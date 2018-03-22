@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import screen from '../../helpers/ScreenSize'
 
 
 const styles = StyleSheet.create({
@@ -8,10 +9,9 @@ const styles = StyleSheet.create({
         top: 270
     },
     compass: {
-        width: ScreenSize.width,
+        width: screen.width,
         resizeMode: 'contain',
     }
-
 });
 
 export default styles

@@ -9,15 +9,11 @@ import Compass from '../components/Compass'
 
 export default class SmartSailing extends Component {
 
-    componentDidUpdate(){
-        console.log('update')
-    }
-    
     render() {
         return (
             <View>
-                <VirtualMap { ...this.props.sailing } />
-                <Compass { ...this.props } />
+                <VirtualMap />
+                <Compass />
             </View>
         );
     }

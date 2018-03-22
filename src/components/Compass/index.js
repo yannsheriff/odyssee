@@ -19,7 +19,7 @@ import { updateOrientation } from '../../actions/sailing'
 
 //  Import Helpers
 // --------------------------------------------------------------
-import Images from '../../assets/images'
+import images from '../../assets/images'
 import screen from '../../helpers/ScreenSize'
 import styles from './styles'
 
@@ -45,8 +45,12 @@ class Compass extends Component {
     this._toggleCompassLock()
   }
 
+  /*
+  * Dispatch action to virtual map
+  */
   componentDidUpdate() {
     console.log('update Compass')
+    this.state._updateOrientation(this.state.orientation)
   }
 
   /*
@@ -100,7 +104,7 @@ class Compass extends Component {
           >
             <Image
               style={styles.compass}
-              source={Images.compass}
+              source={images.compass}
               resizeMethod="scale"
             />
           </View>
@@ -117,9 +121,7 @@ class Compass extends Component {
   ================================================================ */
 
 const mapStateToProps = state => {
-  return {
-    sailing: state.sailing
-  }
+  return {}
 }
 
 const mapDispatchToProps = dispatch => {
