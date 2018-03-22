@@ -1,7 +1,6 @@
 const images = {
-    astronaut: require('./img/astronaut.gif'),
-    slice: require('./img/slice.gif'),
-    vehicules: require('./img/vehicules.gif'),
+    compass: require('./img/Compass.png'),
+    bateau: require('./img/Bateau.png'),
 };
 
 

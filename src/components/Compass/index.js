@@ -1,4 +1,6 @@
 
+//  Import modules
+// --------------------------------------------------------------
 import React, { Component } from 'react';
 import {
   Image,
@@ -9,11 +11,14 @@ import {
   Button,
 } from 'react-native'
 import { connect } from 'react-redux'
+import RNSimpleCompass from 'react-native-simple-compass';
 
-
+//  Import actions
+// --------------------------------------------------------------
 import { updateOrientation } from '../../actions/sailing'
 
-
+//  Import Helpers
+// --------------------------------------------------------------
 import Images from '../../assets/images'
 import screen from '../../helpers/ScreenSize'
 import styles from './styles'
@@ -26,26 +31,80 @@ class Compass extends Component {
     super(props)
 
     this.state = {
-      updateOrientation: this.props.updateOrientation
+      _updateOrientation: this.props.updateOrientation,
+      compassSensitivity: 1,
+      orientation: 0,
+      isCompassLocked: true
     }
-    console.log(props)
+  }
+
+  /*
+  * Activate direction detection
+  */
+  componentDidMount() {
+    this._toggleCompassLock()
   }
 
   componentDidUpdate() {
     console.log('update Compass')
   }
 
-  componentWillReceiveProps(nextProps) {
-
+  /*
+  * Toggle the direction detection
+  */
+  _toggleCompassLock = () => {
+    if (this.state.isCompassLocked) {
+      this.setState({isCompassLocked: false})
+      RNSimpleCompass.start(this.state.compassSensitivity, (degree) => {
+        this.setState({orientation: degree})
+      });
+    } else {
+      this.setState({isCompassLocked: true})
+      RNSimpleCompass.stop()
+    }
   }
+
+
+  /*
+  * Handle the rotation of the compass on the drag event
+  */
+  _handleCompassDrag = (evt) => {
+    if (this.state.isCompassLocked) {
+      if (this.touchLastPos) {
+        var diffBetweenLastAndNewPos = this.touchLastPos - evt.nativeEvent.pageX          
+        var newOrientation = this.state.orientation + diffBetweenLastAndNewPos / 4
+        this.setState({orientation: newOrientation})
+        this.touchLastPos = evt.nativeEvent.pageX  
+      } else {
+        this.touchLastPos = evt.nativeEvent.pageX 
+      }
+    }
+  }
+
 
   render() {
     return (
       <View>
-        <Button
-          onPress={this.state.updateOrientation.bind(this, 20)}
-          title={'change orientation'}
-        />
+        <View style={styles.container} >
+          <Text> {this.state.orientation}</Text>
+          <Button
+            onPress={this._toggleCompassLock}
+            title={this.state.isCompassLocked ? 'unlock' : 'lock'}
+          />
+          <View
+            onStartShouldSetResponder={(evt) => true}
+            onMoveShouldSetResponder={(evt) => true}
+            onResponderMove={this._handleCompassDrag}
+            onResponderRelease={(evt) => { this.touchLastPos = undefined }}
+            style={[styles.compassResponder, { transform: [{ rotate: -this.state.orientation + 'deg' },] }]}
+          >
+            <Image
+              style={styles.compass}
+              source={Images.compass}
+              resizeMethod="scale"
+            />
+          </View>
+        </View>
       </View>
     );
   }
@@ -55,7 +114,7 @@ class Compass extends Component {
 
 /* ===============================================================
   ======================= REDUX CONNECTION =======================
-  ================================================================ */ 
+  ================================================================ */
 
 const mapStateToProps = state => {
   return {
@@ -65,9 +124,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      updateOrientation: (orientation) => {
-          dispatch(updateOrientation(orientation))
-      }
+    updateOrientation: (orientation) => {
+      dispatch(updateOrientation(orientation))
+    }
   }
 }
 
