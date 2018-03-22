@@ -2,12 +2,12 @@ import { updateOrientation } from '../actions/sailing'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import React, { Component } from 'react';
-import Map from '../components/Map'
+import VirtualMap from '../components/Virtual-map'
 import Compass from '../components/Compass'
 
+// this component is not smart for optimizing the refresh 
 
-
-class SmartSailing extends Component {
+export default class SmartSailing extends Component {
 
     componentDidUpdate(){
         console.log('update')
@@ -16,33 +16,9 @@ class SmartSailing extends Component {
     render() {
         return (
             <View>
-                <Map { ...this.props.sailing } />
+                <VirtualMap { ...this.props.sailing } />
                 <Compass { ...this.props } />
             </View>
         );
     }
 }
-
-const mapStateToProps = state => {
-    return {
-        sailing: state.sailing
-    }
-}
-
-
-const mapDispatchToProps = dispatch => {
-    return {
-        updateOrientation: (orientation) => {
-            dispatch(updateOrientation(orientation))
-        }
-    }
-}
-
-
-
-const componentContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SmartSailing)
-
-export default componentContainer

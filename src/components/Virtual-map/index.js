@@ -10,47 +10,39 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-
-import { updateOrientation } from '../../actions/sailing'
-
-
 import Images from '../../assets/images'
 import screen from '../../helpers/ScreenSize'
 import styles from './styles'
 
 
-
-class Compass extends Component {
+class VirtualMap extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-      updateOrientation: this.props.updateOrientation
+      orientation: this.props.sailing.orientation
     }
-    console.log(props)
   }
 
-  componentDidUpdate() {
-    console.log('update Compass')
+  componentDidUpdate(nextProps) {
+    console.log('update MAP')
   }
 
   componentWillReceiveProps(nextProps) {
-
+    this.setState({ orientation: nextProps.sailing.orientation })
   }
 
   render() {
     return (
       <View>
-        <Button
-          onPress={this.state.updateOrientation.bind(this, 20)}
-          title={'change orientation'}
-        />
+        <Text style={styles.welcome}>
+          My orientation : {this.state.orientation}
+        </Text>
       </View>
     );
   }
 }
-
 
 
 /* ===============================================================
@@ -63,17 +55,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-      updateOrientation: (orientation) => {
-          dispatch(updateOrientation(orientation))
-      }
-  }
-}
-
 const componentContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Compass)
+  mapStateToProps
+)(VirtualMap)
 
 export default componentContainer
