@@ -5,13 +5,13 @@ import { StackNavigator } from 'react-navigation';
 
 // Scenes Imports
 // ----------------------------
-import SmartBoilerComponent from './smart-components/SmartBoilComponent';
+import Sailing from './smart-components/SmartSailing';
 
 
 
 const InitialNavigator = StackNavigator({
   Home: {
-    screen: SmartBoilerComponent
+    screen: Sailing
   }
 },
   {

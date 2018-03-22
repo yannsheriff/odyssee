@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { screenReducer}  from './screen'
+import { sailingReducer }  from './sailing'
 
 const mainReducer = combineReducers({
-    screenReducer
+    sailing: sailingReducer
 })
 
 export default mainReducer
