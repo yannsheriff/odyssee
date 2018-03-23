@@ -15,7 +15,7 @@ import RNSimpleCompass from 'react-native-simple-compass';
 
 //  Import actions
 // --------------------------------------------------------------
-import { updateOrientation } from '../../actions/sailing'
+import { updateOrientation, toggleSailing } from '../../actions/sailing'
 
 //  Import Helpers
 // --------------------------------------------------------------
@@ -32,6 +32,7 @@ class Compass extends Component {
 
     this.state = {
       _updateOrientation: this.props.updateOrientation,
+      _toggleSailing: this.props.toggleSailing,
       compassSensitivity: 1,
       orientation: 0,
       isCompassLocked: true
@@ -49,7 +50,6 @@ class Compass extends Component {
   * Dispatch action to virtual map
   */
   componentDidUpdate() {
-    console.log('update Compass')
     this.state._updateOrientation(this.state.orientation)
   }
 
@@ -88,19 +88,25 @@ class Compass extends Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.container} >
-          <Text> {this.state.orientation}</Text>
+      <View style={styles.container}>
+        <View style={styles.center}>
+          <Text style={styles.text}> {this.state.orientation}</Text>
           <Button
             onPress={this._toggleCompassLock}
             title={this.state.isCompassLocked ? 'unlock' : 'lock'}
+            color="#fff"
+          />
+          <Button
+            onPress={this.state._toggleSailing}
+            title={'Start / Stop'}
+            color="#fff"
           />
           <View
             onStartShouldSetResponder={(evt) => true}
             onMoveShouldSetResponder={(evt) => true}
             onResponderMove={this._handleCompassDrag}
             onResponderRelease={(evt) => { this.touchLastPos = undefined }}
-            style={[styles.compassResponder, { transform: [{ rotate: -this.state.orientation + 'deg' },] }]}
+            style={[styles.compassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' },] }]}
           >
             <Image
               style={styles.compass}
@@ -128,6 +134,9 @@ const mapDispatchToProps = dispatch => {
   return {
     updateOrientation: (orientation) => {
       dispatch(updateOrientation(orientation))
+    },
+    toggleSailing: () => {
+      dispatch(toggleSailing())
     }
   }
 }

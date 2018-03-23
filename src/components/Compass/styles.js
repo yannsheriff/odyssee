@@ -3,14 +3,28 @@ import screen from '../../helpers/ScreenSize'
 
 
 const styles = StyleSheet.create({
-    compassResponder: {
+    container: {
+        position: 'absolute',
+        top: 40,
+        
+    },
+    center: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: screen.width
+    },
+    compassContainer: {
         position: 'absolute',
         left: 0,
-        top: 270
+        top: 370
     },
     compass: {
         width: screen.width,
         resizeMode: 'contain',
+    }, 
+    text: {
+        color: '#ffffff50',
+        textAlign: 'center',
     }
 });
 
