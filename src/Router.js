@@ -6,11 +6,15 @@ import { StackNavigator } from 'react-navigation';
 // Scenes Imports
 // ----------------------------
 import Sailing from './smart-components/SmartSailing';
+import Accueil from './components/Home-prov';
 
 
 
 const InitialNavigator = StackNavigator({
   Home: {
+    screen: Accueil
+  }, 
+  Sailing: {
     screen: Sailing
   }
 },

@@ -23,7 +23,7 @@ export default class circle extends Component {
           y={ c.y }
           width={7}
           height={7}
-          fill="red"
+          fill="#ffffff40"
           scale={1}
           rotation={-that.props.deg}
           originX={ c.x + 3}
