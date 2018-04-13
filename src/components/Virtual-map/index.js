@@ -14,7 +14,7 @@ import styles from './styles'
 
 //  Import Constants
 // --------------------------------------------------------------
-import { mapSize, speedRadius, circles } from '../../constants'
+import { mapSize, speedModifiers, circles } from '../../constants'
 
 //  Import Components
 // --------------------------------------------------------------
@@ -39,22 +39,41 @@ class VirtualMap extends Component {
       cnv: { x: 0, y: 0 },
       sailing: false,
       vpRadius:  vpRadius,
+      speedRadius: '',
+      currentSpeed: 0,
+      goalSpeed: 0,
       contentToRender: []
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ orientation: nextProps.sailing.orientation })
-    if (nextProps.sailing.isSailing != this.state.sailing) {
+  componentWillReceiveProps (nextProps) {
+    const dif = Math.abs(speedModifiers.direction - nextProps.sailing.orientation)
+    const modifier = Math.abs((dif - 180) / 180)
+    const speed = speedModifiers.wind - (speedModifiers.wind * modifier) + speedModifiers.min
+    this.setState({
+      orientation: nextProps.sailing.orientation,
+      speedRadius: speed
+    })
+    console.log(speed)
+    if (nextProps.sailing.isSailing !== this.state.sailing) {
         this._toggleSailing()
         requestAnimationFrame(() => {this._updateMap()})
     }
   }
 
   _toggleSailing () {
-    this.setState({
-      sailing: !this.state.sailing
-    })
+    if (this.state.sailing) {
+      this.setState({
+        sailing: !this.state.sailing,
+        goalSpeed: 0
+      })
+    } else {
+      this.setState({
+        sailing: !this.state.sailing,
+        currentSpeed: speedModifiers.acceleration,
+        goalSpeed: this.state.speedRadius
+      })
+    }
   }
 
   _checkIfInViewport () {
@@ -71,14 +90,31 @@ class VirtualMap extends Component {
     })
   }
 
+  _accelerate () {
+    const dif = this.state.goalSpeed - this.state.currentSpeed
+    console.log(this.state.goalSpeed, this.state.currentSpeed)
+    if (dif > 0 && dif >= speedModifiers.acceleration) {
+      this.setState({ currentSpeed: this.state.currentSpeed + speedModifiers.acceleration })
+    } else if (dif < 0 && dif <= -speedModifiers.acceleration) {
+      this.setState({ currentSpeed: this.state.currentSpeed - speedModifiers.acceleration })
+    } else if (dif > -speedModifiers.acceleration && dif < speedModifiers.acceleration) {
+      this.setState({ currentSpeed: this.state.goalSpeed })
+    }
+  }
+
   _updateMap () {
-    if (this.state.sailing) {
+    if (this.state.currentSpeed > 0) {
       const s = this.state
 
       this._checkIfInViewport()
 
-      const newX = s.cnv.x + (speedRadius) * Math.sin(s.orientation * 0.0174533)
-      const newY = s.cnv.y + (speedRadius) * Math.cos(s.orientation * 0.0174533)
+      let newX = s.cnv.x + (s.currentSpeed) * Math.sin(s.orientation * 0.0174533)
+      let newY = s.cnv.y + (s.currentSpeed) * Math.cos(s.orientation * 0.0174533)
+
+      if (newX > (mapSize.x / 2) || newX < -(mapSize.x / 2) || newY > (mapSize.y / 2) || newY < -(mapSize.y / 2)) {
+        newX = newX * -1
+        newY = newY * -1
+      }
 
       this.setState({
         cnv: {
@@ -86,6 +122,7 @@ class VirtualMap extends Component {
           y: newY
         }
       })
+      this._accelerate()
       requestAnimationFrame(() => {this._updateMap()})
     }
   }

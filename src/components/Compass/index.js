@@ -75,8 +75,10 @@ class Compass extends Component {
   _handleCompassDrag = (evt) => {
     if (this.state.isCompassLocked) {
       if (this.touchLastPos) {
-        var diffBetweenLastAndNewPos = this.touchLastPos - evt.nativeEvent.pageX          
-        var newOrientation = this.state.orientation + diffBetweenLastAndNewPos / 4
+        const diffBetweenLastAndNewPos = this.touchLastPos - evt.nativeEvent.pageX
+        let newOrientation = this.state.orientation + diffBetweenLastAndNewPos / 4
+        if (newOrientation > 359) {newOrientation = 0}
+        else if (newOrientation < 0) {newOrientation = 359}
         this.setState({orientation: newOrientation})
         this.touchLastPos = evt.nativeEvent.pageX  
       } else {

@@ -3,7 +3,13 @@ export const mapSize = {
     y: 2000
 }
 
-export const speedRadius = 2
+// Actual max speed is max speed + min speed
+export const speedModifiers = {
+    min: 0.5,
+    wind: Math.random() * 4.5,
+    direction: Math.floor(Math.random() * 360),
+    acceleration: 0.02
+}
 
 function circles() {
     const circles = []
