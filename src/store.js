@@ -3,7 +3,13 @@ import reducers from './reducers'
 const store = createStore(reducers, { //  initial state
     sailing: {
         orientation: 0,
-        isSailing: false
+        position: {
+            x: 0,
+            y: 0
+        },
+        isSailing: false,
+        callMap: false,
+        isMapActive: false
     },
     island: {
         actualStep: 0,

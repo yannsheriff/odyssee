@@ -20,6 +20,9 @@ import { mapSize, speedModifiers, circles } from '../../constants'
 // --------------------------------------------------------------
 import Circles from './Circles-provisoir'
 
+//  Import Actions
+// --------------------------------------------------------------
+import { launchMap } from '../../actions/sailing'
 
 
 class VirtualMap extends Component {
@@ -34,6 +37,7 @@ class VirtualMap extends Component {
     const vpRadius = Math.hypot(screen.width, screen.height) / 2
 
     this.state = {
+      _launchMap: this.props.launchMap,
       orientation: '',
       center: center,
       cnv: { x: 0, y: 0 },
@@ -60,6 +64,11 @@ class VirtualMap extends Component {
         this._toggleSailing()
         requestAnimationFrame(() => {this._updateMap()})
     }
+    if (nextProps.sailing.callMap) {
+        console.log('vaniquertamère')
+        this.state._launchMap(this.state.cnv)
+    }
+
   }
 
 
@@ -225,8 +234,17 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    launchMap: (position) => {
+      dispatch(launchMap(position))
+    }
+  }
+}
+
 const componentContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(VirtualMap)
 
 export default componentContainer
