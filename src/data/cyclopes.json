@@ -1,0 +1,55 @@
+{ 
+    "info" : {
+        "id": 1,
+        "title": "Cyclope Island"
+    }, 
+
+    "steps": 
+    [
+        {
+            "id": 1,
+            "title": "First Screen",
+            "text": " No gun? I'm insulted. Does it come in black? Peace has cost you your strength. Victory has defeated you. Didn't you get the memo? You're taller than you look in the tabIoids, Mr. Wayne.", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 2
+                }, 
+                {
+                    "id": 3
+                }
+            ]
+        }, 
+        {
+            "id": 2,
+            "title": "Test",
+            "text": "gsdvcsfsdfbgndgfdf", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 2
+                }, 
+                {
+                    "id": 3
+                }
+            ]
+        }, 
+        {
+            "id": 3,
+            "title": "Test 2",
+            "text": "gsdvcszfsegdbbgfd zizi", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 2
+                }, 
+                {
+                    "id": 3
+                }
+            ]
+        } 
+    ]
+}

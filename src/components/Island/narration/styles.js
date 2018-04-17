@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native'
-import screen from '../../helpers/ScreenSize'
+import screen from '../../../helpers/ScreenSize'
 
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        top: 40,
+        width: screen.width,
+        height: 300,
+        backgroundColor: '#ffffff'
         
     },
     center: {
@@ -13,22 +14,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: screen.width
     },
-    compassContainer: {
-        position: 'absolute',
-        left: 0,
-        top: 370
-    },
-    compass: {
-        width: screen.width,
-        resizeMode: 'contain',
-    }, 
     text: {
-        color: '#ffffff50',
+        color: 'black',
         textAlign: 'center',
     },
     safeArea: {
         flex: 1,
-        backgroundColor: '#fff'
       }
 });
 

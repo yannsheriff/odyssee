@@ -12,7 +12,7 @@ const store = createStore(reducers, { //  initial state
         isMapActive: false
     },
     island: {
-        actualStep: 0,
+        actualSnippet: 1,
         haveAction: false,
         haveObject: false,
     }

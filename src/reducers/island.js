@@ -1,18 +1,18 @@
-import { NEXT_STEP } from '../actions/island'
+import { NEXT_SNIPPET } from '../actions/island'
 
 
 const initialState = {
-    actualStep: 0,
+    actualSnippet: 0,
     haveAction: false,
     haveObject: false,
 }
 
 export function islandReducer(state = initialState, action) {
     switch (action.type) {
-        case NEXT_STEP:
+        case NEXT_SNIPPET:
             return {
                 ...state,
-                actualStep: action.nextStep
+                actualSnippet: action.nextSnippet
             }
         default:
             return state
