@@ -16,33 +16,16 @@ import styles from './styles'
 // --------------------------------------------------------------
 import { mapSize, speedModifiers, circles } from '../../constants'
 
-//  Import Components
-// --------------------------------------------------------------
-import Circles from './Circles-provisoir'
-
-
-
-class VirtualMap extends Component {
+class MiniatureMap extends Component {
 
   constructor(props) {
     super(props)
 
-    const center = {
-      x: ((mapSize.x / 2) - (screen.width / 2)) * -1,
-      y: ((mapSize.y / 2) - (screen.height / 2)) * -1
-    }
-    const vpRadius = Math.hypot(screen.width, screen.height) / 2
-
     this.state = {
-      orientation: '',
-      center: center,
-      cnv: { x: 0, y: 0 },
-      sailing: false,
-      vpRadius:  vpRadius,
-      speedRadius: '',
-      currentSpeed: 0,
-      goalSpeed: 0,
-      contentToRender: []
+      position: {
+        x: '',
+        y: ''
+      }
     }
   }
 
@@ -57,8 +40,8 @@ class VirtualMap extends Component {
       })
     }
     if (nextProps.sailing.isSailing !== this.state.sailing) {
-        this._toggleSailing()
-        requestAnimationFrame(() => {this._updateMap()})
+      this._toggleSailing()
+      requestAnimationFrame(() => {this._updateMap()})
     }
   }
 
@@ -92,13 +75,13 @@ class VirtualMap extends Component {
     })
   }
 
-/*  _renderAnim () {
-    var current = this.state.anim.current + (this.state.anim.end - this.state.anim.current) * 0.1
+  /*  _renderAnim () {
+      var current = this.state.anim.current + (this.state.anim.end - this.state.anim.current) * 0.1
 
 
 
-    this.setState({ anim: {current:  current }});
-  }*/
+      this.setState({ anim: {current:  current }});
+    }*/
 
   _manageSpeed () {
     const dif = this.state.goalSpeed - this.state.currentSpeed
@@ -217,16 +200,4 @@ class VirtualMap extends Component {
 
 /* ===============================================================
   ======================= REDUX CONNECTION =======================
-  ================================================================ */ 
-
-const mapStateToProps = state => {
-  return {
-    sailing: state.sailing,
-  }
-}
-
-const componentContainer = connect(
-  mapStateToProps
-)(VirtualMap)
-
-export default componentContainer
+  ================================================================ */
