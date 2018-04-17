@@ -5,8 +5,7 @@ import screen from '../../helpers/ScreenSize'
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 40,
-        
+        top: 40
     },
     center: {
         flexDirection: 'column',
@@ -20,12 +19,12 @@ const styles = StyleSheet.create({
     },
     compass: {
         width: screen.width,
-        resizeMode: 'contain',
+        resizeMode: 'contain'
     }, 
     text: {
         color: '#ffffff50',
-        textAlign: 'center',
+        textAlign: 'center'
     }
-});
+})
 
 export default styles

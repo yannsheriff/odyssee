@@ -65,7 +65,6 @@ class VirtualMap extends Component {
         requestAnimationFrame(() => {this._updateMap()})
     }
     if (nextProps.sailing.callMap) {
-        console.log('vaniquertamère')
         this.state._launchMap(this.state.cnv)
     }
 
@@ -101,14 +100,6 @@ class VirtualMap extends Component {
     })
   }
 
-/*  _renderAnim () {
-    var current = this.state.anim.current + (this.state.anim.end - this.state.anim.current) * 0.1
-
-
-
-    this.setState({ anim: {current:  current }});
-  }*/
-
   _manageSpeed () {
     const dif = this.state.goalSpeed - this.state.currentSpeed
     if (dif > 0 && dif >= speedModifiers.acceleration) {
@@ -125,12 +116,13 @@ class VirtualMap extends Component {
       const s = this.state
 
       this._checkIfInViewport()
-      this._manageSpeed()
 
+      if (this.state.currentSpeed !== this.state.goalSpeed) {
+        this._manageSpeed()
+      }
+      console.log('stillWorking')
       let newX = s.cnv.x + (s.currentSpeed) * Math.sin(s.orientation * 0.0174533)
       let newY = s.cnv.y + (s.currentSpeed) * Math.cos(s.orientation * 0.0174533)
-
-      console.log(newX - s.cnv.x, newY - s.cnv.y)
 
       if (newX > (mapSize.x / 2) || newX < -(mapSize.x / 2) || newY > (mapSize.y / 2) || newY < -(mapSize.y / 2)) {
         newX = newX * -1
