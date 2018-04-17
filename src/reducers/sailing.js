@@ -1,9 +1,20 @@
-import { UPDATE_ORIENTATION } from '../actions/sailing'
-import { TOGGLE_SAILING } from '../actions/sailing'
+import {
+  UPDATE_ORIENTATION,
+  TOGGLE_SAILING,
+  CALL_MAP,
+  LAUNCH_MAP,
+  HIDE_MAP
+} from '../actions/sailing'
 
 const initialState = {
     orientation: 0,
-    isSailing: false
+    position: {
+        x: 0,
+        y: 0
+    },
+    isSailing: false,
+    callMap: false,
+    isMapActive: false
 }
 
 export function sailingReducer(state = initialState, action) {
@@ -17,6 +28,24 @@ export function sailingReducer(state = initialState, action) {
             return {
                 ...state,
                 isSailing: !state.isSailing
+            }
+        case CALL_MAP:
+            return {
+                ...state,
+                isSailing: false,
+                callMap: true
+            }
+        case LAUNCH_MAP:
+            return {
+                ...state,
+                isMapActive: true,
+                callMap: false,
+                position: action.position
+            }
+        case HIDE_MAP:
+            return {
+                ...state,
+                isMapActive: false
             }
         default:
             return state

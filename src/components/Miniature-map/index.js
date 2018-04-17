@@ -3,6 +3,7 @@
 // --------------------------------------------------------------
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { View, Text } from 'react-native'
 import Svg,{ G, Rect, Image, Circle } from 'react-native-svg'
 
 
@@ -10,11 +11,15 @@ import Svg,{ G, Rect, Image, Circle } from 'react-native-svg'
 // --------------------------------------------------------------
 import images from '../../assets/images'
 import screen from '../../helpers/ScreenSize'
-import styles from './styles'
+//import styles from './styles'
 
 //  Import Constants
 // --------------------------------------------------------------
 import { mapSize, speedModifiers, circles } from '../../constants'
+
+//  Import Actions
+// --------------------------------------------------------------
+import { hideMap } from  '../../actions/sailing'
 
 class MiniatureMap extends Component {
 
@@ -22,6 +27,7 @@ class MiniatureMap extends Component {
     super(props)
 
     this.state = {
+      _hideMap: this.props.hideMap,
       position: {
         x: '',
         y: ''
@@ -125,74 +131,9 @@ class MiniatureMap extends Component {
 
   render() {
     return (
-      <Svg
-        height={screen.height}
-        width={screen.width}
-      >
-        <G
-          width={mapSize.x}
-          height={mapSize.y}
-          x={this.state.center.x}
-          y={this.state.center.y}
-          originX={mapSize.x / 2}
-          originY={mapSize.y / 2}
-          rotation={this.state.orientation}
-          scale={1}
-        >
-          <Rect
-            width={mapSize.x}
-            height={mapSize.y}
-            x={0}
-            y={0}
-            scale={1}
-            fill="#0071e9"
-          />
-          <G
-            width={mapSize.x}
-            height={mapSize.y}
-            x={this.state.cnv.x}
-            y={this.state.cnv.y}
-            scale={1}
-          >
-            <Circles
-              circlesToRender={this.state.contentToRender}
-              deg={this.state.orientation}
-            />
-          </G>
-        </G>
-        <Image
-          x={(screen.width / 2) - 50}
-          y={-(screen.height / 2) + 94.46}
-          width="100"
-          height="189.9"
-          preserveAspectRatio="xMidYMid slice"
-          opacity="1"
-          href={images.bateau}
-        />
-        <G
-          width={200}
-          height={200}
-          x={0}
-          y={screen.height - 200}
-          scale={1}
-        >
-          <Rect
-            width={200}
-            height={200}
-            x={0}
-            y={0}
-            scale={1}
-            fill="#ffffff"
-            opacity={0.3}
-          />
-          <Circle
-            cx={(this.state.cnv.x + (mapSize.x / 2)) / mapSize.x * 200}
-            cy={(this.state.cnv.y + (mapSize.y / 2)) / mapSize.y * 200}
-            r="2"
-            fill="red"
-          />
-        </G>
-      </Svg>
+      <View>
+        <Text style={{color: 'white'}} > Yo! </Text>
+      </View>
     )
   }
 }
@@ -201,3 +142,23 @@ class MiniatureMap extends Component {
 /* ===============================================================
   ======================= REDUX CONNECTION =======================
   ================================================================ */
+
+
+const mapStateToProps = state => {
+  return {}
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    hideMap: () => {
+      dispatch(hideMap())
+    }
+  }
+}
+
+const componentContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MiniatureMap)
+
+export default componentContainer

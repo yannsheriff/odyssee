@@ -15,7 +15,7 @@ import RNSimpleCompass from 'react-native-simple-compass';
 
 //  Import actions
 // --------------------------------------------------------------
-import { updateOrientation, toggleSailing } from '../../actions/sailing'
+import { updateOrientation, toggleSailing, callMap } from '../../actions/sailing'
 
 //  Import Helpers
 // --------------------------------------------------------------
@@ -33,6 +33,7 @@ class Compass extends Component {
     this.state = {
       _updateOrientation: this.props.updateOrientation,
       _toggleSailing: this.props.toggleSailing,
+      _callMap: this.props.callMap,
       compassSensitivity: 1,
       orientation: 0,
       isCompassLocked: true
@@ -103,6 +104,11 @@ class Compass extends Component {
             title={'Start / Stop'}
             color="#fff"
           />
+          <Button
+            onPress={this.state._callMap}
+            title={'map'}
+            color="#fff"
+          />
           <View
             onStartShouldSetResponder={(evt) => true}
             onMoveShouldSetResponder={(evt) => true}
@@ -139,6 +145,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleSailing: () => {
       dispatch(toggleSailing())
+    },
+    callMap: () => {
+      dispatch(callMap())
     }
   }
 }
