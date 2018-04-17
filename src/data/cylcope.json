@@ -1,0 +1,25 @@
+{ 
+    "info" : {
+        "id": 1,
+        "title": "Cyclope Island"
+    }, 
+
+    "steps": 
+    [
+        {
+            "id": 1,
+            "title": "fef",
+            "text": "gsdvcs", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "action": [
+                {
+                    "id": 2
+                }, 
+                {
+                    "id": 3
+                }
+            ]
+        }
+    ]
+}
