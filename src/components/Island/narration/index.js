@@ -44,11 +44,9 @@ export default class Narration extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.safeArea}>
         <View style={ styles.container }>
           <Text style={ styles.text }> {this.state.text} </Text>  
         </View>
-      </SafeAreaView>
     );
   }
 }

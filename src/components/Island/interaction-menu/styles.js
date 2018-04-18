@@ -5,9 +5,9 @@ import screen from '../../../helpers/ScreenSize'
 const styles = StyleSheet.create({
     container: {
         width: screen.width,
-        height: 300,
-        backgroundColor: '#ffffff'
-        
+        height: 100,
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     center: {
         flexDirection: 'column',
@@ -18,9 +18,6 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'center',
     },
-    safeArea: {
-        flex: 1,
-      }
 });
 
 export default styles

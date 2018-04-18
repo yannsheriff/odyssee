@@ -2,7 +2,7 @@ import { NEXT_SNIPPET } from '../actions/island'
 
 
 const initialState = {
-    actualSnippet: 0,
+    actualSnippetId: 0,
     haveAction: false,
     haveObject: false,
 }
@@ -12,7 +12,7 @@ export function islandReducer(state = initialState, action) {
         case NEXT_SNIPPET:
             return {
                 ...state,
-                actualSnippet: action.nextSnippet
+                actualSnippetId: action.nextSnippet
             }
         default:
             return state
