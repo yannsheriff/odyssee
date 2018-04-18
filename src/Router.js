@@ -7,6 +7,7 @@ import { StackNavigator } from 'react-navigation';
 // ----------------------------
 import Sailing from './smart-components/SmartSailing';
 import Accueil from './components/Home-prov';
+import test from './components/test';
 import Island from './smart-components/SmartIsland';
 
 
@@ -21,10 +22,13 @@ const InitialNavigator = StackNavigator({
   Island: {
     screen: Island
   },
+  Test: {
+    screen: test
+  },
 },
   {
     headerMode: 'none',
-    initialRouteName: 'Home',
+    initialRouteName: 'Island',
     cardStyle: {
       backgroundColor: 'transparent'
     }

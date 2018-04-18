@@ -55,6 +55,11 @@ export default class Accueil extends Component {
                         title={'Aller a l\'ile'}
                         color="#fff"
                     />
+                    <Button
+                        onPress={() => this.props.navigation.navigate('Test')}
+                        title={'Aller a l\'ile'}
+                        color="#fff"
+                    />
                 </View>
             </View>
         );
