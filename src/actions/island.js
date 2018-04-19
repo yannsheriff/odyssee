@@ -1,10 +1,10 @@
-export const NEXT_STEP = 'NEXT_STEP'
+export const NEXT_SNIPPET = 'NEXT_SNIPPET'
 
 
 
-export function goToStep(idStep) {
+export function goToStep(idSnippet) {
     return {
-        type: NEXT_STEP,
-        nextStep: idStep
+        type: NEXT_SNIPPET,
+        nextSnippet: idSnippet
     }
 }

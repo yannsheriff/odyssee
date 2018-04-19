@@ -1,0 +1,88 @@
+{ 
+    "info" : {
+        "id": 1,
+        "title": "Cyclope Island"
+    }, 
+
+    "steps": 
+    [
+        {
+            "id": 1,
+            "title": "First Screen",
+            "text": " No gun? I'm insulted. ", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 2
+                }, 
+                {
+                    "id": 3
+                }
+            ]
+        }, 
+        {
+            "id": 2,
+            "title": "Does it come in black ?", 
+            "text": "Yes of course !", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 3
+                }, 
+                {
+                    "id": 4
+                }
+            ]
+        }, 
+        {
+            "id": 3,
+            "title": "Me too.",
+            "text": "Peace has cost you your strength.", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 4
+                }, 
+                {
+                    "id": 5
+                }
+            ]
+        }, 
+        {
+            "id": 4,
+            "title": "Victory has defeated you.",
+            "text": "Didn't you get the memo? You're taller than you look in the tabIoids, Mr. Wayne.", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 9999
+                }
+            ]
+        }, 
+        {
+            "id": 5,
+            "title": "Not sure ! ",
+            "text": "Bang bang ! You're dead.", 
+            "collectableObject": 0,
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 9999
+                }
+            ]
+        },
+
+
+        {
+            "id": 9999,
+            "title": "End",
+            "text": "This is end of the story", 
+            "collectableObject": 0,
+            "haveAction": false
+        } 
+    ]
+}
