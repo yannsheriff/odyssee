@@ -28,7 +28,7 @@ const InitialNavigator = StackNavigator({
 },
   {
     headerMode: 'none',
-    initialRouteName: 'Island',
+    initialRouteName: 'Home',
     cardStyle: {
       backgroundColor: 'transparent'
     }

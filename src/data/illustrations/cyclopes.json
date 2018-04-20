@@ -1,0 +1,46 @@
+{
+    "info": {
+        "id": 1,
+        "title": "Cyclope Island"
+    },
+
+    "steps": [
+        {
+            "id": 1,
+            "first": 0,
+            "middle": 0,
+            "back": 0
+        },
+        {
+            "id": 2,
+            "first": -300,
+            "middle": -200,
+            "back": -100
+        },
+        {
+            "id": 3,
+            "first": -600,
+            "middle": -300,
+            "back": -200
+        },
+        {
+            "id": 4,
+            "first": -600,
+            "middle": -300,
+            "back": -200
+        },
+        {
+            "id": 5,
+            "first": -900,
+            "middle": -600,
+            "back": -300
+        },
+        {
+            "id": 9999,
+            "first": 0,
+            "middle": 0,
+            "back": 0
+        }
+
+    ]
+}

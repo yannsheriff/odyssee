@@ -49,7 +49,6 @@ class InteractionMenu extends Component {
 
 
   render() {
-    console.log(this.state.actions)
     if (this.state.actions) {
       var actions = this.state.actions.map((action) => {
         return (<Button title={action.title} onPress={ () => { this.state._changeStep(action.id) }} />);
@@ -58,12 +57,9 @@ class InteractionMenu extends Component {
 
     return (
         <View style={ styles.container }>
-          <View style={{opacity: actions ? 0 : 1}} >
-            <Text> pas daction </Text>
-          </View>
-          <Button 
+          {/* <Button 
             title={'exit'}
-          />
+          /> */}
           { actions }
         </View>
     );
