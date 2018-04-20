@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Button } from 'react-native'
-import Svg,{ Rect, Circle } from 'react-native-svg'
+import Svg,{ Rect, Circle, G } from 'react-native-svg'
 
 
 //  Import Helpers
@@ -15,6 +15,10 @@ import styles from './styles'
 //  Import Constants
 // --------------------------------------------------------------
 import { mapSize } from '../../constants'
+
+//  Import Components
+// --------------------------------------------------------------
+import MiniIslands from './miniIslands'
 
 //  Import Actions
 // --------------------------------------------------------------
@@ -39,20 +43,27 @@ class MiniatureMap extends Component {
           height={screen.height}
           width={screen.width}
         >
-          <Rect
-            width={screen.width}
-            height={screen.height}
-            x={0}
-            y={0}
-            scale={1}
-            fill="#0071e9"
-          />
-          <Circle
-            cx={(this.state.position.x + (mapSize.x / 2)) / mapSize.x * screen.width}
-            cy={(this.state.position.y + (mapSize.y / 2)) / mapSize.y * screen.height}
-            r="2"
-            fill="red"
-          />
+          <G
+            rotation={180}
+            originX={screen.width / 2}
+            originY={screen.height / 2}
+          >
+            <Rect
+              width={screen.width}
+              height={screen.height}
+              x={0}
+              y={0}
+              scale={1}
+              fill="#0071e9"
+            />
+            <MiniIslands/>
+            <Circle
+              cx={(this.state.position.x + (mapSize.x / 2)) / mapSize.x * screen.width}
+              cy={(this.state.position.y + (mapSize.y / 2)) / mapSize.y * screen.height}
+              r="2"
+              fill="red"
+            />
+          </G>
         </Svg>
         <Button
           style={styles.button}

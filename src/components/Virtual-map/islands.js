@@ -4,30 +4,30 @@ import Svg,{
   Rect
 } from 'react-native-svg';
 
-export default class circle extends Component {
+export default class islands extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      circlesToRender: this.props.circlesToRender,
+      islands: this.props.islands,
       deg: this.props.deg
     }
   }
 
-  renderCircles () {
+  renderIslands () {
     const that = this
-    return this.props.circlesToRender.map((c) => {
+    return this.props.islands.map((c) => {
       return (
         <Rect
           key={ c.id }
-          x={ c.x }
-          y={ c.y }
-          width={7}
-          height={7}
+          x={ c.position.x }
+          y={ c.position.y }
+          width={c.size}
+          height={c.size}
           fill="#ffffff40"
           scale={1}
           rotation={-that.props.deg}
-          originX={ c.x + 3}
-          originY={ c.y + 3}
+          originX={ c.position.x + (c.size / 2) }
+          originY={ c.position.y + (c.size / 2) }
         />
       )
     })
@@ -35,7 +35,7 @@ export default class circle extends Component {
 
   render(){
     return(
-      this.renderCircles()
+      this.renderIslands()
     )
   }
 }

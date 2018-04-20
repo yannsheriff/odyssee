@@ -14,15 +14,16 @@ import styles from './styles'
 
 //  Import Constants
 // --------------------------------------------------------------
-import { mapSize, speedModifiers, circles } from '../../constants'
+import { mapSize, speedModifiers } from '../../constants'
+import { IslandsData } from '../../constants/islands'
 
 //  Import Components
 // --------------------------------------------------------------
-import Circles from './Circles-provisoir'
+import Islands from './islands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { launchMap } from '../../actions/sailing'
+import { launchMap, toggleSailing, updateOrientation } from '../../actions/sailing'
 
 
 class VirtualMap extends Component {
@@ -38,23 +39,35 @@ class VirtualMap extends Component {
 
     this.state = {
       _launchMap: this.props.launchMap,
-      orientation: '',
+      _toggleSailing: this.props.toggleSailing,
+      _updateOrientation: this.props.updateOrientation,
+      orientation: this.props.sailing.orientation,
       center: center,
-      cnv: { x: 0, y: 0 },
+      cnv: {
+        x: this.props.sailing.position.x,
+        y: this.props.sailing.position.y
+      },
       sailing: false,
       vpRadius:  vpRadius,
-      speedRadius: '',
+      speedRadius: this._getSpeed(0),
       currentSpeed: 0,
       goalSpeed: 0,
+      collisionPoint: {
+        x: 0,
+        y: 0
+      },
+      isCollided: false,
       contentToRender: []
     }
   }
 
+  componentWillMount () {
+    this._checkIfInViewport()
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.sailing.orientation !== this.state.orientation) {
-      const dif = Math.abs(speedModifiers.direction - nextProps.sailing.orientation)
-      const modifier = Math.abs((dif - 180) / 180)
-      const speed = speedModifiers.wind - (speedModifiers.wind * modifier) + speedModifiers.min
+      const speed = this._getSpeed(nextProps.sailing.orientation)
       this.setState({
         orientation: nextProps.sailing.orientation,
         speedRadius: speed
@@ -65,11 +78,18 @@ class VirtualMap extends Component {
         requestAnimationFrame(() => {this._updateMap()})
     }
     if (nextProps.sailing.callMap) {
-        this.state._launchMap(this.state.cnv)
+        this.setState({
+            currentSpeed: 0
+        }, this.state._launchMap(this.state.cnv))
     }
 
   }
 
+  _getSpeed (boatDir) {
+    const dif = Math.abs(speedModifiers.direction - boatDir)
+    const modifier = Math.abs((dif - 180) / 180)
+    return speedModifiers.wind - (speedModifiers.wind * modifier) + speedModifiers.min
+  }
 
   _toggleSailing () {
     if (this.state.sailing) {
@@ -78,6 +98,9 @@ class VirtualMap extends Component {
         goalSpeed: 0
       })
     } else {
+      if (this.state.isCollided) {
+        this._turnAround()
+      }
       this.setState({
         sailing: !this.state.sailing,
         currentSpeed: speedModifiers.acceleration,
@@ -86,16 +109,47 @@ class VirtualMap extends Component {
     }
   }
 
+  _turnAround () {
+    console.log('repositionning')
+    let turnAround = this.state.orientation + 180
+    if (turnAround > 359) { turnAround +=  -360 }
+    this.setState({
+      isCollided: false,
+      cnv: {
+        x: this.state.collisionPoint.x,
+        y: this.state.collisionPoint.y
+      }
+    })
+    this.state._updateOrientation(turnAround)
+  }
+
   _checkIfInViewport () {
     this.state.contentToRender = []
     const cnv = this.state.cnv
     const currentCenterX = -(cnv.x + this.state.center.x) + (screen.width / 2)
     const currentCenterY = -(cnv.y + this.state.center.y) + (screen.height / 2)
 
-    circles.forEach((c) => {
-      const dist = Math.hypot(currentCenterX - c.x, currentCenterY - c.y)
+    IslandsData.forEach((island) => {
+      const dist = Math.hypot(currentCenterX - island.position.x, currentCenterY - island.position.y)
       if (dist <= this.state.vpRadius) {
-        this.state.contentToRender.push(c)
+        this.state.contentToRender.push(island)
+
+        // check for collision
+        if (dist <= (island.collisionDist + 100) && dist > (island.collisionDist + 10) && !this.state.isCollided) {
+          console.log('approaching')
+          this.setState({
+            collisionPoint: {
+              x: this.state.cnv.x,
+              y: this.state.cnv.y
+            }
+          })
+        } else if (dist <= island.collisionDist && !this.state.isCollided) {
+          console.log('colliding')
+          this.setState({
+            isCollided: true
+          })
+          this.state._toggleSailing()
+        }
       }
     })
   }
@@ -116,11 +170,9 @@ class VirtualMap extends Component {
       const s = this.state
 
       this._checkIfInViewport()
-
       if (this.state.currentSpeed !== this.state.goalSpeed) {
         this._manageSpeed()
       }
-      console.log('stillWorking')
       let newX = s.cnv.x + (s.currentSpeed) * Math.sin(s.orientation * 0.0174533)
       let newY = s.cnv.y + (s.currentSpeed) * Math.cos(s.orientation * 0.0174533)
 
@@ -172,8 +224,8 @@ class VirtualMap extends Component {
             y={this.state.cnv.y}
             scale={1}
           >
-            <Circles
-              circlesToRender={this.state.contentToRender}
+            <Islands
+              islands={this.state.contentToRender}
               deg={this.state.orientation}
             />
           </G>
@@ -188,25 +240,26 @@ class VirtualMap extends Component {
           href={images.bateau}
         />
         <G
-          width={200}
-          height={200}
+          width={screen.width}
+          height={screen.height}
           x={0}
-          y={screen.height - 200}
-          scale={1}
+          y={0}
+          rotation={180}
+          originX={screen.width / 2}
+          originY={screen.height / 2}
         >
           <Rect
-            width={200}
-            height={200}
+            width={screen.width}
+            height={screen.height}
             x={0}
             y={0}
-            scale={1}
-            fill="#ffffff"
+            fill='#ffffff'
             opacity={0.3}
           />
           <Circle
-            cx={(this.state.cnv.x + (mapSize.x / 2)) / mapSize.x * 200}
-            cy={(this.state.cnv.y + (mapSize.y / 2)) / mapSize.y * 200}
-            r="2"
+            cx={(this.state.cnv.x + (mapSize.x / 2)) / mapSize.x * screen.width}
+            cy={(this.state.cnv.y + (mapSize.y / 2)) / mapSize.y * screen.height}
+            r="5"
             fill="red"
           />
         </G>
@@ -230,6 +283,12 @@ const mapDispatchToProps = dispatch => {
   return {
     launchMap: (position) => {
       dispatch(launchMap(position))
+    },
+    toggleSailing: () => {
+      dispatch(toggleSailing())
+    },
+    updateOrientation: (orientation) => {
+      dispatch(updateOrientation(orientation))
     }
   }
 }
