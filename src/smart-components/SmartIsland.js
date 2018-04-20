@@ -80,7 +80,7 @@ componentWillReceiveProps(nextProps) {
     } else {
       actions = false;
     }
-    console.log('getSnippetData : ', offsets)
+
     const payload = {
       snippet: snippet,
       actions: actions, 
@@ -105,7 +105,7 @@ componentWillReceiveProps(nextProps) {
 
   render() {
     return ( 
-      <SafeAreaView style={{ backgroundColor: '#fff' }} >
+
         <View style={{
           backgroundColor: '#fff',
           height: screen.height
@@ -114,7 +114,7 @@ componentWillReceiveProps(nextProps) {
           <Narration snippet = { this.state.snippet } /> 
           <InteractionMenu actions = { this.state.actions } /> 
         </View>
-      </SafeAreaView>
+
     );
   }
 }
