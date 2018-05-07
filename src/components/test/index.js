@@ -13,13 +13,13 @@ export default class BasicExample extends React.Component {
     super(props);
     this.state = {
       next: 0, 
-      colors: ["#E09891", "#CB769E", "#CEDFD9"]
+      anim: [ anim, perso ]
     };
   }
 
 
   next = () => {
-    var rand = Math.floor(Math.random() * 3) 
+    var rand = Math.floor(Math.random() * 2) 
     console.log(rand)
     this.setState({
       next: rand
@@ -29,7 +29,12 @@ export default class BasicExample extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <AnimationLayout animations={ this.state.colors[this.state.next] } />
+          <AnimationLayout 
+            nextAnimation={ anim }
+            animationDuration={ 1000 } 
+            transitionDuration={ 1000 }
+            loop={ true }
+          />
           <View style={{ backgroundColor: "#ff0000", width: 50, height: 50, marginLeft: 100, marginTop: 100 }}></View>
           <Button
             title={'next'}
