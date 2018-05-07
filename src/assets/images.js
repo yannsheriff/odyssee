@@ -1,5 +1,6 @@
 const images = {
-    compass: require('./img/Compass.png'),
+    boussole: require('./img/Boussole.png'),
+    aiguille: require('./img/Aiguille.png'),
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
 };

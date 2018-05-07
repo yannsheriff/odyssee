@@ -1,11 +1,14 @@
-export const IslandsData = [
+const islands = [
   {
     id: 0,
     position: {
       x: 1000,
       y: 1500
     },
-    size: 30,
+    size: {
+      x: 30,
+      y: 30
+    },
     collisionDist: 150
   },
   {
@@ -14,7 +17,10 @@ export const IslandsData = [
       x: 1000,
       y: 1800
     },
-    size: 30,
+    size: {
+      x: 30,
+      y: 30
+    },
     collisionDist: 150
   },
   {
@@ -23,7 +29,10 @@ export const IslandsData = [
       x: 1500,
       y: 850
     },
-    size: 30,
+    size: {
+      x: 30,
+      y: 30
+    },
     collisionDist: 150
   },
   {
@@ -32,7 +41,10 @@ export const IslandsData = [
       x: 900,
       y: 500
     },
-    size: 30,
+    size: {
+      x: 30,
+      y: 30
+    },
     collisionDist: 150
   },
   {
@@ -41,7 +53,19 @@ export const IslandsData = [
       x: 450,
       y: 850
     },
-    size: 30,
+    size: {
+      x: 30,
+      y: 30
+    },
     collisionDist: 150
   }
 ]
+
+islands.forEach(island => {
+  const nb = Math.floor(Math.random() * 10) + 15
+  for (let i = 0; i < nb.length; i++) {
+
+  }
+})
+
+export const IslandsData = islands

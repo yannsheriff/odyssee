@@ -12,15 +12,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: screen.width
     },
+    outerCompassContainer: {
+      position: 'absolute',
+      top: 184,
+      width: screen.width - 100,
+      left: 20
+    },
     compassContainer: {
         position: 'absolute',
         left: 0,
-        top: 370
+        top: 415,
+        width: screen.width
     },
     compass: {
         width: screen.width,
+        resizeMode: 'center'
+    },
+    pointer: {
+        width: screen.width - 100,
         resizeMode: 'contain'
-    }, 
+    },
     text: {
         color: '#ffffff50',
         textAlign: 'center'
