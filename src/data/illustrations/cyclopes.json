@@ -9,7 +9,14 @@
             "id": 1,
             "first": 0,
             "middle": 0,
-            "back": 0
+            "back": 0,
+            "collectables": [
+                {
+                    "id":1,
+                    "x": 46,
+                    "y": 76
+                 }
+            ]
         },
         {
             "id": 2,
