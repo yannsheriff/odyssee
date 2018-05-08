@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         height: screen.height,
         width: screen.width,
         position:  "absolute",
-        backgroundColor: "#34435E",
+        // backgroundColor: "#34435E",
         top: 0
     },
     center: {

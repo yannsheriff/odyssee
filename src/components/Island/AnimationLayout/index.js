@@ -6,21 +6,26 @@ import LottieView from 'lottie-react-native';
 import styles from './styles';
 import screen from '../../../helpers/ScreenSize'
 
-export default class BasicExample extends React.Component {
+export default class AnimationLayout extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.animation = []
     this.state = {
       isTransitionFinished: true,
       animations: [
         {
-          animation: props.nextAnimation,
+          animation: props.nextAnimation.animation,
           animationProgress: new Animated.Value(0),
           position: new Animated.Value(0),
         }
       ],
     };
-    this.singleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
+    if (props.loop) {
+      this.cycleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
+    } else {
+      this.singleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
+    }
   }
 
 
@@ -32,7 +37,7 @@ export default class BasicExample extends React.Component {
         isTransitionFinished: false,
         animations:[ 
           {
-            animation: nextProps.nextAnimation, 
+            animation: nextProps.nextAnimation.animation, 
             animationProgress: new Animated.Value(0),
             position: new Animated.Value(screen.width-2)
           }, 
@@ -103,9 +108,6 @@ export default class BasicExample extends React.Component {
       duration: duration,
     }).start()
   }
-
-
-
 
 
   render() {

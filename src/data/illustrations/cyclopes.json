@@ -7,46 +7,94 @@
     "steps": [
         {
             "id": 1,
-            "first": 0,
-            "middle": 0,
-            "back": 0,
+            "offsets": {
+                "first": 0,
+                "middle": 0,
+                "back": 0
+            },
             "collectables": [
                 {
                     "id":1,
                     "x": 46,
                     "y": 76
                  }
-            ]
+            ],
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 5000
+            }
         },
         {
             "id": 2,
-            "first": -300,
-            "middle": -200,
-            "back": -100
+            "offsets": {
+                "first": -300,
+                "middle": -200,
+                "back": -100
+            },
+            "animation": {
+                "loop": false,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 5000
+            }
         },
         {
             "id": 3,
-            "first": -600,
-            "middle": -300,
-            "back": -200
+            "offsets": {
+                "first": -600,
+                "middle": -300,
+                "back": -200
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 5000
+            }
         },
         {
             "id": 4,
-            "first": -600,
-            "middle": -300,
-            "back": -200
+            "offsets": {
+                "first": -600,
+                "middle": -300,
+                "back": -200
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 5000
+            }
         },
         {
             "id": 5,
-            "first": -900,
-            "middle": -600,
-            "back": -300
+            "offsets": {
+                "first": -900,
+                "middle": -600,
+                "back": -300
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 5000
+            }
         },
         {
             "id": 9999,
-            "first": 0,
-            "middle": 0,
-            "back": 0
+            "offsets": {
+                "first": 0,
+                "middle": 0,
+                "back": 0
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 5000
+            }
         }
 
     ]

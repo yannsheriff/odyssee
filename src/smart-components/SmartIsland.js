@@ -37,7 +37,8 @@ class SmartIsland extends Component {
     this.state = {
       snippet: payload.snippet,
       actions: payload.actions,
-      offsets: payload.offsets
+      offsets: payload.offsets,
+      animation: payload.animation,
     }
   }
 
@@ -65,7 +66,14 @@ componentWillReceiveProps(nextProps) {
 
     const offsets = cyclopes.illustrations.steps.find((index) => {
       if (index.id === id) {
-        return index
+        return index.offsets
+      }
+    });
+
+
+    const animation = cyclopes.illustrations.steps.find((index) => {
+      if (index.id === id) {
+        return index.animation
       }
     });
 
@@ -81,10 +89,12 @@ componentWillReceiveProps(nextProps) {
       actions = false;
     }
 
+
     const payload = {
       snippet: snippet,
       actions: actions, 
-      offsets: offsets
+      offsets: offsets,
+      animation: animation,
     }
 
     return payload
@@ -99,7 +109,8 @@ componentWillReceiveProps(nextProps) {
     this.setState({
       snippet: payload.snippet,
       actions: payload.actions,
-      offsets: payload.offsets
+      offsets: payload.offsets,
+      animation: payload.animation,
     })
   }
 
@@ -110,7 +121,10 @@ componentWillReceiveProps(nextProps) {
           backgroundColor: '#fff',
           height: screen.height
         }}>
-          <Illustrations offsets={this.state.offsets}/>
+          <Illustrations 
+            offsets={ this.state.offsets.offsets }
+            animation={ this.state.animation.animation }
+          />
           <Narration snippet = { this.state.snippet } /> 
           <InteractionMenu actions = { this.state.actions } /> 
         </View>

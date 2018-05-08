@@ -23,6 +23,23 @@ export const backgrounds = {
             height: 1347,
             width: 3365,
         } 
+    },
+    foret: {
+        p1: {
+            image: require('./img/Plan1.png'),
+            height: 2433,
+            width: 9989,
+        },
+        p2: {
+            image: require('./img/Plan2.png'),
+            height: 2541,
+            width: 5219,
+        },
+        p3: {
+            image: require('./img/Plan3.jpg'),
+            height: 2437,
+            width: 3500,
+        } 
     }
 }
 
