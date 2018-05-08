@@ -4,8 +4,13 @@ import screen from '../../../helpers/ScreenSize'
 
 const styles = StyleSheet.create({
     container: {
+        position: "absolute",
+        bottom: 0,
+    },
+    menu: {
         width: screen.width,
         height: 30,
+        marginBottom: 40,
         flexDirection: 'row',
         justifyContent: 'center',
     },
@@ -18,6 +23,12 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'center',
     },
+    swipReconizer: {
+        width: screen.width,
+        height: 300,
+        position: "absolute",
+        bottom: 0,
+    }
 });
 
 export default styles

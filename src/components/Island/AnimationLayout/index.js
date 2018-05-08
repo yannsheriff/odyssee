@@ -9,22 +9,26 @@ import screen from '../../../helpers/ScreenSize'
 export default class AnimationLayout extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.animation = []
     this.state = {
       isTransitionFinished: true,
       animations: [
         {
-          animation: props.nextAnimation.animation,
+          // If animation is not null put it in the state
+          animation: props.nextAnimation ? props.nextAnimation.animation : null,
           animationProgress: new Animated.Value(0),
           position: new Animated.Value(0),
         }
       ],
     };
-    if (props.loop) {
-      this.cycleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
-    } else {
-      this.singleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
+    
+    // If animation is not null launch it in the constructor
+    if (props.nextAnimation ) {
+      if (props.loop) {
+        this.cycleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
+      } else {
+        this.singleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
+      }
     }
   }
 
@@ -45,8 +49,10 @@ export default class AnimationLayout extends React.Component {
         ]
       }, function () { // When set state did finish
 
-        // launch new animation
-        this.launchNewAnimationOnReceive(1000, nextProps.loop) 
+        // launch new animation if it exist
+        if (nextProps.nextAnimation) {
+          this.launchNewAnimationOnReceive(1000, nextProps.loop) 
+        }
 
         // Animate the old & the animation to the left
         Animated.parallel([
@@ -112,14 +118,18 @@ export default class AnimationLayout extends React.Component {
 
   render() {
       var animations = this.state.animations.map((anim, index) => {
-        return (
-          <Animated.View style={[styles.background, { left: anim.position }]}>
-           <LottieView 
-                source={ anim.animation } 
-                progress={ anim.animationProgress }
-            />
-          </Animated.View>
-        );
+        if (anim) {   // If animation exist then render it
+          return (
+            <Animated.View style={[styles.background, { left: anim.position }]}>
+             <LottieView 
+                  source={ anim.animation } 
+                  progress={ anim.animationProgress }
+              />
+            </Animated.View>
+          )
+        } else {      // Else render a blank layer
+          return <Animated.View style={[styles.background, { left: anim.position }]}> </Animated.View>
+        }
       })
 
       return (

@@ -57,7 +57,7 @@ componentWillReceiveProps(nextProps) {
   *  Load the data of the wanted Snippet
   */
   getSnippetData(id) { 
-    let actions = [];
+
     const snippet = cyclopes.writting.steps.find((index) => {
       if (index.id === id) {
         return index
@@ -75,24 +75,37 @@ componentWillReceiveProps(nextProps) {
       if (index.id === id) {
         return index.animation
       }
-    });
+    })
+
+    let snippetArray = []
+    let haveAction = true
 
     if (snippet.haveAction) {
       snippet.actions.forEach(element => {
         cyclopes.writting.steps.find((index) => {
           if (index.id === element.id) {
-            actions.push(index) 
+            snippetArray.push(index) 
           }
         });
       });
     } else {
-      actions = false;
+      haveAction = false 
+      snippetArray = cyclopes.writting.steps.find((index) => {
+        if (index.id === id) {
+          return index
+        }
+      });
+      snippetArray = [snippetArray]
+    }
+    let bundleAction = {
+      haveAction: haveAction,
+      snippets: snippetArray
     }
 
 
     const payload = {
       snippet: snippet,
-      actions: actions, 
+      actions: bundleAction, 
       offsets: offsets,
       animation: animation,
     }
