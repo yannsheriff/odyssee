@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
         borderStyle: "solid"
     }
 
-    
 });
 
 export default styles

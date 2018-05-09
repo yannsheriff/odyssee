@@ -1,7 +1,8 @@
 
 
 const images = {
-    compass: require('./img/Compass.png'),
+    boussole: require('./img/bb.png'),
+    aiguille: require('./img/aiguille.png'),
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
     homeScreen: require('./img/home.jpg'),
