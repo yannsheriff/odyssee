@@ -10,14 +10,29 @@ const styles = StyleSheet.create({
     },
     background: {
         position: 'absolute',
-        top: 60, 
+        top: 0, 
         left: 0,
         width: screen.width,
         height: screen.height,
     },
     center: {
-        marginTop: 400
+        position: 'absolute',
+        top: 550, 
+        left: 0,
+        width: screen.width,
+        flexDirection: "column",
+        alignItems: "center"
+    }, 
+    buttonBorder: {
+        paddingVertical: 5,
+        width: 220,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderRadius: 50,
+        borderColor: "white",
+        borderStyle: "solid"
     }
+
     
 });
 

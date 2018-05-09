@@ -4,6 +4,7 @@ const images = {
     compass: require('./img/Compass.png'),
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
+    homeScreen: require('./img/home.jpg'),
 };
 
 export const backgrounds = {
