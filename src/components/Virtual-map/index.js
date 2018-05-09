@@ -239,7 +239,7 @@ class VirtualMap extends Component {
           opacity="1"
           href={images.bateau}
         />
-        <G
+        {/* <G
           width={screen.width}
           height={screen.height}
           x={0}
@@ -262,7 +262,7 @@ class VirtualMap extends Component {
             r="5"
             fill="red"
           />
-        </G>
+        </G> */}
       </Svg>
     )
   }

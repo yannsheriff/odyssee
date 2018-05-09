@@ -55,6 +55,7 @@ class MiniatureMap extends Component {
               y={0}
               scale={1}
               fill="#0071e9"
+              onPress={this.state._hideMap}
             />
             <MiniIslands/>
             <Circle
@@ -67,7 +68,6 @@ class MiniatureMap extends Component {
         </Svg>
         <Button
           style={styles.button}
-          onPress={this.state._hideMap}
           title={'map'}
           color="#fff"
         />

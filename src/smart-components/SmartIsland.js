@@ -21,7 +21,7 @@ class SmartIsland extends Component {
     render() {
         return (
             <View>
-                <Narration />
+                {/* <Narration /> */}
                 <Text style={{color: 'white'}}> Island </Text>
             </View>
         );
