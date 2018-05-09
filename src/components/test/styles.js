@@ -6,6 +6,17 @@ const styles = StyleSheet.create({
     container: {
         width: screen.width,
         height: screen.height,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: '#fff',
+    },
+    absolute: {
+        width: screen.width,
+        height: screen.height,
+        position: "absolute",
+        top: 0, 
+        left: 0
     },
     background: {
         backgroundColor: '#000',

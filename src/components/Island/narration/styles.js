@@ -6,16 +6,13 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 630,
         width: screen.width,
-        height: 50,
-    },
-    center: {
-        flexDirection: 'column',
+        flexDirection: 'row',
         justifyContent: 'center',
-        width: screen.width
     },
     text: {
-        color: 'black',
+        color: 'white',
         textAlign: 'center',
+        width: screen.width - 40,
     },
 });
 

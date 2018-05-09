@@ -47,7 +47,7 @@ export default class ParallaxLayout extends Component {
         this.state.fadeAnim,
       {
           toValue: nextProps.offsetX,
-          duration: 5000,              
+          duration: 2000,              
         }
       ).start()
     }

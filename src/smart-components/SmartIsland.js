@@ -37,7 +37,8 @@ class SmartIsland extends Component {
     this.state = {
       snippet: payload.snippet,
       actions: payload.actions,
-      offsets: payload.offsets
+      offsets: payload.offsets,
+      animation: payload.animation,
     }
   }
 
@@ -56,7 +57,7 @@ componentWillReceiveProps(nextProps) {
   *  Load the data of the wanted Snippet
   */
   getSnippetData(id) { 
-    let actions = [];
+
     const snippet = cyclopes.writting.steps.find((index) => {
       if (index.id === id) {
         return index
@@ -65,26 +66,48 @@ componentWillReceiveProps(nextProps) {
 
     const offsets = cyclopes.illustrations.steps.find((index) => {
       if (index.id === id) {
-        return index
+        return index.offsets
       }
     });
+
+
+    const animation = cyclopes.illustrations.steps.find((index) => {
+      if (index.id === id) {
+        return index.animation
+      }
+    })
+
+    let snippetArray = []
+    let haveAction = true
 
     if (snippet.haveAction) {
       snippet.actions.forEach(element => {
         cyclopes.writting.steps.find((index) => {
           if (index.id === element.id) {
-            actions.push(index) 
+            snippetArray.push(index) 
           }
         });
       });
     } else {
-      actions = false;
+      haveAction = false 
+      snippetArray = cyclopes.writting.steps.find((index) => {
+        if (index.id === id) {
+          return index
+        }
+      });
+      snippetArray = [snippetArray]
     }
+    let bundleAction = {
+      haveAction: haveAction,
+      snippets: snippetArray
+    }
+
 
     const payload = {
       snippet: snippet,
-      actions: actions, 
-      offsets: offsets
+      actions: bundleAction, 
+      offsets: offsets,
+      animation: animation,
     }
 
     return payload
@@ -99,7 +122,8 @@ componentWillReceiveProps(nextProps) {
     this.setState({
       snippet: payload.snippet,
       actions: payload.actions,
-      offsets: payload.offsets
+      offsets: payload.offsets,
+      animation: payload.animation,
     })
   }
 
@@ -110,7 +134,10 @@ componentWillReceiveProps(nextProps) {
           backgroundColor: '#fff',
           height: screen.height
         }}>
-          <Illustrations offsets={this.state.offsets}/>
+          <Illustrations 
+            offsets={ this.state.offsets.offsets }
+            animation={ this.state.animation.animation }
+          />
           <Narration snippet = { this.state.snippet } /> 
           <InteractionMenu actions = { this.state.actions } /> 
         </View>
