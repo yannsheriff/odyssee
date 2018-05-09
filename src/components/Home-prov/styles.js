@@ -17,8 +17,7 @@ const styles = StyleSheet.create({
     },
     center: {
         marginTop: 400
-    }
-    
+    }    
 });
 
 export default styles

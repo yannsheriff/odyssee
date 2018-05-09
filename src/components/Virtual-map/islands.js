@@ -21,8 +21,8 @@ export default class islands extends Component {
           key={ c.id }
           x={ c.position.x }
           y={ c.position.y }
-          width={c.size}
-          height={c.size}
+          width={c.size.x}
+          height={c.size.y}
           fill="#ffffff40"
           scale={1}
           rotation={-that.props.deg}
