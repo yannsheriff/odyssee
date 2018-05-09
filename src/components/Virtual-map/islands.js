@@ -26,8 +26,8 @@ export default class islands extends Component {
           fill="#ffffff40"
           scale={1}
           rotation={-that.props.deg}
-          originX={ c.position.x + (c.size / 2) }
-          originY={ c.position.y + (c.size / 2) }
+          originX={ c.position.x + (c.size.x / 2) }
+          originY={ c.position.y + (c.size.y / 2) }
         />
       )
     })

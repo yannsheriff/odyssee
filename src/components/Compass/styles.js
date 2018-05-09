@@ -16,17 +16,17 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: 184,
       width: screen.width - 100,
-      left: 20
+      left: 50
     },
     compassContainer: {
         position: 'absolute',
-        left: 0,
-        top: 415,
-        width: screen.width
+        left: 50,
+        top: 184,
+        width: screen.width - 100,
     },
     compass: {
-        width: screen.width,
-        resizeMode: 'center'
+        width: screen.width - 100,
+        resizeMode: 'contain'
     },
     pointer: {
         width: screen.width - 100,
