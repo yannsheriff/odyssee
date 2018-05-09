@@ -53,8 +53,9 @@ class InteractionMenu extends Component {
   }
 
   _handleSwip = () => {
-    console.log(this.state.actions)
-    this.state._changeStep(this.state.actions[0].actions[0].id)
+    if (!this.state.haveAction) {
+      this.state._changeStep(this.state.actions[0].actions[0].id)
+    }
   }
 
 

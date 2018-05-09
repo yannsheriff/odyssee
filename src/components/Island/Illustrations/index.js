@@ -81,16 +81,16 @@ export default class Illustrations extends Component {
             source={backgrounds.foret.p2}
             offsetX={this.state.offsets.middle}
           />
-          
-          <ParallaxLayout 
-            source={backgrounds.foret.p1}
-            offsetX={this.state.offsets.first}
-          />
           <AnimationLayout
             nextAnimation={ animations[this.state.animation.animationId] }
             animationDuration={ this.state.animation.animationDuration } 
             transitionDuration={ this.state.animation.transitionDuration }
             loop={ this.state.animation.loop }
+          />
+          
+          <ParallaxLayout 
+            source={backgrounds.foret.p1}
+            offsetX={this.state.offsets.first}
           />
         </View>
     )
