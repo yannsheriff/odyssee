@@ -34,8 +34,12 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#ffffff50',
-        textAlign: 'center'
-    }
-})
+        textAlign: 'center',
+    },
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#fff'
+      }
+});
 
 export default styles

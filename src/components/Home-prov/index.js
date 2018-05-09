@@ -41,20 +41,31 @@ export default class Accueil extends Component {
             <View style={styles.container}>
                 <Image
                     style={styles.background}
-                    source={images.home}
+                    source={images.homeScreen}
                     resizeMethod="scale"
                 />
                 <View style={styles.center}>
-                    <Button
-                        onPress={() => this.props.navigation.navigate('Sailing')}
-                        title={'Aller a la navigation'}
-                        color="#fff"
-                    />
+                    <View style={styles.buttonBorder}>
+                        <Button
+                            onPress={() => this.props.navigation.navigate('Sailing')}
+                            title={'Aller a la navigation'}
+                            color="#fff"
+                        />
+                    </View>
+                    <View style={styles.buttonBorder}>
                     <Button
                         onPress={() => this.props.navigation.navigate('Island')}
                         title={'Aller a l\'ile'}
                         color="#fff"
                     />
+                    </View>
+                    <View style={styles.buttonBorder}>
+                    <Button
+                        onPress={() => this.props.navigation.navigate('Test')}
+                        title={'Test animations'}
+                        color="#fff"
+                    />
+                    </View>
                 </View>
             </View>
         );

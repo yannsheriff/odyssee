@@ -1,0 +1,110 @@
+{
+    "info": {
+        "id": 1,
+        "title": "Cyclope Island"
+    },
+
+    "steps": [
+        {
+            "id": 1,
+            "offsets": {
+                "first": 0,
+                "middle": 0,
+                "back": 0
+            },
+            "collectables": [
+                {
+                    "id":1,
+                    "x": 46,
+                    "y": 76
+                 }
+            ],
+            "animation": {}
+        },
+        {
+            "id": 2,
+            "offsets": {
+                "first": -300,
+                "middle": -200,
+                "back": -100
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 2,
+                "animationDuration": 1000,
+                "transitionDuration": 2000
+            }
+        },
+        {
+            "id": 3,
+            "offsets": {
+                "first": -600,
+                "middle": -300,
+                "back": -200
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 2000
+            }
+        },
+        {
+            "id": 4,
+            "offsets": {
+                "first": -600,
+                "middle": -300,
+                "back": -200
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 2000
+            }
+        },
+        {
+            "id": 5,
+            "offsets": {
+                "first": -900,
+                "middle": -600,
+                "back": -300
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 2000
+            }
+        },
+        {
+            "id": 6,
+            "offsets": {
+                "first": -900,
+                "middle": -600,
+                "back": -300
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 2000
+            }
+        },
+        {
+            "id": 9999,
+            "offsets": {
+                "first": 0,
+                "middle": 0,
+                "back": 0
+            },
+            "animation": {
+                "loop": true,
+                "animationId": 1,
+                "animationDuration": 1000,
+                "transitionDuration": 2000
+            }
+        }
+
+    ]
+}
