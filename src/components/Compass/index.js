@@ -110,6 +110,15 @@ class Compass extends Component {
             color="#fff"
           />
           <View
+            style={[styles.outerCompassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' },] }]}
+          >
+            <Image
+              style={styles.pointer}
+              source={images.boussole}
+              resizeMethod="scale"
+            />
+          </View>
+          <View
             onStartShouldSetResponder={(evt) => true}
             onMoveShouldSetResponder={(evt) => true}
             onResponderMove={this._handleCompassDrag}
@@ -118,7 +127,7 @@ class Compass extends Component {
           >
             <Image
               style={styles.compass}
-              source={images.compass}
+              source={images.aiguille}
               resizeMethod="scale"
             />
           </View>
@@ -135,7 +144,8 @@ class Compass extends Component {
   ================================================================ */
 
 const mapStateToProps = state => {
-  return {}
+  return {
+  }
 }
 
 const mapDispatchToProps = dispatch => {
