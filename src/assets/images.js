@@ -8,6 +8,21 @@ const images = {
     homeScreen: require('./img/home.jpg'),
 };
 
+export const choices = [
+    {
+        id: 0,
+        img: require('./img/Lance.png')
+    },
+    {
+        id: 1,
+        img: require('./img/Continuer.png')
+    },
+    {
+        id: 2,
+        img: require('./img/Arc.png')
+    },
+]
+
 export const backgrounds = {
     test: {
         p1: {
