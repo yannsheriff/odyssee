@@ -49,6 +49,7 @@
         {
             "id": 4,
             "title": "Attraper un arc",
+            "choiceImgId": 2,
             "text": "Ce gibier tombe à point, les hommes s’emparent aussitôt de leur arc, et d’épieux à longues douilles, pour chasser. Les dieux sont avec nous, la chasse est bonne. Et ainsi, du lever au coucher du soleil, nous festoyons  de viandes grillées et de vin doux tiré des amphores.",
             "collectableObject": 0,
             "haveAction": false,
@@ -61,6 +62,7 @@
         {
             "id": 5,
             "title": "Attraper un épieux",
+            "choiceImgId": 0,
             "text": "Ce gibier tombe à point, les hommes s’emparent aussitôt de leur arc, et d’épieux à longues douilles, pour chasser. Les dieux sont avec nous, la chasse est bonne. Et ainsi, du lever au coucher du soleil, nous festoyons  de viandes grillées et de vin doux tiré des amphores.",
             "collectableObject": 0,
             "haveAction": false,
@@ -73,6 +75,7 @@
         {
             "id": 6,
             "title": "Continuer sa route",
+            "choiceImgId": 1,
             "text": "Tout près de notre îlot se dresse une autre île, plus montagneuse. Elle est si proche de nous que l’on en devine les fumées des foyers, et l’on entend les brebis et les chèvres bêler. Elle m’intrigue. Qui habite cette terre ? ",
             "collectableObject": 0,
             "haveAction": true,

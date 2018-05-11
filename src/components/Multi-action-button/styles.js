@@ -3,14 +3,8 @@ import screen from '../../helpers/ScreenSize'
 
 
 const styles = StyleSheet.create({
-    container: {
-        width: screen.width,
-        height: screen.height,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: '#fff',
-    },
+
+
     absolute: {
         width: screen.width,
         height: screen.height,
@@ -25,6 +19,18 @@ const styles = StyleSheet.create({
     },
     center: {
         marginTop: 400
+    }, 
+    choiceImg: {
+        position: "absolute",
+        resizeMode: 'contain',
+    },
+    text: {
+        position:"absolute",
+        top: 300,
+        width: screen.width,
+        textAlign: "center",
+        fontSize: 80,
+        fontWeight: "bold",
     }
     
 });

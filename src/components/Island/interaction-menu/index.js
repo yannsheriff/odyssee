@@ -29,6 +29,7 @@ import styles from './styles'
 //  Import Component
 // --------------------------------------------------------------
 import Swip from '../Swip'
+import MultiActionButton from '../../Multi-action-button'
 
 class InteractionMenu extends Component {
 
@@ -38,18 +39,28 @@ class InteractionMenu extends Component {
     this.state = {
       style: props.style,
       actions: this.props.actions.snippets,
+      actionsForButton: this._formatDataForActionButon(this.props.actions.snippets),
       haveAction: this.props.actions.haveAction,
       _changeStep: this.props.goToStep
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
       if (nextProps.actions) {
         this.setState({ 
-          actions: nextProps.actions.snippets,
+          actions: this.props.actions.snippets,
+          actionsForButton: this._formatDataForActionButon(nextProps.actions.snippets),
           haveAction: nextProps.actions.haveAction
         })
       }
+  }
+
+  _formatDataForActionButon(actions) {
+    let payload = actions.map((action) => {
+      return { id: action.id, img: action.choiceImgId, label: action.title}
+    })
+    return payload
   }
 
   _handleSwip = () => {
@@ -62,22 +73,19 @@ class InteractionMenu extends Component {
 
 
   render() {
-    if (this.state.actions && this.state.haveAction) {
-      console.log(this.state.actions)
-      var actions = this.state.actions.map((action) => {
-        return (<Button title={action.title} onPress={ () => { this.state._changeStep(action.id) }} />);
-      })
-    }
-
     return (
       <View style={styles.container}>
+        
+        <MultiActionButton
+          actions={this.state.actionsForButton}
+          onChoiceSelected={() => { 
+            this.state._changeStep(action.id) 
+          }}
+        />
         <Swip
           style={ styles.swipReconizer }
           callback={ this._handleSwip }
         />
-        <View style={ styles.menu }>
-          { actions }
-        </View>
       </View>
     );
   }
