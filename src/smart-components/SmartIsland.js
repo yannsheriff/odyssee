@@ -31,6 +31,7 @@ import screen from '../helpers/ScreenSize'
 
 class SmartIsland extends Component {
 
+
   constructor(props) {
     super(props)
     const payload = this.getSnippetData(this.props.island.actualSnippetId)

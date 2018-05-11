@@ -32,7 +32,7 @@ export function launchMap (position) {
 }
 
 export function hideMap () {
-  return {
-    type: LAUNCH_MAP
-  }
+    return {
+        type: HIDE_MAP
+    }
 }

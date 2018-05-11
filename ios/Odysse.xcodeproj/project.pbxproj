@@ -138,14 +138,16 @@
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
 		};
-		320AD98320A2819700F0244B /* PBXContainerItemProxy */ = {
+
+		328A3ED720A2FE3600AD651D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 330E45EEEC554D97B4A96FA7 /* RNBlur.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A68BD7BC1BC31318005F02DF;
 			remoteInfo = RNBlur;
 		};
-		320AD98520A2819700F0244B /* PBXContainerItemProxy */ = {
+
+		328A3ED920A2FE3600AD651D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 330E45EEEC554D97B4A96FA7 /* RNBlur.xcodeproj */;
 			proxyType = 2;
@@ -636,11 +638,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		320AD97F20A2819700F0244B /* Products */ = {
+		328A3ED320A2FE3500AD651D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				320AD98420A2819700F0244B /* libRNBlur.a */,
-				320AD98620A2819700F0244B /* libRNBlur.a */,
+				328A3ED820A2FE3600AD651D /* libRNBlur.a */,
+				328A3EDA20A2FE3600AD651D /* libRNBlur.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -953,7 +955,7 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = 320AD97F20A2819700F0244B /* Products */;
+					ProductGroup = 328A3ED320A2FE3500AD651D /* Products */;
 					ProjectRef = 330E45EEEC554D97B4A96FA7 /* RNBlur.xcodeproj */;
 				},
 				{
@@ -1053,18 +1055,18 @@
 			remoteRef = 2D16E6851FA4F8DC00B85C8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		320AD98420A2819700F0244B /* libRNBlur.a */ = {
+		328A3ED820A2FE3600AD651D /* libRNBlur.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNBlur.a;
-			remoteRef = 320AD98320A2819700F0244B /* PBXContainerItemProxy */;
+			remoteRef = 328A3ED720A2FE3600AD651D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		320AD98620A2819700F0244B /* libRNBlur.a */ = {
+		328A3EDA20A2FE3600AD651D /* libRNBlur.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNBlur.a;
-			remoteRef = 320AD98520A2819700F0244B /* PBXContainerItemProxy */;
+			remoteRef = 328A3ED920A2FE3600AD651D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
