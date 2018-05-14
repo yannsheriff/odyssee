@@ -202,11 +202,12 @@ export default class MultiActionButton extends React.Component {
                   Animated.parallel([
                     Animated.timing(button.y, {
                       toValue: newValueY, 
+                      easing: Easing.in,
                       duration: 300,
                     }),
                     Animated.timing(button.x, {
                       toValue: newValueX, 
-                      // easing: Easing.ease()
+                      easing: Easing.in,
                       duration: 300,
                     })
                   ]).start()
@@ -218,7 +219,6 @@ export default class MultiActionButton extends React.Component {
                   chosenId: button.id
                 })
 
-                
 
               }  else if (this.isHovered.reduce(function(acc, val) { return acc + val; }) < 1) { // if nothing is hovered
 
@@ -308,7 +308,7 @@ export default class MultiActionButton extends React.Component {
                 style={[styles.absolute, { opacity: this.state.opacity }]}
                 viewRef={this.state.viewRef}
                 blurType="dark"
-                blurAmount={15}
+                blurAmount={10}
               />
               <Text
               style={[ styles.text, this.state.textStyle ]}
