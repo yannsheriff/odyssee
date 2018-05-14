@@ -148,6 +148,10 @@ componentWillReceiveProps(nextProps) {
 }
 
 
+/* ===============================================================
+  ======================= REDUX CONNECTION =======================
+  ================================================================ */
+
 const mapStateToProps = state => {
   return {
     island: state.island

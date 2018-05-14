@@ -51,6 +51,10 @@ class SmartSailing extends Component {
 }
 
 
+/* ===============================================================
+  ======================= REDUX CONNECTION =======================
+  ================================================================ */
+  
 const mapStateToProps = state => {
   return {
       sailing: state.sailing,
