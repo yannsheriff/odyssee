@@ -88,16 +88,33 @@ class InteractionMenu extends Component {
         <MultiActionButton
           actions={this.state.actionsForButton}
           // mainBtnStyle={}
-          // mainBtn={}
           // initalPositon={}
           //labelStyle={}
+
+          mainButton={
+            <Image
+              source={images.openMenu}
+              resizeMethod={"contain"}
+              style={{height: 50, width: 50}}
+            />
+          }
+          
           mainBtnOpen={
             <Image
               source={images.closeMenu}
               resizeMethod={"contain"}
-              style={{height: 60, width: 60}}
+              style={{height: 50, width: 50}}
             />
           }
+          disabled={
+            <Image
+              source={images.openMenu}
+              resizeMethod={"contain"}
+              style={{height: 50, width: 50, opacity: 0.1}}
+            />
+          }
+
+          isActive={this.state.haveAction ? true : false}
 
           onChoiceSelected={(action) => { 
             this.state._changeStep(action) 

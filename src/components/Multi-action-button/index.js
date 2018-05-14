@@ -17,13 +17,13 @@ export default class MultiActionButton extends React.Component {
     this.callback = props.onChoiceSelected
     this.firstTouch = undefined
     this.menuIsOpen = false
-    this.buttonSize = 60
+    this.buttonSize = 50
     this.isHovered=[0]
     this.distFromInitialPosition = 120
     this.initialPosition = this.props.initalPositon 
     ? this.props.initalPositon
     : {
-      x: screen.width/2 -30,
+      x: screen.width/2 -25,
       y: screen.height - 70
     }
     this.positionReferenceMap = [
@@ -36,10 +36,12 @@ export default class MultiActionButton extends React.Component {
       optionsSize: new Animated.Value(0),
       text: '',
       isOpen: false,
+      isActive: this.props.isActive ? this.props.isActive : true, 
       chosenId: undefined,
       buttonArray: this._prepareButtons(this.props.actions),
       btnStyle: this.props.mainBtnStyle, 
       customBtnOpen: this.props.mainBtnOpen,
+      customBtnDisabled: this.props.disabled,
       customBtn: this.props.mainButton,
       textStyle: this.props.labelStyle,
     };
@@ -51,6 +53,12 @@ export default class MultiActionButton extends React.Component {
         buttonArray: this._prepareButtons(nextProps.actions)
       })
     } 
+
+    if (nextProps.isActive !== undefined) {
+      this.setState({
+        isActive: nextProps.isActive
+      })
+    }
   }
 
 
@@ -203,12 +211,12 @@ export default class MultiActionButton extends React.Component {
                     Animated.timing(button.y, {
                       toValue: newValueY, 
                       easing: Easing.in,
-                      duration: 300,
+                      duration: 200,
                     }),
                     Animated.timing(button.x, {
                       toValue: newValueX, 
                       easing: Easing.in,
-                      duration: 300,
+                      duration: 200,
                     })
                   ]).start()
                 }
@@ -268,11 +276,14 @@ export default class MultiActionButton extends React.Component {
 
   render() {
     let customBtn = null
-    if(this.state.customBtn || this.state.customBtnOpen ) {
+    if(this.state.customBtn || this.state.customBtnOpen || this.state.customActiveBtn ) {
       if(this.state.isOpen && this.state.customBtnOpen) {
         customBtn = this.state.customBtnOpen
-      } else if (this.state.customBtn) {
+      } else if (this.state.customBtn && this.state.isActive) {
         customBtn = this.state.customBtn
+      } else if (this.state.customBtnDisabled) {
+        console.log('seeeul')
+        customBtn = this.state.customBtnDisabled
       }
     }
 
@@ -326,11 +337,12 @@ export default class MultiActionButton extends React.Component {
                   position: "absolute",
                   top: this.initialPosition.y,
                   left: this.initialPosition.x,
-                  backgroundColor: "white",
+                  backgroundColor: "transparent",
                   borderRadius: 50,
                   zIndex: 99,
                   height: this.buttonSize,
                   width: this.buttonSize,
+                  
                 }, this.state.btnStyle ]}
                 
                 onLongPress={this._onLongPressButton}

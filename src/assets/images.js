@@ -6,7 +6,8 @@ const images = {
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
     homeScreen: require('./img/home.jpg'),
-    closeMenu: require('./img/Close.png')
+    closeMenu: require('./img/Close.png'),
+    openMenu: require('./img/plus.png'),
 };
 
 export const choices = [
