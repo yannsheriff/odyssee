@@ -59,29 +59,14 @@ export default class MultiActionButton extends React.Component {
       optionsSize: new Animated.Value(0),
       text: '',
       chosenId: undefined,
-      // buttonArray: this._prepareButtons([
-      //   {
-      //     img: 0,
-      //     id: 1,
-      //     label: "suce ma bite"
-      //   },
-      //   {
-      //     img: 2,
-      //     id: 1,
-      //     label: "NIK theophile"
-      //   },
-      //   {
-      //     img: 1,
-      //     id: 1,
-      //     label: "va acheter a boir"
-      //   },
-      // ])
-      buttonArray: this._prepareButtons(this.props.actions)
+      buttonArray: this._prepareButtons(this.props.actions),
+      btnStyle: this.props.mainBtnStyle, 
+      customBtn: this.props.mainButton
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.actions.img) {
+    if (nextProps.actions[0].img) {
       this.setState({
         buttonArray: this._prepareButtons(nextProps.actions)
       })
@@ -94,10 +79,9 @@ export default class MultiActionButton extends React.Component {
   * Format data & give them positions
   */ 
   _prepareButtons(array = []) {
-    console.log(array.length)
     let payload = []
     if (array.length > 0) {
-      if (array.img) {
+      if (array[0].img) {
       let nbOfButtons = array.length - 1
       array.forEach((data, index) => {
         payload.push(
@@ -122,7 +106,6 @@ export default class MultiActionButton extends React.Component {
   * Animate buttons to there positions, and blur the bckground
   */ 
   _openMenu = () => {
-    console.log("open")
     this.setState({
       opacity: 1
     })
@@ -254,17 +237,16 @@ export default class MultiActionButton extends React.Component {
       }
     })
 
+    var customBtn = this.state.customBtn 
+    ? this.state.customBtn
+    : null
+
     return (
         <View style={{
           width: screen.width,
           height: screen.height,
           justifyContent: "center",
-          // backgroundColor: '#fff',
         }}>
-            {/* <Image
-              style={styles.absolute}
-              source={images.home}
-            /> */}
             <BlurView
                 style={[styles.absolute, {opacity: this.state.opacity}]}
                 viewRef={this.state.viewRef}
@@ -283,7 +265,7 @@ export default class MultiActionButton extends React.Component {
 
             >
               <View 
-                style={{
+                style={[{
                   position: "absolute",
                   top: this.initialPosition.y,
                   left: this.initialPosition.x,
@@ -292,7 +274,7 @@ export default class MultiActionButton extends React.Component {
                   zIndex: 99,
                   height: this.buttonSize,
                   width: this.buttonSize,
-                }}
+                }, this.state.btnStyle ]}
                 
                 onLongPress={this._onLongPressButton}
                 onStartShouldSetResponder={(evt) => true}
@@ -300,6 +282,7 @@ export default class MultiActionButton extends React.Component {
                 onResponderMove={this._handleDrag}
                 onResponderRelease={(evt) => { this._closeMenu() }}
               >
+                { customBtn }
               </View>
             </View>
             

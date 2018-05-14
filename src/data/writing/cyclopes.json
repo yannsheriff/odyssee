@@ -78,7 +78,7 @@
             "choiceImgId": 1,
             "text": "Tout près de notre îlot se dresse une autre île, plus montagneuse. Elle est si proche de nous que l’on en devine les fumées des foyers, et l’on entend les brebis et les chèvres bêler. Elle m’intrigue. Qui habite cette terre ? ",
             "collectableObject": 0,
-            "haveAction": true,
+            "haveAction": false,
             "actions": [
                 {
                     "id": 9999
