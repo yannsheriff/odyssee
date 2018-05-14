@@ -87,12 +87,21 @@ class InteractionMenu extends Component {
         
         <MultiActionButton
           actions={this.state.actionsForButton}
-          onChoiceSelected={(action) => { 
-            console.log(action)
-            this.state._changeStep(action) 
-          }}
           // mainBtnStyle={}
           // mainBtn={}
+          // initalPositon={}
+          //labelStyle={}
+          mainBtnOpen={
+            <Image
+              source={images.closeMenu}
+              resizeMethod={"contain"}
+              style={{height: 60, width: 60}}
+            />
+          }
+
+          onChoiceSelected={(action) => { 
+            this.state._changeStep(action) 
+          }}
         />
 
         { swip }

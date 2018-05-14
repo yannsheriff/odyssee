@@ -9,10 +9,16 @@
             "title": "",
             "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché. L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage, sans jeter les ancres. On peut attendre ici, sans danger, les vents pour repartir.",
             "collectableObject": 0,
-            "haveAction": false,
+            "haveAction": true,
             "actions": [
                 {
-                    "id": 2
+                    "id": 4
+                },
+                {
+                    "id": 5
+                },
+                {
+                    "id": 6
                 }
             ]
         },

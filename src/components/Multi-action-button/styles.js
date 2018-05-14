@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
         top: 300,
         width: screen.width,
         textAlign: "center",
-        fontSize: 80,
+        fontSize: 70,
+        color: "white",
         fontWeight: "bold",
     }
     
