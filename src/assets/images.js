@@ -6,7 +6,24 @@ const images = {
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
     homeScreen: require('./img/home.jpg'),
+    closeMenu: require('./img/Close.png'),
+    openMenu: require('./img/plus.png'),
 };
+
+export const choices = [
+    {
+        id: 0,
+        img: require('./img/Lance.png')
+    },
+    {
+        id: 1,
+        img: require('./img/Continuer.png')
+    },
+    {
+        id: 2,
+        img: require('./img/Arc.png')
+    },
+]
 
 export const backgrounds = {
     test: {
