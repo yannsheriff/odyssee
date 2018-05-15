@@ -88,8 +88,6 @@ export default class MultiActionButton extends React.Component {
       
     }
   }
-  console.log(payload)
-
     return payload
   }
 
@@ -282,7 +280,6 @@ export default class MultiActionButton extends React.Component {
       } else if (this.state.customBtn && this.state.isActive) {
         customBtn = this.state.customBtn
       } else if (this.state.customBtnDisabled) {
-        console.log('seeeul')
         customBtn = this.state.customBtnDisabled
       }
     }

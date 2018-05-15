@@ -47,14 +47,12 @@ class InteractionMenu extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
       if (nextProps.actions.snippets.length > 0) {
-        console.log("nextProps")
         this.setState({ 
           actions: nextProps.actions.snippets,
           actionsForButton: this._formatDataForActionButon(nextProps.actions.snippets),
           haveAction: nextProps.actions.haveAction
-        }, () => console.log(this.state))
+        })
       }
   }
 
@@ -66,7 +64,6 @@ class InteractionMenu extends Component {
   }
 
   _handleSwip = () => {
-      console.log(this.state.actions[0].actions[0].id)
       this.state._changeStep(this.state.actions[0].actions[0].id)
   }
 

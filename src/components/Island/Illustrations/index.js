@@ -47,7 +47,6 @@ export default class Illustrations extends Component {
       },
       image: props.source
     }
-    console.log(this.state)
   }
 
   componentWillReceiveProps(nextProps) {
