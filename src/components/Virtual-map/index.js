@@ -148,7 +148,8 @@ class VirtualMap extends Component {
             isCollided: true
           })
           this.state._toggleSailing()
-        // } else if (dist <= island.collisionDist && !island.isIsland && island.opacity > 0) {
+        }
+        //  else if (dist <= island.collisionDist && !island.isIsland && island.opacity > 0) {
         //   island.opacity = island.opacity - 0.1
         // } else if (dist >= island.collisionDist && !island.isIsland < 1) {
         //   island.opacity = island.opacity + 0.1
