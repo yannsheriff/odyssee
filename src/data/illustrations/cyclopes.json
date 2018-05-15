@@ -31,7 +31,7 @@
             "animation": {
                 "loop": true,
                 "animationId": 2,
-                "animationDuration": 1000,
+                "animationDuration": 3000,
                 "transitionDuration": 2000
             }
         },

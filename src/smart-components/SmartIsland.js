@@ -31,6 +31,7 @@ import screen from '../helpers/ScreenSize'
 
 class SmartIsland extends Component {
 
+
   constructor(props) {
     super(props)
     const payload = this.getSnippetData(this.props.island.actualSnippetId)
@@ -146,6 +147,10 @@ componentWillReceiveProps(nextProps) {
   }
 }
 
+
+/* ===============================================================
+  ======================= REDUX CONNECTION =======================
+  ================================================================ */
 
 const mapStateToProps = state => {
   return {
