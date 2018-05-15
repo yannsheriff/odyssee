@@ -12,8 +12,25 @@ const images = {
       cyclope_2: require('./img/cyclope_2.png'),
       cyclope_3: require('./img/cyclope_3.png'),
       cyclope_4: require('./img/cyclope_4.png')
-    }
+    },
+    closeMenu: require('./img/Close.png'),
+    openMenu: require('./img/plus.png'),
 };
+
+export const choices = [
+    {
+        id: 0,
+        img: require('./img/Lance.png')
+    },
+    {
+        id: 1,
+        img: require('./img/Continuer.png')
+    },
+    {
+        id: 2,
+        img: require('./img/Arc.png')
+    },
+]
 
 export const backgrounds = {
     test: {

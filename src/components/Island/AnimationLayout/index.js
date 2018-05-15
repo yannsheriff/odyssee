@@ -94,7 +94,7 @@ export default class AnimationLayout extends React.Component {
   cycleAnimation(value, duration) {
     Animated.sequence([
       Animated.timing(value, {
-        toValue: 0.7,
+        toValue: 1,
         duration: duration,
       }),
       Animated.timing(value, {
@@ -110,7 +110,7 @@ export default class AnimationLayout extends React.Component {
 
   singleAnimation(value, duration) {
     Animated.timing(value, {
-      toValue: 0.7,
+      toValue: 1,
       duration: duration,
     }).start()
   }
