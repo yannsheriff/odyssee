@@ -2,10 +2,17 @@
 
 const images = {
     boussole: require('./img/bb.png'),
-    aiguille: require('./img/aiguille.png'),
+    aiguille: require('./img/Aiguille.png'),
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
     homeScreen: require('./img/home.jpg'),
+    iles: {
+      cyclope: require('./img/ile_cyclope.png'),
+      cyclope_1: require('./img/cyclope_1.png'),
+      cyclope_2: require('./img/cyclope_2.png'),
+      cyclope_3: require('./img/cyclope_3.png'),
+      cyclope_4: require('./img/cyclope_4.png')
+    }
 };
 
 export const backgrounds = {

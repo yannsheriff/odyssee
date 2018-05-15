@@ -72,6 +72,7 @@ class VirtualMap extends Component {
         orientation: nextProps.sailing.orientation,
         speedRadius: speed
       })
+      this._sortContent()
     }
     if (nextProps.sailing.isSailing !== this.state.sailing) {
         this._toggleSailing()
@@ -124,7 +125,9 @@ class VirtualMap extends Component {
   }
 
   _checkIfInViewport () {
-    this.state.contentToRender = []
+    this.state.contentTorender = []
+    let content = []
+    let collisionPoint = ''
     const cnv = this.state.cnv
     const currentCenterX = -(cnv.x + this.state.center.x) + (screen.width / 2)
     const currentCenterY = -(cnv.y + this.state.center.y) + (screen.height / 2)
@@ -132,24 +135,46 @@ class VirtualMap extends Component {
     IslandsData.forEach((island) => {
       const dist = Math.hypot(currentCenterX - island.position.x, currentCenterY - island.position.y)
       if (dist <= this.state.vpRadius) {
-        this.state.contentToRender.push(island)
+        content.push(island)
 
         // check for collision
-        if (dist <= (island.collisionDist + 100) && dist > (island.collisionDist + 10) && !this.state.isCollided) {
-          console.log('approaching')
-          this.setState({
-            collisionPoint: {
-              x: this.state.cnv.x,
-              y: this.state.cnv.y
-            }
-          })
-        } else if (dist <= island.collisionDist && !this.state.isCollided) {
-          console.log('colliding')
+        if (dist <= (island.collisionDist + 100) && dist > (island.collisionDist + 10) && !this.state.isCollided && island.isIsland) {
+          collisionPoint = {
+            x: this.state.cnv.x,
+            y: this.state.cnv.y
+          }
+        } else if (dist <= island.collisionDist && !this.state.isCollided && island.isIsland) {
           this.setState({
             isCollided: true
           })
           this.state._toggleSailing()
-        }
+        // } else if (dist <= island.collisionDist && !island.isIsland && island.opacity > 0) {
+        //   island.opacity = island.opacity - 0.1
+        // } else if (dist >= island.collisionDist && !island.isIsland < 1) {
+        //   island.opacity = island.opacity + 0.1
+        // }
+      }
+    })
+    this.state.contentToRender = content
+
+    if ((collisionPoint.x !== this.state.collisionPoint.x && collisionPoint.y !== this.state.collisionPoint.y) && collisionPoint !== '') {
+      this.setState({
+        collisionPoint: collisionPoint
+      })
+    }
+  }
+
+  _sortContent () {
+    this.state.contentToRender.sort((a, b) => {
+      const o = this.state.orientation
+      if (o < 45 || o >= 315) {
+        return a.position.y - b.position.y
+      } else if (o >= 45 && o < 135) {
+        return a.position.x - b.position.x
+      } else if (o >= 135 && o < 225) {
+        return b.position.y - a.position.y
+      } else if (o >= 225 && o < 315) {
+        return b.position.x - a.position.x
       }
     })
   }
@@ -170,6 +195,7 @@ class VirtualMap extends Component {
       const s = this.state
 
       this._checkIfInViewport()
+      this._sortContent()
       if (this.state.currentSpeed !== this.state.goalSpeed) {
         this._manageSpeed()
       }
@@ -191,7 +217,6 @@ class VirtualMap extends Component {
       requestAnimationFrame(() => {this._updateMap()})
     }
   }
-
 
   render() {
     return (
@@ -215,7 +240,7 @@ class VirtualMap extends Component {
             x={0}
             y={0}
             scale={1}
-            fill="#0071e9"
+            fill="#59beb2"
           />
           <G
             width={mapSize.x}
@@ -227,14 +252,15 @@ class VirtualMap extends Component {
             <Islands
               islands={this.state.contentToRender}
               deg={this.state.orientation}
+              images={images}
             />
           </G>
         </G>
         <Image
-          x={(screen.width / 2) - 50}
-          y={-(screen.height / 2) + 94.46}
-          width="100"
-          height="189.9"
+          x={(screen.width / 2) - 37.5}
+          y={-(screen.height / 2) + 71.2125}
+          width="75"
+          height="142.425"
           preserveAspectRatio="xMidYMid slice"
           opacity="1"
           href={images.bateau}

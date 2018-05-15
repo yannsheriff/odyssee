@@ -109,8 +109,9 @@ class Compass extends Component {
             title={'map'}
             color="#fff"
           />
+        </View>
           <View
-            style={[styles.outerCompassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' },] }]}
+            style={[styles.outerCompassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' }] }]}
           >
             <Image
               style={styles.pointer}
@@ -131,7 +132,6 @@ class Compass extends Component {
               resizeMethod="scale"
             />
           </View>
-        </View>
       </View>
     );
   }

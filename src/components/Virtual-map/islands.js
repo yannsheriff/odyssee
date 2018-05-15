@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 import Svg,{
-  Rect
-} from 'react-native-svg';
+  Text, G, Image
+} from 'react-native-svg'
+
+import images from '../../assets/images'
 
 export default class islands extends Component {
   constructor (props) {
@@ -14,20 +16,19 @@ export default class islands extends Component {
   }
 
   renderIslands () {
-    const that = this
     return this.props.islands.map((c) => {
       return (
-        <Rect
+        <Image
           key={ c.id }
-          x={ c.position.x }
-          y={ c.position.y }
-          width={c.size.x}
-          height={c.size.y}
-          fill="#ffffff40"
-          scale={1}
-          rotation={-that.props.deg}
-          originX={ c.position.x + (c.size.x / 2) }
-          originY={ c.position.y + (c.size.y / 2) }
+          x={ c.position.x - (c.size.x / 2) }
+          y={ -c.position.y + (c.size.y / 2) }
+          width={ c.size.x }
+          height={ c.size.y }
+          href={ images.iles[c.image] }
+          preserveAspectRatio="xMidYMid slice"
+          rotation={-this.props.deg}
+          originX={ c.position.x }
+          originY={ c.position.y }
         />
       )
     })
