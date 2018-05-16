@@ -36,7 +36,7 @@ export default class MultiActionButton extends React.Component {
       optionsSize: new Animated.Value(0),
       text: '',
       isOpen: false,
-      isActive: this.props.isActive ? this.props.isActive : true, 
+      isActive: this.props.isActive !== undefined ? this.props.isActive : true, 
       chosenId: undefined,
       buttonArray: this._prepareButtons(this.props.actions),
       btnStyle: this.props.mainBtnStyle, 

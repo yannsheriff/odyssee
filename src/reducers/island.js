@@ -1,8 +1,13 @@
-import { NEXT_SNIPPET } from '../actions/island'
+import { 
+NEXT_SNIPPET, 
+SAVE_ISLAND_DATA 
+} from '../actions/island'
 
 
 const initialState = {
-    actualSnippetId: 0,
+    currentIslandId: 1,
+    screenReaded: [1,5],
+    actualSnippetId: 6,
     haveAction: false,
     haveObject: false,
 }
@@ -14,6 +19,9 @@ export function islandReducer(state = initialState, action) {
                 ...state,
                 actualSnippetId: action.nextSnippet
             }
+        case SAVE_ISLAND_DATA:
+            return state
+            
         default:
             return state
     }

@@ -17,11 +17,11 @@ import Illustrations from '../components/Island/Illustrations'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { goToStep } from '../actions/island'
+import { goToStep, saveIslandData } from '../actions/island'
 
 //  Import Data
 // --------------------------------------------------------------
-import { cyclopes } from '../data'
+import islands from '../data'
 
 //  Import Helpers
 // --------------------------------------------------------------
@@ -34,12 +34,15 @@ class SmartIsland extends Component {
 
   constructor(props) {
     super(props)
-    const payload = this.getSnippetData(this.props.island.actualSnippetId)
+    const payload = this.getSnippetData(this.props.island.currentIslandId, this.props.island.actualSnippetId)
     this.state = {
       snippet: payload.snippet,
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
+      islandState: this.props.island,
+      _changeStep: this.props.goToStep,
+      _saveData: this.props.saveData
     }
   }
 
@@ -49,7 +52,7 @@ class SmartIsland extends Component {
   */
 componentWillReceiveProps(nextProps) {
   if (nextProps.island.actualSnippet !== this.state.snippet) {
-    this.updateSnippet(nextProps.island.actualSnippetId)
+    this.updateSnippet(nextProps.island)
   }
 }
 
@@ -57,23 +60,23 @@ componentWillReceiveProps(nextProps) {
  /*
   *  Load the data of the wanted Snippet
   */
-  getSnippetData(id) { 
+  getSnippetData(currentIslandId, actualSnippetId) { 
 
-    const snippet = cyclopes.writting.steps.find((index) => {
-      if (index.id === id) {
+    const snippet = islands[currentIslandId].writting.steps.find((index) => {
+      if (index.id === actualSnippetId) {
         return index
       }
     });
 
-    const offsets = cyclopes.illustrations.steps.find((index) => {
-      if (index.id === id) {
+    const offsets = islands[currentIslandId].illustrations.steps.find((index) => {
+      if (index.id === actualSnippetId) {
         return index.offsets
       }
     });
 
 
-    const animation = cyclopes.illustrations.steps.find((index) => {
-      if (index.id === id) {
+    const animation = islands[currentIslandId].illustrations.steps.find((index) => {
+      if (index.id === actualSnippetId) {
         return index.animation
       }
     })
@@ -83,7 +86,7 @@ componentWillReceiveProps(nextProps) {
 
     if (snippet.haveAction) {
       snippet.actions.forEach(element => {
-        cyclopes.writting.steps.find((index) => {
+        islands[currentIslandId].writting.steps.find((index) => {
           if (index.id === element.id) {
             snippetArray.push(index) 
           }
@@ -91,8 +94,8 @@ componentWillReceiveProps(nextProps) {
       });
     } else {
       haveAction = false 
-      snippetArray = cyclopes.writting.steps.find((index) => {
-        if (index.id === id) {
+      snippetArray = islands[currentIslandId].writting.steps.find((index) => {
+        if (index.id === actualSnippetId) {
           return index
         }
       });
@@ -118,14 +121,24 @@ componentWillReceiveProps(nextProps) {
  /*
   *  Update the current snippet 
   */
-  updateSnippet(id) {
-    const payload = this.getSnippetData(id)
+  updateSnippet(state) {
+    const payload = this.getSnippetData(state.currentIslandId, state.actualSnippetId)
     this.setState({
       snippet: payload.snippet,
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
+      islandState: state
     })
+  }
+
+  /*
+  *  Ask for new snippet and save old state
+  */
+
+  goToNextStep = (id) => {
+    this.state._saveData(this.state.islandState, id) 
+    this.state._changeStep(id) 
   }
 
   render() {
@@ -140,7 +153,10 @@ componentWillReceiveProps(nextProps) {
             animation={ this.state.animation.animation }
           />
           <Narration snippet = { this.state.snippet } /> 
-          <InteractionMenu actions = { this.state.actions } /> 
+          <InteractionMenu 
+            actions = { this.state.actions } 
+            changeStep={ this.goToNextStep }  
+          /> 
         </View>
 
     );
@@ -158,9 +174,21 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    goToStep: (id) => {
+      dispatch(goToStep(id))
+    },
+    saveData: (state, id) => {
+      dispatch(saveIslandData(state, id))
+    }
+  }
+}
+
 
 const componentContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SmartIsland)
 
 export default componentContainer

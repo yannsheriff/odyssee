@@ -16,9 +16,12 @@ const store = createStore(
             },
             isSailing: false,
             callMap: false,
-            isMapActive: false
+            isMapActive: false,
+            collectableEquipped: []
         },
         island: {
+            currentIslandId: 1,
+            screenReaded: [],
             actualSnippetId: 1,
             haveAction: false,
             haveObject: false,

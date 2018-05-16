@@ -31,17 +31,18 @@ import styles from './styles'
 import Swip from '../Swip'
 import MultiActionButton from '../../Multi-action-button'
 
-class InteractionMenu extends Component {
+export default class InteractionMenu extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
+
       style: props.style,
       actions: this.props.actions.snippets,
       actionsForButton: this._formatDataForActionButon(this.props.actions.snippets),
       haveAction: this.props.actions.haveAction,
-      _changeStep: this.props.goToStep
+      _changeStep: this.props.changeStep
     }
 
   }
@@ -111,7 +112,7 @@ class InteractionMenu extends Component {
             />
           }
 
-          isActive={this.state.haveAction ? true : false}
+          isActive={this.state.haveAction}
 
           onChoiceSelected={(action) => { 
             this.state._changeStep(action) 
@@ -124,22 +125,3 @@ class InteractionMenu extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    goToStep: (id) => {
-      dispatch(goToStep(id))
-    },
-  }
-}
-
-const componentContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InteractionMenu)
-
-export default componentContainer

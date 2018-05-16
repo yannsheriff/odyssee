@@ -18,9 +18,10 @@ class StoreService {
     }
   }
   
-  async getData() {
+  async getSaving() {
     try {
-      return await AsyncStorage.getItem("saved");
+      let dataSaved = await AsyncStorage.getItem("saved");
+      return JSON.parse(dataSaved)
     } catch (error) {
       throw error;
     }
