@@ -14,11 +14,6 @@ import {
 import { connect } from 'react-redux'
 
 
-//  Import actions
-// --------------------------------------------------------------
-import { goToStep } from '../../../actions/island'
-
-
 //  Import Helpers
 // --------------------------------------------------------------
 import images from '../../../assets/images'

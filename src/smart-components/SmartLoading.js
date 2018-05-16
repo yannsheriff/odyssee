@@ -1,18 +1,14 @@
 //  Import Modules
 // --------------------------------------------------------------
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
+import { requestStore } from '../redux/actions/loading'
 
-//  Import Helpers
-// --------------------------------------------------------------
-import renderIf from '../helpers/renderIf'
 
 //  Import Components
 // --------------------------------------------------------------
-import VirtualMap from '../components/Virtual-map'
-import Compass from '../components/Compass'
-import MiniMap from '../components/Miniature-map'
+import Router from '../Router'
 
 
 class SmartLoading extends Component {
@@ -20,30 +16,30 @@ class SmartLoading extends Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
-        sailing: this.props.sailing,
-        island: this.props.island
-    }
+       ReduxState: this.props.state,
+       populateStore: this.props.populateStore
+    } 
   }
 
-  componentWillReceiveProps (nextProps) {
-    if(nextProps.sailing.isMapActive !== this.state.isMapActive) {
-      this.setState({ isMapActive: !this.state.isMapActive })
-    }
+  componentDidMount() {
+    console.log(this.state.ReduxState)
+    this.state.populateStore()
   }
 
+  componentWillReceiveProps(nextProps) {
+    // console.log("nextProps", nextProps)
+    this.setState({
+      ReduxState: nextProps.state
+    })
+  }
 
     render() {
-            // if sailing && island 
-
-            // ====> go to island
-
-        return (
-            <View>
-                
-            </View>
-        );
+      let render = this.state.ReduxState.island !== undefined 
+                  && this.state.ReduxState.sailing.isMapActive !== undefined
+      ? ( <Router /> ) 
+      : ( <View><Text>loading..</Text></View> /* <Loader /> */ )
+        return render
     }
 }
 
@@ -54,20 +50,21 @@ class SmartLoading extends Component {
   
 const mapStateToProps = state => {
   return {
-      sailing: state.sailing,
-      island: state.island
+      state: state
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-      // hydrate data action
+      populateStore: () => {
+        dispatch(requestStore())
+      },
     }
   }
 
 const componentContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SmartSailing)
+)(SmartLoading)
 
 export default componentContainer

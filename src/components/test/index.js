@@ -9,9 +9,10 @@ export default class BasicExample extends React.Component {
   constructor(props) {
     super(props);
     this.test = {
+      isOnIsland: 1,
       visitedIsland:[
         {
-          id: 1,
+          id: 2,
           screenReaded: [],
           actualSnippetId: 1,
           haveAction: false,
@@ -33,9 +34,26 @@ export default class BasicExample extends React.Component {
 
 
   componentDidMount() {
-    // this.consoleDataSaved()
     this.consoleDataSaved()
+    // this.handleIslandData()
     
+  }
+
+  async handleIslandData() {
+    var savedData = storeService.getSaving()
+    savedData.then((data)=> {
+      var actualIslandSavedData = data.visitedIsland.find((island) => { 
+        if( island.id === 1) { 
+          return island 
+        }
+      })
+      if (actualIslandSavedData ) {
+        console.log("loadIsland")
+      } else {
+        console.log("Create island")
+      }
+    })
+  
   }
 
   async consoleDataSaved() {

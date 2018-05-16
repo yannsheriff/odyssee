@@ -3,8 +3,10 @@ import {
   TOGGLE_SAILING,
   CALL_MAP,
   LAUNCH_MAP,
-  HIDE_MAP
+  HIDE_MAP,
 } from '../actions/sailing'
+
+import { POPULATE_STORE } from '../actions/loading'
 
 const initialState = {
     orientation: 0,
@@ -17,7 +19,7 @@ const initialState = {
     isMapActive: false
 }
 
-export function sailingReducer(state = initialState, action) {
+export function sailingReducer(state = [], action) {
     switch (action.type) {
         case UPDATE_ORIENTATION:
             return {
@@ -47,6 +49,9 @@ export function sailingReducer(state = initialState, action) {
                 ...state,
                 isMapActive: false
             }
+        case POPULATE_STORE:
+            return action.payload.sailing
+
         default:
             return state
     }

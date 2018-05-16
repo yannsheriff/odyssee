@@ -54,7 +54,7 @@ export default class Accueil extends Component {
                     </View>
                     <View style={styles.buttonBorder}>
                     <Button
-                        onPress={() => this.props.navigation.navigate('Island')}
+                        onPress={() => this.props.navigation.navigate('Island', { islandId: 1})} // props news on this island
                         title={'Aller a l\'ile'}
                         color="#fff"
                     />

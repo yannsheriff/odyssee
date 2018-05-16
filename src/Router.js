@@ -11,7 +11,6 @@ import test from './components/test';
 import Island from './smart-components/SmartIsland';
 
 
-
 const InitialNavigator = StackNavigator({
   Home: {
     screen: Accueil

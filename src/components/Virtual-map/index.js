@@ -23,7 +23,7 @@ import Islands from './islands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { launchMap, toggleSailing, updateOrientation } from '../../actions/sailing'
+import { launchMap, toggleSailing, updateOrientation } from '../../redux/actions/sailing'
 
 
 class VirtualMap extends Component {

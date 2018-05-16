@@ -17,7 +17,7 @@ import Illustrations from '../components/Island/Illustrations'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { goToStep, saveIslandData } from '../actions/island'
+import { goToStep, saveIslandData, saveNewIsland } from '../redux/actions/island'
 
 //  Import Data
 // --------------------------------------------------------------
@@ -26,6 +26,7 @@ import islands from '../data'
 //  Import Helpers
 // --------------------------------------------------------------
 import screen from '../helpers/ScreenSize'
+import { storeService } from '../helpers/saveData'
 
 
 
@@ -34,17 +35,51 @@ class SmartIsland extends Component {
 
   constructor(props) {
     super(props)
-    const payload = this.getSnippetData(this.props.island.currentIslandId, this.props.island.actualSnippetId)
+    const { params } = this.props.navigation.state;
+    this.actualSnippetId = this.props.island.actualSnippetId ? this.props.island.actualSnippetId : 1
+    this.islandId = params.islandId
+    
+    var payload = this.getSnippetData(this.islandId , this.actualSnippetId)
+    console.log("Payload : ", payload)
     this.state = {
+      currentIslandId: this.islandId,
       snippet: payload.snippet,
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
       islandState: this.props.island,
       _changeStep: this.props.goToStep,
-      _saveData: this.props.saveData
+      _saveData: this.props.saveData,
+      _newIsland: this.props.newIsland,
     }
+    
   }
+
+
+  async handleIslandData() {
+
+    return storeService.getSaving().then((data)=> {
+
+      var actualIslandSavedData = data.visitedIsland.find((island) => { 
+        if( island.id === this.islandId) { 
+          return island 
+        }
+      })
+
+      if (actualIslandSavedData ) {
+
+        return true
+      } else {
+
+        this.state._newIsland(this.islandId)
+        return false
+      }
+    })
+  }
+
+componentDidMount(){
+  let islandIsRegitered = this.handleIslandData()
+}
 
   
  /*
@@ -124,12 +159,13 @@ componentWillReceiveProps(nextProps) {
   updateSnippet(state) {
     const payload = this.getSnippetData(state.currentIslandId, state.actualSnippetId)
     this.setState({
+      currentIslandId: state.currentIslandId,
       snippet: payload.snippet,
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
       islandState: state
-    })
+    }, ()=> console.log(this.state))
   }
 
   /*
@@ -137,6 +173,7 @@ componentWillReceiveProps(nextProps) {
   */
 
   goToNextStep = (id) => {
+    console.log('go to id : ', id)
     this.state._saveData(this.state.islandState, id) 
     this.state._changeStep(id) 
   }
@@ -170,7 +207,8 @@ componentWillReceiveProps(nextProps) {
 
 const mapStateToProps = state => {
   return {
-    island: state.island
+    island: state.island,
+    isOnIsland: state.isOnIsland
   }
 }
 
@@ -181,7 +219,11 @@ const mapDispatchToProps = dispatch => {
     },
     saveData: (state, id) => {
       dispatch(saveIslandData(state, id))
-    }
+    },
+    newIsland: (id) => {
+      dispatch(saveNewIsland(id))
+    },
+    
   }
 }
 
