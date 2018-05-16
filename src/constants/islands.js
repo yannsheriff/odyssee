@@ -12,7 +12,8 @@ const islands = [
     collisionDist: 150,
     image: 'cyclope',
     biomeLength: 4,
-    isIsland: true
+    isIsland: true,
+    isTarget: false
   }
 ]
 

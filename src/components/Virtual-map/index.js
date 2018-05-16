@@ -3,7 +3,7 @@
 // --------------------------------------------------------------
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import Svg,{ G, Rect, Image, Circle } from 'react-native-svg'
+import Svg,{ G, Rect, Image, Text } from 'react-native-svg'
 
 
 //  Import Helpers
@@ -23,7 +23,7 @@ import Islands from './islands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { launchMap, toggleSailing, updateOrientation } from '../../actions/sailing'
+import { launchMap, toggleSailing, updateOrientation, updatePosition } from '../../actions/sailing'
 
 
 class VirtualMap extends Component {
@@ -41,6 +41,7 @@ class VirtualMap extends Component {
       _launchMap: this.props.launchMap,
       _toggleSailing: this.props.toggleSailing,
       _updateOrientation: this.props.updateOrientation,
+      _updatePosition: this.props.updatePosition,
       orientation: this.props.sailing.orientation,
       center: center,
       cnv: {
@@ -149,11 +150,11 @@ class VirtualMap extends Component {
           })
           this.state._toggleSailing()
         }
-        //  else if (dist <= island.collisionDist && !island.isIsland && island.opacity > 0) {
-        //   island.opacity = island.opacity - 0.1
-        // } else if (dist >= island.collisionDist && !island.isIsland < 1) {
-        //   island.opacity = island.opacity + 0.1
-        // }
+         else if (dist <= island.collisionDist && !island.isIsland && island.opacity > 0) {
+          island.opacity = island.opacity - 0.1
+        } else if (dist >= island.collisionDist && !island.isIsland && island.opacity < 1) {
+          island.opacity = island.opacity + 0.1
+        }
       }
     })
     this.state.contentToRender = content
@@ -214,6 +215,9 @@ class VirtualMap extends Component {
           y: newY
         }
       })
+      this.state._updatePosition({x: newX, y: newY})
+      // console.log('state', {x: newX, y: newY})
+      // console.log('redux', this.props.sailing.position)
 
       requestAnimationFrame(() => {this._updateMap()})
     }
@@ -266,30 +270,6 @@ class VirtualMap extends Component {
           opacity="1"
           href={images.bateau}
         />
-        {/* <G
-          width={screen.width}
-          height={screen.height}
-          x={0}
-          y={0}
-          rotation={180}
-          originX={screen.width / 2}
-          originY={screen.height / 2}
-        >
-          <Rect
-            width={screen.width}
-            height={screen.height}
-            x={0}
-            y={0}
-            fill='#ffffff'
-            opacity={0.3}
-          />
-          <Circle
-            cx={(this.state.cnv.x + (mapSize.x / 2)) / mapSize.x * screen.width}
-            cy={(this.state.cnv.y + (mapSize.y / 2)) / mapSize.y * screen.height}
-            r="5"
-            fill="red"
-          />
-        </G> */}
       </Svg>
     )
   }
@@ -316,6 +296,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateOrientation: (orientation) => {
       dispatch(updateOrientation(orientation))
+    },
+    updatePosition: (position) => {
+      dispatch(updatePosition(position))
     }
   }
 }

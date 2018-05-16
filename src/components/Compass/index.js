@@ -22,6 +22,7 @@ import { updateOrientation, toggleSailing, callMap } from '../../actions/sailing
 import images from '../../assets/images'
 import screen from '../../helpers/ScreenSize'
 import styles from './styles'
+import { mapSize } from '../../constants'
 
 
 
@@ -35,8 +36,28 @@ class Compass extends Component {
       _toggleSailing: this.props.toggleSailing,
       _callMap: this.props.callMap,
       compassSensitivity: 1,
-      orientation: 0,
-      isCompassLocked: true
+      orientation: this.props.sailing.orientation,
+      isCompassLocked: true,
+      destination: {
+        id: this.props.sailing.destination.id,
+        x: this.props.sailing.destination.x - (mapSize.x / 2),
+        y: this.props.sailing.destination.y - (mapSize.y / 2)
+      },
+      position: {
+        x: -this.props.sailing.position.x,
+        y: -this.props.sailing.position.y
+      }
+    }
+  }
+
+  componentWillReceiveProps () {
+    if (this.props.sailing.position !== this.state.position) {
+      this.setState({
+        position: {
+          x: -this.props.sailing.position.x,
+          y: -this.props.sailing.position.y
+        }
+      })
     }
   }
 
@@ -48,13 +69,6 @@ class Compass extends Component {
   }
 
   /*
-  * Dispatch action to virtual map
-  */
-  componentDidUpdate() {
-    this.state._updateOrientation(this.state.orientation)
-  }
-
-  /*
   * Toggle the direction detection
   */
   _toggleCompassLock = () => {
@@ -62,13 +76,13 @@ class Compass extends Component {
       this.setState({isCompassLocked: false})
       RNSimpleCompass.start(this.state.compassSensitivity, (degree) => {
         this.setState({orientation: degree})
+        this.state._updateOrientation(degree)
       });
     } else {
       this.setState({isCompassLocked: true})
       RNSimpleCompass.stop()
     }
   }
-
 
   /*
   * Handle the rotation of the compass on the drag event
@@ -81,6 +95,7 @@ class Compass extends Component {
         if (newOrientation > 359) {newOrientation = 0}
         else if (newOrientation < 0) {newOrientation = 359}
         this.setState({orientation: newOrientation})
+        this.state._updateOrientation(newOrientation)
         this.touchLastPos = evt.nativeEvent.pageX  
       } else {
         this.touchLastPos = evt.nativeEvent.pageX 
@@ -88,8 +103,24 @@ class Compass extends Component {
     }
   }
 
+  _getPointerDirection = () => {
+    if (this.state.destination.id !== '') {
+      const position = this.state.position
+      const destination = this.state.destination
+      const adj = position.y - destination.y
+      const opp = position.x - destination.x
+      let dir
+      if (adj > 0) {
+        dir = Math.atan(opp / adj) * 180 / Math.PI
+      } else if (adj < 0){
+        dir = (Math.atan(opp / adj) * 180 / Math.PI) + 180
+      }
+      return dir
+    }
+  }
 
   render() {
+    console.log(this.props.sailing.position)
     return (
       <View style={styles.container}>
         <View style={styles.center}>
@@ -110,28 +141,28 @@ class Compass extends Component {
             color="#fff"
           />
         </View>
-          <View
-            style={[styles.outerCompassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' }] }]}
-          >
-            <Image
-              style={styles.pointer}
-              source={images.boussole}
-              resizeMethod="scale"
-            />
-          </View>
-          <View
-            onStartShouldSetResponder={(evt) => true}
-            onMoveShouldSetResponder={(evt) => true}
-            onResponderMove={this._handleCompassDrag}
-            onResponderRelease={(evt) => { this.touchLastPos = undefined }}
-            style={[styles.compassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' },] }]}
-          >
-            <Image
-              style={styles.compass}
-              source={images.aiguille}
-              resizeMethod="scale"
-            />
-          </View>
+        <View
+          style={[styles.outerCompassContainer, { transform: [{ rotate: -this._getPointerDirection() + this.state.orientation + 'deg' }] }]}
+        >
+          <Image
+            style={styles.pointer}
+            source={images.boussole}
+            resizeMethod="scale"
+          />
+        </View>
+        <View
+          onStartShouldSetResponder={(evt) => true}
+          onMoveShouldSetResponder={(evt) => true}
+          onResponderMove={this._handleCompassDrag}
+          onResponderRelease={(evt) => { this.touchLastPos = undefined }}
+          style={[styles.compassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' }] }]}
+        >
+          <Image
+            style={styles.compass}
+            source={images.aiguille}
+            resizeMethod="scale"
+          />
+        </View>
       </View>
     );
   }
@@ -145,6 +176,7 @@ class Compass extends Component {
 
 const mapStateToProps = state => {
   return {
+    sailing: state.sailing
   }
 }
 

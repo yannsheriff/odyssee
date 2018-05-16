@@ -3,6 +3,8 @@ export const TOGGLE_SAILING = 'TOGGLE_SAILING'
 export const CALL_MAP = 'CALL_MAP'
 export const LAUNCH_MAP = 'LAUNCH_MAP'
 export const HIDE_MAP = 'HIDE_MAP'
+export const UPDATE_DESTINATION = 'UPDATE_DESTINATION'
+export const UPDATE_POSITION = 'UPDATE_POSITION'
 
 
 export function updateOrientation (orientation) {
@@ -35,4 +37,18 @@ export function hideMap () {
     return {
         type: HIDE_MAP
     }
+}
+
+export function updateDestination (destination) {
+  return {
+    type: UPDATE_DESTINATION,
+    destination: destination
+  }
+}
+
+export function updatePosition (position) {
+  return {
+    type: UPDATE_POSITION,
+    position: position
+  }
 }
