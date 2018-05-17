@@ -24,6 +24,7 @@ export default class islands extends Component {
           y={ -c.position.y + (c.size.y / 2) }
           width={ c.size.x }
           height={ c.size.y }
+          opacity={ c.opacity }
           href={ images.iles[c.image] }
           preserveAspectRatio="xMidYMid slice"
           rotation={-this.props.deg}

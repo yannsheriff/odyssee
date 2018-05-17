@@ -9,10 +9,11 @@ const islands = [
       x: 271,
       y: 534
     },
-    collisionDist: 150,
+    collisionDist: 200,
     image: 'cyclope',
     biomeLength: 4,
-    isIsland: true
+    isIsland: true,
+    isTarget: false
   }
 ]
 
