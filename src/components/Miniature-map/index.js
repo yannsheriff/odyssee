@@ -68,7 +68,7 @@ class MiniatureMap extends Component {
             originX={c.size / 2}
             originY={c.size / 2}
             cx={(mapSize.x - c.position.x) / mapSize.x * screen.width}
-            cy={(mapSize.y - c.position.y) / mapSize.y * screen.width}
+            cy={(mapSize.y - c.position.y) / mapSize.y * screen.height}
             r="5"
             onPress={() => { this._switchDestination(c) }}
           />
@@ -82,17 +82,17 @@ class MiniatureMap extends Component {
       <View>
         <Svg
           style={styles.svg}
-          height={screen.width}
+          height={screen.height}
           width={screen.width}
         >
           <G
             rotation={180}
             originX={screen.width / 2}
-            originY={screen.width / 2}
+            originY={screen.height / 2}
           >
             <Rect
               width={screen.width}
-              height={screen.width}
+              height={screen.height}
               x={0}
               y={0}
               scale={1}
@@ -102,7 +102,7 @@ class MiniatureMap extends Component {
             { this._renderIslands() }
             <Circle
               cx={(this.state.position.x + (mapSize.x / 2)) / mapSize.x * screen.width}
-              cy={(this.state.position.y + (mapSize.y / 2)) / mapSize.y * screen.width}
+              cy={(this.state.position.y + (mapSize.y / 2)) / mapSize.y * screen.height}
               r="2"
               fill="red"
             />

@@ -142,7 +142,7 @@ class Compass extends Component {
           />
         </View>
         <View
-          style={[styles.outerCompassContainer, { transform: [{ rotate: -this._getPointerDirection() + this.state.orientation + 'deg' }] }]}
+          style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
         >
           <Image
             style={styles.pointer}

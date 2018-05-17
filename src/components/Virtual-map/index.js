@@ -53,6 +53,7 @@ class VirtualMap extends Component {
       speedRadius: this._getSpeed(0),
       currentSpeed: 0,
       goalSpeed: 0,
+      deceleration: 0,
       collisionPoint: {
         x: 0,
         y: 0
@@ -97,7 +98,8 @@ class VirtualMap extends Component {
     if (this.state.sailing) {
       this.setState({
         sailing: !this.state.sailing,
-        goalSpeed: 0
+        goalSpeed: 0,
+        deceleration: this.state.currentSpeed / 30 // 30 is the number of frames needed for complete deceleration
       })
     } else {
       if (this.state.isCollided) {
@@ -135,25 +137,28 @@ class VirtualMap extends Component {
 
     IslandsData.forEach((island) => {
       const dist = Math.hypot(currentCenterX - island.position.x, currentCenterY - island.position.y)
-      if (dist <= this.state.vpRadius) {
+      if (dist <= this.state.vpRadius + 150) { // 150 is a margin so that bigger images get rendered even when their anchor point is still out of radius distance
         content.push(island)
 
         // check for collision
-        if (dist <= (island.collisionDist + 100) && dist > (island.collisionDist + 10) && !this.state.isCollided && island.isIsland) {
-          collisionPoint = {
-            x: this.state.cnv.x,
-            y: this.state.cnv.y
+        if (island.isIsland) {
+          if (dist <= (island.collisionDist + 100) && dist > (island.collisionDist + 10) && !this.state.isCollided) {
+            collisionPoint = {
+              x: this.state.cnv.x,
+              y: this.state.cnv.y
+            }
+          } else if (dist <= island.collisionDist && !this.state.isCollided) {
+            this.setState({
+              isCollided: true
+            })
+            this.state._toggleSailing()
           }
-        } else if (dist <= island.collisionDist && !this.state.isCollided && island.isIsland) {
-          this.setState({
-            isCollided: true
-          })
-          this.state._toggleSailing()
-        }
-         else if (dist <= island.collisionDist && !island.isIsland && island.opacity > 0) {
-          island.opacity = island.opacity - 0.1
-        } else if (dist >= island.collisionDist && !island.isIsland && island.opacity < 1) {
-          island.opacity = island.opacity + 0.1
+        } else {
+          if (dist <= island.collisionDist && island.opacity > 0) {
+            island.opacity = island.opacity - 0.1
+          } else if (dist >= island.collisionDist && island.opacity < 1) {
+            island.opacity = island.opacity + 0.1
+          }
         }
       }
     })
@@ -184,10 +189,19 @@ class VirtualMap extends Component {
   _manageSpeed () {
     const dif = this.state.goalSpeed - this.state.currentSpeed
     if (dif > 0 && dif >= speedModifiers.acceleration) {
+      // current speed is lower than goal speed : raise speed
       this.setState({ currentSpeed: this.state.currentSpeed + speedModifiers.acceleration })
     } else if (dif < 0 && dif <= -speedModifiers.acceleration) {
-      this.setState({ currentSpeed: this.state.currentSpeed - speedModifiers.acceleration })
-    } else if ( Math.abs(dif) < speedModifiers.acceleration ) {
+      // current speed is higher than goal speed : reduce speed
+      if(this.state.sailing) {
+        // updating speed after boat direction change
+        this.setState({ currentSpeed: this.state.currentSpeed - speedModifiers.acceleration })
+      } else {
+        // stopping boat
+        this.setState({ currentSpeed: this.state.currentSpeed - this.state.deceleration })
+      }
+    } else if (Math.abs(dif) < speedModifiers.acceleration) {
+      // difference between goal and current speeds is inferior to the acceleration value : go directly to goal speed
       this.setState({ currentSpeed: this.state.goalSpeed })
     }
   }
@@ -216,8 +230,6 @@ class VirtualMap extends Component {
         }
       })
       this.state._updatePosition({x: newX, y: newY})
-      // console.log('state', {x: newX, y: newY})
-      // console.log('redux', this.props.sailing.position)
 
       requestAnimationFrame(() => {this._updateMap()})
     }
