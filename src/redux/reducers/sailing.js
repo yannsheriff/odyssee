@@ -5,7 +5,8 @@ import {
   LAUNCH_MAP,
   HIDE_MAP,
   UPDATE_DESTINATION,
-  UPDATE_POSITION
+  UPDATE_POSITION,
+  SAVE_SAILING
 } from '../actions/sailing'
 
 import { POPULATE_STORE } from '../actions/loading'
@@ -65,6 +66,10 @@ export function sailingReducer(state = initialState, action) {
       return {
         ...state,
         position: action.position
+      }
+    case SAVE_SAILING:
+      return {
+        ...state
       }
     case POPULATE_STORE:
       return action.payload.sailing

@@ -120,7 +120,6 @@ class Compass extends Component {
   }
 
   render() {
-    console.log(this.props.sailing.position)
     return (
       <View style={styles.container}>
         <View style={styles.center}>

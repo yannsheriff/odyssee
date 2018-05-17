@@ -5,6 +5,7 @@ export const LAUNCH_MAP = 'LAUNCH_MAP'
 export const HIDE_MAP = 'HIDE_MAP'
 export const UPDATE_DESTINATION = 'UPDATE_DESTINATION'
 export const UPDATE_POSITION = 'UPDATE_POSITION'
+export const SAVE_SAILING = 'SAVE_SAILING'
 
 
 export function updateOrientation (orientation) {
@@ -50,5 +51,11 @@ export function updatePosition (position) {
   return {
     type: UPDATE_POSITION,
     position: position
+  }
+}
+
+export function saveSailing () {
+  return {
+    type: SAVE_SAILING
   }
 }

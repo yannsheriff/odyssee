@@ -1,8 +1,9 @@
 //  Import Modules
 // --------------------------------------------------------------
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, AppState } from 'react-native'
 import { connect } from 'react-redux'
+import { saveSailing } from '../redux/actions/sailing'
 
 //  Import Helpers
 // --------------------------------------------------------------
@@ -22,7 +23,25 @@ class SmartSailing extends Component {
     super(props)
 
     this.state = {
-      isMapActive: this.props.sailing.isMapActive
+      _saveSailing: this.props.saveSailing,
+      isMapActive: this.props.sailing.isMapActive,
+      appState: AppState.currentState
+    }
+  }
+
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange)
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange)
+    this.state._saveSailing()
+    console.log('unmount maboy')
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (this.state.appState === 'active' && nextAppState === 'background') {
+      this.state._saveSailing()
     }
   }
 
@@ -33,21 +52,21 @@ class SmartSailing extends Component {
   }
 
 
-    render() {
-        return (
-            <View>
-              {renderIf(!this.state.isMapActive,
-                <VirtualMap />
-              )}
-              {renderIf(!this.state.isMapActive,
-                <Compass />
-              )}
-              {renderIf(this.state.isMapActive,
-                <MiniMap />
-              )}
-            </View>
-        );
-    }
+  render() {
+      return (
+          <View>
+            {renderIf(!this.state.isMapActive,
+              <VirtualMap />
+            )}
+            {renderIf(!this.state.isMapActive,
+              <Compass />
+            )}
+            {renderIf(this.state.isMapActive,
+              <MiniMap />
+            )}
+          </View>
+      );
+  }
 }
 
 
@@ -61,8 +80,17 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    saveSailing: () => {
+      dispatch(saveSailing())
+    }
+  }
+}
+
 const componentContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SmartSailing)
 
 export default componentContainer

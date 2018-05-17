@@ -128,6 +128,9 @@ class VirtualMap extends Component {
     this.state._updateOrientation(turnAround)
   }
 
+  /*
+   * Check which elements should be rendered, and which are getting in collision distances
+   */
   _checkIfInViewport () {
     this.state.contentTorender = []
     let content = []
@@ -172,6 +175,9 @@ class VirtualMap extends Component {
     }
   }
 
+  /*
+   * Sort array of elements to render in order to prevent wrong index overlap
+   */
   _sortContent () {
     this.state.contentToRender.sort((a, b) => {
       const o = this.state.orientation
