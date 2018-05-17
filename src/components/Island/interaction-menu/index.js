@@ -14,11 +14,6 @@ import {
 import { connect } from 'react-redux'
 
 
-//  Import actions
-// --------------------------------------------------------------
-import { goToStep } from '../../../actions/island'
-
-
 //  Import Helpers
 // --------------------------------------------------------------
 import images from '../../../assets/images'
@@ -31,30 +26,29 @@ import styles from './styles'
 import Swip from '../Swip'
 import MultiActionButton from '../../Multi-action-button'
 
-class InteractionMenu extends Component {
+export default class InteractionMenu extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
+
       style: props.style,
       actions: this.props.actions.snippets,
       actionsForButton: this._formatDataForActionButon(this.props.actions.snippets),
       haveAction: this.props.actions.haveAction,
-      _changeStep: this.props.goToStep
+      _changeStep: this.props.changeStep
     }
 
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
       if (nextProps.actions.snippets.length > 0) {
-        console.log("nextProps")
         this.setState({ 
           actions: nextProps.actions.snippets,
           actionsForButton: this._formatDataForActionButon(nextProps.actions.snippets),
           haveAction: nextProps.actions.haveAction
-        }, () => console.log(this.state))
+        })
       }
   }
 
@@ -66,7 +60,6 @@ class InteractionMenu extends Component {
   }
 
   _handleSwip = () => {
-      console.log(this.state.actions[0].actions[0].id)
       this.state._changeStep(this.state.actions[0].actions[0].id)
   }
 
@@ -114,7 +107,7 @@ class InteractionMenu extends Component {
             />
           }
 
-          isActive={this.state.haveAction ? true : false}
+          isActive={this.state.haveAction}
 
           onChoiceSelected={(action) => { 
             this.state._changeStep(action) 
@@ -127,22 +120,3 @@ class InteractionMenu extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    goToStep: (id) => {
-      dispatch(goToStep(id))
-    },
-  }
-}
-
-const componentContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InteractionMenu)
-
-export default componentContainer

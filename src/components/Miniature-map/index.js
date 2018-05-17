@@ -19,7 +19,9 @@ import { IslandsData } from '../../constants/islands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { hideMap, updateDestination } from  '../../actions/sailing'
+
+import { hideMap, updateDestination } from  '../../redux/actions/sailing'
+
 
 class MiniatureMap extends Component {
 

@@ -8,6 +8,8 @@ import {
   UPDATE_POSITION
 } from '../actions/sailing'
 
+import { POPULATE_STORE } from '../actions/loading'
+
 const initialState = {
   orientation: 0,
   position: {
@@ -64,6 +66,8 @@ export function sailingReducer(state = initialState, action) {
         ...state,
         position: action.position
       }
+    case POPULATE_STORE:
+      return action.payload.sailing
     default:
       return state
   }

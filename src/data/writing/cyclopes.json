@@ -9,16 +9,10 @@
             "title": "",
             "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché. L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage, sans jeter les ancres. On peut attendre ici, sans danger, les vents pour repartir.",
             "collectableObject": 0,
-            "haveAction": true,
+            "haveAction": false,
             "actions": [
                 {
-                    "id": 4
-                },
-                {
-                    "id": 5
-                },
-                {
-                    "id": 6
+                    "id": 2
                 }
             ]
         },
@@ -92,11 +86,21 @@
             ]
         },
         {
-            "id": 9999,
+            "id": 9999, 
             "title": "End",
             "text": "This is end of the story",
             "collectableObject": 0,
-            "haveAction": false
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "title": "Retourner au bateau",
+            "choiceImgId": 0
         }
     ]
 }

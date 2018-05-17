@@ -36,7 +36,7 @@ export default class MultiActionButton extends React.Component {
       optionsSize: new Animated.Value(0),
       text: '',
       isOpen: false,
-      isActive: this.props.isActive ? this.props.isActive : true, 
+      isActive: this.props.isActive !== undefined ? this.props.isActive : true, 
       chosenId: undefined,
       buttonArray: this._prepareButtons(this.props.actions),
       btnStyle: this.props.mainBtnStyle, 
@@ -88,8 +88,6 @@ export default class MultiActionButton extends React.Component {
       
     }
   }
-  console.log(payload)
-
     return payload
   }
 
@@ -282,7 +280,6 @@ export default class MultiActionButton extends React.Component {
       } else if (this.state.customBtn && this.state.isActive) {
         customBtn = this.state.customBtn
       } else if (this.state.customBtnDisabled) {
-        console.log('seeeul')
         customBtn = this.state.customBtnDisabled
       }
     }
@@ -337,7 +334,7 @@ export default class MultiActionButton extends React.Component {
                   position: "absolute",
                   top: this.initialPosition.y,
                   left: this.initialPosition.x,
-                  backgroundColor: "transparent",
+                  backgroundColor: "red",
                   borderRadius: 50,
                   zIndex: 99,
                   height: this.buttonSize,
@@ -351,7 +348,7 @@ export default class MultiActionButton extends React.Component {
                 onResponderMove={this._handleDrag}
                 onResponderRelease={(evt) => { this._closeMenu() }}
               >
-                { customBtn }
+                {/* { customBtn } */}
 
               </View>
             </View>

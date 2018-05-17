@@ -15,7 +15,7 @@ import RNSimpleCompass from 'react-native-simple-compass';
 
 //  Import actions
 // --------------------------------------------------------------
-import { updateOrientation, toggleSailing, callMap } from '../../actions/sailing'
+import { updateOrientation, toggleSailing, callMap } from '../../redux/actions/sailing'
 
 //  Import Helpers
 // --------------------------------------------------------------

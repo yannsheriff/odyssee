@@ -1,44 +1,73 @@
 import React from 'react'
 import Svg,{ G, Rect, Image, Circle } from 'react-native-svg'
 import screen from '../../helpers/ScreenSize'
-import images from '../../assets/images'
+import images, { backgrounds } from '../../assets/images'
+import { AsyncStorage, View } from 'react-native';
+import { storeService } from '../../helpers/saveData'
 
 export default class BasicExample extends React.Component {
   constructor(props) {
     super(props);
+    this.test = {
+      isOnIsland: 1,
+      visitedIsland:[
+        {
+          id: 2,
+          screenReaded: [],
+          actualSnippetId: 1,
+          haveAction: false,
+          haveObject: false,
+        }
+      ],
+      navigation: {
+        position: {
+          x: 0,
+          y: 0
+        },
+        collectableEquipped: []
+      }
 
+      
+    }
     this.state = {}
   }
 
+
+  componentDidMount() {
+    this.consoleDataSaved()
+    // this.handleIslandData()
+    
+  }
+
+  async handleIslandData() {
+    var savedData = storeService.getSaving()
+    savedData.then((data)=> {
+      var actualIslandSavedData = data.visitedIsland.find((island) => { 
+        if( island.id === 1) { 
+          return island 
+        }
+      })
+      if (actualIslandSavedData ) {
+        console.log("loadIsland")
+      } else {
+        console.log("Create island")
+      }
+    })
+  
+  }
+
+  async consoleDataSaved() {
+    await storeService.save(this.test)
+
+    console.log("Restore state 🔄")
+  }
+  
+
   render() {
     return (
-      <Svg
-        height={screen.height}
-        width={screen.width}
-      >
-        <G
-          x={0}
-          y={0}
-        >
-          <Image
-            x={(screen.width / 2) - 50}
-            y={-(screen.height / 2) + 94.46}
-            width="100"
-            height="189.9"
-            preserveAspectRatio="xMidYMid slice"
-            opacity="1"
-            href={images.bateau}
-          />
-          <Rect
-            width={50}
-            height={50}
-            x={(screen.width / 2) - 25}
-            y={(screen.height / 2) - 25}
-            scale={1}
-            fill="#0071e9"
-          />
-        </G>
-      </Svg>
+      <View style={{backgroundColor: "white"}}>
+
+      </View>
     );
   }
 }
