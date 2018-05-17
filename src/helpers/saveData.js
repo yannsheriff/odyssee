@@ -82,19 +82,19 @@ class StoreService {
       var state = {
         isOnIsland: false,
         sailing: {
-          orientation: 0,
+          orientation: dataSaved.sailing.orientation,
           position: {
-              x: dataSaved.navigation.position.x,
-              y: dataSaved.navigation.position.y
+              x: dataSaved.sailing.position.x,
+              y: dataSaved.sailing.position.y
           },
           isSailing: false,
           callMap: false,
           isMapActive: false,
-          collectableEquipped: dataSaved.navigation.collectableEquipped,
+          collectableEquipped: dataSaved.sailing.collectableEquipped,
           destination: { 
-            id: '', 
-            x: '',
-            y: '',
+            id: dataSaved.sailing.destination.id, 
+            x: dataSaved.sailing.destination.id,
+            y: dataSaved.sailing.destination.id,
           }
         },
         island: {

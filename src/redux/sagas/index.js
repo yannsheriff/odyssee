@@ -13,7 +13,7 @@ export function* helloSaga() {
 export function* saveSailingData(action) {
   console.log('Saving data ⏳')
   const data = yield storeService.getSaving()
-
+  console.log(action)
   let newSailing = {
     orientation: action.state.orientation,
     position: {
@@ -35,6 +35,7 @@ export function* saveSailingData(action) {
     ...data,
     sailing: newSailing
   }
+  console.log(newState)
   yield storeService.save(newState)
   console.log('Saved ✅')
 }

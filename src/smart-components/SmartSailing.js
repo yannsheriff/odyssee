@@ -47,12 +47,18 @@ class SmartSailing extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    
     if(nextProps.sailing.isMapActive !== this.state.isMapActive) {
-      this.setState({ 
-        reduxState: nextProps.sailing, 
-        isMapActive: !this.state.isMapActive 
-      })
+
+        var isMapActive = !this.state.isMapActive 
+    } else {
+      var isMapActive = this.state.isMapActive 
     }
+
+    this.setState({ 
+      reduxState: nextProps.sailing,
+      isMapActive: isMapActive
+    })
   }
 
 
