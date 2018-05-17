@@ -17,7 +17,7 @@ import Illustrations from '../components/Island/Illustrations'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { goToStep, saveIslandData, saveNewIsland } from '../redux/actions/island'
+import { goToStep, saveIslandData, requestIslandData } from '../redux/actions/island'
 
 //  Import Data
 // --------------------------------------------------------------
@@ -39,46 +39,25 @@ class SmartIsland extends Component {
     this.actualSnippetId = this.props.island.actualSnippetId ? this.props.island.actualSnippetId : 1
     this.islandId = params.islandId
     
-    var payload = this.getSnippetData(this.islandId , this.actualSnippetId)
-    console.log("Payload : ", payload)
+    // var payload = this.getSnippetData(this.islandId , this.actualSnippetId)
+    // console.log("Payload : ", payload)
     this.state = {
-      currentIslandId: this.islandId,
-      snippet: payload.snippet,
-      actions: payload.actions,
-      offsets: payload.offsets,
-      animation: payload.animation,
+      snippet: undefined,
+      actions: undefined,
+      offsets: undefined,
+      animation: undefined,
+      currentIslandId: undefined,
       islandState: this.props.island,
       _changeStep: this.props.goToStep,
       _saveData: this.props.saveData,
-      _newIsland: this.props.newIsland,
+      _requestIslandData: this.props.requestIslandData,
     }
     
   }
 
 
-  async handleIslandData() {
-
-    return storeService.getSaving().then((data)=> {
-
-      var actualIslandSavedData = data.visitedIsland.find((island) => { 
-        if( island.id === this.islandId) { 
-          return island 
-        }
-      })
-
-      if (actualIslandSavedData ) {
-
-        return true
-      } else {
-
-        this.state._newIsland(this.islandId)
-        return false
-      }
-    })
-  }
-
-componentDidMount(){
-  let islandIsRegitered = this.handleIslandData()
+componentWillMount(){
+  this.state._requestIslandData(this.islandId)
 }
 
   
@@ -86,7 +65,9 @@ componentDidMount(){
   *  Update the current snippet 
   */
 componentWillReceiveProps(nextProps) {
-  if (nextProps.island.actualSnippet !== this.state.snippet) {
+  console.log("Data is arriving !")
+  if (nextProps.island.actualSnippetId !== this.state.snippet) {
+    console.log("let's update")
     this.updateSnippet(nextProps.island)
   }
 }
@@ -165,7 +146,7 @@ componentWillReceiveProps(nextProps) {
       offsets: payload.offsets,
       animation: payload.animation,
       islandState: state
-    }, ()=> console.log(this.state))
+    })
   }
 
   /*
@@ -173,30 +154,41 @@ componentWillReceiveProps(nextProps) {
   */
 
   goToNextStep = (id) => {
-    console.log('go to id : ', id)
-    this.state._saveData(this.state.islandState, id) 
-    this.state._changeStep(id) 
+    if(id === 0) {
+      this.props.navigation.navigate('Home')
+    } else {
+      this.state._saveData(this.state.islandState, id) 
+      this.state._changeStep(id) 
+    }
   }
 
   render() {
-    return ( 
 
-        <View style={{
-          backgroundColor: '#fff',
-          height: screen.height
-        }}>
-          <Illustrations 
-            offsets={ this.state.offsets.offsets }
-            animation={ this.state.animation.animation }
-          />
-          <Narration snippet = { this.state.snippet } /> 
-          <InteractionMenu 
-            actions = { this.state.actions } 
-            changeStep={ this.goToNextStep }  
-          /> 
-        </View>
+    if (  this.state.actions 
+          && this.state.offsets 
+          && this.state.animation 
+          && this.state.snippet ) 
+    {
 
-    );
+      var view = (<View style={{
+        backgroundColor: '#fff',
+        height: screen.height
+      }}>
+        <Illustrations 
+          offsets={ this.state.offsets.offsets }
+          animation={ this.state.animation.animation }
+        />
+        <Narration snippet = { this.state.snippet } /> 
+        <InteractionMenu 
+          actions = { this.state.actions } 
+          changeStep={ this.goToNextStep }  
+        /> 
+      </View> )
+    } else {
+      var view = (<View><Text style={{color: 'white', textAlign: "center", marginTop: 300}}> Loading ... </Text></View>)
+    }
+    
+    return view
   }
 }
 
@@ -220,8 +212,8 @@ const mapDispatchToProps = dispatch => {
     saveData: (state, id) => {
       dispatch(saveIslandData(state, id))
     },
-    newIsland: (id) => {
-      dispatch(saveNewIsland(id))
+    requestIslandData: (id) => {
+      dispatch(requestIslandData(id))
     },
     
   }

@@ -86,11 +86,21 @@
             ]
         },
         {
-            "id": 9999,
+            "id": 9999, 
             "title": "End",
             "text": "This is end of the story",
             "collectableObject": 0,
-            "haveAction": false
+            "haveAction": true,
+            "actions": [
+                {
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "id": 0,
+            "title": "Retourner au bateau",
+            "choiceImgId": 0
         }
     ]
 }

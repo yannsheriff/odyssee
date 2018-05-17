@@ -28,12 +28,22 @@ export default class ParallaxLayout extends Component {
 
   constructor(props) {
     super(props)
-    this.offsetX = 0
+    this.offsetX = this.props.offsetX
     this.state = {
       fadeAnim: new Animated.Value(0),
       source: props.source,
       imgWidth: this.calculateWidth(props.source)
     }
+  }
+
+  componentDidMount() {
+    Animated.timing(
+      this.state.fadeAnim,
+    {
+        toValue: this.offsetX,
+        duration: 2000,              
+      }
+    ).start()
   }
 
   calculateWidth(img) {

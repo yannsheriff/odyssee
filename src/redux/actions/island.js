@@ -1,6 +1,7 @@
 export const NEXT_SNIPPET = 'NEXT_SNIPPET'
 export const SAVE_ISLAND_DATA = 'SAVE_ISLAND_DATA'
-export const SAVE_NEW_ISLAND = 'SAVE_NEW_ISLAND'
+export const REQUEST_ISLAND_DATA = 'REQUEST_ISLAND_DATA'
+export const DISPATCH_ISLAND_DATA = 'DISPATCH_ISLAND_DATA'
 
 
 
@@ -21,9 +22,18 @@ export function saveIslandData(islandState, idSnippet) {
 }
 
 
-export function saveNewIsland(islandId) {
+export function requestIslandData(islandId) {
     return {
-        type: SAVE_NEW_ISLAND,
-        islandId: islandId
+        type: REQUEST_ISLAND_DATA,
+        islandId: islandId, 
+    }
+}
+
+export function dispatchIslandData(payload) {
+    console.log("Dispatching asked data..")
+    return {
+        type: DISPATCH_ISLAND_DATA,
+        islandId: payload.islandId, 
+        actualSnippetId: payload.actualSnippetId, 
     }
 }

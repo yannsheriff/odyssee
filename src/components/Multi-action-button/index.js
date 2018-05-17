@@ -334,7 +334,7 @@ export default class MultiActionButton extends React.Component {
                   position: "absolute",
                   top: this.initialPosition.y,
                   left: this.initialPosition.x,
-                  backgroundColor: "transparent",
+                  backgroundColor: "red",
                   borderRadius: 50,
                   zIndex: 99,
                   height: this.buttonSize,
@@ -348,7 +348,7 @@ export default class MultiActionButton extends React.Component {
                 onResponderMove={this._handleDrag}
                 onResponderRelease={(evt) => { this._closeMenu() }}
               >
-                { customBtn }
+                {/* { customBtn } */}
 
               </View>
             </View>

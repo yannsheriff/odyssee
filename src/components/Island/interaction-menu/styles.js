@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
         height: 300,
         position: "absolute",
         bottom: 0,
-        zIndex: 50
+        zIndex: 50,
+        backgroundColor: "red",
+        opacity: 0.3
     }
 });
 

@@ -1,7 +1,8 @@
 import { 
 NEXT_SNIPPET, 
 SAVE_ISLAND_DATA,
-SAVE_NEW_ISLAND,
+REQUEST_ISLAND_DATA,
+DISPATCH_ISLAND_DATA,
 } from '../actions/island'
 
 import { POPULATE_STORE } from '../actions/loading'
@@ -21,12 +22,15 @@ export function islandReducer(state = [], action) {
                 ...state,
                 actualSnippetId: action.nextSnippet
             }
-        case SAVE_NEW_ISLAND:
+        case DISPATCH_ISLAND_DATA:
             return {
                 ...state,
                 currentIslandId: action.islandId,
-                actualSnippetId: 1
+                actualSnippetId: action.actualSnippetId
             }
+        case REQUEST_ISLAND_DATA:
+            return state
+
         case SAVE_ISLAND_DATA:
             return state
         
