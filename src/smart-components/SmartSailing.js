@@ -36,7 +36,7 @@ class SmartSailing extends Component {
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this._handleAppStateChange)
-    this.state._saveSailing()
+    this.state._saveSailing(this.state.reduxState)
     console.log('unmount maboy')
   }
 
