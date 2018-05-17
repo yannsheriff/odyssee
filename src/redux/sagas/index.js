@@ -1,6 +1,7 @@
 import { delay } from 'redux-saga'
 import { put, takeEvery, all } from 'redux-saga/effects'
 import { SAVE_ISLAND_DATA, REQUEST_ISLAND_DATA, dispatchIslandData } from '../actions/island'
+import { SAVE_SAILING } from '../actions/sailing'
 import { REQUEST_STORE, populateStore } from '../actions/loading'
 import { storeService } from '../../helpers/saveData'
 
@@ -9,12 +10,39 @@ export function* helloSaga() {
 }
 
 
+export function* saveSailingData(action) {
+  console.log('Saving data ⏳')
+  const data = yield storeService.getSaving()
+
+  let newSailing = {
+    orientation: action.state.orientation,
+    position: {
+        x: action.state.position.x,
+        y: action.state.position.y
+    },
+    isSailing: false,
+    callMap: false,
+    isMapActive: false,
+    collectableEquipped: action.state.collectableEquipped,
+    destination: { 
+      id: action.state.destination.id, 
+      x: action.state.destination.x,
+      y: action.state.destination.y,
+    }
+  }
+
+  var newState = {
+    ...data,
+    sailing: newSailing
+  }
+  yield storeService.save(newState)
+  console.log('Saved ✅')
+}
+
 // Our worker Saga: will perform the async increment task
 export function* saveDataAsync(action) {
   const data = yield storeService.getSaving()
-  console.log('Saving data..')
-  console.log('.');console.log('.');console.log('.');console.log('.');console.log('.');console.log('.');console.log('.');console.log('.')
-   
+  console.log('Saving data ⏳')
     let actualIslandSavedData = data.visitedIsland.find((island, index) => { if( island.id === action.state.currentIslandId) { return island }})
     
     // If existe
@@ -104,13 +132,18 @@ export function* watchSavingAsync() {
   yield takeEvery(SAVE_ISLAND_DATA, saveDataAsync)
 }
 
+export function* watchPopulateStore() {
+  yield takeEvery(SAVE_SAILING, saveSailingData)
+}
+
 export function* watchRequestIslandData() {
   yield takeEvery(REQUEST_ISLAND_DATA, requestIslandData)
 }
 
-export function* watchPopulateStore() {
+export function* watchSavingSailing() {
   yield takeEvery(REQUEST_STORE, dispatchPopulateStore)
 }
+
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
@@ -120,5 +153,6 @@ export default function* rootSaga() {
     watchSavingAsync(),
     watchPopulateStore(),
     watchRequestIslandData(),
+    watchSavingSailing(),
   ])
 }
