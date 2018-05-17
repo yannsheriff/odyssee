@@ -90,7 +90,12 @@ class StoreService {
           isSailing: false,
           callMap: false,
           isMapActive: false,
-          collectableEquipped: dataSaved.navigation.collectableEquipped
+          collectableEquipped: dataSaved.navigation.collectableEquipped,
+          destination: { 
+            id: '', 
+            x: '',
+            y: '',
+          }
         },
         island: {
             currentIslandId: null,
@@ -118,7 +123,12 @@ class StoreService {
           isSailing: false,
           callMap: false,
           isMapActive: false,
-          collectableEquipped: []
+          collectableEquipped: [],
+          destination: { 
+            id: '', 
+            x: '',
+            y: '',
+          }
         },
         island: {
             currentIslandId: null,
