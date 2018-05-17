@@ -17,15 +17,16 @@ import Illustrations from '../components/Island/Illustrations'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { goToStep } from '../actions/island'
+import { goToStep, saveIslandData, requestIslandData } from '../redux/actions/island'
 
 //  Import Data
 // --------------------------------------------------------------
-import { cyclopes } from '../data'
+import islands from '../data'
 
 //  Import Helpers
 // --------------------------------------------------------------
 import screen from '../helpers/ScreenSize'
+import { storeService } from '../helpers/saveData'
 
 
 
@@ -34,22 +35,40 @@ class SmartIsland extends Component {
 
   constructor(props) {
     super(props)
-    const payload = this.getSnippetData(this.props.island.actualSnippetId)
+    const { params } = this.props.navigation.state;
+    this.actualSnippetId = this.props.island.actualSnippetId ? this.props.island.actualSnippetId : 1
+    this.islandId = params.islandId
+    
+    // var payload = this.getSnippetData(this.islandId , this.actualSnippetId)
+    // console.log("Payload : ", payload)
     this.state = {
-      snippet: payload.snippet,
-      actions: payload.actions,
-      offsets: payload.offsets,
-      animation: payload.animation,
+      snippet: undefined,
+      actions: undefined,
+      offsets: undefined,
+      animation: undefined,
+      currentIslandId: undefined,
+      islandState: this.props.island,
+      _changeStep: this.props.goToStep,
+      _saveData: this.props.saveData,
+      _requestIslandData: this.props.requestIslandData,
     }
+    
   }
+
+
+componentWillMount(){
+  this.state._requestIslandData(this.islandId)
+}
 
   
  /*
   *  Update the current snippet 
   */
 componentWillReceiveProps(nextProps) {
-  if (nextProps.island.actualSnippet !== this.state.snippet) {
-    this.updateSnippet(nextProps.island.actualSnippetId)
+  console.log("Data is arriving !")
+  if (nextProps.island.actualSnippetId !== this.state.snippet) {
+    console.log("let's update")
+    this.updateSnippet(nextProps.island)
   }
 }
 
@@ -57,23 +76,23 @@ componentWillReceiveProps(nextProps) {
  /*
   *  Load the data of the wanted Snippet
   */
-  getSnippetData(id) { 
+  getSnippetData(currentIslandId, actualSnippetId) { 
 
-    const snippet = cyclopes.writting.steps.find((index) => {
-      if (index.id === id) {
+    const snippet = islands[currentIslandId].writting.steps.find((index) => {
+      if (index.id === actualSnippetId) {
         return index
       }
     });
 
-    const offsets = cyclopes.illustrations.steps.find((index) => {
-      if (index.id === id) {
+    const offsets = islands[currentIslandId].illustrations.steps.find((index) => {
+      if (index.id === actualSnippetId) {
         return index.offsets
       }
     });
 
 
-    const animation = cyclopes.illustrations.steps.find((index) => {
-      if (index.id === id) {
+    const animation = islands[currentIslandId].illustrations.steps.find((index) => {
+      if (index.id === actualSnippetId) {
         return index.animation
       }
     })
@@ -83,7 +102,7 @@ componentWillReceiveProps(nextProps) {
 
     if (snippet.haveAction) {
       snippet.actions.forEach(element => {
-        cyclopes.writting.steps.find((index) => {
+        islands[currentIslandId].writting.steps.find((index) => {
           if (index.id === element.id) {
             snippetArray.push(index) 
           }
@@ -91,8 +110,8 @@ componentWillReceiveProps(nextProps) {
       });
     } else {
       haveAction = false 
-      snippetArray = cyclopes.writting.steps.find((index) => {
-        if (index.id === id) {
+      snippetArray = islands[currentIslandId].writting.steps.find((index) => {
+        if (index.id === actualSnippetId) {
           return index
         }
       });
@@ -118,32 +137,58 @@ componentWillReceiveProps(nextProps) {
  /*
   *  Update the current snippet 
   */
-  updateSnippet(id) {
-    const payload = this.getSnippetData(id)
+  updateSnippet(state) {
+    const payload = this.getSnippetData(state.currentIslandId, state.actualSnippetId)
     this.setState({
+      currentIslandId: state.currentIslandId,
       snippet: payload.snippet,
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
+      islandState: state
     })
   }
 
+  /*
+  *  Ask for new snippet and save old state
+  */
+
+  goToNextStep = (id) => {
+    if(id === 0) {
+      this.props.navigation.navigate('Home')
+    } else {
+      this.state._saveData(this.state.islandState, id) 
+      this.state._changeStep(id) 
+    }
+  }
+
   render() {
-    return ( 
 
-        <View style={{
-          backgroundColor: '#fff',
-          height: screen.height
-        }}>
-          <Illustrations 
-            offsets={ this.state.offsets.offsets }
-            animation={ this.state.animation.animation }
-          />
-          <Narration snippet = { this.state.snippet } /> 
-          <InteractionMenu actions = { this.state.actions } /> 
-        </View>
+    if (  this.state.actions 
+          && this.state.offsets 
+          && this.state.animation 
+          && this.state.snippet ) 
+    {
 
-    );
+      var view = (<View style={{
+        backgroundColor: '#fff',
+        height: screen.height
+      }}>
+        <Illustrations 
+          offsets={ this.state.offsets.offsets }
+          animation={ this.state.animation.animation }
+        />
+        <Narration snippet = { this.state.snippet } /> 
+        <InteractionMenu 
+          actions = { this.state.actions } 
+          changeStep={ this.goToNextStep }  
+        /> 
+      </View> )
+    } else {
+      var view = (<View><Text style={{color: 'white', textAlign: "center", marginTop: 300}}> Loading ... </Text></View>)
+    }
+    
+    return view
   }
 }
 
@@ -154,13 +199,30 @@ componentWillReceiveProps(nextProps) {
 
 const mapStateToProps = state => {
   return {
-    island: state.island
+    island: state.island,
+    isOnIsland: state.isOnIsland
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    goToStep: (id) => {
+      dispatch(goToStep(id))
+    },
+    saveData: (state, id) => {
+      dispatch(saveIslandData(state, id))
+    },
+    requestIslandData: (id) => {
+      dispatch(requestIslandData(id))
+    },
+    
   }
 }
 
 
 const componentContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SmartIsland)
 
 export default componentContainer

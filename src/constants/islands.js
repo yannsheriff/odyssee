@@ -3,69 +3,44 @@ const islands = [
     id: 0,
     position: {
       x: 1000,
-      y: 1500
+      y: 700
     },
     size: {
-      x: 30,
-      y: 30
+      x: 271,
+      y: 534
     },
-    collisionDist: 150
-  },
-  {
-    id: 1,
-    position: {
-      x: 1000,
-      y: 1800
-    },
-    size: {
-      x: 30,
-      y: 30
-    },
-    collisionDist: 150
-  },
-  {
-    id: 2,
-    position: {
-      x: 1500,
-      y: 850
-    },
-    size: {
-      x: 30,
-      y: 30
-    },
-    collisionDist: 150
-  },
-  {
-    id: 3,
-    position: {
-      x: 900,
-      y: 500
-    },
-    size: {
-      x: 30,
-      y: 30
-    },
-    collisionDist: 150
-  },
-  {
-    id: 4,
-    position: {
-      x: 450,
-      y: 850
-    },
-    size: {
-      x: 30,
-      y: 30
-    },
-    collisionDist: 150
+    collisionDist: 150,
+    image: 'cyclope',
+    biomeLength: 4,
+    isIsland: true
   }
 ]
 
+const biomesElements = []
 islands.forEach(island => {
-  const nb = Math.floor(Math.random() * 10) + 15
-  for (let i = 0; i < nb.length; i++) {
-
+  const nb = Math.floor(Math.random() * 10) + 10
+  for (let i = 0; i < nb; i++) {
+    const dist = Math.random() * 500 + 200
+    const deg = Math.random() * 360
+    const element = {
+      id: island.id + '_' + i,
+      position: {
+        x: island.position.x + (dist) * Math.sin(deg * 0.0174533),
+        y: island.position.y + (dist) * Math.cos(deg * 0.0174533)
+      },
+      size: {
+        x: 100,
+        y: 100
+      },
+      collisionDist: 75,
+      image: island.image + '_' + (Math.floor(Math.random() * island.biomeLength + 1)),
+      isIsland: false,
+      opacity: 1
+    }
+    biomesElements.push(element)
   }
 })
 
-export const IslandsData = islands
+const elements = islands.concat(biomesElements)
+
+export const IslandsData = elements

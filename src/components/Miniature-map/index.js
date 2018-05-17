@@ -22,7 +22,7 @@ import MiniIslands from './miniIslands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { hideMap } from  '../../actions/sailing'
+import { hideMap } from  '../../redux/actions/sailing'
 
 class MiniatureMap extends Component {
 

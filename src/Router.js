@@ -7,9 +7,8 @@ import { StackNavigator } from 'react-navigation';
 // ----------------------------
 import Sailing from './smart-components/SmartSailing';
 import Accueil from './components/Home-prov';
-import MultiAction from './components/Multi-action-button';
+import test from './components/test';
 import Island from './smart-components/SmartIsland';
-
 
 
 const InitialNavigator = StackNavigator({
@@ -23,7 +22,7 @@ const InitialNavigator = StackNavigator({
     screen: Island
   },
   Test: {
-    screen: MultiAction
+    screen: test
   },
 },
   {
