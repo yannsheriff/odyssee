@@ -154,6 +154,7 @@ componentWillReceiveProps(nextProps) {
   */
 
   goToNextStep = (id) => {
+    console.log("Smart Islant => goToNextStep", id)
     if(id === 0) {
       this.props.navigation.navigate('Home')
     } else {

@@ -48,7 +48,7 @@ export default class MultiActionButton extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.actions[0].img) {
+    if (nextProps.actions[0].img !== undefined && nextProps.isActive || nextProps.actions[0].img !== undefined && nextProps.isActive == undefined) {
       this.setState({
         buttonArray: this._prepareButtons(nextProps.actions)
       })
@@ -69,7 +69,7 @@ export default class MultiActionButton extends React.Component {
   _prepareButtons(array = []) {
     let payload = []
     if (array.length > 0) {
-      if (array[0].img) {
+      if (array[0].img !== undefined) {
       let nbOfButtons = array.length - 1
       array.forEach((data, index) => {
         payload.push(
@@ -165,7 +165,7 @@ export default class MultiActionButton extends React.Component {
       });
     }
 
-    if (this.state.chosenId) {
+    if (this.state.chosenId !== undefined) {
       if (this.callback) {
         this.callback(this.state.chosenId)
       }
@@ -334,7 +334,6 @@ export default class MultiActionButton extends React.Component {
                   position: "absolute",
                   top: this.initialPosition.y,
                   left: this.initialPosition.x,
-                  backgroundColor: "red",
                   borderRadius: 50,
                   zIndex: 99,
                   height: this.buttonSize,
@@ -348,7 +347,7 @@ export default class MultiActionButton extends React.Component {
                 onResponderMove={this._handleDrag}
                 onResponderRelease={(evt) => { this._closeMenu() }}
               >
-                {/* { customBtn } */}
+                { customBtn }
 
               </View>
             </View>

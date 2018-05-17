@@ -25,12 +25,12 @@ const styles = StyleSheet.create({
     },
     swipReconizer: {
         width: screen.width,
-        height: 300,
+        height: screen.height,
         position: "absolute",
         bottom: 0,
         zIndex: 50,
         backgroundColor: "red",
-        opacity: 0.3
+        opacity: 0.3,
     }
 });
 
