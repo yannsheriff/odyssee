@@ -25,6 +25,7 @@ class SmartSailing extends Component {
     this.state = {
       _saveSailing: this.props.saveSailing,
       isMapActive: this.props.sailing.isMapActive,
+      reduxState: this.props.sailing,
       appState: AppState.currentState
     }
   }
@@ -41,13 +42,16 @@ class SmartSailing extends Component {
 
   _handleAppStateChange = (nextAppState) => {
     if (this.state.appState === 'active' && nextAppState === 'background') {
-      this.state._saveSailing()
+      this.state._saveSailing(this.state.reduxState)
     }
   }
 
   componentWillReceiveProps (nextProps) {
     if(nextProps.sailing.isMapActive !== this.state.isMapActive) {
-      this.setState({ isMapActive: !this.state.isMapActive })
+      this.setState({ 
+        reduxState: nextProps.sailing, 
+        isMapActive: !this.state.isMapActive 
+      })
     }
   }
 
@@ -82,8 +86,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveSailing: () => {
-      dispatch(saveSailing())
+    saveSailing: (state) => {
+      dispatch(saveSailing(state))
     }
   }
 }

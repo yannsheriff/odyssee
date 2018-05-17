@@ -68,9 +68,8 @@ export function sailingReducer(state = initialState, action) {
         position: action.position
       }
     case SAVE_SAILING:
-      return {
-        ...state
-      }
+      return state
+
     case POPULATE_STORE:
       return action.payload.sailing
     default:

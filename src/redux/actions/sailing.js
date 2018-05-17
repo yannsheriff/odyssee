@@ -54,8 +54,9 @@ export function updatePosition (position) {
   }
 }
 
-export function saveSailing () {
+export function saveSailing (state) {
   return {
-    type: SAVE_SAILING
+    type: SAVE_SAILING,
+    state: state
   }
 }
