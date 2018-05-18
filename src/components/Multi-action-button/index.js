@@ -324,17 +324,15 @@ export default class MultiActionButton extends React.Component {
                 // blurType="regular"
                 overlayColor={'e5e5e5'}
                 blurAmount={10}
-              />
-              <Text
+            />
+            <Text
               style={[ styles.text, this.state.textStyle ]}
-              >  {this.state.text} </Text>
+            >  {this.state.text} </Text>
             <View
               style={{
                 height:  screen.height,
                 width:  screen.width,
-  
               }}
-
             >
               <View 
                 style={[{
@@ -355,7 +353,6 @@ export default class MultiActionButton extends React.Component {
                 onResponderRelease={(evt) => { this._closeMenu() }}
               >
                 { customBtn }
-
               </View>
             </View>
             

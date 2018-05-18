@@ -107,6 +107,7 @@ export default class InteractionMenu extends Component {
               style={{height: 50, width: 50}}
             />
           }
+
           disabled={
             <Image
               source={images.openMenu}

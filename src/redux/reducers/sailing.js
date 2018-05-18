@@ -6,7 +6,8 @@ import {
   HIDE_MAP,
   UPDATE_DESTINATION,
   UPDATE_POSITION,
-  SAVE_SAILING
+  SAVE_SAILING,
+  COLLISION
 } from '../actions/sailing'
 
 import { POPULATE_STORE } from '../actions/loading'
@@ -20,6 +21,7 @@ const initialState = {
   isSailing: false,
   callMap: false,
   isMapActive: false,
+  islandCollided: null,
   destination: {
     id: '',
     x: '',
@@ -67,9 +69,13 @@ export function sailingReducer(state = initialState, action) {
         ...state,
         position: action.position
       }
+    case COLLISION:
+      return {
+        ...state,
+        islandCollided: action.islandCollided
+      }
     case SAVE_SAILING:
       return state
-
     case POPULATE_STORE:
       return action.payload.sailing
     default:

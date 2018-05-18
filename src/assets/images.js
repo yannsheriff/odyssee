@@ -14,7 +14,7 @@ const images = {
       cyclope_4: require('./img/cyclope_4.png')
     },
     closeMenu: require('./img/Close.png'),
-    openMenu: require('./img/plus.png'),
+    openMenu: require('./img/plus.png')
 };
 
 export const choices = [
