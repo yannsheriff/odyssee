@@ -8,7 +8,8 @@ import { saveSailing } from '../redux/actions/sailing'
 //  Import Helpers
 // --------------------------------------------------------------
 import renderIf from '../helpers/renderIf'
-import images from '../assets/images'
+import screen from '../helpers/ScreenSize'
+import images, { choices } from '../assets/images'
 
 //  Import Components
 // --------------------------------------------------------------
@@ -64,7 +65,7 @@ class SmartSailing extends Component {
         actionsForButton: [
           {
             id: nextProps.sailing.islandCollided,
-            img: 1,
+            img: choices[1].img,
             label: 'Accoster sur l\'île'
           }
         ],
@@ -76,7 +77,17 @@ class SmartSailing extends Component {
 
   render() {
       return (
-          <View>
+          <View
+            height={screen.height}
+            width={screen.width}
+            style={{
+              width: screen.width,
+              height: screen.height,
+              position: "absolute",
+              top: 0,
+              left: 0
+            }}
+          >
             {renderIf(!this.state.isMapActive,
               <VirtualMap />
             )}
@@ -86,7 +97,9 @@ class SmartSailing extends Component {
             {renderIf(this.state.isMapActive,
               <MiniMap />
             )}
-            {renderIf(!this.state.isMapActive && this.state.isCollided !== null,
+            { console.log(this.state.isMapActive, this.state.islandCollided) }
+            {renderIf(!this.state.isMapActive && this.state.islandCollided !== null,
+
               <MultiActionButton
                 actions={this.state.actionsForButton}
 
@@ -113,6 +126,8 @@ class SmartSailing extends Component {
                     style={{height: 50, width: 50, opacity: 0.1}}
                   />
                 }
+
+                initalPositon={{ x: 10, y: 10 }}
 
                 isActive={this.state.haveAction}
 
