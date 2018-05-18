@@ -321,7 +321,8 @@ export default class MultiActionButton extends React.Component {
             <BlurView
                 style={[styles.absolute, { opacity: this.state.opacity }]}
                 viewRef={this.state.viewRef}
-                blurType="dark"
+                // blurType="regular"
+                overlayColor={'e5e5e5'}
                 blurAmount={10}
               />
               <Text
