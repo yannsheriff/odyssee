@@ -77,7 +77,7 @@ export default class Narration extends Component {
           // When the animation is finished wiat 1s and delete old animation from the state Array
           setTimeout(()=> {
             this.setState({ 
-              texts: [this.state.animations.shift()],
+              texts: [this.state.texts.shift()],
               isTransitionFinished: true
             })
           }, 500)
@@ -88,9 +88,30 @@ export default class Narration extends Component {
 
 
   render() {
+
+    var animations = this.state.texts.map((text, index) => {
+      if (anim) {   // If animation exist then render it
+        return (
+          <Animated.View style={[styles.background, { left: anim.position }]}>
+           <LottieView 
+                source={ anim.animation } 
+                progress={ anim.animationProgress }
+            />
+          </Animated.View>
+        )
+      } else {      // Else render a blank layer
+        return <Animated.View style={[styles.background, { left: anim.position }]}> </Animated.View>
+      }
+    })
+
+    return (
+      <View>
+        { animations }
+      </View>
+  );
     return (
         <View style={ styles.container }>
-          <Text style={ styles.text }> {this.state.text} </Text>  
+            
         </View>
     );
   }
