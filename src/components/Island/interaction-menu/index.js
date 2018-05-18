@@ -88,9 +88,11 @@ export default class InteractionMenu extends Component {
         
         <MultiActionButton
           actions={this.state.actionsForButton}
+          // mainButtonsSize={10}
+          // actionsButtonsSize={50}
           // mainBtnStyle={}
           // initalPositon={}
-          //labelStyle={}
+          // labelStyle={}
 
           mainButton={
             <Image
@@ -107,6 +109,7 @@ export default class InteractionMenu extends Component {
               style={{height: 50, width: 50}}
             />
           }
+
           disabled={
             <Image
               source={images.openMenu}

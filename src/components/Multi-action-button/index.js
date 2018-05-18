@@ -16,14 +16,15 @@ export default class MultiActionButton extends React.Component {
     this.callback = props.onChoiceSelected
     this.firstTouch = undefined
     this.menuIsOpen = false
-    this.buttonSize = 50
     this.isHovered=[0]
     this.distFromInitialPosition = 120
+    this.actionsButtonsSize = this.props.actionsButtonsSize ? this.props.actionsButtonsSize: 70
+    this.mainButtonsSize = this.props.mainButtonsSize ? this.props.mainButtonsSize: 50
     this.initialPosition = this.props.initalPositon 
     ? this.props.initalPositon
     : {
-      x: screen.width/2 -25,
-      y: screen.height - 70
+      x: screen.width/2 - this.mainButtonsSize/2,
+      y: screen.height - 80
     }
     this.positionReferenceMap = [
       [0],
@@ -122,7 +123,7 @@ export default class MultiActionButton extends React.Component {
       animationsToPlay.push(
         Animated.spring(this.state.optionsSize, {
           duration: 1000,
-          toValue: this.buttonSize, 
+          toValue: this.actionsButtonsSize, 
         })
       )
       Animated.parallel(animationsToPlay).start();
@@ -183,9 +184,9 @@ export default class MultiActionButton extends React.Component {
   /*
   * when user touch, is it long touch ? then colision detection with all choices 
   */ 
-  _handleDrag = (evt) => {
+  _handleDrag = (evt) => { 
       if (this.firstTouch) {
-        if ( evt.nativeEvent.timestamp > this.firstTouch + 500) {
+        if ( evt.nativeEvent.timestamp > this.firstTouch + 200) {
           if (!this.menuIsOpen) {
             this._openMenu()
             this.menuIsOpen = true
@@ -199,9 +200,9 @@ export default class MultiActionButton extends React.Component {
             
             this.state.buttonArray.forEach((button, index) => { // loop for dection 
               if ( evt.nativeEvent.pageX > button.x1 
-                && evt.nativeEvent.pageX < button.x1 + this.buttonSize
+                && evt.nativeEvent.pageX < button.x1 + this.actionsButtonsSize
                 && evt.nativeEvent.pageY > button.y1
-                && evt.nativeEvent.pageY < button.y1 + this.buttonSize 
+                && evt.nativeEvent.pageY < button.y1 + this.actionsButtonsSize 
               ) {
 
                 this.isHovered.push(1)
@@ -301,7 +302,7 @@ export default class MultiActionButton extends React.Component {
                   height: this.state.optionsSize,
                   width: this.state.optionsSize, 
                 }]}
-  
+                key={button.id}
                 resizeMode={'contain'}
                 source={button.img}
                 >
@@ -317,6 +318,9 @@ export default class MultiActionButton extends React.Component {
           width: screen.width,
           height: screen.height,
           justifyContent: "center",
+          position: "absolute",
+          top: 0,
+          left: 0,
         }}>
             <BlurView
                 style={[styles.absolute, { opacity: this.state.opacity }]}
@@ -324,17 +328,15 @@ export default class MultiActionButton extends React.Component {
                 // blurType="regular"
                 overlayColor={'e5e5e5'}
                 blurAmount={10}
-              />
-              <Text
+            />
+            <Text
               style={[ styles.text, this.state.textStyle ]}
-              >  {this.state.text} </Text>
+            >  {this.state.text} </Text>
             <View
               style={{
                 height:  screen.height,
                 width:  screen.width,
-  
               }}
-
             >
               <View 
                 style={[{
@@ -343,8 +345,8 @@ export default class MultiActionButton extends React.Component {
                   left: this.initialPosition.x,
                   borderRadius: 50,
                   zIndex: 99,
-                  height: this.buttonSize,
-                  width: this.buttonSize,
+                  height: this.mainButtonsSize,
+                  width: this.mainButtonsSize
                   
                 }, this.state.btnStyle ]}
                 
@@ -355,7 +357,6 @@ export default class MultiActionButton extends React.Component {
                 onResponderRelease={(evt) => { this._closeMenu() }}
               >
                 { customBtn }
-
               </View>
             </View>
             
