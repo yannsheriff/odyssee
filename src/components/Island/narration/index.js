@@ -89,14 +89,11 @@ export default class Narration extends Component {
 
   render() {
 
-    var animations = this.state.texts.map((text, index) => {
+    var text = this.state.texts.map((text, index) => {
       if (anim) {   // If animation exist then render it
         return (
           <Animated.View style={[styles.background, { left: anim.position }]}>
-           <LottieView 
-                source={ anim.animation } 
-                progress={ anim.animationProgress }
-            />
+            <Text style={ styles.text }> { text.text } </Text>
           </Animated.View>
         )
       } else {      // Else render a blank layer
@@ -106,7 +103,7 @@ export default class Narration extends Component {
 
     return (
       <View>
-        { animations }
+        { text }
       </View>
   );
     return (
