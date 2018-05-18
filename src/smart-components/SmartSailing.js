@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { View, AppState, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { saveSailing } from '../redux/actions/sailing'
+import { saveSailing, collision } from '../redux/actions/sailing'
 
 //  Import Helpers
 // --------------------------------------------------------------
@@ -27,6 +27,7 @@ class SmartSailing extends Component {
 
     this.state = {
       _saveSailing: this.props.saveSailing,
+      _collision: this.props.collision,
       isMapActive: this.props.sailing.isMapActive,
       islandCollided: this.props.sailing.islandCollided,
       reduxState: this.props.sailing,
@@ -67,6 +68,11 @@ class SmartSailing extends Component {
             id: nextProps.sailing.islandCollided,
             img: choices[1].img,
             label: 'Accoster sur l\'île'
+          },
+          {
+            id: 'leave',
+            img: choices[2].img,
+            label: 'Rester en mer'
           }
         ],
         haveAction: true
@@ -78,8 +84,6 @@ class SmartSailing extends Component {
   render() {
       return (
           <View
-            height={screen.height}
-            width={screen.width}
             style={{
               width: screen.width,
               height: screen.height,
@@ -97,7 +101,6 @@ class SmartSailing extends Component {
             {renderIf(this.state.isMapActive,
               <MiniMap />
             )}
-            { console.log(this.state.isMapActive, this.state.islandCollided) }
             {renderIf(!this.state.isMapActive && this.state.islandCollided !== null,
 
               <MultiActionButton
@@ -127,12 +130,16 @@ class SmartSailing extends Component {
                   />
                 }
 
-                initalPositon={{ x: 10, y: 10 }}
+                initalPositon={{ x: (screen.width / 2) - 25, y: screen.height - 100 }}
 
                 isActive={this.state.haveAction}
 
                 onChoiceSelected={(action) => {
-                  console.log(action)
+                  if (action === 'leave') {
+                    this.state._collision(null)
+                  } else {
+                    this.props.navigation.navigate('Island', { islandId: action })
+                  }
                 }}
               />
             )}
@@ -156,6 +163,9 @@ const mapDispatchToProps = dispatch => {
   return {
     saveSailing: (state) => {
       dispatch(saveSailing(state))
+    },
+    collision: (islandCollided) => {
+      dispatch(collision(islandCollided))
     }
   }
 }

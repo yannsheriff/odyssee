@@ -60,7 +60,7 @@ class VirtualMap extends Component {
         x: 0,
         y: 0
       },
-      isCollided: false,
+      islandCollided: null,
       contentToRender: []
     }
   }
@@ -104,9 +104,6 @@ class VirtualMap extends Component {
         deceleration: this.state.currentSpeed / 30 // 30 is the number of frames needed for complete deceleration
       })
     } else {
-      if (this.state.isCollided) {
-        this._turnAround()
-      }
       this.setState({
         sailing: !this.state.sailing,
         currentSpeed: speedModifiers.acceleration,
@@ -115,27 +112,12 @@ class VirtualMap extends Component {
     }
   }
 
-  _turnAround () {
-    console.log('repositionning')
-    let turnAround = this.state.orientation + 180
-    if (turnAround > 359) { turnAround +=  -360 }
-    this.setState({
-      isCollided: false,
-      cnv: {
-        x: this.state.collisionPoint.x,
-        y: this.state.collisionPoint.y
-      }
-    })
-    this.state._updateOrientation(turnAround)
-  }
-
   /*
    * Check which elements should be rendered, and which are getting in collision distances
    */
   _checkIfInViewport () {
     this.state.contentTorender = []
     let content = []
-    let collisionPoint = ''
     const cnv = this.state.cnv
     const currentCenterX = -(cnv.x + this.state.center.x) + (screen.width / 2)
     const currentCenterY = -(cnv.y + this.state.center.y) + (screen.height / 2)
@@ -143,38 +125,40 @@ class VirtualMap extends Component {
     IslandsData.forEach((island) => {
       const dist = Math.hypot(currentCenterX - island.position.x, currentCenterY - island.position.y)
       if (dist <= this.state.vpRadius + 150) { // 150 is a margin so that bigger images get rendered even when their anchor point is still out of radius distance
-        content.push(island)
 
         // check for collision
         if (island.isIsland) {
-          if (dist <= (island.collisionDist + 100) && dist > (island.collisionDist + 10) && !this.state.isCollided) {
-            collisionPoint = {
-              x: this.state.cnv.x,
-              y: this.state.cnv.y
+          if (dist <= island.collisionDist) {
+            if (this.state.islandCollided === null) {
+              this.setState({
+                islandCollided: island.id
+              })
+              this.state._collision(island.id)
+              this.state._toggleSailing()
+            } else if (this.state.islandCollided !== null && island.opacity > 0 && this.state.goalSpeed > 0) {
+              island.opacity = Math.floor(((island.opacity * 10) - 1)) / 10
             }
-          } else if (dist <= island.collisionDist && !this.state.isCollided) {
-            this.setState({
-              isCollided: true
-            })
-            this.state._collision(island.id)
-            this.state._toggleSailing()
+          } else if (dist >= island.collisionDist + 100 && island.opacity < 1) {
+            console.log(island.opacity, 'leaving')
+            if (this.state.islandCollided !== null) {
+              this.setState({
+                islandCollided: null
+              })
+            }
+            island.opacity = Math.floor(((island.opacity * 10) + 1)) / 10
           }
-        } else {
+        } else if (!island.isIsland) {
           if (dist <= island.collisionDist && island.opacity > 0) {
-            island.opacity = island.opacity - 0.1
+            island.opacity += - 0.1
           } else if (dist >= island.collisionDist && island.opacity < 1) {
-            island.opacity = island.opacity + 0.1
+            island.opacity += 0.1
           }
         }
+        // add island to array of elements to be rendered
+        content.push(island)
       }
     })
     this.state.contentToRender = content
-
-    if ((collisionPoint.x !== this.state.collisionPoint.x && collisionPoint.y !== this.state.collisionPoint.y) && collisionPoint !== '') {
-      this.setState({
-        collisionPoint: collisionPoint
-      })
-    }
   }
 
   /*
