@@ -23,7 +23,7 @@ import Islands from './islands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { launchMap, toggleSailing, updateOrientation, updatePosition } from '../../redux/actions/sailing'
+import { launchMap, toggleSailing, updateOrientation, updatePosition, collision } from '../../redux/actions/sailing'
 
 
 
@@ -43,6 +43,7 @@ class VirtualMap extends Component {
       _toggleSailing: this.props.toggleSailing,
       _updateOrientation: this.props.updateOrientation,
       _updatePosition: this.props.updatePosition,
+      _collision: this.props.collision,
       orientation: this.props.sailing.orientation,
       center: center,
       cnv: {
@@ -155,6 +156,7 @@ class VirtualMap extends Component {
             this.setState({
               isCollided: true
             })
+            this.state._collision(island.id)
             this.state._toggleSailing()
           }
         } else {
@@ -318,6 +320,9 @@ const mapDispatchToProps = dispatch => {
     },
     updatePosition: (position) => {
       dispatch(updatePosition(position))
+    },
+    collision: (islandCollided) => {
+      dispatch(collision(islandCollided))
     }
   }
 }

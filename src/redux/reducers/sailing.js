@@ -21,6 +21,7 @@ const initialState = {
   isSailing: false,
   callMap: false,
   isMapActive: false,
+  islandCollided: null,
   destination: {
     id: '',
     x: '',
@@ -71,7 +72,7 @@ export function sailingReducer(state = initialState, action) {
     case COLLISION:
       return {
         ...state,
-        isCollided: !state.isCollided
+        islandCollided: action.islandCollided
       }
     case SAVE_SAILING:
       return state

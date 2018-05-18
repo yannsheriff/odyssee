@@ -90,12 +90,8 @@ class StoreService {
           isSailing: false,
           callMap: false,
           isMapActive: false,
-<<<<<<< Updated upstream
+          islandCollided: null,
           collectableEquipped: dataSaved.sailing.collectableEquipped,
-=======
-          isCollided: false,
-          collectableEquipped: dataSaved.navigation.collectableEquipped,
->>>>>>> Stashed changes
           destination: { 
             id: dataSaved.sailing.destination.id, 
             x: dataSaved.sailing.destination.id,
@@ -128,7 +124,7 @@ class StoreService {
           isSailing: false,
           callMap: false,
           isMapActive: false,
-          isCollided: false,
+          islandCollided: null,
           collectableEquipped: [],
           destination: { 
             id: '', 

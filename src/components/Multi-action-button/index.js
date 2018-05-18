@@ -183,7 +183,7 @@ export default class MultiActionButton extends React.Component {
   /*
   * when user touch, is it long touch ? then colision detection with all choices 
   */ 
-  _handleDrag = (evt) => {
+  _handleDrag = (evt) => { console.log("ok")
       if (this.firstTouch) {
         if ( evt.nativeEvent.timestamp > this.firstTouch + 500) {
           if (!this.menuIsOpen) {
@@ -301,7 +301,7 @@ export default class MultiActionButton extends React.Component {
                   height: this.state.optionsSize,
                   width: this.state.optionsSize, 
                 }]}
-  
+                key={button.id}
                 resizeMode={'contain'}
                 source={button.img}
                 >
@@ -317,6 +317,9 @@ export default class MultiActionButton extends React.Component {
           width: screen.width,
           height: screen.height,
           justifyContent: "center",
+          position: "absolute",
+          top: 0,
+          left: 0,
         }}>
             <BlurView
                 style={[styles.absolute, { opacity: this.state.opacity }]}

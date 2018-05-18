@@ -8,7 +8,8 @@ import { saveSailing } from '../redux/actions/sailing'
 //  Import Helpers
 // --------------------------------------------------------------
 import renderIf from '../helpers/renderIf'
-import images from '../assets/images'
+import screen from '../helpers/ScreenSize'
+import images, { choices } from '../assets/images'
 
 //  Import Components
 // --------------------------------------------------------------
@@ -27,9 +28,11 @@ class SmartSailing extends Component {
     this.state = {
       _saveSailing: this.props.saveSailing,
       isMapActive: this.props.sailing.isMapActive,
-      isCollided: this.props.sailing.isCollided,
+      islandCollided: this.props.sailing.islandCollided,
       reduxState: this.props.sailing,
-      appState: AppState.currentState
+      appState: AppState.currentState,
+      actionsForButton: [],
+      haveAction: false
     }
   }
 
@@ -50,39 +53,55 @@ class SmartSailing extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    
     if(nextProps.sailing.isMapActive !== this.state.isMapActive) {
-
-        var isMapActive = !this.state.isMapActive 
-    } else {
-      var isMapActive = this.state.isMapActive 
+      this.setState({
+        reduxState: nextProps.sailing,
+        isMapActive: !this.state.isMapActive,
+      })
+    } else if(nextProps.sailing.islandCollided !== this.state.islandCollided) {
+      this.setState({
+        reduxState: nextProps.sailing,
+        islandCollided: nextProps.sailing.islandCollided,
+        actionsForButton: [
+          {
+            id: nextProps.sailing.islandCollided,
+            img: choices[1].img,
+            label: 'Accoster sur l\'île'
+          }
+        ],
+        haveAction: true
+      })
     }
-
-    this.setState({ 
-      reduxState: nextProps.sailing,
-      isMapActive: isMapActive
-    })
   }
 
 
   render() {
       return (
-          <View>
+          <View
+            height={screen.height}
+            width={screen.width}
+            style={{
+              width: screen.width,
+              height: screen.height,
+              position: "absolute",
+              top: 0,
+              left: 0
+            }}
+          >
             {renderIf(!this.state.isMapActive,
               <VirtualMap />
             )}
-            {renderIf(!this.state.isMapActive && !this.state.isCollided,
+            {renderIf(!this.state.isMapActive && this.state.islandCollided === null,
               <Compass />
             )}
             {renderIf(this.state.isMapActive,
               <MiniMap />
             )}
-            {renderIf(!this.state.isMapActive && this.state.isCollided,
+            { console.log(this.state.isMapActive, this.state.islandCollided) }
+            {renderIf(!this.state.isMapActive && this.state.islandCollided !== null,
+
               <MultiActionButton
                 actions={this.state.actionsForButton}
-                // mainBtnStyle={}
-                // initalPositon={}
-                //labelStyle={}
 
                 mainButton={
                   <Image
@@ -108,10 +127,12 @@ class SmartSailing extends Component {
                   />
                 }
 
+                initalPositon={{ x: 10, y: 10 }}
+
                 isActive={this.state.haveAction}
 
                 onChoiceSelected={(action) => {
-                  this.state._changeStep(action)
+                  console.log(action)
                 }}
               />
             )}
