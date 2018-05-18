@@ -4,7 +4,7 @@
 
 > type : *Array of objects*
 ```javascript
-	onChoiceSelected={[
+	actions={[
 		{id: 0, img: require('./src.img'), label: "Lorem"},
 		{id: 1, img: require('./src1.img'), label: "Ipsum"},
 	]}
