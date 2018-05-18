@@ -1,7 +1,10 @@
 # Multi-Action-Button
 
+
+
 ### actions
 
+> **Required** 
 > type : *Array of objects*
 ```javascript
 	actions={[
@@ -15,6 +18,7 @@ The array of action, needs all the three parameters
 
 ### onChoiceSelected
 
+> **Required** 
 > type : *function*
 ```javascript
 	onChoiceSelected={(id) => {
