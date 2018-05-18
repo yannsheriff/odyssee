@@ -62,8 +62,9 @@ export function saveSailing (state) {
   }
 }
 
-export function collision () {
+export function collision (islandCollided) {
   return {
-    type: COLLISION
+    type: COLLISION,
+    islandCollided: islandCollided
   }
 }
