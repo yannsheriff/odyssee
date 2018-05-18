@@ -16,14 +16,15 @@ export default class MultiActionButton extends React.Component {
     this.callback = props.onChoiceSelected
     this.firstTouch = undefined
     this.menuIsOpen = false
-    this.buttonSize = 50
     this.isHovered=[0]
     this.distFromInitialPosition = 120
+    this.actionsButtonsSize = this.props.actionsButtonsSize ? this.props.actionsButtonsSize: 70
+    this.mainButtonsSize = this.props.mainButtonsSize ? this.props.mainButtonsSize: 50
     this.initialPosition = this.props.initalPositon 
     ? this.props.initalPositon
     : {
-      x: screen.width/2 -25,
-      y: screen.height - 70
+      x: screen.width/2 - this.mainButtonsSize/2,
+      y: screen.height - 80
     }
     this.positionReferenceMap = [
       [0],
@@ -122,7 +123,7 @@ export default class MultiActionButton extends React.Component {
       animationsToPlay.push(
         Animated.spring(this.state.optionsSize, {
           duration: 1000,
-          toValue: this.buttonSize, 
+          toValue: this.actionsButtonsSize, 
         })
       )
       Animated.parallel(animationsToPlay).start();
@@ -183,9 +184,9 @@ export default class MultiActionButton extends React.Component {
   /*
   * when user touch, is it long touch ? then colision detection with all choices 
   */ 
-  _handleDrag = (evt) => { console.log("ok")
+  _handleDrag = (evt) => { 
       if (this.firstTouch) {
-        if ( evt.nativeEvent.timestamp > this.firstTouch + 500) {
+        if ( evt.nativeEvent.timestamp > this.firstTouch + 200) {
           if (!this.menuIsOpen) {
             this._openMenu()
             this.menuIsOpen = true
@@ -199,9 +200,9 @@ export default class MultiActionButton extends React.Component {
             
             this.state.buttonArray.forEach((button, index) => { // loop for dection 
               if ( evt.nativeEvent.pageX > button.x1 
-                && evt.nativeEvent.pageX < button.x1 + this.buttonSize
+                && evt.nativeEvent.pageX < button.x1 + this.actionsButtonsSize
                 && evt.nativeEvent.pageY > button.y1
-                && evt.nativeEvent.pageY < button.y1 + this.buttonSize 
+                && evt.nativeEvent.pageY < button.y1 + this.actionsButtonsSize 
               ) {
 
                 this.isHovered.push(1)
@@ -344,8 +345,8 @@ export default class MultiActionButton extends React.Component {
                   left: this.initialPosition.x,
                   borderRadius: 50,
                   zIndex: 99,
-                  height: this.buttonSize,
-                  width: this.buttonSize,
+                  height: this.mainButtonsSize,
+                  width: this.mainButtonsSize
                   
                 }, this.state.btnStyle ]}
                 
