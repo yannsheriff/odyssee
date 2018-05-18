@@ -10,6 +10,7 @@ import {
   View,
   Button,
   SafeAreaView,
+  Animated
 } from 'react-native'
 import { connect } from 'react-redux'
 import RNSimpleCompass from 'react-native-simple-compass';
@@ -32,7 +33,7 @@ export default class Narration extends Component {
     this.animation = []
     this.state = {
       isTransitionFinished: true,
-      transitionDuration: this.props.transitionDuration ? this.props.transitionDuration : 5000,
+      transitionDuration: this.props.transitionDuration ? this.props.transitionDuration : 1000,
       texts: [
         {
           // If animation is not null put it in the state
@@ -90,14 +91,14 @@ export default class Narration extends Component {
   render() {
 
     var text = this.state.texts.map((text, index) => {
-      if (anim) {   // If animation exist then render it
+      if (text) {   // If animation exist then render it
         return (
-          <Animated.View style={[styles.background, { left: anim.position }]}>
+          <Animated.View style={{ position: "absolute", left: text.position, top: 580, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
             <Text style={ styles.text }> { text.text } </Text>
           </Animated.View>
         )
       } else {      // Else render a blank layer
-        return <Animated.View style={[styles.background, { left: anim.position }]}> </Animated.View>
+        return <Animated.View style={[{ left: text.position }]}> </Animated.View>
       }
     })
 
@@ -106,10 +107,6 @@ export default class Narration extends Component {
         { text }
       </View>
   );
-    return (
-        <View style={ styles.container }>
-            
-        </View>
-    );
+   
   }
 }
