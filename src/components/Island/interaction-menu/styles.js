@@ -27,10 +27,8 @@ const styles = StyleSheet.create({
         width: screen.width,
         height: screen.height,
         position: "absolute",
-        bottom: 0,
+        top: 0,
         zIndex: 50,
-          backgroundColor: "red",
-          opacity: 0.3
     }
 });
 

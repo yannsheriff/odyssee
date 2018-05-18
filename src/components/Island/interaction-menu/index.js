@@ -58,9 +58,7 @@ export default class InteractionMenu extends Component {
 
   _formatDataForActionButon(actions) {
     let payload = actions.map((action) => {
-      console.log(action.choiceImgId)
       if (action.choiceImgId !== undefined) {
-        console.log("??")
         return { id: action.id, img: choices[action.choiceImgId].img, label: action.title}
       }
     })

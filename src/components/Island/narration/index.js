@@ -38,7 +38,7 @@ export default class Narration extends Component {
         {
           // If animation is not null put it in the state
           text: props.snippet.text ? props.snippet.text : null,
-          position: new Animated.Value(0),
+          opacity: new Animated.Value(1),
         }
       ],
     }
@@ -57,7 +57,7 @@ export default class Narration extends Component {
         texts:[ 
           {
             text: nextProps.snippet.text, 
-            position: new Animated.Value(screen.width-2)
+            opacity: new Animated.Value(0)
           }, 
           ...this.state.texts
         ]
@@ -66,13 +66,14 @@ export default class Narration extends Component {
 
         // Animate the old & the animation to the left
         Animated.parallel([
-          Animated.timing(this.state.texts[1].position, {
-            duration: transitionDuration ,
-            toValue: -screen.width + 2, 
-          }),
-          Animated.timing(this.state.texts[0].position, {
+          Animated.timing(this.state.texts[1].opacity, {
             duration: transitionDuration,
-            toValue: 0,
+            toValue: 0, 
+          }),
+          Animated.timing(this.state.texts[0].opacity, {
+            delay: 2000,
+            duration: transitionDuration,
+            toValue: 1,
           }),
         ]).start(()=> {
           // When the animation is finished wiat 1s and delete old animation from the state Array
@@ -93,12 +94,12 @@ export default class Narration extends Component {
     var text = this.state.texts.map((text, index) => {
       if (text) {   // If animation exist then render it
         return (
-          <Animated.View style={{ position: "absolute", left: text.position, top: 580, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
+          <Animated.View style={{ position: "absolute", opacity: text.opacity, top: 560, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
             <Text style={ styles.text }> { text.text } </Text>
           </Animated.View>
         )
       } else {      // Else render a blank layer
-        return <Animated.View style={[{ left: text.position }]}> </Animated.View>
+        return <Animated.View style={[{ opacity: text.opacity }]}> </Animated.View>
       }
     })
 
