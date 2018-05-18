@@ -10,8 +10,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
+        fontFamily: "Infini-Regular",
+        fontSize: 15,
+        lineHeight: 26,
         color: 'white',
-        textAlign: 'center',
+        textAlign: 'left',
         width: screen.width - 40,
     },
 });
