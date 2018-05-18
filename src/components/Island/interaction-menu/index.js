@@ -26,6 +26,10 @@ import styles from './styles'
 import Swip from '../Swip'
 import MultiActionButton from '../../Multi-action-button'
 
+import { choices } from '../../../assets/images'
+
+
+
 export default class InteractionMenu extends Component {
 
   constructor(props) {
@@ -54,7 +58,11 @@ export default class InteractionMenu extends Component {
 
   _formatDataForActionButon(actions) {
     let payload = actions.map((action) => {
-      return { id: action.id, img: action.choiceImgId, label: action.title}
+      console.log(action.choiceImgId)
+      if (action.choiceImgId !== undefined) {
+        console.log("??")
+        return { id: action.id, img: choices[action.choiceImgId].img, label: action.title}
+      }
     })
     return payload
   }

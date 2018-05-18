@@ -8,7 +8,6 @@ import { BlurView } from 'react-native-blur';
 import images from '../../assets/images'
 import AnimationLayout from '../Island/AnimationLayout'
 import screen from '../../helpers/ScreenSize'
-import { choices } from '../../assets/images'
 
 export default class MultiActionButton extends React.Component {
   constructor(props) {
@@ -31,6 +30,13 @@ export default class MultiActionButton extends React.Component {
       [45, -45],
       [-45, 0, 45]
     ]
+
+    if (props.actions.length > 0  && props.isActive || props.actions.length > 0  && props.isActive == undefined) {
+      var buttonArray = this._prepareButtons(this.props.actions)
+    } else {
+      var buttonArray = []
+    }
+
     this.state = {
       opacity: 0,
       optionsSize: new Animated.Value(0),
@@ -38,7 +44,7 @@ export default class MultiActionButton extends React.Component {
       isOpen: false,
       isActive: this.props.isActive !== undefined ? this.props.isActive : true, 
       chosenId: undefined,
-      buttonArray: this._prepareButtons(this.props.actions),
+      buttonArray: buttonArray ,
       btnStyle: this.props.mainBtnStyle, 
       customBtnOpen: this.props.mainBtnOpen,
       customBtnDisabled: this.props.disabled,
@@ -48,7 +54,7 @@ export default class MultiActionButton extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.actions[0].img !== undefined && nextProps.isActive || nextProps.actions[0].img !== undefined && nextProps.isActive == undefined) {
+    if (nextProps.actions.length > 0  && nextProps.isActive || nextProps.actions.length > 0  && nextProps.isActive == undefined) {
       this.setState({
         buttonArray: this._prepareButtons(nextProps.actions)
       })
@@ -78,7 +84,7 @@ export default class MultiActionButton extends React.Component {
             y: new Animated.Value(this.initialPosition.y),
             x1: this.initialPosition.x + this.distFromInitialPosition * Math.sin(this.positionReferenceMap[nbOfButtons][index] * (Math.PI / 180)),
             y1: this.initialPosition.y - this.distFromInitialPosition * Math.cos(this.positionReferenceMap[nbOfButtons][index] * (Math.PI / 180)),
-            img: choices[data.img].img,
+            img: data.img,
             label: data.label,
             isHovered: false,
             id: data.id
