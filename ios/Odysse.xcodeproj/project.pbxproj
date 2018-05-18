@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -44,6 +43,7 @@
 		A52785D02087491300336B4A /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52785C62087487F00336B4A /* Lottie.framework */; };
 		A52785D12087491300336B4A /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A52785C62087487F00336B4A /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		14985139911F488F961E402E /* Infini-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 88C3830E34F949F6AA07B20A /* Infini-regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,7 +138,6 @@
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
 		};
-
 		328A3ED720A2FE3600AD651D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 330E45EEEC554D97B4A96FA7 /* RNBlur.xcodeproj */;
@@ -146,7 +145,6 @@
 			remoteGlobalIDString = A68BD7BC1BC31318005F02DF;
 			remoteInfo = RNBlur;
 		};
-
 		328A3ED920A2FE3600AD651D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 330E45EEEC554D97B4A96FA7 /* RNBlur.xcodeproj */;
@@ -452,6 +450,7 @@
 		DD61FABF705749B39C5CDE47 /* Lottie.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Lottie.xcodeproj; path = "../node_modules/lottie-ios/Lottie.xcodeproj"; sourceTree = "<group>"; };
 		F4197094CA554800A6E241DE /* RNSimpleCompass.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSimpleCompass.xcodeproj; path = "../node_modules/react-native-simple-compass/ios/RNSimpleCompass.xcodeproj"; sourceTree = "<group>"; };
 		F469C069E126458A9EE6EDE7 /* libRNSimpleCompass.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSimpleCompass.a; sourceTree = "<group>"; };
+		88C3830E34F949F6AA07B20A /* Infini-regular.otf */ = {isa = PBXFileReference; name = "Infini-regular.otf"; path = "../src/assets/fonts/Infini-regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -707,6 +706,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A5DF45492064626D00EC34E5 /* Recovered References */,
+				C186FCD9A4FD44DDB552394A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -780,6 +780,15 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		C186FCD9A4FD44DDB552394A /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				88C3830E34F949F6AA07B20A /* Infini-regular.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1323,6 +1332,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				14985139911F488F961E402E /* Infini-regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
