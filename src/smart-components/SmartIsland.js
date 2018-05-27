@@ -17,7 +17,7 @@ import Illustrations from '../components/Island/Illustrations'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { goToStep, saveIslandData, requestIslandData } from '../redux/actions/island'
+import { goToStep, saveIslandData, requestIslandData, goToPreviousStep } from '../redux/actions/island'
 
 //  Import Data
 // --------------------------------------------------------------
@@ -49,6 +49,7 @@ class SmartIsland extends Component {
       currentIslandId: undefined,
       islandState: this.props.island,
       _changeStep: this.props.goToStep,
+      _goToPreviousStep: this.props.goToPreviousStep,
       _saveData: this.props.saveData,
       _requestIslandData: this.props.requestIslandData,
     }
@@ -65,11 +66,13 @@ componentWillMount(){
   *  Update the current snippet 
   */
 componentWillReceiveProps(nextProps) {
-  console.log("Data is arriving !")
   if (nextProps.island.actualSnippetId !== this.state.snippet) {
-    console.log("let's update")
     this.updateSnippet(nextProps.island)
   }
+}
+
+componentDidUpdate(){
+  console.log("STATE : ", this.state)
 }
 
 
@@ -139,13 +142,21 @@ componentWillReceiveProps(nextProps) {
   */
   updateSnippet(state) {
     const payload = this.getSnippetData(state.currentIslandId, state.actualSnippetId)
+
+    if (this.state.islandState.actualSnippetId !== 1)  {
+      var isGoingForward = payload.snippet.id > this.state.islandState.actualSnippetId ? true : false
+    } else {
+      var isGoingForward = true
+    }
+                            
     this.setState({
       currentIslandId: state.currentIslandId,
       snippet: payload.snippet,
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
-      islandState: state
+      islandState: state, 
+      isGoingForward: isGoingForward
     })
   }
 
@@ -154,12 +165,17 @@ componentWillReceiveProps(nextProps) {
   */
 
   goToNextStep = (id) => {
-    console.log("Smart Islant => goToNextStep", id)
     if(id === 0) {
       this.props.navigation.navigate('Home')
     } else {
       this.state._saveData(this.state.islandState, id) 
       this.state._changeStep(id) 
+    }
+  }
+
+  goToPreviousStep = () => {
+    if(this.state.islandState.actualSnippetId > 1 ) {
+      this.state._goToPreviousStep() 
     }
   }
 
@@ -178,11 +194,13 @@ componentWillReceiveProps(nextProps) {
         <Illustrations 
           offsets={ this.state.offsets.offsets }
           animation={ this.state.animation.animation }
+          swipBackward={ !this.state.isGoingForward }
         />
         <Narration snippet = { this.state.snippet } /> 
         <InteractionMenu 
           actions = { this.state.actions } 
           changeStep={ this.goToNextStep }  
+          prevStep={this.goToPreviousStep }  
         /> 
       </View> )
     } else {
@@ -215,6 +233,9 @@ const mapDispatchToProps = dispatch => {
     },
     requestIslandData: (id) => {
       dispatch(requestIslandData(id))
+    },
+    goToPreviousStep: () => {
+      dispatch(goToPreviousStep())
     },
     
   }

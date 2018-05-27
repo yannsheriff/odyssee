@@ -67,7 +67,6 @@ export function* saveDataAsync(action) {
       }
     } 
   // Save data to Async storage
-  console.log('state : ', newState)
   yield storeService.save(newState)
   console.log('Saved ✅')
 }
@@ -97,6 +96,7 @@ export function* requestIslandData(action) {
       ? 1
       : actualIslandSavedData.actualSnippetId
     let payload = {
+      screenReaded: actualIslandSavedData.screenReaded,
       islandId: actualIslandSavedData.id,
       actualSnippetId: snippetID
     }

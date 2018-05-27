@@ -41,7 +41,8 @@ export default class InteractionMenu extends Component {
       actions: this.props.actions.snippets,
       actionsForButton: this._formatDataForActionButon(this.props.actions.snippets),
       haveAction: this.props.actions.haveAction,
-      _changeStep: this.props.changeStep
+      _changeStep: this.props.changeStep,
+      _prevStep: this.props.prevStep
     }
 
   }
@@ -65,9 +66,14 @@ export default class InteractionMenu extends Component {
     return payload
   }
 
-  _handleSwip = () => {
+  _nextStep = () => {
       this.state._changeStep(this.state.actions[0].actions[0].id)
   }
+  _prevStep = () => {
+    this.state._prevStep()
+  }
+
+
 
 
 
@@ -78,7 +84,8 @@ export default class InteractionMenu extends Component {
     ? null
     : <Swip
         style={ styles.swipReconizer }
-        callback={ this._handleSwip }
+        onSwipRight={ this._prevStep }
+        onSwipLeft={ this._nextStep }
       />
 
     return (
