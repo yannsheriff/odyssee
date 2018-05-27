@@ -14,7 +14,12 @@
                     "y": 76
                  }
             ],
-            "animation": {}
+            "animation": {
+                "loop": true,
+                "animationId": 2,
+                "animationDuration": 6000,
+                "transitionDuration": 2000
+            }
         },
         {
             "id": 2,
@@ -24,9 +29,6 @@
                 "back": -100
             },
             "animation": {
-                "loop": true,
-                "animationId": 2,
-                "animationDuration": 3000,
                 "transitionDuration": 2000
             }
         },
@@ -39,7 +41,7 @@
             },
             "animation": {
                 "loop": true,
-                "animationId": 1,
+                "animationId": 2,
                 "animationDuration": 1000,
                 "transitionDuration": 2000
             }
@@ -89,9 +91,9 @@
         {
             "id": 9999,
             "offsets": {
-                "first": 0,
-                "middle": 0,
-                "back": 0
+                "first": -900,
+                "middle": -600,
+                "back": -300
             },
             "animation": {
                 "loop": true,

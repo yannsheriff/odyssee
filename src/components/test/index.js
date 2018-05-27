@@ -34,7 +34,9 @@ export default class BasicExample extends React.Component {
 
 
   componentDidMount() {
-    this.consoleDataSaved()
+    this.restoreData()
+    // this.consoleDataSaved()
+    // this.getPreviousSnipet()
     // this.handleIslandData()
     
   }
@@ -57,9 +59,27 @@ export default class BasicExample extends React.Component {
   }
 
   async consoleDataSaved() {
+    let data = await storeService.getSaving()
+    console.log(data)
+  }
+
+  async restoreData() {
     await storeService.save(this.test)
 
     console.log("Restore state 🔄")
+  }
+
+  getPreviousSnipet(state) {
+    let array = [1, 2, 3, 4, 5, 6, 7, 6, 7, 6, 5, 6, 5]
+    let current = 5
+    let array2 = array.reverse()
+    let prevSnippet = array2.find((screenID)=> {
+      if(screenID < current) {
+        return screenID
+      }
+    })
+    console.log(prevSnippet)
+
   }
   
 

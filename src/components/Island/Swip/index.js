@@ -28,7 +28,8 @@ export default class Swip extends Component {
 
   constructor(props) {
     super(props)
-    this.callback = props.callback
+    this.onSwipLeft = props.onSwipLeft
+    this.onSwipRight = props.onSwipRight
     this.state = {
       style: props.style
     } 
@@ -42,10 +43,10 @@ export default class Swip extends Component {
       },
       onPanResponderRelease: (e, gestureState) => {
         if (swipeRecognizer.isRightSwipe(gestureState)) {
-          // do some other things
+          this.onSwipRight()
         }
         if (swipeRecognizer.isLeftSwipe(gestureState)) {
-          this.callback()
+          this.onSwipLeft()
         }
       },
     });
