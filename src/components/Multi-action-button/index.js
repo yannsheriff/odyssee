@@ -1,13 +1,8 @@
 import React from 'react';
-import { Animated, Easing, View, Button, TouchableWithoutFeedback, Image, Text, Alert } from 'react-native';
-import LottieView from 'lottie-react-native';
-import anim from '../../assets/anim/etoiles/data.json'
-import perso from '../../assets/anim/perso/perso.json'
+import { Animated, Easing, Text, View } from 'react-native';
+import screen from '../../helpers/ScreenSize';
 import styles from '../Multi-action-button/styles';
 import { BlurView } from 'react-native-blur';
-import images from '../../assets/images'
-import AnimationLayout from '../Island/AnimationLayout'
-import screen from '../../helpers/ScreenSize'
 
 export default class MultiActionButton extends React.Component {
   constructor(props) {
@@ -20,6 +15,8 @@ export default class MultiActionButton extends React.Component {
     this.distFromInitialPosition = 120
     this.actionsButtonsSize = this.props.actionsButtonsSize ? this.props.actionsButtonsSize: 70
     this.mainButtonsSize = this.props.mainButtonsSize ? this.props.mainButtonsSize: 50
+    this.onButtonPressed = this.props.onButtonPressed ? this.props.onButtonPressed : undefined
+    this.onButtonReleased = this.props.onButtonReleased ? this.props.onButtonReleased : undefined
     this.initialPosition = this.props.initalPositon 
     ? this.props.initalPositon
     : {
@@ -52,6 +49,14 @@ export default class MultiActionButton extends React.Component {
       customBtn: this.props.mainButton,
       textStyle: this.props.labelStyle,
     };
+  }
+
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.isOpen !== this.state.isOpen) {
+      if(this.state.isOpen && this.onButtonPressed ) { this.onButtonPressed() }
+      else if (this.onButtonReleased) { this.onButtonReleased() }
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -186,7 +191,7 @@ export default class MultiActionButton extends React.Component {
   */ 
   _handleDrag = (evt) => { 
       if (this.firstTouch) {
-        if ( evt.nativeEvent.timestamp > this.firstTouch + 200) {
+        if ( evt.nativeEvent.timestamp > this.firstTouch + 100) {
           if (!this.menuIsOpen) {
             this._openMenu()
             this.menuIsOpen = true
@@ -312,32 +317,29 @@ export default class MultiActionButton extends React.Component {
       })
     }
 
+    var bluredView = this.state.isOpen
+    ? <BlurView
+        style={styles.absolute}
+        viewRef={this.state.viewRef}
+        // blurType="regular"
+        overlayColor={'e5e5e5'}
+        blurAmount={10}
+      />
+    : null
+
 
     return (
         <View style={{
-          width: screen.width,
-          height: screen.height,
           justifyContent: "center",
           position: "absolute",
           top: 0,
           left: 0,
         }}>
-            <BlurView
-                style={[styles.absolute, { opacity: this.state.opacity }]}
-                viewRef={this.state.viewRef}
-                // blurType="regular"
-                overlayColor={'e5e5e5'}
-                blurAmount={10}
-            />
+            { bluredView }
             <Text
               style={[ styles.text, this.state.textStyle ]}
             >  {this.state.text} </Text>
-            <View
-              style={{
-                height:  screen.height,
-                width:  screen.width,
-              }}
-            >
+            <View>
               <View 
                 style={[{
                   position: "absolute",
@@ -347,7 +349,6 @@ export default class MultiActionButton extends React.Component {
                   zIndex: 99,
                   height: this.mainButtonsSize,
                   width: this.mainButtonsSize
-                  
                 }, this.state.btnStyle ]}
                 
                 onLongPress={this._onLongPressButton}
@@ -357,6 +358,7 @@ export default class MultiActionButton extends React.Component {
                 onResponderRelease={(evt) => { this._closeMenu() }}
               >
                 { customBtn }
+
               </View>
             </View>
             
