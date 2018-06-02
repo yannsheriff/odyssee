@@ -38,6 +38,7 @@ class SmartIsland extends Component {
     const { params } = this.props.navigation.state;
     this.actualSnippetId = this.props.island.actualSnippetId ? this.props.island.actualSnippetId : 1
     this.islandId = params.islandId
+    this.isTransitionFinished = true
     
     // var payload = this.getSnippetData(this.islandId , this.actualSnippetId)
     // console.log("Payload : ", payload)
@@ -69,10 +70,6 @@ componentWillReceiveProps(nextProps) {
   if (nextProps.island.actualSnippetId !== this.state.snippet) {
     this.updateSnippet(nextProps.island)
   }
-}
-
-componentDidUpdate(){
-  console.log("STATE : ", this.state)
 }
 
 
@@ -148,7 +145,8 @@ componentDidUpdate(){
     } else {
       var isGoingForward = true
     }
-                            
+
+    this.isTransitionFinished = false     
     this.setState({
       currentIslandId: state.currentIslandId,
       snippet: payload.snippet,
@@ -157,6 +155,10 @@ componentDidUpdate(){
       animation: payload.animation,
       islandState: state, 
       isGoingForward: isGoingForward
+    }, () => {
+      setTimeout(()=>{
+        this.isTransitionFinished = true
+      }, 4000)
     })
   }
 
@@ -167,14 +169,14 @@ componentDidUpdate(){
   goToNextStep = (id) => {
     if(id === 0) {
       this.props.navigation.navigate('Home')
-    } else {
+    } else if (this.isTransitionFinished) {
       this.state._saveData(this.state.islandState, id) 
       this.state._changeStep(id) 
     }
   }
 
   goToPreviousStep = () => {
-    if(this.state.islandState.actualSnippetId > 1 ) {
+    if(this.state.islandState.actualSnippetId > 1 && this.isTransitionFinished ) {
       this.state._goToPreviousStep() 
     }
   }

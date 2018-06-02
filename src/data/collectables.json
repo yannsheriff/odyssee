@@ -1,0 +1,22 @@
+{
+    "collectables": [
+        {
+            "id": 1,
+            "name": "Glyphes d'Éol",
+            "x": 46,
+            "y": 76
+        },
+        {
+            "id": 2,
+            "name": "Glyphes d'Éol",
+            "x": 100,
+            "y": 200
+        },
+        {
+            "id": 3,
+            "name": "Glyphes d'Éol",
+            "x": 0,
+            "y": 0
+        }
+    ]
+}

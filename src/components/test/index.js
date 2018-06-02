@@ -4,6 +4,10 @@ import screen from '../../helpers/ScreenSize'
 import images, { backgrounds } from '../../assets/images'
 import { AsyncStorage, View } from 'react-native';
 import { storeService } from '../../helpers/saveData'
+import LottieView from 'lottie-react-native'
+import Collectables from '../Island/Collectables'
+
+import { microInteraction } from '../../assets/anim'
 
 export default class BasicExample extends React.Component {
   constructor(props) {
@@ -85,8 +89,8 @@ export default class BasicExample extends React.Component {
 
   render() {
     return (
-      <View style={{backgroundColor: "white"}}>
-
+      <View style={{backgroundColor: "black" }}>
+          <Collectables />
       </View>
     );
   }

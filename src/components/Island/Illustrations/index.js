@@ -20,7 +20,7 @@ import styles from './styles'
 //  Import assets
 // --------------------------------------------------------------
 import { backgrounds } from '../../../assets/images'
-import animations from '../../../assets/anim'
+import {animations} from '../../../assets/anim'
 
 //  Import components
 // --------------------------------------------------------------
