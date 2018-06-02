@@ -7,6 +7,13 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 0,
     },
+    absolute: {
+        width: screen.width,
+        height: 10,
+        position: "absolute",
+        top: 0, 
+        left: 0
+    },
     menu: {
         width: screen.width,
         height: 30,
@@ -28,7 +35,6 @@ const styles = StyleSheet.create({
         height: screen.height,
         position: "absolute",
         top: 0,
-        zIndex: 50,
     }
 });
 
