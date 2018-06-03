@@ -19,29 +19,44 @@ class StoreService {
   }
   
   async getSaving() {
-    try {
-      let dataSaved = await AsyncStorage.getItem("saved");
+
+    let dataSaved = await AsyncStorage.getItem("saved");
+
+    if (dataSaved !== null && dataSaved) {
       return JSON.parse(dataSaved)
-    } catch (error) {
-      return {
-        isOnIsland: null,
+    } else {
+      let createSaving = {
+        isOnIsland: false,
         isTutoFinished: false,
-        visitedIsland:[
-          {
-            id: 2,
-            screenReaded: [],
-            actualSnippetId: 1,
-            haveAction: false,
-            haveObject: false,
-          }
-        ],
-        navigation: {
+        collectables: {
+          fragments:[],
+          glyphs: []
+        },
+        visitedIsland:[{}],
+        sailing: {
+          orientation: 0,
           position: {
-            x: 0,
-            y: 0
+              x: 0,
+              y: 0
           },
-          collectableEquipped: []
+          isSailing: false,
+          callMap: false,
+          isMapActive: false,
+          islandCollided: null,
+          collectableFound: [],
+          collectableEquipped: [],
+          destination: { 
+            id: '', 
+            x: '',
+            y: '',
+          }
         }
+      }
+
+      await this.save(createSaving)
+      return {
+        isNewInstance: true,
+        ...createSaving
       }
     }
   }
@@ -73,76 +88,84 @@ class StoreService {
   }
   
   async loadState() { //  initial state
-    try {
-      let dataSaved = await this.getSaving()
-      console.log(' ================ Async Storage ================ ')
-      console.log("last Save :", dataSaved )
-      
-
-      var state = {
-        isOnIsland: false,
-        sailing: {
-          orientation: dataSaved.sailing.orientation,
-          position: {
-              x: dataSaved.sailing.position.x,
-              y: dataSaved.sailing.position.y
+      const dataSaved = await this.getSaving()
+      if (dataSaved.isNewInstance ) {
+        var state = {
+          isOnIsland: false,
+          collectables: {
+            fragments:[],
+            glyphs: []
           },
-          isSailing: false,
-          callMap: false,
-          isMapActive: false,
-          islandCollided: null,
-          collectableEquipped: dataSaved.sailing.collectableEquipped,
-          destination: { 
-            id: dataSaved.sailing.destination.id, 
-            x: dataSaved.sailing.destination.id,
-            y: dataSaved.sailing.destination.id,
-          }
-        },
-        island: {
-            currentIslandId: null,
-            screenReaded: [],
-            actualSnippetId: 1,
-            haveAction: false,
-            haveObject: false,
-        }
-      }
-      if (dataSaved.isOnIsland) {
-        let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
-        state.island.currentIslandId = dataSaved.isOnIsland
-        state.island.actualSnippetId = actualIsland.actualSnippetId
-        state.isOnIsland = dataSaved.isOnIsland
-      }
-
-    } catch (error) {
-      var state = {
-        isOnIsland: false,
-        sailing: {
-          orientation: 0,
-          position: {
-              x: 0,
-              y: 0
+          sailing: {
+            orientation: 0,
+            position: {
+                x: 0,
+                y: 0
+            },
+            isSailing: false,
+            callMap: false,
+            isMapActive: false,
+            islandCollided: null,
+            collectableEquipped: [],
+            destination: { 
+              id: '', 
+              x: '',
+              y: '',
+            }
           },
-          isSailing: false,
-          callMap: false,
-          isMapActive: false,
-          islandCollided: null,
-          collectableEquipped: [],
-          destination: { 
-            id: '', 
-            x: '',
-            y: '',
+          island: {
+              currentIslandId: null,
+              screenReaded: [],
+              actualSnippetId: 1,
+              haveAction: false,
+              haveObject: false,
           }
-        },
-        island: {
-            currentIslandId: null,
-            screenReaded: [],
-            actualSnippetId: 1,
-            haveAction: false,
-            haveObject: false,
         }
+        console.log(' ================ Async Storage ================ ')
+        console.log("blablablaf :", state )
+        return state
+      } else {
+        console.log(' ================ Async Storage ================ ')
+        console.log("last Save :", dataSaved )
+        var state = {
+          isOnIsland: false,
+          collectables: {
+            fragments: dataSaved.collectables.fragments,
+            glyphs: dataSaved.collectables.glyphs
+          },
+          sailing: {
+            orientation: dataSaved.sailing.orientation ? dataSaved.sailing.orientation : 0,
+            position: {
+                x: dataSaved.sailing.position.x,
+                y: dataSaved.sailing.position.y
+            },
+            isSailing: false,
+            callMap: false,
+            isMapActive: false,
+            islandCollided: null,
+            collectableEquipped: dataSaved.sailing.collectableEquipped,
+            destination: { 
+              id: dataSaved.sailing.destination.id, 
+              x: dataSaved.sailing.destination.id,
+              y: dataSaved.sailing.destination.id,
+            }
+          },
+          island: {
+              currentIslandId: null,
+              screenReaded: [],
+              actualSnippetId: 1,
+              haveAction: false,
+              haveObject: false,
+          }
+        }
+        if (dataSaved.isOnIsland) {
+          let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
+          state.island.currentIslandId = dataSaved.isOnIsland
+          state.island.actualSnippetId = actualIsland.actualSnippetId
+          state.isOnIsland = dataSaved.isOnIsland
+        }
+        return state
       }
-    }
-    return state
   }
 }
 

@@ -38,11 +38,11 @@ export default class BasicExample extends React.Component {
 
 
   componentDidMount() {
-    this.restoreData()
+    // this.restoreData()
     // this.consoleDataSaved()
     // this.getPreviousSnipet()
     // this.handleIslandData()
-    
+    this.lala()
   }
 
   async handleIslandData() {
@@ -85,12 +85,65 @@ export default class BasicExample extends React.Component {
     console.log(prevSnippet)
 
   }
-  
+
+  lala() {
+    a = [1,2,3]
+    b = [5,6,7]
+    m = [
+      [1,2,3],
+      [5,6,7]
+    ]
+
+    my = [1,2,4,5,6,3]
+
+    var collactableToReturn =  m.map((element, index) => {
+        var test = element.filter((e, index) => {
+          for (let index = 0; index < my.length; index++) {
+            if (my[index] === e ) { 
+              return true 
+            }
+          }
+        })
+        if (test.length === element.length) { 
+          console.log('find a object')
+          return true 
+      } else { 
+        return false
+      }
+    });
+
+    console.log(collactableToReturn)
+
+  }
+ 
+
+
 
   render() {
     return (
       <View style={{backgroundColor: "black" }}>
-          <Collectables />
+          <Collectables 
+            array={[
+              {
+                id: 1,
+                name: "Glyphes d'Éol",
+                x: 100,
+                y: 100
+              },
+              {
+                id: 2,
+                name: "Glyphes de zeus",
+                x: 100,
+                y: 200
+              },
+              {
+                  id: 3,
+                  name: "Glyphes zizi",
+                  x: 50,
+                  y: 60
+              }
+            ]}
+          />
       </View>
     );
   }
