@@ -32,6 +32,14 @@ const styles = StyleSheet.create({
         fontSize: 70,
         color: "white",
         fontWeight: "bold",
+    },
+    animation: {
+        position: "absolute",
+        top: 233.5,
+        left: -5.5,
+        height: 400,
+        width: 400,
+        // backgroundColor: 'black'
     }
     
 });

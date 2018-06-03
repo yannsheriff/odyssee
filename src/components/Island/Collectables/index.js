@@ -10,7 +10,6 @@ import {
   Alert
 } from 'react-native'
 import { connect } from 'react-redux'
-import RNSimpleCompass from 'react-native-simple-compass'
 
 
 //  Import Helpers
@@ -23,10 +22,12 @@ import renderIf from '../../../helpers/renderIf'
 // --------------------------------------------------------------
 import { backgrounds } from '../../../assets/images'
 import {animations} from '../../../assets/anim'
+import { microInteraction } from '../../../assets/anim'
 
 //  Import Actions
 // --------------------------------------------------------------
 import { foundNewCollectable, saveCollectables, foundNewGlyphe } from '../../../redux/actions/collectables'
+import { printNotification } from '../../../redux/actions/notification'
 
 //  Import data
 // --------------------------------------------------------------
@@ -51,6 +52,7 @@ class Collectables extends Component {
       _fragementFound: this.props.fragementFound,
       _glypheFound: this.props.glypheFound,
       _saveCollectables: this.props.saveCollectables,
+      _dispatchNotification: this.props.callnotification
     }
   }
 
@@ -154,10 +156,18 @@ class Collectables extends Component {
     console.log(fragmentId)
     if ( glypheArray ) {
       let newGlyphe = glypheArray[0]
-      Alert.alert('Nouvelle glyphe !', 'bravo vous avez trouvez la ' + collectables.glyphs[newGlyphe].name )
+      this.state._dispatchNotification(
+        "Nouvelle glyphe !",
+        "Bravo vous avez touvé la " + collectables.glyphs[newGlyphe].name,
+        microInteraction.findGlyphe
+      )
       this.state._glypheFound(newGlyphe, fragmentId)
     } else {
-      Alert.alert('bravo', 'vous avez trouvé un ' + collectableData.name )
+      this.state._dispatchNotification(
+        "Nouveaux fragement !",
+        "Bravo vous avez touvé un " + collectableData.name,
+        microInteraction.findFragment
+      )
       this.state._fragementFound(fragmentId)
     }
     this.state.collectablePressed(fragmentId)
@@ -233,7 +243,10 @@ class Collectables extends Component {
       },
       saveCollectables: (state)=> {
         dispatch(saveCollectables(state))
-      }
+      },
+      callnotification: (title, sub, anim) => {
+        dispatch(printNotification(title, sub, anim))
+      },
     }
   }
   

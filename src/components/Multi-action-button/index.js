@@ -356,13 +356,7 @@ export default class MultiActionButton extends React.Component {
             <View>
               {renderIf(this.state.isActive,
                 <LottieView 
-                        style={{
-                          position: "absolute",
-                          top: 233.5,
-                          left: -5.5,
-                          height: 400,
-                          width: 400,
-                        }}
+                        style={styles.animation}
                         source={ microInteraction.actionMenu } 
                         loop={ true }
                         speed={0.5}

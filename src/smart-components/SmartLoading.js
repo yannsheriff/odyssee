@@ -10,6 +10,7 @@ import { AsyncStorage } from 'react-native';
 //  Import Components
 // --------------------------------------------------------------
 import Router from '../Router'
+import Notification from '../components/Notification'
 
 
 class SmartLoading extends Component {
@@ -23,9 +24,9 @@ class SmartLoading extends Component {
     } 
   }
 
-  componentWillMount() {
-    AsyncStorage.removeItem('saved');
-  }
+  // componentWillMount() {
+  //   AsyncStorage.removeItem('saved');
+  // }
 
   componentDidMount() {
     console.log(this.state.ReduxState)
@@ -41,7 +42,7 @@ class SmartLoading extends Component {
 
     render() {
       let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.isMapActive !== undefined
-      ? ( <Router /> ) 
+      ? ( <View><Router /><Notification /></View> ) 
       : ( <View><Text>loading..</Text></View> /* <Loader /> */ )
         return render
     }
