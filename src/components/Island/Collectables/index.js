@@ -24,6 +24,14 @@ import renderIf from '../../../helpers/renderIf'
 import { backgrounds } from '../../../assets/images'
 import {animations} from '../../../assets/anim'
 
+//  Import Actions
+// --------------------------------------------------------------
+import { foundNewCollectable, saveCollectables, foundNewGlyphe } from '../../../redux/actions/collectables'
+
+//  Import data
+// --------------------------------------------------------------
+import { collectables } from '../../../data'
+
 //  Import components
 // --------------------------------------------------------------
 import ParallaxLayout from '../ParallaxLayout'
@@ -31,39 +39,145 @@ import AnimationLayout from '../AnimationLayout'
 
 
 
-export default class Collectables extends Component {
+class Collectables extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      collectables: [
-        {
-          id: 1,
-          name: "Glyphes d'Éol",
-          x: 100,
-          y: 100
-        },
-        {
-          id: 2,
-          name: "Glyphes de zeus",
-          x: 100,
-          y: 200
-      },
-      {
-          id: 3,
-          name: "Glyphes zizi",
-          x: 50,
-          y: 60
-      }
-      ]
+      collectablePressed: props.collectablePressed,
+      collectableState: this.props.collectables,
+      collectables: props.array ? this.filterCollectables(props.array, this.props.collectables) : [],
+      glypheArray: this.getGlyphesArray(),
+      _fragementFound: this.props.fragementFound,
+      _glypheFound: this.props.glypheFound,
+      _saveCollectables: this.props.saveCollectables,
     }
   }
 
+ /*
+  *  if there is fragement filter it and add it to state
+  */
   componentWillReceiveProps(nextProps) {
-
+    if(nextProps.array) {
+      const collectablesNotAlreadyFound = this.filterCollectables(nextProps.array, this.state.collectableState)
+      if (collectablesNotAlreadyFound) {
+        this.setState({ 
+          collectables: collectablesNotAlreadyFound
+        })
+      }
+    } else {
+      this.setState({
+        collectables: []
+      })
+    }
+    if(nextProps.collectables !== this.state.collectables) {
+      this.setState({collectableState: nextProps.collectables})
+    }
   }
 
+ /*
+  *  Format glyphe array
+  */
+  getGlyphesArray() {
+    const glypheArray = collectables.glyphs.map(element => {
+      return element.fragments
+    })
+    return glypheArray
+  }
+
+ /*
+  *  Take  fragement to display, compare it with redux already found fragement
+  *  Return the fragement that are not in redux
+  */
+  filterCollectables(collectablesArray, collectableState) {
+    const collactableToReturn =  collectablesArray.filter(collectbaleToDisplay => {
+      var alreadyExist = collectableState.fragments.find( collectableAlreadyFound =>  { 
+        if (collectbaleToDisplay.id === collectableAlreadyFound) { return collectableAlreadyFound } 
+      });
+      if (alreadyExist === undefined) { return collectbaleToDisplay }
+    });
+    return collactableToReturn
+  }
+
+ /*
+  *  Take new fragement id, add it to already found fragement and check if it make a glyphe
+  *  Return the glyphe that are not in redux
+  */
+  isAnObjectCompleted(id) {
+    var objectsFound = [].concat(this.state.collectableState.fragments, id)
+    var glyphsFoundedArray =  this.state.glypheArray.map((element, glypheIndex) => {
+      var test = element.filter(e => {
+        for (let index = 0; index < objectsFound.length; index++) {
+          if (objectsFound[index] === e ) { 
+            return objectsFound[index]
+          }
+        }
+      })
+      if (test.length === element.length) { 
+        return glypheIndex 
+      } else { 
+        return false
+      }
+    });
+    if(glyphsFoundedArray.some(element => element !== false)) {
+      let newGlyphe = this.newCompletedGlyphs(glyphsFoundedArray) 
+      if(newGlyphe.length > 0) {
+        return newGlyphe
+      }
+    } else {
+      return false
+    }
+  }
   
+ /*
+  *  Take an array of glyphs and compare it with redux state glyphs
+  *  Return the glyphe that are not in redux
+  */
+  newCompletedGlyphs(completedGlyphsArray) {
+    let completedGlyphes = completedGlyphsArray.filter(element => element !== false)
+    let newGlyphes = completedGlyphes.filter(element => {
+      if(this.state.collectableState.glyphs.some(el => element === el) === false ) {
+        return true
+      }
+    })
+    return newGlyphes
+  }
+
+ /*
+  *  When a collectable is pressed
+  *  check if it make a full glyphe 
+  *  => if true save it and display something
+  *  => else add new fragment
+  */
+  collectablePressed = (fragmentId, collectableData) => {
+    let glypheArray= this.isAnObjectCompleted(fragmentId)
+    console.log(fragmentId)
+    if ( glypheArray ) {
+      let newGlyphe = glypheArray[0]
+      Alert.alert('Nouvelle glyphe !', 'bravo vous avez trouvez la ' + collectables.glyphs[newGlyphe].name )
+      this.state._glypheFound(newGlyphe, fragmentId)
+    } else {
+      Alert.alert('bravo', 'vous avez trouvé un ' + collectableData.name )
+      this.state._fragementFound(fragmentId)
+    }
+    this.state.collectablePressed(fragmentId)
+  }
+
+ /*
+  *  When component update because of redux Reload collectables
+  *  and save the new state ! 
+  */
+  componentDidUpdate(prevProps){
+    if(prevProps.collectables.fragments !== this.state.collectableState.fragments) {
+      this.state._saveCollectables(this.state.collectableState)
+      const collectablesNotAlreadyFound = this.filterCollectables(this.state.collectables, this.state.collectableState)
+      if (collectablesNotAlreadyFound) {
+        this.setState({ 
+          collectables: collectablesNotAlreadyFound
+        })
+      }
+    }
+  }
 
   render() {
 
@@ -74,9 +188,9 @@ export default class Collectables extends Component {
             <View 
               onStartShouldSetResponder={ (evt) => true }
               onResponderGrant={  (evt) => { 
-                Alert.alert('bravo', 'vous avez trouvz la '+ collectable.name )
+                this.collectablePressed(collectable.id, collectable)
               } }
-              // 
+              
               style={{
                 position: "absolute",
                 width: 20,                
@@ -99,4 +213,34 @@ export default class Collectables extends Component {
   }
 }
 
+/* ===============================================================
+  ======================= REDUX CONNECTION =======================
+  ================================================================ */
 
+  const mapStateToProps = state => {
+    return {
+      collectables: state.collectables
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      fragementFound: (id) => {
+        dispatch(foundNewCollectable(id))
+      },
+      glypheFound: (glyphe, fragment ) => {
+        dispatch(foundNewGlyphe(glyphe, fragment))
+      },
+      saveCollectables: (state)=> {
+        dispatch(saveCollectables(state))
+      }
+    }
+  }
+  
+  
+  const componentContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Collectables)
+  
+  export default componentContainer

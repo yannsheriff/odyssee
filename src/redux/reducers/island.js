@@ -8,13 +8,6 @@ PREVIOUS_SNIPPET
 
 import { POPULATE_STORE } from '../actions/loading'
 
-const initialState = {
-    currentIslandId: 1,
-    screenReaded: [1,5],
-    actualSnippetId: 6,
-    haveAction: false,
-    haveObject: false,
-}
 
 export function islandReducer(state = [], action) {
     switch (action.type) {

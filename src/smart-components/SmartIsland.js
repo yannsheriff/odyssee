@@ -14,14 +14,17 @@ import React, { Component } from 'react';
 import Narration from '../components/Island/narration'
 import InteractionMenu from '../components/Island/interaction-menu'
 import Illustrations from '../components/Island/Illustrations'
+import Collectables from '../components/Island/Collectables'
 
 //  Import Actions
 // --------------------------------------------------------------
 import { goToStep, saveIslandData, requestIslandData, goToPreviousStep } from '../redux/actions/island'
+import { foundNewCollectable, saveCollectables } from '../redux/actions/collectables'
 
 //  Import Data
 // --------------------------------------------------------------
 import islands from '../data'
+import { collectables } from '../data'
 
 //  Import Helpers
 // --------------------------------------------------------------
@@ -84,6 +87,12 @@ componentWillReceiveProps(nextProps) {
       }
     });
 
+    const illustration = islands[currentIslandId].illustrations.steps.find((index) => {
+      if (index.id === actualSnippetId) {
+        return index
+      }
+    });
+
     const offsets = islands[currentIslandId].illustrations.steps.find((index) => {
       if (index.id === actualSnippetId) {
         return index.offsets
@@ -96,6 +105,18 @@ componentWillReceiveProps(nextProps) {
         return index.animation
       }
     })
+
+
+    const collectableIds = illustration.collectables ? illustration.collectables : undefined
+    var collectableData = []
+    if ( collectableIds ) {
+      collectableIds.forEach(index => {
+        let collectable = collectables.fragments.find(element => index === element.id)
+        if(collectable) { collectableData.push(collectable) }
+      })
+    } 
+
+    console.log(collectableData)
 
     let snippetArray = []
     let haveAction = true
@@ -128,6 +149,7 @@ componentWillReceiveProps(nextProps) {
       actions: bundleAction, 
       offsets: offsets,
       animation: animation,
+      collectables: collectableData,
     }
 
     return payload
@@ -153,6 +175,7 @@ componentWillReceiveProps(nextProps) {
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
+      collectables: payload.collectables,
       islandState: state, 
       isGoingForward: isGoingForward
     }, () => {
@@ -181,6 +204,10 @@ componentWillReceiveProps(nextProps) {
     }
   }
 
+  collectableFound = (id) => {
+    //do something
+  }
+
   render() {
 
     if (  this.state.actions 
@@ -202,8 +229,12 @@ componentWillReceiveProps(nextProps) {
         <InteractionMenu 
           actions = { this.state.actions } 
           changeStep={ this.goToNextStep }  
-          prevStep={this.goToPreviousStep }  
+          prevStep={ this.goToPreviousStep }  
         /> 
+        <Collectables 
+          array={ this.state.collectables }
+          collectablePressed={ this.collectableFound }
+        />
       </View> )
     } else {
       var view = (<View><Text style={{color: 'white', textAlign: "center", marginTop: 300}}> Loading ... </Text></View>)
@@ -221,7 +252,7 @@ componentWillReceiveProps(nextProps) {
 const mapStateToProps = state => {
   return {
     island: state.island,
-    isOnIsland: state.isOnIsland
+    isOnIsland: state.isOnIsland,
   }
 }
 
@@ -239,7 +270,6 @@ const mapDispatchToProps = dispatch => {
     goToPreviousStep: () => {
       dispatch(goToPreviousStep())
     },
-    
   }
 }
 

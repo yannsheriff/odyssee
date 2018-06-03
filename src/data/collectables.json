@@ -1,22 +1,52 @@
 {
-    "collectables": [
+    "fragments": [
         {
             "id": 1,
-            "name": "Glyphes d'Éol",
+            "name": "fragements d'Éol",
             "x": 46,
             "y": 76
         },
         {
             "id": 2,
-            "name": "Glyphes d'Éol",
+            "name": "fragements d'Éol",
             "x": 100,
             "y": 200
         },
         {
             "id": 3,
-            "name": "Glyphes d'Éol",
+            "name": "fragements d'Éol",
             "x": 0,
             "y": 0
+        },
+        {
+            "id": 4,
+            "name": "fragements de Zeus",
+            "x": 100,
+            "y": 200
+        },
+        {
+            "id": 5,
+            "name": "fragements de Zeus",
+            "x": 46,
+            "y": 76
+        },
+        {
+            "id": 6,
+            "name": "fragements de Zeus",
+            "x": 89,
+            "y": 300
+        }
+    ],
+    "glyphs": [
+        {
+            "id": 0,
+            "name": "Glyphes d'Éol",
+            "fragments": [1,2]
+        },
+        {
+            "id": 1,
+            "name": "Glyphes de Zeus",
+            "fragments": [4,5,6]
         }
     ]
 }
