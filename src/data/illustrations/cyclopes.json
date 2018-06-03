@@ -7,7 +7,7 @@
                 "middle": 0,
                 "back": 0
             },
-            "collectables": [1,2],
+            "collectables": [1],
             "animation": {
                 "loop": true,
                 "animationId": 2,
@@ -22,7 +22,7 @@
                 "middle": -200,
                 "back": -100
             },
-            "collectables": [4,5,6],
+            "collectables": [4],
             "animation": {
                 "transitionDuration": 2000
             }
@@ -34,6 +34,7 @@
                 "middle": -300,
                 "back": -200
             },
+            "collectables": [2],
             "animation": {
                 "loop": true,
                 "animationId": 2,
@@ -48,6 +49,7 @@
                 "middle": -300,
                 "back": -200
             },
+            "collectables": [3],
             "animation": {
                 "loop": true,
                 "animationId": 1,

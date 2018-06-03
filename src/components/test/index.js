@@ -2,14 +2,18 @@ import React from 'react'
 import Svg,{ G, Rect, Image, Circle } from 'react-native-svg'
 import screen from '../../helpers/ScreenSize'
 import images, { backgrounds } from '../../assets/images'
-import { AsyncStorage, View } from 'react-native';
+import { AsyncStorage, View, Button } from 'react-native';
 import { storeService } from '../../helpers/saveData'
 import LottieView from 'lottie-react-native'
-import Collectables from '../Island/Collectables'
+import Notification from '../Notification'
+import { connect } from 'react-redux'
+
+
+import { printNotification } from '../../redux/actions/notification'
 
 import { microInteraction } from '../../assets/anim'
 
-export default class BasicExample extends React.Component {
+class BasicExample extends React.Component {
   constructor(props) {
     super(props);
     this.test = {
@@ -33,7 +37,9 @@ export default class BasicExample extends React.Component {
 
       
     }
-    this.state = {}
+    this.state = {
+      _callNotification: this.props.callnotification
+    }
   }
 
 
@@ -42,7 +48,6 @@ export default class BasicExample extends React.Component {
     // this.consoleDataSaved()
     // this.getPreviousSnipet()
     // this.handleIslandData()
-    this.lala()
   }
 
   async handleIslandData() {
@@ -86,65 +91,53 @@ export default class BasicExample extends React.Component {
 
   }
 
-  lala() {
-    a = [1,2,3]
-    b = [5,6,7]
-    m = [
-      [1,2,3],
-      [5,6,7]
-    ]
-
-    my = [1,2,4,5,6,3]
-
-    var collactableToReturn =  m.map((element, index) => {
-        var test = element.filter((e, index) => {
-          for (let index = 0; index < my.length; index++) {
-            if (my[index] === e ) { 
-              return true 
-            }
-          }
-        })
-        if (test.length === element.length) { 
-          console.log('find a object')
-          return true 
-      } else { 
-        return false
-      }
-    });
-
-    console.log(collactableToReturn)
-
+  callnotification = () => {
+    this.state._callNotification(
+      "New notification",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porta nibh vitae nibh accumsan tincidunt.",
+      require('../../assets/anim/success_animation.json')
+    )
   }
+
+
  
 
 
 
   render() {
     return (
-      <View style={{backgroundColor: "black" }}>
-          <Collectables 
-            array={[
-              {
-                id: 1,
-                name: "Glyphes d'Éol",
-                x: 100,
-                y: 100
-              },
-              {
-                id: 2,
-                name: "Glyphes de zeus",
-                x: 100,
-                y: 200
-              },
-              {
-                  id: 3,
-                  name: "Glyphes zizi",
-                  x: 50,
-                  y: 60
-              }
-            ]}
+      <View style={{backgroundColor: "#FAFAFF", height: 800, width: 400, paddingTop: 100 }}>
+          <Button 
+            onPress={this.callnotification}
+            title="press"
           />
+          {/* <Notification /> */}
       </View>
     );
   }
 }
+
+
+/* ===============================================================
+  ======================= REDUX CONNECTION =======================
+  ================================================================ */
+
+  const mapStateToProps = state => {
+    return {}
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      callnotification: (title, sub, anim) => {
+        dispatch(printNotification(title, sub, anim))
+      },
+    }
+  }
+  
+  
+  const componentContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(BasicExample)
+  
+  export default componentContainer

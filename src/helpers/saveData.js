@@ -91,6 +91,11 @@ class StoreService {
       const dataSaved = await this.getSaving()
       if (dataSaved.isNewInstance ) {
         var state = {
+          notification: {
+            title: undefined,
+            subtitle: undefined,
+            animation: undefined,
+          },
           isOnIsland: false,
           collectables: {
             fragments:[],
@@ -121,13 +126,16 @@ class StoreService {
               haveObject: false,
           }
         }
-        console.log(' ================ Async Storage ================ ')
-        console.log("blablablaf :", state )
         return state
       } else {
         console.log(' ================ Async Storage ================ ')
         console.log("last Save :", dataSaved )
         var state = {
+          notification: {
+            title: undefined,
+            subtitle: undefined,
+            animation: undefined,
+          },
           isOnIsland: false,
           collectables: {
             fragments: dataSaved.collectables.fragments,
