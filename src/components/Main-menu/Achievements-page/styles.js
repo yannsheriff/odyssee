@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginLeft: 10,
     flex: 1
-  }
+  },
+  header: { height: 70 }
 });
 
 export default styles;

@@ -1,3 +1,5 @@
+//  Import modules
+// --------------------------------------------------------------
 import React from "react";
 import {
   Animated,
@@ -13,30 +15,40 @@ import {
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { connect } from "react-redux";
+import Swiper from "react-native-swiper";
+
+//  Import helpers
+// --------------------------------------------------------------
 import screen from "../../../helpers/ScreenSize";
+
+import CollectableItem from '../Collectable-item'
+
+//  Import data
+// --------------------------------------------------------------
 import { collectables } from "../../../data";
-import { equipGlyph, unequipGlyph } from "../../../redux/actions/menu";
 import images from "../../../assets/images";
 import styles from "./styles"
 
-import Swiper from "react-native-swiper";
+//  Import edux
+// --------------------------------------------------------------
+import { equipGlyph, unequipGlyph } from "../../../redux/actions/menu";
 
-// import styles from './styles';\
+
 
 class Menu_achivement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       collectableEquipped: this.props.state.menu.collectableEquipped,
-      collectables: this.prepareCollectablesData(
-        this.props.state.collectables.glyphs,
-        this.props.state.menu.collectableEquipped
-      ),
+      collectables: this.prepareCollectablesData(this.props.state.collectables.glyphs, this.props.state.menu.collectableEquipped),
       _equipGlyph: this.props.equipGlyph,
       _unEquipGlyph: this.props.unequipGlyph
     };
   }
 
+  /*
+  * If Redux is updated
+  */
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.state.collectables.glyphs &&
@@ -52,6 +64,11 @@ class Menu_achivement extends React.Component {
     }
   }
 
+  /*
+  * Format data for Render 
+  * Take : Array[all the founded glyphs id], Array [all the selected glyphs id]
+  * return Array 
+  */
   prepareCollectablesData(foundedGlyphs, selectedGlyphs) {
     let collectablesArray = collectables.glyphs.map(element => {
       if (foundedGlyphs) {
@@ -75,28 +92,13 @@ class Menu_achivement extends React.Component {
     return collectablesArray;
   }
 
-  indexDidChange = id => {
-    Animated.timing(
-      // Animate value over time
-      this.state.paginationPosition, // The value to drive
-      {
-        toValue: id * (screen.width / 3),
-        duration: 200 // Animate to final value of 1
-      }
-    ).start();
-  };
-
+   /*
+  * Toggle a glyphe if it's founded 
+  * send a redux action
+  */
   toggleSelectedGlyphe = id => {
-    if (
-      this.state.collectables.some(
-        elementSelected => elementSelected.id === id && elementSelected.found
-      )
-    ) {
-      if (
-        this.state.collectableEquipped.some(
-          elementSelected => elementSelected === id
-        )
-      ) {
+    if ( this.state.collectables.some(elementSelected => elementSelected.id === id && elementSelected.found)) {
+      if (this.state.collectableEquipped.some(elementSelected => elementSelected === id)) {
         this.state._unEquipGlyph(id);
       } else {
         this.state._equipGlyph(id);
@@ -105,45 +107,31 @@ class Menu_achivement extends React.Component {
   };
 
   render() {
+
+    // ===== Render collectables ===== // 
+
     var collectablesToDisplay = this.state.collectables.map(element => {
       return (
-        <View style={styles.collectablesContainer}>
-          <TouchableOpacity
-            style={[
-              styles.touchable,
-              {
-                backgroundColor: element.found
-                  ? "rgba(255, 255, 255, 0.3)"
-                  : null,
-                borderColor: element.selected ? "red" : null,
-                borderWidth: element.selected ? 1 : 0
-              }
-            ]}
-            onPress={() => {
-              this.toggleSelectedGlyphe(element.id);
-            }}
-          >
-            <View style={{ position: "absolute" }}>
-              <Image
-                style={{
-                  height: element.selected ? 58 : 60,
-                  width: element.selected ? 58 : 60
-                }}
-                source={images.glyphes}
-              />
-              <Text style={[styles.glyphsFont, { opacity: element.found ? 1 : 0 }]}>
-                {element.icon}
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.glyphesName}>{element.name}</Text>
-        </View>
+        <CollectableItem 
+          id={element.id}
+          selected={element.selected}
+          found={element.found}
+          name={element.name}
+          icon={element.icon}
+          onPress={ this.toggleSelectedGlyphe }
+        />
       );
     });
+
+
+     // ===== Render page ===== //
+
     return (
       <SafeAreaView>
-        <View style={{ height: 70 }} />
+        <View style={styles.header} /> 
         <View>
+
+          {/*====== Glyphes ======*/}
           <View>
             <View style={styles.partContainer}>
               <Text style={styles.partTitle}> Glyphes </Text>
@@ -156,11 +144,14 @@ class Menu_achivement extends React.Component {
               showsHorizontalScrollIndicator={false}
             >
               {collectablesToDisplay}
+              
             </ScrollView>
           </View>
+
+          {/*====== Achievements ======*/}
           <View style={{ marginTop: 20 }}>
             <View style={styles.partConatiner}>
-              <Text style={styles.partTitle}>Achievements</Text>
+              <Text style={styles.partTitle}> Achievements </Text>
               <View style={styles.lineTitle} />
             </View>
             <ScrollView
@@ -177,54 +168,10 @@ class Menu_achivement extends React.Component {
                   marginRight: 15
                 }}
               />
-              <View
-                style={{
-                  height: 60,
-                  width: 60,
-                  backgroundColor: "black",
-                  borderRadius: 50,
-                  marginRight: 15
-                }}
-              />
-              <View
-                style={{
-                  height: 60,
-                  width: 60,
-                  backgroundColor: "black",
-                  borderRadius: 50,
-                  marginRight: 15
-                }}
-              />
-              <View
-                style={{
-                  height: 60,
-                  width: 60,
-                  backgroundColor: "black",
-                  borderRadius: 50,
-                  marginRight: 15
-                }}
-              />
-              <View
-                style={{
-                  height: 60,
-                  width: 60,
-                  backgroundColor: "black",
-                  borderRadius: 50,
-                  marginRight: 15
-                }}
-              />
-              <View
-                style={{
-                  height: 60,
-                  width: 60,
-                  backgroundColor: "black",
-                  borderRadius: 50,
-                  marginRight: 15
-                }}
-              />
+              
             </ScrollView>
           </View>
-        </View>
+        </View> 
       </SafeAreaView>
     );
   }

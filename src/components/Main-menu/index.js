@@ -4,7 +4,7 @@ import LottieView from "lottie-react-native";
 import { connect } from "react-redux";
 import { toggleMenu, saveMenu } from "../../redux/actions/menu";
 import screen from "../../helpers/ScreenSize";
-import Achivements from "./achievements";
+import Achivements from "./Achievements-page";
 import { BlurView } from "react-native-blur";
 import renderIf from "../../helpers/renderIf";
 
