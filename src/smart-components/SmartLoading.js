@@ -12,6 +12,7 @@ import { AsyncStorage } from 'react-native';
 // --------------------------------------------------------------
 import Router from '../Router'
 import Notification from '../components/Notification'
+import MainMenu from '../components/Main-menu'
 
 
 class SmartLoading extends Component {
@@ -43,7 +44,7 @@ class SmartLoading extends Component {
 
     render() {
       let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.isMapActive !== undefined
-      ? ( <View><Router /><Notification /></View> ) 
+      ? ( <View><Router /><MainMenu /><Notification /></View> ) 
       : ( <View><Text>loading..</Text></View> /* <Loader /> */ )
         return render
     }

@@ -40,12 +40,38 @@
     "glyphs": [
         {
             "id": 0,
-            "name": "Glyphes d'Éol",
-            "fragments": [1,2,3]
+            "name": "Éol",
+            "icon": "eol",
+            "fragments": [1]
         },
         {
             "id": 1,
-            "name": "Glyphes de Zeus",
+            "name": "Athena",
+            "icon": "ena",
+            "fragments": [4,5,6]
+        },
+        {
+            "id": 2,
+            "name": "Elios",
+            "icon": "ios",
+            "fragments": [4,5,6]
+        },
+        {
+            "id": 4,
+            "name": "Hades",
+            "icon": "des",
+            "fragments": [4,5,6]
+        },
+        {
+            "id": 5,
+            "name": "Chronos",
+            "icon": "ono",
+            "fragments": [4,5,6]
+        },
+        {
+            "id": 6,
+            "name": "Poseidon",
+            "icon": "sei",
             "fragments": [4,5,6]
         }
     ]

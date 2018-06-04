@@ -1,47 +1,55 @@
-import React from 'react'
-import Svg,{ G, Rect, Image, Circle } from 'react-native-svg'
-import screen from '../../helpers/ScreenSize'
-import images, { backgrounds } from '../../assets/images'
-import { AsyncStorage, View, Button } from 'react-native';
-import { storeService } from '../../helpers/saveData'
-import LottieView from 'lottie-react-native'
-import Notification from '../Notification'
-import { connect } from 'react-redux'
+import React from "react";
+import screen from "../../helpers/ScreenSize";
+import images, { backgrounds } from "../../assets/images";
+import { AsyncStorage, View, Button, StyleSheet, Image } from "react-native";
+import { storeService } from "../../helpers/saveData";
+import LottieView from "lottie-react-native";
+import MainMenu from "../Main-menu";
+import { connect } from "react-redux";
 
+import { toggleMenu } from "../../redux/actions/menu";
 
-import { printNotification } from '../../redux/actions/notification'
+import { microInteraction } from "../../assets/anim";
 
-import { microInteraction } from '../../assets/anim'
+const styles = StyleSheet.create({
+  container: {
+    width: screen.width,
+    height: screen.height
+  },
+  background: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: screen.width,
+    height: screen.height
+  },
+  center: {
+    position: "absolute",
+    top: 550,
+    left: 0,
+    width: screen.width,
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  buttonBorder: {
+    paddingVertical: 5,
+    width: 220,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderRadius: 50,
+    borderColor: "white",
+    borderStyle: "solid"
+  }
+});
 
 class BasicExample extends React.Component {
   constructor(props) {
     super(props);
-    this.test = {
-      isOnIsland: 1,
-      visitedIsland:[
-        {
-          id: 2,
-          screenReaded: [],
-          actualSnippetId: 1,
-          haveAction: false,
-          haveObject: false,
-        }
-      ],
-      navigation: {
-        position: {
-          x: 0,
-          y: 0
-        },
-        collectableEquipped: []
-      }
 
-      
-    }
     this.state = {
-      _callNotification: this.props.callnotification
-    }
+      _toggleMenu: this.props.toggleMenu
+    };
   }
-
 
   componentDidMount() {
     // this.restoreData()
@@ -50,94 +58,46 @@ class BasicExample extends React.Component {
     // this.handleIslandData()
   }
 
-  async handleIslandData() {
-    var savedData = storeService.getSaving()
-    savedData.then((data)=> {
-      var actualIslandSavedData = data.visitedIsland.find((island) => { 
-        if( island.id === 1) { 
-          return island 
-        }
-      })
-      if (actualIslandSavedData ) {
-        console.log("loadIsland")
-      } else {
-        console.log("Create island")
-      }
-    })
-  
-  }
-
-  async consoleDataSaved() {
-    let data = await storeService.getSaving()
-    console.log(data)
-  }
-
-  async restoreData() {
-    await storeService.save(this.test)
-
-    console.log("Restore state 🔄")
-  }
-
-  getPreviousSnipet(state) {
-    let array = [1, 2, 3, 4, 5, 6, 7, 6, 7, 6, 5, 6, 5]
-    let current = 5
-    let array2 = array.reverse()
-    let prevSnippet = array2.find((screenID)=> {
-      if(screenID < current) {
-        return screenID
-      }
-    })
-    console.log(prevSnippet)
-
-  }
-
-  callnotification = () => {
-    this.state._callNotification(
-      "New notification",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porta nibh vitae nibh accumsan tincidunt.",
-      require('../../assets/anim/success_animation.json')
-    )
-  }
-
-
- 
-
-
-
   render() {
     return (
-      <View style={{backgroundColor: "#FAFAFF", height: 800, width: 400, paddingTop: 100 }}>
-          <Button 
-            onPress={this.callnotification}
-            title="press"
+      <View style={styles.container}>
+        <Image
+          style={styles.background}
+          source={images.homeScreen}
+          resizeMethod="scale"
+        />
+        <View style={{ position: "absolute", top: 70, left: 20, zIndex: 50 }}>
+          <Button
+            title={"menu"}
+            onPress={() => {
+              this.state._toggleMenu();
+            }}
           />
-          {/* <Notification /> */}
+        </View>
       </View>
     );
   }
 }
 
-
 /* ===============================================================
   ======================= REDUX CONNECTION =======================
   ================================================================ */
 
-  const mapStateToProps = state => {
-    return {}
-  }
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-      callnotification: (title, sub, anim) => {
-        dispatch(printNotification(title, sub, anim))
-      },
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleMenu: () => {
+      dispatch(toggleMenu());
     }
-  }
-  
-  
-  const componentContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(BasicExample)
-  
-  export default componentContainer
+  };
+};
+
+const componentContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BasicExample);
+
+export default componentContainer;

@@ -4,6 +4,7 @@ import { islandReducer }  from './island'
 import { isOnIsland }  from './isOnIsland'
 import { collectables }  from './collectables'
 import { notification }  from './notification'
+import { menu } from './menu'
 
 const mainReducer = combineReducers({
     sailing: sailingReducer,
@@ -11,6 +12,7 @@ const mainReducer = combineReducers({
     isOnIsland,
     collectables,
     notification,
+    menu,
 })
 
 export default mainReducer
