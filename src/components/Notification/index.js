@@ -2,6 +2,7 @@ import React from 'react';
 import { Animated, Easing, View, Text } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { connect } from 'react-redux'
+import ReactNativeHaptic from 'react-native-haptic';
 
 import styles from './styles';
 
@@ -22,6 +23,7 @@ class VisualNotification extends React.Component {
   componentWillReceiveProps (nextProps) {
     console.log('yo')
     if(nextProps.notification.title) {
+      ReactNativeHaptic.generate('notification')
       this.setState({
         haveNotification: true,
         title: nextProps.notification.title,
@@ -30,6 +32,7 @@ class VisualNotification extends React.Component {
       }, () => {
         if(nextProps.notification.animation) {
           this.animation.play();
+          
         }
       })
     }

@@ -11,6 +11,9 @@ import {
     Button,
 } from 'react-native'
 import { StackNavigator } from 'react-navigation';
+import { connect } from 'react-redux'
+import { AsyncStorage } from 'react-native';
+import { requestStore } from '../../redux/actions/loading'
 
 
 //  Import Helpers
@@ -21,20 +24,29 @@ import styles from './styles'
 
 
 
-export default class Accueil extends Component {
+class Accueil extends Component {
 
     constructor(props) {
         super(props)
-
+        this.requestFlushData = false 
         this.state = {
-            _updateOrientation: this.props.updateOrientation,
-            _toggleSailing: this.props.toggleSailing,
-            compassSensitivity: 1,
-            orientation: 0,
-            isCompassLocked: true
+            _populateStore: this.props.populateStore
         }
     }
 
+    async newGame() {
+        await AsyncStorage.removeItem('saved')
+        this.requestFlushData = true
+        this.state._populateStore()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.requestFlushData) {
+            this.requestFlushData = false
+            this.props.navigation.navigate('Island', { islandId: 1})
+        }
+    }
+    
 
     render() {
         return (
@@ -61,10 +73,15 @@ export default class Accueil extends Component {
                     </View>
                     <View style={styles.buttonBorder}>
                     <Button
-                        onPress={() => this.props.navigation.navigate('Test')}
-                        title={'Test animations'}
+                        onPress={ this.newGame.bind(this) }
+                        title={'Nouvelle partie'}
                         color="#fff"
                     />
+                    {/* <Button
+                        onPress={() => this.props.navigation.navigate('Test')}
+                        title={'Test'}
+                        color="#fff"
+                    /> */}
                     </View>
                 </View>
             </View>
@@ -73,3 +90,27 @@ export default class Accueil extends Component {
 }
 
 
+/* ===============================================================
+  ======================= REDUX CONNECTION =======================
+  ================================================================ */
+  
+  const mapStateToProps = state => {
+    return {
+        state: state
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+      return {
+        populateStore: () => {
+          dispatch(requestStore())
+        },
+      }
+    }
+  
+  const componentContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Accueil)
+  
+  export default componentContainer
