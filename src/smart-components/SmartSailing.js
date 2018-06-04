@@ -14,7 +14,6 @@ import images, { choices } from '../assets/images'
 //  Import Components
 // --------------------------------------------------------------
 import VirtualMap from '../components/Virtual-map'
-import Compass from '../components/Compass'
 import MiniMap from '../components/Miniature-map'
 import MultiActionButton from '../components/Multi-action-button'
 
@@ -94,9 +93,6 @@ class SmartSailing extends Component {
           >
             {renderIf(!this.state.isMapActive,
               <VirtualMap />
-            )}
-            {renderIf(!this.state.isMapActive && this.state.islandCollided === null,
-              <Compass />
             )}
             {renderIf(this.state.isMapActive,
               <MiniMap />

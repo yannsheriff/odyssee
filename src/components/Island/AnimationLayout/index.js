@@ -20,7 +20,7 @@ export default class AnimationLayout extends React.Component {
           position: new Animated.Value(0),
         }
       ],
-    };
+    }
     
     // If animation is not null launch it in the constructor
     if (props.nextAnimation) {
