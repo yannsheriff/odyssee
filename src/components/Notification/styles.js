@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     container: {
         width: screen.width,
         height: screen.height,
-        backgroundColor: 'rgba(000, 000, 000, 0.9)',
+        backgroundColor: 'rgba(000, 000, 000, 0.3)',
         // opacity: 0.7,
         position: "absolute",
         top: 0,
@@ -31,9 +31,19 @@ const styles = StyleSheet.create({
     },
     animation: {
         marginTop: 20,
-        width: screen.width / 100 * 70,
-        height: screen.width / 100 * 70,
-    }
+        position: "absolute",
+        top: 0,
+        width: screen.width,
+        height: screen.height,
+        // backgroundColor: "red"
+    }, 
+    absolute: {
+        width: screen.width,
+        height: screen.height,
+        position: "absolute",
+        top: 0, 
+        left: 0
+    },
     
 });
 

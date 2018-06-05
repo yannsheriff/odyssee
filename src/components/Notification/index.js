@@ -3,6 +3,7 @@ import { Animated, Easing, View, Text } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { connect } from 'react-redux'
 import ReactNativeHaptic from 'react-native-haptic';
+import { BlurView } from 'react-native-blur'
 
 import styles from './styles';
 
@@ -54,13 +55,16 @@ class VisualNotification extends React.Component {
     if (this.state.haveNotification) {
       var notification = <View 
         style={ styles.container}
-        onStartShouldSetResponder={ (evt) => true }
-        onResponderGrant={  (evt) => { 
-          this.closeNotification()
-        }}>
+        >
 
-        <Text style={ styles.title }>{ this.state.title }</Text>
-        <Text style={ styles.subtitle }>{ this.state.subtitle }</Text>
+        <BlurView
+              style={styles.absolute}
+              viewRef={this.state.viewRef}
+              blurType="light"
+              blurAmount={20}
+            />
+
+       
         <View style={styles.animation}>
           <LottieView
             resizeMode="contain"
@@ -72,6 +76,14 @@ class VisualNotification extends React.Component {
             style={styles.animation}
           />
         </View>
+        <Text style={ styles.title }>{ this.state.title }</Text>
+        <Text style={ styles.subtitle }>{ this.state.subtitle }</Text>
+        <View 
+          style={styles.absolute } 
+          onStartShouldSetResponder={ (evt) => true }
+          onResponderGrant={  (evt) => { 
+            this.closeNotification()
+          }}/> 
       </View>
     }
 
