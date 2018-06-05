@@ -3,7 +3,7 @@
 // --------------------------------------------------------------
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Image, TouchableWithoutFeedback, Animated } from 'react-native'
+import { View, Image, TouchableWithoutFeedback, Animated, Text } from 'react-native'
 import Svg,{ G, Rect } from 'react-native-svg'
 import RNSimpleCompass from 'react-native-simple-compass'
 import LottieView from 'lottie-react-native'
@@ -53,6 +53,11 @@ class VirtualMap extends Component {
       vpRadius:  Math.hypot(screen.width, screen.height) / 2,
       speedRadius: this._getSpeed(0),
       currentSpeed: 0,
+      stopping: false,
+      speedCap: {
+        min: 0,
+        max: 0.00001
+      },
       goalSpeed: 0,
       deceleration: 0,
       collisionPoint: {
@@ -70,13 +75,13 @@ class VirtualMap extends Component {
         y: this.props.sailing.destination.y - (mapSize.y / 2)
       },
       // boat animation
+      animProgress: new Animated.Value(0),
       animData: animatedBoat,
       animStates: boatStates,
-      animCurrent: 'sailing',
-      animInLine: [],
+      animCurrent: 'stopped',
+      animInLine: null,
       animGoal: null,
-      currentFrame: 0,
-      nbFrames: 1
+      totalFrames: 270
     }
   }
 
@@ -98,11 +103,28 @@ class VirtualMap extends Component {
   }
 
   _updateBoatAnimationState = () => {
-    const boatState = this.state.animStates[this.state.animCurrent].frames
-    this.setState({
-      nbFrames: Math.abs(boatState[0] - boatState[1])
+    const boatState = this.state.animStates[this.state.animCurrent]
+
+    if (boatState.hasOwnProperty('cap') && this.state.speedCap !== boatState.cap) {
+      this.setState({
+        speedCap: {
+          min: boatState.cap.min * (speedModifiers.max + speedModifiers.min),
+          max: boatState.cap.max * (speedModifiers.max + speedModifiers.min)
+        }
+      })
+    }
+
+    this.state.animProgress.setValue(boatState.frames[0] / this.state.totalFrames)
+
+    Animated.timing(this.state.animProgress, {
+      toValue: boatState.frames[1] / this.state.totalFrames,
+      duration: Math.abs(boatState.frames[0] - boatState.frames[1]) / 30 * 1000
+    }).start(() => {
+      if (this.state.animGoal !== null) {
+        this._switchBoatAnimation()
+      }
+      this._updateBoatAnimationState()
     })
-    this.animation.play(boatState[0], boatState[1])
   }
 
   _getSpeed = (boatDir) => {
@@ -116,7 +138,7 @@ class VirtualMap extends Component {
       this.setState({
         sailing: !this.state.sailing,
         goalSpeed: 0,
-        deceleration: this.state.currentSpeed / 30 // 30 is the number of frames needed for complete deceleration
+        deceleration: this.state.currentSpeed / 35 // 35 is the number of frames needed for complete deceleration
       })
     } else {
       this.setState({
@@ -128,6 +150,7 @@ class VirtualMap extends Component {
         requestAnimationFrame(() => {this._updateMap()})
       }
     }
+    console.log(this.state)
   }
 
   /*
@@ -203,20 +226,29 @@ class VirtualMap extends Component {
 
     if (dif > 0 && dif >= speedModifiers.acceleration) {
       // current speed is lower than goal speed : raise speed
-      this.setState({ currentSpeed: this.state.currentSpeed + speedModifiers.acceleration })
-      this._checkBoatStateChanges('up')
+      if (speed < this.state.speedCap.max) {
+        this.setState({currentSpeed: this.state.currentSpeed + speedModifiers.acceleration})
+      } else {
+        this._checkBoatStateChanges('up')
+      }
     }
     else if (dif < 0 && dif <= -speedModifiers.acceleration) {
       // current speed is higher than goal speed : reduce speed
       if(this.state.sailing) {
         // updating speed after boat direction change
-        this.setState({ currentSpeed: this.state.currentSpeed - speedModifiers.acceleration })
-        this._checkBoatStateChanges('down')
+        if (speed > this.state.speedCap.min) {
+          this.setState({currentSpeed: this.state.currentSpeed - speedModifiers.acceleration})
+        } else {
+          this._checkBoatStateChanges('down')
+        }
       }
       else {
         // stopping boat
-        this.setState({ currentSpeed: this.state.currentSpeed - this.state.deceleration })
-        this._checkBoatStateChanges(false)
+        if (this.state.animCurrent === 'toStopped' || this.state.animCurrent === 'toRowing' || this.state.animCurrent === 'stopped') {
+          this.setState({currentSpeed: this.state.currentSpeed - this.state.deceleration})
+        } else {
+          this._checkBoatStateChanges(false)
+        }
       }
     }
     else if (Math.abs(dif) < speedModifiers.acceleration) {
@@ -227,12 +259,11 @@ class VirtualMap extends Component {
 
   _checkBoatStateChanges = (dir) => {
     const state = this.state
-    const speed = state.currentSpeed
-    const maxSpeed = speedModifiers.max + speedModifiers.min
 
-    if (state.animGoal !== null) {
+    if (state.animGoal === null && !this.state.stopping) {
       let inLine = null
       let goal = null
+      let stop = false
 
       if (dir) {
         inLine = state.animStates[state.animCurrent][dir].trans
@@ -241,25 +272,50 @@ class VirtualMap extends Component {
       else if (!dir) {
         inLine = state.animStates[state.animCurrent].stop
         goal = 'stopped'
+        stop = true
       }
 
       this.setState({
         animInLine: inLine,
-        animGoal: goal
+        animGoal: goal,
+        stopping: stop
       })
     }
   }
 
   _switchBoatAnimation = () => {
-    const state = this.state
-    let nextFrame = state.currentFrame + 1
-    if (nextFrame > state.nbFrames) {
-      nextFrame = 0
+    let anims = ''
+    let cap = this.state.speedCap
+    if (this.state.animInLine !== this.state.animGoal) {
+      const newCurrent = this.state.animInLine
+      const newInLine = this.state.animGoal
+      const newGoal = this.state.animGoal
+      anims = {
+        animCurrent: newCurrent,
+        animInLine: newInLine,
+        animGoal: newGoal
+      }
+      cap = {
+        min: this.state.animStates[this.state.animCurrent].cap.min,
+        max: this.state.animStates[this.state.animCurrent].cap.max
+      }
     }
-    this.setState({
-      currentFrame: nextFrame
-    })
-    console.log(this.state.currentFrame, this.state.nbFrames)
+    else if (this.state.animInLine === this.state.animGoal) {
+      const newCurrent = this.state.animInLine
+      anims = {
+        animCurrent: newCurrent,
+        animInLine: null,
+        animGoal: null
+      }
+    }
+    if (typeof anims === 'object') {
+      this.setState({
+        animCurrent: anims.animCurrent,
+        animInLine: anims.animInLine,
+        animGoal: anims.animGoal,
+        speedCap: cap
+      })
+    }
   }
 
   /*
@@ -271,12 +327,10 @@ class VirtualMap extends Component {
 
       this._checkIfInViewport()
       this._sortContent()
+
       if (this.state.currentSpeed !== this.state.goalSpeed) {
         this._manageSpeed()
       }
-      //if (this.state.goal !== null) {
-        this._switchBoatAnimation()
-      //}
       let newX = s.position.x + (s.currentSpeed) * Math.sin(s.orientation * 0.0174533)
       let newY = s.position.y + (s.currentSpeed) * Math.cos(s.orientation * 0.0174533)
 
@@ -293,6 +347,11 @@ class VirtualMap extends Component {
       })
 
       requestAnimationFrame(() => {this._updateMap()})
+    } else if (this.state.stopping) {
+      this.setState({
+        stopping: false,
+        currentSpeed: 0
+      })
     }
   }
 
@@ -398,14 +457,16 @@ class VirtualMap extends Component {
         </Svg>
         <Animated.View style={styles.boat}>
           <LottieView
-            ref={ animation => {
-              this.animation = animation
-            }}
-            loop={ true }
-            speed={ 1 }
             source={ this.state.animData }
+            progress={this.state.animProgress}
+            loop={ true }
           />
         </Animated.View>
+        <View
+          style={styles.navtools}
+        >
+          <Text>{ Math.round(this._getSpeed(this.state.orientation) * 10) / 10 + ' ' + Math.round(this.state.currentSpeed * 10) / 10 }</Text>
+        </View>
         <View
           style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
         >

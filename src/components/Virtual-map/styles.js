@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
     },
     boat: {
       position: 'absolute',
-      width: 150,
-      height: 250,
-      left: (screen.width / 2) - 75,
-      top: (screen.height / 2) - 125
+      width: 400,
+      height: 600,
+      left: (screen.width / 2) - 200,
+      top: (screen.height / 2) - 300
     },
     container: {
       position: 'relative',
@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     },
     navtools: {
       position: 'absolute',
+      top: 50,
+      left: 50
     },
     outerCompassContainer: {
       position: 'absolute',

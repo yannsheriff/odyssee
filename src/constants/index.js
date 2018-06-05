@@ -9,7 +9,7 @@ export const speedModifiers = {
     max: 2.5,
     wind: Math.random() * 2.25,
     direction: Math.floor(Math.random() * 360),
-    acceleration: 0.075
+    acceleration: 0.02
 }
 
 export const boatStates = {
@@ -18,10 +18,19 @@ export const boatStates = {
       up: {
         trans: 'toRowing',
         goal: 'rowing'
+      },
+      cap: {
+        min: 0,
+        max: 0.00001
       }
     },
     toRowing: {
-      frames:[30, 60]
+      frames:[30, 60],
+      stop: 'stopped',
+      cap: {
+        min: 0,
+        max: 0.33
+      }
     },
     rowing: {
       frames:[60, 89],
@@ -33,13 +42,22 @@ export const boatStates = {
         trans: 'toRowing',
         goal: 'stopped'
       },
-      stop: 'toRowing'
+      stop: 'stopped',
+      cap: {
+        min: 0,
+        max: 0.33
+      }
     },
     toSailing: {
-      frames:[89, 108]
+      frames:[89, 122],
+      stop: 'toStopped',
+      cap: {
+        min: 0.33,
+        max: 0.66
+      }
     },
     sailing: {
-      frames:[108, 122],
+      frames:[122, 153],
       up: {
         trans: 'toMaxSpeed',
         goal: 'maxSpeed'
@@ -48,10 +66,19 @@ export const boatStates = {
         trans: 'toSailing',
         goal: 'rowing'
       },
-      stop: 'toStopped'
+      stop: 'toStopped',
+      cap: {
+        min: 0.33,
+        max: 0.66
+      }
     },
     toMaxSpeed: {
-      frames:[153, 163]
+      frames:[153, 163],
+      stop: 'toStopped',
+      cap: {
+        min: 0.66,
+        max: 1
+      }
     },
     maxSpeed: {
       frames:[182, 199],
@@ -59,7 +86,11 @@ export const boatStates = {
         trans: 'toMaxSpeed',
         goal: 'sailing'
       },
-      stop: 'toStopped'
+      stop: 'toStopped',
+      cap: {
+        min: 0.66,
+        max: 1
+      }
     },
     toStopped: {
       frames:[240, 255]
