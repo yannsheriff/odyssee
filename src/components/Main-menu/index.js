@@ -56,17 +56,28 @@ class MainMenu extends React.Component {
       paginationPosition: new Animated.Value(0),
       _toggleMenu: this.props.toggleMenu,
       _saveMenu: this.props.saveMenu,
+      page: 0,
       display: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.store.menu.displayMenu !== this.state.display) {
-      this.setState({
-        reduxStore: nextProps.store,
-        display: nextProps.store.menu.displayMenu,
-        paginationPosition: new Animated.Value(0),
-      });
+      if(nextProps.store.menu.page) {
+        this.setState({
+          reduxStore: nextProps.store,
+          display: nextProps.store.menu.displayMenu,
+          page: nextProps.store.menu.page,
+          paginationPosition: new Animated.Value(nextProps.store.menu.page * (screen.width / 3)),
+        });
+      } else {
+        this.setState({
+          reduxStore: nextProps.store,
+          display: nextProps.store.menu.displayMenu,
+          paginationPosition: new Animated.Value(0),
+        });
+      }
+      
     } else {
       this.setState({
         reduxStore: nextProps.store,
@@ -102,7 +113,7 @@ class MainMenu extends React.Component {
             <View
               style={[
                 styles.absolute,
-                { backgroundColor: "rgba(000, 000, 000, 0.1)" }
+                { backgroundColor: "rgba(000, 000, 000, 0.3)" }
               ]}
             />
             <BlurView
@@ -116,6 +127,7 @@ class MainMenu extends React.Component {
               loop={true}
               showsPagination={false}
               onIndexChanged={this.indexDidChange}
+              index={this.state.page}
             >
               <View style={styles.slide1}>
                 <Text style={styles.text}>Hello Swiper</Text>

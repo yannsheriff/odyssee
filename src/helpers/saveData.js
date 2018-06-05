@@ -32,6 +32,10 @@ class StoreService {
           fragments:[],
           glyphs: []
         },
+        menu: {
+          displayMenu: false,
+          collectableEquipped: [],
+        },
         visitedIsland:[{}],
         sailing: {
           orientation: 0,

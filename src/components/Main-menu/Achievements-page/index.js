@@ -1,38 +1,20 @@
 //  Import modules
 // --------------------------------------------------------------
 import React from "react";
-import {
-  Animated,
-  Easing,
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  SafeAreaView,
-  ScrollView,
-  Image,
-  TouchableOpacity
-} from "react-native";
-import LottieView from "lottie-react-native";
+import { SafeAreaView, ScrollView, Text, View, Image } from "react-native";
 import { connect } from "react-redux";
-import Swiper from "react-native-swiper";
-
-//  Import helpers
-// --------------------------------------------------------------
-import screen from "../../../helpers/ScreenSize";
-
-import CollectableItem from '../Collectable-item'
 
 //  Import data
 // --------------------------------------------------------------
+import images from "../../../assets/images"
 import { collectables } from "../../../data";
-import images from "../../../assets/images";
-import styles from "./styles"
+import { achievement } from "../../../data";
 
-//  Import edux
+//  Import redux
 // --------------------------------------------------------------
 import { equipGlyph, unequipGlyph } from "../../../redux/actions/menu";
-
+import CollectableItem from '../Collectable-item';
+import styles from "./styles";
 
 
 class Menu_achivement extends React.Component {
@@ -41,6 +23,7 @@ class Menu_achivement extends React.Component {
     this.state = {
       collectableEquipped: this.props.state.menu.collectableEquipped,
       collectables: this.prepareCollectablesData(this.props.state.collectables.glyphs, this.props.state.menu.collectableEquipped),
+      achievement: this.prepareAchievementsData(),
       _equipGlyph: this.props.equipGlyph,
       _unEquipGlyph: this.props.unequipGlyph
     };
@@ -92,6 +75,17 @@ class Menu_achivement extends React.Component {
     return collectablesArray;
   }
 
+
+  prepareAchievementsData() {
+    let collectablesArray = achievement.list.map(element => {
+      return {
+        name: element.name,
+      };
+    });
+    return collectablesArray;
+  }
+
+
    /*
   * Toggle a glyphe if it's founded 
   * send a redux action
@@ -124,6 +118,21 @@ class Menu_achivement extends React.Component {
     });
 
 
+     // ===== Render collectables ===== // 
+
+     var achievementToDisplay = this.state.achievement.map(element => {
+      return (
+        <View style={styles.achievementContainer}>
+          <Text style={styles.achievementText}> { element.name } </Text>
+          <Image 
+            style={styles.achievementImage}
+            source={images.glyphes}
+          />
+        </View>
+      );
+    });
+
+
      // ===== Render page ===== //
 
     return (
@@ -132,7 +141,7 @@ class Menu_achivement extends React.Component {
         <View>
 
           {/*====== Glyphes ======*/}
-          <View>
+          <View >
             <View style={styles.partContainer}>
               <Text style={styles.partTitle}> Glyphes </Text>
               <View style={styles.lineTitle} />
@@ -150,24 +159,16 @@ class Menu_achivement extends React.Component {
 
           {/*====== Achievements ======*/}
           <View style={{ marginTop: 20 }}>
-            <View style={styles.partConatiner}>
+            <View style={styles.partContainer}>
               <Text style={styles.partTitle}> Achievements </Text>
               <View style={styles.lineTitle} />
             </View>
             <ScrollView
-              style={{ marginTop: 20 }}
-              contentContainerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+              style={styles.scrollview}
+              contentContainerStyle={{ paddingTop: 20, paddingBottom: 20 }}
               showsHorizontalScrollIndicator={false}
             >
-              <View
-                style={{
-                  height: 60,
-                  width: 60,
-                  backgroundColor: "black",
-                  borderRadius: 50,
-                  marginRight: 15
-                }}
-              />
+              { achievementToDisplay }
               
             </ScrollView>
           </View>

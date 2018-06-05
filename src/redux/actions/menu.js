@@ -3,9 +3,10 @@ export const EQUIP_GLYPH = 'EQUIPE_GLYPHE'
 export const UNEQUIP_GLYPH = 'UNEQUIPE_GLYPHE'
 export const SAVE_MENU = 'SAVE_MENU'
 
-export function toggleMenu() {
+export function toggleMenu(page=0) {
     return {
         type: TOGGLE_MENU,
+        page: page
     }
 }
 

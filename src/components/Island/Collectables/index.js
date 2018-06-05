@@ -107,20 +107,21 @@ class Collectables extends Component {
   */
   isAnObjectCompleted(id) {
     var objectsFound = [].concat(this.state.collectableState.fragments, id)
-    var glyphsFoundedArray =  this.state.glypheArray.map((element, glypheIndex) => {
-      var test = element.filter(e => {
+    var glyphsFoundedArray =  this.state.glypheArray.map((completeFragmentsArray, glypheIndex) => {
+      var fragmentArrayFilteredByGlyph = completeFragmentsArray.filter(fragmentsId => {
         for (let index = 0; index < objectsFound.length; index++) {
-          if (objectsFound[index] === e ) { 
+          if (objectsFound[index] === fragmentsId ) { 
             return objectsFound[index]
           }
         }
       })
-      if (test.length === element.length) { 
+      if (fragmentArrayFilteredByGlyph.length === completeFragmentsArray.length) { 
         return glypheIndex 
       } else { 
         return false
       }
     });
+
     if(glyphsFoundedArray.some(element => element !== false)) {
       let newGlyphe = this.newCompletedGlyphs(glyphsFoundedArray) 
       if(newGlyphe.length > 0) {
@@ -145,6 +146,27 @@ class Collectables extends Component {
     return newGlyphes
   }
 
+
+  getGlypheCompletion(fragmentId) {
+    var objectsFound = [].concat(this.state.collectableState.fragments, fragmentId)
+    let glyphIds = this.state.glypheArray.filter(completeFragmentsArray => {
+      if(completeFragmentsArray.some(fragement => fragement === fragmentId)) {
+        return completeFragmentsArray
+      }
+    })
+    var fragmentFound= glyphIds[0].filter(fragmentsId => {
+      for (let index = 0; index < objectsFound.length; index++) {
+        if (objectsFound[index] === fragmentsId ) { 
+          return objectsFound[index]
+        }
+      }
+    })
+    return {
+      all: glyphIds[0].length,
+      completed: fragmentFound.length
+    }
+  }
+
  /*
   *  When a collectable is pressed
   *  check if it make a full glyphe 
@@ -153,8 +175,8 @@ class Collectables extends Component {
   */
   collectablePressed = (fragmentId, collectableData) => {
     let glypheArray= this.isAnObjectCompleted(fragmentId)
-    console.log(fragmentId)
-    if ( glypheArray ) {
+    console.log(glypheArray)
+    if ( Array.isArray(glypheArray) ) {
       let newGlyphe = glypheArray[0]
       this.state._dispatchNotification(
         "Nouvelle glyphe !",
@@ -163,9 +185,12 @@ class Collectables extends Component {
       )
       this.state._glypheFound(newGlyphe, fragmentId)
     } else {
+      let glypheCompletion = this.getGlypheCompletion(fragmentId)
+      console.log(glypheCompletion)
       this.state._dispatchNotification(
         "Nouveaux fragement !",
-        "Bravo vous avez touvé un " + collectableData.name,
+        "Bravo vous avez touvé "+ glypheCompletion.completed+" sur " +glypheCompletion.all +" "+ collectableData.name,
+
         microInteraction.findFragment
       )
       this.state._fragementFound(fragmentId)

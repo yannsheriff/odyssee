@@ -214,7 +214,7 @@ componentWillReceiveProps(nextProps) {
   }
 
   toggleMenu = () => {
-    this.state._toggleMenu();
+    this.state._toggleMenu(1);
   }
 
 
@@ -290,8 +290,8 @@ const mapDispatchToProps = dispatch => {
     goToPreviousStep: () => {
       dispatch(goToPreviousStep())
     },
-    toggleMenu: () => {
-      dispatch(toggleMenu());
+    toggleMenu: (page) => {
+      dispatch(toggleMenu(page));
     }
   }
 }

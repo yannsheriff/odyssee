@@ -20,19 +20,19 @@
         },
         {
             "id": 4,
-            "name": "fragements de Zeus",
+            "name": "fragements d'Athena",
             "x": 100,
             "y": 200
         },
         {
             "id": 5,
-            "name": "fragements de Zeus",
+            "name": "fragements d'Athena",
             "x": 46,
             "y": 76
         },
         {
             "id": 6,
-            "name": "fragements de Zeus",
+            "name": "fragements d'Athena",
             "x": 89,
             "y": 300
         }
@@ -42,7 +42,7 @@
             "id": 0,
             "name": "Éol",
             "icon": "eol",
-            "fragments": [1]
+            "fragments": [1,2]
         },
         {
             "id": 1,
@@ -54,25 +54,25 @@
             "id": 2,
             "name": "Elios",
             "icon": "ios",
-            "fragments": [4,5,6]
+            "fragments": [7,8,9]
         },
         {
             "id": 4,
             "name": "Hades",
             "icon": "des",
-            "fragments": [4,5,6]
+            "fragments": [10,11]
         },
         {
             "id": 5,
             "name": "Chronos",
             "icon": "ono",
-            "fragments": [4,5,6]
+            "fragments": [12,13,14]
         },
         {
             "id": 6,
             "name": "Poseidon",
             "icon": "sei",
-            "fragments": [4,5,6]
+            "fragments": [17,15,16]
         }
     ]
 }

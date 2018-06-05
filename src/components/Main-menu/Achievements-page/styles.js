@@ -33,34 +33,27 @@ const styles = StyleSheet.create({
     width: (screen.width / 100) * 70,
     height: (screen.width / 100) * 70
   },
-  touchable: {
-    height: 60,
-    width: 60,
-    borderRadius: 50
+  achievementContainer: {
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    flex: 1,
+    height: 50
   },
-  collectablesContainer: {
-    width: 70,
-    marginRight: 15,
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  glyphsFont: {
+  achievementText: {
     color: "white",
-    fontFamily: "Ravenia",
     fontSize: 18,
-    position: "absolute",
-    top: 22,
-    width: 60,
-    textAlign: "center",
-    height: 40
+    width: screen.width / 100 * 80
   },
-  glyphesName: {
-    textAlign: "center",
-    color: "white",
-    width: 70,
-    marginTop: 5
+  achievementImage: {
+    width: 30,
+    height: 30,
   },
-  partConatiner: {
+  scrollview: {
+    height: screen.height /100 * 53.5
+  },
+  partContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start"

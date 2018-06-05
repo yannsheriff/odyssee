@@ -12,7 +12,8 @@ export function menu(state = {}, action) {
         case TOGGLE_MENU:
             return {
                 ...state,
-                displayMenu: !state.displayMenu
+                displayMenu: !state.displayMenu,
+                page: action.page
             }
         
         case EQUIP_GLYPH:
