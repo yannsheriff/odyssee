@@ -179,8 +179,8 @@ class Collectables extends Component {
     if ( Array.isArray(glypheArray) ) {
       let newGlyphe = glypheArray[0]
       this.state._dispatchNotification(
-        "Nouvelle glyphe !",
-        "Bravo vous avez touvé la " + collectables.glyphs[newGlyphe].name,
+        "Nouvelle glyphe !", null,
+        "Bravo vous avez touvé la " + collectables.glyphs[newGlyphe].name, 
         microInteraction.findGlyphe
       )
       this.state._glypheFound(newGlyphe, fragmentId)
@@ -189,8 +189,8 @@ class Collectables extends Component {
       console.log(glypheCompletion)
       this.state._dispatchNotification(
         "Nouveaux fragement !",
-        "Bravo vous avez touvé "+ glypheCompletion.completed+" sur " +glypheCompletion.all +" "+ collectableData.name,
-
+        glypheCompletion.completed+"/"+glypheCompletion.all,
+        collectableData.name,
         microInteraction.findFragment
       )
       this.state._fragementFound(fragmentId)
@@ -269,8 +269,8 @@ class Collectables extends Component {
       saveCollectables: (state)=> {
         dispatch(saveCollectables(state))
       },
-      callnotification: (title, sub, anim) => {
-        dispatch(printNotification(title, sub, anim))
+      callnotification: (title, sub, sub2, anim) => {
+        dispatch(printNotification(title, sub, sub2, anim))
       },
     }
   }

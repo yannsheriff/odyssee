@@ -2,37 +2,37 @@
     "fragments": [
         {
             "id": 1,
-            "name": "fragements d'Éol",
+            "name": "Fragements d'Éol",
             "x": 46,
             "y": 76
         },
         {
             "id": 2,
-            "name": "fragements d'Éol",
+            "name": "Fragements d'Éol",
             "x": 100,
             "y": 200
         },
         {
             "id": 3,
-            "name": "fragements d'Éol",
+            "name": "Fragements d'Éol",
             "x": 100,
             "y": 200
         },
         {
             "id": 4,
-            "name": "fragements d'Athena",
+            "name": "Fragements d'Athena",
             "x": 100,
             "y": 200
         },
         {
             "id": 5,
-            "name": "fragements d'Athena",
+            "name": "Fragements d'Athena",
             "x": 46,
             "y": 76
         },
         {
             "id": 6,
-            "name": "fragements d'Athena",
+            "name": "Fragements d'Athena",
             "x": 89,
             "y": 300
         }
@@ -42,7 +42,7 @@
             "id": 0,
             "name": "Éol",
             "icon": "eol",
-            "fragments": [1,2]
+            "fragments": [1]
         },
         {
             "id": 1,
