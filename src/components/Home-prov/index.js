@@ -14,6 +14,7 @@ import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import { AsyncStorage } from 'react-native';
 import { requestStore } from '../../redux/actions/loading'
+import { NavigationActions } from "react-navigation";
 
 
 //  Import Helpers
@@ -43,9 +44,25 @@ class Accueil extends Component {
     componentWillReceiveProps(nextProps) {
         if(this.requestFlushData) {
             this.requestFlushData = false
-            this.props.navigation.navigate('Island', { islandId: 1})
+            this.navigateToIsland()
         }
     }
+
+    navigateToSailing = () => {
+        const navigate = NavigationActions.navigate({
+          routeName: 'Sailing',
+          params: {}
+        });
+        this.props.navigation.dispatch(navigate);
+      };
+
+      navigateToIsland = () => {
+        const navigate = NavigationActions.navigate({
+          routeName: 'Island',
+          params: { islandId: 1 }
+        });
+        this.props.navigation.dispatch(navigate);
+      };
     
 
     render() {
@@ -59,14 +76,14 @@ class Accueil extends Component {
                 <View style={styles.center}>
                     <View style={styles.buttonBorder}>
                         <Button
-                            onPress={() => this.props.navigation.navigate('Sailing')}
+                            onPress={this.navigateToSailing}
                             title={'Aller a la navigation'}
                             color="#fff"
                         />
                     </View>
                     <View style={styles.buttonBorder}>
                     <Button
-                        onPress={() => this.props.navigation.navigate('Island', { islandId: 1})} // props news on this island
+                        onPress={this.navigateToIsland} // props news on this island
                         title={'Aller a l\'ile'}
                         color="#fff"
                     />
