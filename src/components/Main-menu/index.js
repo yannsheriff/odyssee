@@ -7,6 +7,7 @@ import screen from "../../helpers/ScreenSize";
 import Achivements from "./Achievements-page";
 import { BlurView } from "react-native-blur";
 import renderIf from "../../helpers/renderIf";
+import ReactNativeHaptic from 'react-native-haptic'
 
 import Swiper from "react-native-swiper";
 import images from "../../assets/images";
@@ -100,6 +101,7 @@ class MainMenu extends React.Component {
 
 
   closeMenu = () => {
+    ReactNativeHaptic.generate('impact')
     this.state._saveMenu(this.state.reduxStore.menu)
     this.state._toggleMenu();
   };

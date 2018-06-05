@@ -36,7 +36,7 @@ class VisualNotification extends React.Component {
         if(nextProps.notification.animation) {
           Animated.timing(this.state.progress, {
             toValue: 1,
-            duration: 4000,
+            duration: 2300,
             easing: Easing.linear,
           }).start(()=> {
             this.setState({

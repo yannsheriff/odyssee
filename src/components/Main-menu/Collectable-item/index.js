@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import images from "../../../assets/images"
 import styles from "./styles"
-
+import ReactNativeHaptic from 'react-native-haptic'
 
 
 
@@ -32,6 +32,7 @@ export default class CollectableItem extends React.Component {
  }
 
   toggleSelectedGlyphe = id => {
+    ReactNativeHaptic.generate('selection')
     this.state.onPress(id)
   }
 

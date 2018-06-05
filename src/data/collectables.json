@@ -42,7 +42,7 @@
             "id": 0,
             "name": "Éol",
             "icon": "eol",
-            "fragments": [1]
+            "fragments": [1,2]
         },
         {
             "id": 1,

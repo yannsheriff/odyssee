@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import React, { Component } from 'react';
+import ReactNativeHaptic from 'react-native-haptic'
 
 //  Import Components
 // --------------------------------------------------------------
@@ -214,6 +215,7 @@ componentWillReceiveProps(nextProps) {
   }
 
   toggleMenu = () => {
+    ReactNativeHaptic.generate('impact')
     this.state._toggleMenu(1);
   }
 
