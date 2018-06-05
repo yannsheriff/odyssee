@@ -3,6 +3,7 @@ import { Animated, Easing, View, Text, StyleSheet, Button,TouchableOpacity, Imag
 import LottieView from "lottie-react-native";
 import { connect } from "react-redux";
 import { toggleMenu, saveMenu, navigateTo } from "../../redux/actions/menu";
+import { goToSailing } from "../../redux/actions/navigation";
 import screen from "../../helpers/ScreenSize";
 import Achivements from "./Achievements-page";
 import { BlurView } from "react-native-blur";
@@ -12,6 +13,7 @@ import ReactNativeHaptic from 'react-native-haptic'
 import Swiper from "react-native-swiper";
 import images from "../../assets/images";
 import styles from './styles';
+import { NavigationActions } from "react-navigation";
 
 
 class MainMenu extends React.Component {
@@ -22,9 +24,10 @@ class MainMenu extends React.Component {
       reduxStore: this.props.store,
       paginationPosition: new Animated.Value(0),
       display: false,
-      popupDisplay: true,
+      popupDisplay: false,
       _toggleMenu: this.props.toggleMenu,
       _saveMenu: this.props.saveMenu,
+      _goToSailing: this.props.goToSailing,
     };
   }
 
@@ -33,6 +36,7 @@ class MainMenu extends React.Component {
       if(nextProps.store.menu.page) {
         this.page = nextProps.store.menu.page,
         this.setState({
+          page: nextProps.store.menu.page,
           reduxStore: nextProps.store,
           display: nextProps.store.menu.displayMenu,
           paginationPosition: new Animated.Value(nextProps.store.menu.page * (screen.width / 3)),
@@ -42,6 +46,7 @@ class MainMenu extends React.Component {
           reduxStore: nextProps.store,
           display: nextProps.store.menu.displayMenu,
           paginationPosition: new Animated.Value(0),
+          popupDisplay: false
         });
       }
       
@@ -52,23 +57,32 @@ class MainMenu extends React.Component {
     }
   }
 
-
-
   indexDidChange = id => {
+    console.log(id)
+    this.page = id
     Animated.timing(
       this.state.paginationPosition, 
       {
         toValue: id * (screen.width / 3),
         duration: 200 
       }
-    ).start();
-    this.page = id
+    ).start(()=>{
+      this.forceUpdate();
+    });
+    
   };
 
-  quitIsland() {
-
+  displayQuitPopup = () => {
+    this.setState({
+      popupDisplay: true
+    })
   }
 
+  navigateToSailing = () => {
+    this.closeMenu()
+    this.state._goToSailing()
+
+  };
 
   closeMenu = () => {
     ReactNativeHaptic.generate('impact')
@@ -113,7 +127,7 @@ class MainMenu extends React.Component {
                 style={styles.wrapper}
                 showsPagination={false}
                 onIndexChanged={this.indexDidChange}
-                index={this.page}
+                index={ this.state.page }
               >
                 <View style={styles.slide1}>
                   <Text style={styles.text}>Hello Swiper</Text>
@@ -122,7 +136,11 @@ class MainMenu extends React.Component {
                   <Achivements  />
                 </View>
                 <View style={styles.slide3}>
-                  <Text style={styles.text}>And simple</Text>
+                  <Button
+                    onPress={this.displayQuitPopup}
+                    title={'Quitter l\'ile'}
+                    color={'white'}
+                  />
                 </View>
               </Swiper>
               <View
@@ -132,11 +150,11 @@ class MainMenu extends React.Component {
                   style={[styles.navigationIndicator, {left: this.state.paginationPosition,}]}
                 />
                 <View style={styles.categories}> 
-                  <Text style={[styles.categorieMenu, { opacity: this.state.page === 0 ? 1 : 0.7 }]}>Carte</Text>
+                  <Text style={[styles.categorieMenu, { opacity: this.page === 0 ? 1 : 0.5 }]}>Carte</Text>
                   <View style={[styles.dash, {marginLeft: -10}]} />
-                  <Text style={[styles.categorieMenu, { opacity: this.state.page === 1 ? 1 : 0.7 }]}>Inventaire</Text>
+                  <Text style={[styles.categorieMenu, { opacity: this.page === 1 ? 1 : 0.5 }]}>Inventaire</Text>
                   <View style={[styles.dash, {marginRight: -9}]}/>
-                  <Text style={[styles.categorieMenu, { opacity: this.state.page === 2 ? 1 : 0.7 }]}>Reglages</Text>
+                  <Text style={[styles.categorieMenu, { opacity: this.page === 2 ? 1 : 0.5 }]}>Reglages</Text>
                 </View>
               </View> 
             </View>)}
@@ -146,7 +164,7 @@ class MainMenu extends React.Component {
                 <Text style={{textAlign: "center", color: "white", fontSize: 22, fontFamily: "Infini-Regular",width: screen.width /100 * 90 }} > Etes-vous sur de vouloir quitter l'ile ? </Text>
                 <View style={{marginTop: 30, flexDirection: "row", justifyContent: "space-around", width: screen.width / 100 * 60 }}>
                   <TouchableOpacity
-                    onPress={() => { this.state._navigateTo('Sailing') }}
+                    onPress={this.navigateToSailing}
                   >
                    <Text style={{textAlign: "center", color: "white", fontSize: 22, fontFamily: "Infini-Regular"}} > Oui </Text>
                    </TouchableOpacity>
@@ -187,6 +205,9 @@ const mapDispatchToProps = dispatch => {
     },
     navigateTo: (screen) => {
       dispatch(navigateTo(screen))
+    },
+    goToSailing: ()=> {
+      dispatch(goToSailing())
     }
   };
 };

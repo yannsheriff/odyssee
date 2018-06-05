@@ -44,7 +44,7 @@ class Accueil extends Component {
     componentWillReceiveProps(nextProps) {
         if(this.requestFlushData) {
             this.requestFlushData = false
-            this.props.navigation.navigate('Island', { islandId: 1})
+            this.navigateToIsland()
         }
     }
 
