@@ -33,13 +33,14 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
     },
-    animation: {
+    animationContainer: {
         position: "absolute",
-        top: 233.5,
-        left: -5.5,
-        height: 400,
-        width: 400,
-        // backgroundColor: 'black'
+        height: 150,
+        width: 150,
+    },
+    animation: {
+        height: 150,
+        width: 150,
     }
     
 });

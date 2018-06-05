@@ -257,6 +257,7 @@ componentWillReceiveProps(nextProps) {
             style={styles.menu}
           />
         </TouchableOpacity>
+        
       </View> )
     } else {
       var view = (<View><Text style={{color: 'white', textAlign: "center", marginTop: 300}}> Loading ... </Text></View>)
