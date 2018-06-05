@@ -3,45 +3,66 @@ import screen from '../../helpers/ScreenSize'
 
 
 const styles = StyleSheet.create({
-    container: {
-        width: screen.width,
-        height: screen.height,
-        backgroundColor: 'rgba(000, 000, 000, 0.9)',
-        // opacity: 0.7,
-        position: "absolute",
-        top: 0,
-        left: 0,
-        flexDirection: "column",
-        alignItems: "center",
+    wrapper: {},
+    slide1: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "transparent"
     },
-    title: {
-        width: screen.width / 100 * 60,
-        marginTop: 120,
-        fontFamily: "Infini-Regular",
-        fontSize: 32,
-        color: 'white',
-        textAlign: 'center',
+    slide2: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#97CAE5"
     },
-    subtitle: {
-        width: screen.width / 100 * 60,
-        marginTop: 20,
-        fontSize: 16,
-        color: 'white',
-        textAlign: 'center',
+    slide3: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "transparent"
     },
-    animation: {
-        marginTop: 20,
-        width: screen.width / 100 * 70,
-        height: screen.width / 100 * 70,
+    text: {
+      color: "#fff",
+      fontSize: 30,
+      fontWeight: "bold"
     },
     absolute: {
-        width: screen.width,
-        height: screen.height,
-        position: "absolute",
-        top: 0, 
-        left: 0
+      width: screen.width,
+      height: screen.height,
+      position: "absolute",
+      top: 0,
+      left: 0
+    }, 
+    categorieMenu: {
+      flex: 1,
+      fontFamily: "Infini-Regular",
+      color: "white",
+      fontSize: 18,
+      textAlign: "center",
+    }, 
+    categories: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: 15
+    }, 
+    close: { position: "absolute", top: 70, right: 20, zIndex: 50 },
+    dash: { width: 1, height: 20, backgroundColor: 'rgba(255, 255, 255, 0.5)',  },
+    navigationLine: {
+      position: "absolute",
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      bottom: 80,
+      left: 0,
+      width: screen.width,
+      height: 4
     },
-    
-});
+    navigationIndicator: {
+      position: "absolute",
+      backgroundColor: "#fff",
+      bottom: 0,
+      width: screen.width / 3,
+      height: 4
+    }
+  });
 
 export default styles

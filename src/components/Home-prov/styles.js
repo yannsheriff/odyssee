@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
     center: {
         position: 'absolute',
-        top: 550, 
+        top: screen.height/ 100 * 65, 
         left: 0,
         width: screen.width,
         flexDirection: "column",

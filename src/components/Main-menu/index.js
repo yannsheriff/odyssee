@@ -11,53 +11,18 @@ import ReactNativeHaptic from 'react-native-haptic'
 
 import Swiper from "react-native-swiper";
 import images from "../../assets/images";
+import styles from './styles';
 
-// import styles from './styles';\
-
-const styles = StyleSheet.create({
-  wrapper: {},
-  slide1: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent"
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#97CAE5"
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent"
-  },
-  text: {
-    color: "#fff",
-    fontSize: 30,
-    fontWeight: "bold"
-  },
-  absolute: {
-    width: screen.width,
-    height: screen.height,
-    position: "absolute",
-    top: 0,
-    left: 0
-  }
-});
 
 class MainMenu extends React.Component {
   constructor(props) {
     super(props);
-
+    this.page = 0 
     this.state = {
       reduxStore: this.props.store,
       paginationPosition: new Animated.Value(0),
       _toggleMenu: this.props.toggleMenu,
       _saveMenu: this.props.saveMenu,
-      page: 0,
       display: false
     };
   }
@@ -65,10 +30,10 @@ class MainMenu extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.store.menu.displayMenu !== this.state.display) {
       if(nextProps.store.menu.page) {
+        this.page = nextProps.store.menu.page,
         this.setState({
           reduxStore: nextProps.store,
           display: nextProps.store.menu.displayMenu,
-          page: nextProps.store.menu.page,
           paginationPosition: new Animated.Value(nextProps.store.menu.page * (screen.width / 3)),
         });
       } else {
@@ -86,17 +51,17 @@ class MainMenu extends React.Component {
     }
   }
 
-  componentDidMount() {}
+
 
   indexDidChange = id => {
     Animated.timing(
-      // Animate value over time
-      this.state.paginationPosition, // The value to drive
+      this.state.paginationPosition, 
       {
         toValue: id * (screen.width / 3),
-        duration: 200 // Animate to final value of 1
+        duration: 200 
       }
     ).start();
+    this.page = id
   };
 
 
@@ -124,12 +89,24 @@ class MainMenu extends React.Component {
               blurType="light"
               blurAmount={20}
             />
+            <View
+              style={styles.close}
+            >
+              <TouchableOpacity 
+                onPress={this.closeMenu} 
+                style={{width: 30, height: 30}}
+              >
+                <Image 
+                  style={{width: 30, height: 30}}
+                  source={images.closeMainMenu} 
+                  />
+              </TouchableOpacity>
+            </View>
             <Swiper
               style={styles.wrapper}
-              loop={true}
               showsPagination={false}
               onIndexChanged={this.indexDidChange}
-              index={this.state.page}
+              index={this.page}
             >
               <View style={styles.slide1}>
                 <Text style={styles.text}>Hello Swiper</Text>
@@ -142,38 +119,18 @@ class MainMenu extends React.Component {
               </View>
             </Swiper>
             <View
-              style={{ position: "absolute", top: 70, right: 20, zIndex: 50 }}
-            >
-              <TouchableOpacity 
-                onPress={this.closeMenu} 
-                style={{width: 30, height: 30}}
-              >
-                <Image 
-                  style={{width: 30, height: 30}}
-                  source={images.closeMainMenu} 
-                  />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                position: "absolute",
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                bottom: 80,
-                left: 0,
-                width: screen.width,
-                height: 4
-              }}
+              style={styles.navigationLine}
             >
               <Animated.View
-                style={{
-                  position: "absolute",
-                  backgroundColor: "#fff",
-                  bottom: 0,
-                  left: this.state.paginationPosition,
-                  width: screen.width / 3,
-                  height: 4
-                }}
+                style={[styles.navigationIndicator, {left: this.state.paginationPosition,}]}
               />
+              <View style={styles.categories}> 
+                <Text style={[styles.categorieMenu, { opacity: this.state.page === 0 ? 1 : 0.7 }]}>Carte</Text>
+                <View style={[styles.dash, {marginLeft: -10}]} />
+                <Text style={[styles.categorieMenu, { opacity: this.state.page === 1 ? 1 : 0.7 }]}>Inventaire</Text>
+                <View style={[styles.dash, {marginRight: -9}]}/>
+                <Text style={[styles.categorieMenu, { opacity: this.state.page === 2 ? 1 : 0.7 }]}>Reglages</Text>
+              </View>
             </View>
           </View>
         )}
