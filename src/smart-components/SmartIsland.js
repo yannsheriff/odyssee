@@ -5,6 +5,9 @@ import {
   SafeAreaView,
   Text,
   View, 
+  TouchableOpacity,
+  StyleSheet, 
+  Image
 } from 'react-native'
 import { connect } from 'react-redux'
 import React, { Component } from 'react';
@@ -20,6 +23,7 @@ import Collectables from '../components/Island/Collectables'
 // --------------------------------------------------------------
 import { goToStep, saveIslandData, requestIslandData, goToPreviousStep } from '../redux/actions/island'
 import { foundNewCollectable, saveCollectables } from '../redux/actions/collectables'
+import { toggleMenu } from '../redux/actions/menu'
 
 //  Import Data
 // --------------------------------------------------------------
@@ -30,6 +34,7 @@ import { collectables } from '../data'
 // --------------------------------------------------------------
 import screen from '../helpers/ScreenSize'
 import { storeService } from '../helpers/saveData'
+import images from '../assets/images';
 
 
 
@@ -56,6 +61,7 @@ class SmartIsland extends Component {
       _goToPreviousStep: this.props.goToPreviousStep,
       _saveData: this.props.saveData,
       _requestIslandData: this.props.requestIslandData,
+      _toggleMenu: this.props.toggleMenu
     }
     
   }
@@ -116,7 +122,6 @@ componentWillReceiveProps(nextProps) {
       })
     } 
 
-    console.log(collectableData)
 
     let snippetArray = []
     let haveAction = true
@@ -208,6 +213,11 @@ componentWillReceiveProps(nextProps) {
     //do something
   }
 
+  toggleMenu = () => {
+    this.state._toggleMenu(1);
+  }
+
+
   render() {
 
     if (  this.state.actions 
@@ -235,6 +245,16 @@ componentWillReceiveProps(nextProps) {
           array={ this.state.collectables }
           collectablePressed={ this.collectableFound }
         />
+        <TouchableOpacity 
+          onPress={ this.toggleMenu }
+          style={ styles.menuContainer}
+        >
+          <Image 
+            source={images.burger}
+            resizeMethod="contain"
+            style={styles.menu}
+          />
+        </TouchableOpacity>
       </View> )
     } else {
       var view = (<View><Text style={{color: 'white', textAlign: "center", marginTop: 300}}> Loading ... </Text></View>)
@@ -270,6 +290,9 @@ const mapDispatchToProps = dispatch => {
     goToPreviousStep: () => {
       dispatch(goToPreviousStep())
     },
+    toggleMenu: (page) => {
+      dispatch(toggleMenu(page));
+    }
   }
 }
 
@@ -280,3 +303,20 @@ const componentContainer = connect(
 )(SmartIsland)
 
 export default componentContainer
+
+
+
+const styles = StyleSheet.create({
+
+  menu: {
+    width: 30,
+    height: 30,
+  },
+  menuContainer: {
+    position: "absolute",
+    top: 35,
+    right: 20,
+    width: 30,
+    height: 30,
+  },
+});

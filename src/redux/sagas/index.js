@@ -2,6 +2,7 @@ import { delay } from 'redux-saga'
 import { put, takeEvery, all } from 'redux-saga/effects'
 import { SAVE_ISLAND_DATA, REQUEST_ISLAND_DATA, dispatchIslandData } from '../actions/island'
 import { SAVE_SAILING } from '../actions/sailing'
+import { SAVE_MENU } from '../actions/menu'
 import { SAVE_COLLECTABLES } from '../actions/collectables'
 import { REQUEST_STORE, populateStore } from '../actions/loading'
 import { storeService } from '../../helpers/saveData'
@@ -86,6 +87,21 @@ export function* saveCollectablesData(action) {
   console.log('Saved ✅')
 }
 
+export function* saveMenuData(action) {
+  const data = yield storeService.getSaving()
+  console.log('Saving data ⏳')
+  console.log(action)
+  var newState = {
+    ...data,
+    menu: {
+      displayMenu: false,
+      collectableEquipped: action.state.collectableEquipped,
+    }
+  }
+  yield storeService.save(newState)
+  console.log('Saved ✅')
+}
+
 export function* dispatchPopulateStore() {
   console.log('Populating data ⏳')
   const data = yield storeService.loadState()
@@ -150,6 +166,10 @@ export function*  watchSavingSailing() {
   yield takeEvery(SAVE_SAILING, saveSailingData)
 }
 
+export function*  watchSavingMenu() {
+  yield takeEvery(SAVE_MENU, saveMenuData)
+}
+
 export function* watchSavingCollectables() {
   yield takeEvery(SAVE_COLLECTABLES, saveCollectablesData)
 }
@@ -172,6 +192,7 @@ export default function* rootSaga() {
     watchPopulateStore(),
     watchRequestIslandData(),
     watchSavingSailing(),
-    watchSavingCollectables()
+    watchSavingCollectables(),
+    watchSavingMenu()
   ])
 }

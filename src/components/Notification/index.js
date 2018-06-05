@@ -3,6 +3,7 @@ import { Animated, Easing, View, Text } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { connect } from 'react-redux'
 import ReactNativeHaptic from 'react-native-haptic';
+import { BlurView } from 'react-native-blur'
 
 import styles from './styles';
 
@@ -14,25 +15,34 @@ class VisualNotification extends React.Component {
       haveNotification: false,
       title: null,
       subtitle: null,
-      source: null
+      source: null,
+      progress: new Animated.Value(0),
+      displayText: 0
     }
     
   }
 
 
   componentWillReceiveProps (nextProps) {
-    console.log('yo')
     if(nextProps.notification.title) {
       ReactNativeHaptic.generate('notification')
       this.setState({
         haveNotification: true,
         title: nextProps.notification.title,
         subtitle: nextProps.notification.subtitle ? nextProps.notification.subtitle : '',
+        subtitle2: nextProps.notification.subtitle2 ? nextProps.notification.subtitle2 : '',
         source: nextProps.notification.animation ? nextProps.notification.animation : null
       }, () => {
         if(nextProps.notification.animation) {
-          this.animation.play();
-          
+          Animated.timing(this.state.progress, {
+            toValue: 1,
+            duration: 4000,
+            easing: Easing.linear,
+          }).start(()=> {
+            this.setState({
+              displayText: 1
+            })
+          });
         }
       })
     }
@@ -43,7 +53,7 @@ class VisualNotification extends React.Component {
   }
 
   closeNotification = () => {
-    this.setState({haveNotification: false})
+    this.setState({haveNotification: false, displayText: 0, progress: new Animated.Value(0) })
   }
   
 
@@ -54,24 +64,34 @@ class VisualNotification extends React.Component {
     if (this.state.haveNotification) {
       var notification = <View 
         style={ styles.container}
-        onStartShouldSetResponder={ (evt) => true }
-        onResponderGrant={  (evt) => { 
-          this.closeNotification()
-        }}>
+        >
 
-        <Text style={ styles.title }>{ this.state.title }</Text>
-        <Text style={ styles.subtitle }>{ this.state.subtitle }</Text>
+        <BlurView
+              style={styles.absolute}
+              viewRef={this.state.viewRef}
+              blurType="light"
+              blurAmount={20}
+            />
+
+       
         <View style={styles.animation}>
           <LottieView
             resizeMode="contain"
-            ref={animation => {
-              this.animation = animation;
-            }}
+            progress={this.state.progress}
             source={this.state.source}
             loop={false}
             style={styles.animation}
           />
         </View>
+        <Text style={[ styles.title, { opacity: this.state.displayText } ]}>{ this.state.title }</Text>
+        <Text style={[ styles.subtitle, { opacity: this.state.displayText } ]}>{ this.state.subtitle }</Text>
+        <Text style={[ styles.subtitle2, { opacity: this.state.displayText } ]}>{ this.state.subtitle2 }</Text>
+        <View 
+          style={styles.absolute } 
+          onStartShouldSetResponder={ (evt) => true }
+          onResponderGrant={  (evt) => { 
+            this.closeNotification()
+          }}/> 
       </View>
     }
 

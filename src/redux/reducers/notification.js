@@ -9,6 +9,7 @@ export function notification(state = [], action) {
                 ...state,
                 title: action.payload.title,
                 subtitle: action.payload.subtitle ? action.payload.subtitle : null, 
+                subtitle2: action.payload.subtitle2 ? action.payload.subtitle2 : null, 
                 animation: action.payload.animPath ? action.payload.animPath : null
             }
             

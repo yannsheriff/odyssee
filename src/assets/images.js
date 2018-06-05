@@ -6,6 +6,9 @@ const images = {
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
     homeScreen: require('./img/home.jpg'),
+    closeMainMenu: require('./img/croix.png'),
+    burger: require('./img/menu.png'),
+    glyphes: require('./img/CercleGlyph.png'),
     iles: {
       cyclope: require('./img/ile_cyclope.png'),
       cyclope_1: require('./img/cyclope_1.png'),

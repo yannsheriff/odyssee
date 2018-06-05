@@ -2,37 +2,37 @@
     "fragments": [
         {
             "id": 1,
-            "name": "fragements d'Éol",
+            "name": "Fragements d'Éol",
             "x": 46,
             "y": 76
         },
         {
             "id": 2,
-            "name": "fragements d'Éol",
+            "name": "Fragements d'Éol",
             "x": 100,
             "y": 200
         },
         {
             "id": 3,
-            "name": "fragements d'Éol",
+            "name": "Fragements d'Éol",
             "x": 100,
             "y": 200
         },
         {
             "id": 4,
-            "name": "fragements de Zeus",
+            "name": "Fragements d'Athena",
             "x": 100,
             "y": 200
         },
         {
             "id": 5,
-            "name": "fragements de Zeus",
+            "name": "Fragements d'Athena",
             "x": 46,
             "y": 76
         },
         {
             "id": 6,
-            "name": "fragements de Zeus",
+            "name": "Fragements d'Athena",
             "x": 89,
             "y": 300
         }
@@ -40,13 +40,39 @@
     "glyphs": [
         {
             "id": 0,
-            "name": "Glyphes d'Éol",
-            "fragments": [1,2,3]
+            "name": "Éol",
+            "icon": "eol",
+            "fragments": [1]
         },
         {
             "id": 1,
-            "name": "Glyphes de Zeus",
+            "name": "Athena",
+            "icon": "ena",
             "fragments": [4,5,6]
+        },
+        {
+            "id": 2,
+            "name": "Elios",
+            "icon": "ios",
+            "fragments": [7,8,9]
+        },
+        {
+            "id": 4,
+            "name": "Hades",
+            "icon": "des",
+            "fragments": [10,11]
+        },
+        {
+            "id": 5,
+            "name": "Chronos",
+            "icon": "ono",
+            "fragments": [12,13,14]
+        },
+        {
+            "id": 6,
+            "name": "Poseidon",
+            "icon": "sei",
+            "fragments": [17,15,16]
         }
     ]
 }
