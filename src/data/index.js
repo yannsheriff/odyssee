@@ -1,4 +1,5 @@
 import Collectables from './collectables.json'
+import Achievement from './achievement.json'
 import illu_cyclope from './illustrations/cyclopes.json'
 import writ_cyclope from './writing/cyclopes.json'
 
@@ -13,3 +14,4 @@ export default islands = [
 ]
 
 export const collectables = Collectables
+export const achievement = Achievement

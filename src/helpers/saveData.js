@@ -32,6 +32,10 @@ class StoreService {
           fragments:[],
           glyphs: []
         },
+        menu: {
+          displayMenu: false,
+          collectableEquipped: [],
+        },
         visitedIsland:[{}],
         sailing: {
           orientation: 0,
@@ -97,6 +101,10 @@ class StoreService {
             animation: undefined,
           },
           isOnIsland: false,
+          menu: {
+            displayMenu: false,
+            collectableEquipped: [],
+          },
           collectables: {
             fragments:[],
             glyphs: []
@@ -137,6 +145,10 @@ class StoreService {
             animation: undefined,
           },
           isOnIsland: false,
+          menu: {
+            displayMenu: false,
+            collectableEquipped: dataSaved.menu.collectableEquipped,
+          },
           collectables: {
             fragments: dataSaved.collectables.fragments,
             glyphs: dataSaved.collectables.glyphs

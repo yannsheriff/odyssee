@@ -55,6 +55,11 @@ export default class MultiActionButton extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if(this.state.isActive) {
+      this.animationAction.play()
+    } 
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if(this.state.isActive) {
@@ -355,15 +360,20 @@ export default class MultiActionButton extends React.Component {
             >  {this.state.text} </Text>
             <View>
               {renderIf(this.state.isActive,
-                <LottieView 
-                        style={styles.animation}
-                        source={ microInteraction.actionMenu } 
-                        loop={ true }
-                        speed={0.5}
-                        ref={animation => {
-                          this.animationAction = animation;
-                        }}
-                    />)}
+                <View  style={[styles.animationContainer, { top: 
+                  this.initialPosition.y - 50, 
+                  left:this.initialPosition.x -50
+                }]}>
+                  <LottieView 
+                    style={ styles.animation }
+                    source={ microInteraction.actionMenu } 
+                    loop={ true }
+                    speed={0.5}
+                    ref={animation => {
+                      this.animationAction = animation;
+                    }}
+                    />
+                  </View>)}
               <View 
                 style={[{
                   position: "absolute",

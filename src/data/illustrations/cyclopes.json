@@ -49,7 +49,7 @@
                 "middle": -300,
                 "back": -200
             },
-            "collectables": [3],
+            "collectables": [5],
             "animation": {
                 "loop": true,
                 "animationId": 1,
@@ -64,6 +64,7 @@
                 "middle": -600,
                 "back": -300
             },
+            "collectables": [6],
             "animation": {
                 "loop": true,
                 "animationId": 1,
