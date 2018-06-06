@@ -22,7 +22,7 @@ export const animations = [
 export const microInteraction = {
   actionMenu: require('./RondAnimMenuAction.json'),
   findFragment:  require('./GlyphAnim.json'),
-  findGlyphe:  require('./GlythComplete.json')
+  findGlyphe:  require('./GlyphComplete.json')
 }
 
 export const loaderAnim = require('./loaderAnim.json')

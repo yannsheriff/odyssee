@@ -179,8 +179,8 @@ class Collectables extends Component {
     if ( Array.isArray(glypheArray) ) {
       let newGlyphe = glypheArray[0]
       this.state._dispatchNotification(
-        "Nouvelle glyphe !", null,
-        "Bravo vous avez touvé la " + collectables.glyphs[newGlyphe].name, 
+        "Nouvelle bénédiction !", null,
+        "Bravo vous avez obtenu la bénédiction d'" + collectables.glyphs[newGlyphe].name, 
         microInteraction.findGlyphe
       )
       this.state._glypheFound(newGlyphe, fragmentId)
