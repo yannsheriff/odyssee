@@ -9,16 +9,23 @@ const InitialNavigator = StackNavigator({
       screen: Accueil
     }, 
     Sailing: {
-      screen: Sailing
+      screen: Sailing,
+      navigationOptions: {
+        gesturesEnabled: false,
+      },
     },
     Island: {
-      screen: Island
+      screen: Island,
+      navigationOptions: {
+        gesturesEnabled: false,
+      },
     },
     Test: {
       screen: test
     },
   }, {
     headerMode: 'none',
+    gesturesEnabled: false,
   })
 
   export default InitialNavigator;
