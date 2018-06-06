@@ -192,7 +192,7 @@ componentWillReceiveProps(nextProps) {
     }, () => {
       setTimeout(()=>{
         this.isTransitionFinished = true
-      }, 2000)
+      }, 4000)
     })
   }
 

@@ -14,19 +14,28 @@ export default class Loader extends React.Component {
 
     this.state = {
       anim: new Animated.Value(0),
+      opacity: new Animated.Value(1),
     }
     
   }
   componentDidMount() {
-    Animated.timing(this.state.anim, {
-      toValue: 1, 
-      duration: 1500,
-    }).start()
+
+    Animated.sequence([
+      Animated.timing(this.state.anim, {
+        toValue: 1, 
+        duration: 1500,
+      }),
+      Animated.timing(this.state.opacity, {
+        toValue: 0, 
+        duration: 1000,
+      })
+    ]).start()
+
   }
 
   render() {
       return (
-        <View style={styles.container}>
+        <Animated.View  style={[ styles.container, { opacity: this.state.opacity }]}>
           <View style={styles.anim}> 
             <LottieView 
               style={styles.anim}
@@ -34,7 +43,7 @@ export default class Loader extends React.Component {
               progress={this.state.anim}
             />
           </View>
-        </View>
+        </Animated.View>
     );
   }
 }
