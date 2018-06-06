@@ -232,7 +232,7 @@ class Collectables extends Component {
                 height: 20,
                 top: collectable.y,
                 left: collectable.x,
-                backgroundColor: 'red',
+                backgroundColor: 'white',
               }}
             />  
            )

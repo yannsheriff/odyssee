@@ -18,8 +18,6 @@ const styles = StyleSheet.create({
     fontFamily: "Ravenia",
     fontSize: 18,
     position: "absolute",
-    top: 22,
-    width: 60,
     textAlign: "center",
     height: 40
   },
