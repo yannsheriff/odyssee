@@ -20,7 +20,7 @@ import styles from './styles'
 //  Import assets
 // --------------------------------------------------------------
 import { backgrounds } from '../../../assets/images'
-import animations from '../../../assets/anim'
+import {animations} from '../../../assets/anim'
 
 //  Import components
 // --------------------------------------------------------------
@@ -44,6 +44,7 @@ export default class Illustrations extends Component {
         animationId: props.animation.animationId,
         animationDuration: props.animation.animationDuration,
         transitionDuration: props.animation.transitionDuration,
+        swipBackward: props.swipBackward
       },
       image: props.source
     }
@@ -63,6 +64,7 @@ export default class Illustrations extends Component {
             animationId: nextProps.animation.animationId,
             animationDuration: nextProps.animation.animationDuration,
             transitionDuration: nextProps.animation.transitionDuration,
+            swipBackward: nextProps.swipBackward
           },
         })
       }
@@ -85,6 +87,7 @@ export default class Illustrations extends Component {
             animationDuration={ this.state.animation.animationDuration } 
             transitionDuration={ this.state.animation.transitionDuration }
             loop={ this.state.animation.loop }
+            swipBack={this.state.animation.swipBackward}
           />
           
           <ParallaxLayout 

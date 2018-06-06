@@ -2,8 +2,8 @@
 // --------------------------------------------------------------
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Button } from 'react-native'
-import Svg,{ Rect, Circle, G } from 'react-native-svg'
+import { View } from 'react-native'
+import Svg,{ Rect, Circle, G, Text } from 'react-native-svg'
 
 
 //  Import Helpers
@@ -15,14 +15,13 @@ import styles from './styles'
 //  Import Constants
 // --------------------------------------------------------------
 import { mapSize } from '../../constants'
-
-//  Import Components
-// --------------------------------------------------------------
-import MiniIslands from './miniIslands'
+import { IslandsData } from '../../constants/islands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { hideMap } from  '../../redux/actions/sailing'
+
+import { hideMap, updateDestination } from  '../../redux/actions/sailing'
+
 
 class MiniatureMap extends Component {
 
@@ -31,8 +30,53 @@ class MiniatureMap extends Component {
 
     this.state = {
       _hideMap: this.props.hideMap,
-      position: this.props.sailing.position
+      _updateDestination: this.props.updateDestination,
+      position: this.props.sailing.position,
+      destination: this.props.sailing.destination
     }
+  }
+
+  _switchDestination (target) {
+    if (target.id !== this.state.destination.id) {
+      this.setState({
+        destination: target
+      })
+      const destination = {
+        id: target.id,
+        x: target.position.x,
+        y: target.position.y
+      }
+      this.state._updateDestination(destination)
+    } else {
+      this.setState({
+        destination: ''
+      })
+      this.state._updateDestination('')
+    }
+  }
+
+  _renderIslands () {
+    return IslandsData.map((c) => {
+      if (c.isIsland) {
+        let color = '#ffffff40'
+        if (c.id === this.state.destination.id) {
+          color = 'red'
+        }
+        return (
+          <Circle
+            key={c.id}
+            fill={ color }
+            scale={1}
+            originX={c.size / 2}
+            originY={c.size / 2}
+            cx={(mapSize.x - c.position.x) / mapSize.x * screen.width}
+            cy={(mapSize.y - c.position.y) / mapSize.y * screen.height}
+            r="5"
+            onPress={() => { this._switchDestination(c) }}
+          />
+        )
+      }
+    })
   }
 
   render() {
@@ -57,7 +101,7 @@ class MiniatureMap extends Component {
               fill="#0071e9"
               onPress={this.state._hideMap}
             />
-            <MiniIslands/>
+            { this._renderIslands() }
             <Circle
               cx={(this.state.position.x + (mapSize.x / 2)) / mapSize.x * screen.width}
               cy={(this.state.position.y + (mapSize.y / 2)) / mapSize.y * screen.height}
@@ -66,16 +110,18 @@ class MiniatureMap extends Component {
             />
           </G>
         </Svg>
-        <Button
-          style={styles.button}
-          title={'map'}
-          color="#fff"
-        />
+        <Text
+          fill="black"
+          fontSize="20"
+          fontWeight="bold"
+          x="100"
+          y="70">
+          {/*{ this.state.destination.position.id }*/}
+        </Text>
       </View>
     )
   }
 }
-
 
 /* ===============================================================
   ======================= REDUX CONNECTION =======================
@@ -92,6 +138,9 @@ const mapDispatchToProps = dispatch => {
   return {
     hideMap: () => {
       dispatch(hideMap())
+    },
+    updateDestination: (destination) => {
+      dispatch(updateDestination(destination))
     }
   }
 }

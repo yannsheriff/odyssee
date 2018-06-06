@@ -3,8 +3,9 @@ import perso from '../../assets/anim/perso/perso.json'
 import ulysse from './ulysse_maquette.json'
 
 
+
 // In this array Id == Index
-const animations = [
+export const animations = [
     {
         modo: "Silence is golden."
     },
@@ -17,4 +18,11 @@ const animations = [
         animation: ulysse
     }, 
 ]
-export default animations
+
+export const microInteraction = {
+  actionMenu: require('./MenuAction.json'),
+  findFragment:  require('./success_animation.json'),
+  findGlyphe:  require('./trophy.json')
+}
+
+export const animatedBoat = require('./boat.json')

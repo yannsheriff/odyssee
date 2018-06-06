@@ -14,11 +14,14 @@
     "react-native": "0.52.0",
     "react-native-blur": "^3.2.2",
     "react-native-gesture-recognizers": "^0.3.0",
+    "react-native-haptic": "^1.0.5",
     "react-native-rename": "^2.2.2",
     "react-native-simple-compass": "^1.0.0",
     "react-native-svg": "^6.3.1",
     "react-native-swipe-recognizer": "^0.2.0",
+    "react-native-swiper": "^1.5.13",
     "react-navigation": "^1.5.8",
+    "react-navigation-redux-helpers": "^1.1.2",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-async-initial-state": "^0.2.2",
@@ -32,5 +35,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts/"
+    ]
   }
 }

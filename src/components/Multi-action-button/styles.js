@@ -32,6 +32,15 @@ const styles = StyleSheet.create({
         fontSize: 70,
         color: "white",
         fontWeight: "bold",
+    },
+    animationContainer: {
+        position: "absolute",
+        height: 150,
+        width: 150,
+    },
+    animation: {
+        height: 150,
+        width: 150,
     }
     
 });

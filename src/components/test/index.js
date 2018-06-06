@@ -1,73 +1,103 @@
-import React from 'react'
-import Svg,{ G, Rect, Image, Circle } from 'react-native-svg'
-import screen from '../../helpers/ScreenSize'
-import images, { backgrounds } from '../../assets/images'
-import { AsyncStorage, View } from 'react-native';
-import { storeService } from '../../helpers/saveData'
+import React from "react";
+import screen from "../../helpers/ScreenSize";
+import images, { backgrounds } from "../../assets/images";
+import { AsyncStorage, View, Button, StyleSheet, Image } from "react-native";
+import { storeService } from "../../helpers/saveData";
+import LottieView from "lottie-react-native";
+import MainMenu from "../Main-menu";
+import { connect } from "react-redux";
 
-export default class BasicExample extends React.Component {
+import { toggleMenu } from "../../redux/actions/menu";
+
+import { microInteraction } from "../../assets/anim";
+
+const styles = StyleSheet.create({
+  container: {
+    width: screen.width,
+    height: screen.height
+  },
+  background: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: screen.width,
+    height: screen.height
+  },
+  center: {
+    position: "absolute",
+    top: 550,
+    left: 0,
+    width: screen.width,
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  buttonBorder: {
+    paddingVertical: 5,
+    width: 220,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderRadius: 50,
+    borderColor: "white",
+    borderStyle: "solid"
+  }
+});
+
+class BasicExample extends React.Component {
   constructor(props) {
     super(props);
-    this.test = {
-      isOnIsland: 1,
-      visitedIsland:[
-        {
-          id: 2,
-          screenReaded: [],
-          actualSnippetId: 1,
-          haveAction: false,
-          haveObject: false,
-        }
-      ],
-      navigation: {
-        position: {
-          x: 0,
-          y: 0
-        },
-        collectableEquipped: []
-      }
 
-      
-    }
-    this.state = {}
+    this.state = {
+      _toggleMenu: this.props.toggleMenu
+    };
   }
-
 
   componentDidMount() {
-    this.consoleDataSaved()
+    // this.restoreData()
+    // this.consoleDataSaved()
+    // this.getPreviousSnipet()
     // this.handleIslandData()
-    
   }
-
-  async handleIslandData() {
-    var savedData = storeService.getSaving()
-    savedData.then((data)=> {
-      var actualIslandSavedData = data.visitedIsland.find((island) => { 
-        if( island.id === 1) { 
-          return island 
-        }
-      })
-      if (actualIslandSavedData ) {
-        console.log("loadIsland")
-      } else {
-        console.log("Create island")
-      }
-    })
-  
-  }
-
-  async consoleDataSaved() {
-    await storeService.save(this.test)
-
-    console.log("Restore state 🔄")
-  }
-  
 
   render() {
     return (
-      <View style={{backgroundColor: "white"}}>
-
+      <View style={styles.container}>
+        <Image
+          style={styles.background}
+          source={images.homeScreen}
+          resizeMethod="scale"
+        />
+        <View style={{ position: "absolute", top: 70, left: 20, zIndex: 50 }}>
+          <Button
+            title={"menu"}
+            onPress={() => {
+              this.state._toggleMenu();
+            }}
+          />
+        </View>
       </View>
     );
   }
 }
+
+/* ===============================================================
+  ======================= REDUX CONNECTION =======================
+  ================================================================ */
+
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleMenu: () => {
+      dispatch(toggleMenu());
+    }
+  };
+};
+
+const componentContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BasicExample);
+
+export default componentContainer;

@@ -1,0 +1,57 @@
+
+{
+    "list": [
+        {
+            "id": 2,
+            "name": "Terre en vue !"
+        },
+        {
+            "id": 1,
+            "name": "Bénédiction d'éol !"
+        },
+        {
+            "id": 0,
+            "name": "Ile du cyclope"
+        },
+        {
+            "id": 3,
+            "name": "10 premiere pages"
+        },
+        {
+            "id": 3,
+            "name": "Précoce ?"
+        },
+        {
+            "id": 4,
+            "name": "Bénédiction d'éol !"
+        },
+        {
+            "id": 5,
+            "name": "Bénédiction d'Elios !"
+        },
+        {
+            "id": 6,
+            "name": "Bénédiction d'Athena !"
+        },
+        {
+            "id": 7,
+            "name": "Bénédiction d'Hades !"
+        },
+        {
+            "id": 8,
+            "name": "Bénédiction de Poseidon !"
+        },
+        {
+            "id": 9,
+            "name": "Bénédiction de Chronos !"
+        },
+        {
+            "id": 10,
+            "name": "Bénédiction d'Elios !"
+        },
+        {
+            "id": 11,
+            "name": "Obtenir toute les beneditions des dieux"
+        }
+    ]
+}

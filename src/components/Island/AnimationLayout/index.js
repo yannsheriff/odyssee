@@ -20,10 +20,10 @@ export default class AnimationLayout extends React.Component {
           position: new Animated.Value(0),
         }
       ],
-    };
+    }
     
     // If animation is not null launch it in the constructor
-    if (props.nextAnimation ) {
+    if (props.nextAnimation) {
       if (props.loop) {
         this.cycleAnimation(this.state.animations[0].animationProgress, props.animationDuration)
       } else {
@@ -34,16 +34,17 @@ export default class AnimationLayout extends React.Component {
 
 
   componentWillReceiveProps (nextProps) {
-    if(nextProps.nextAnimation && this.state.isTransitionFinished ) { // If component receive a new animation 
+    console.log(nextProps)
+    if( this.state.isTransitionFinished ) { // If component receive a new animation 
       
       // Push new animation in state array
       this.setState({ 
         isTransitionFinished: false,
         animations:[ 
           {
-            animation: nextProps.nextAnimation.animation, 
+            animation: nextProps.nextAnimation ? nextProps.nextAnimation.animation : null, 
             animationProgress: new Animated.Value(0),
-            position: new Animated.Value(screen.width-2)
+            position: nextProps.swipBack ? new Animated.Value(-screen.width-2) : new Animated.Value(screen.width-2)
           }, 
           ...this.state.animations
         ]
@@ -51,18 +52,18 @@ export default class AnimationLayout extends React.Component {
 
         // launch new animation if it exist
         if (nextProps.nextAnimation) {
-          this.launchNewAnimationOnReceive(1000, nextProps.loop) 
+          this.launchNewAnimationOnReceive(nextProps.animationDuration, nextProps.loop) 
         }
 
         // Animate the old & the animation to the left
         Animated.parallel([
           Animated.timing(this.state.animations[1].position, {
             duration: nextProps.transitionDuration,
-            toValue: -screen.width + 2, 
+            toValue:  nextProps.swipBack ? screen.width + 2 : -screen.width + 2 , 
           }),
           Animated.timing(this.state.animations[0].position, {
             duration: nextProps.transitionDuration,
-            toValue: 0,
+            toValue:  0,
           }),
         ]).start(()=> {
           // When the animation is finished wiat 1s and delete old animation from the state Array

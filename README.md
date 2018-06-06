@@ -60,6 +60,26 @@ style the label of each actions on hover.
 
   
 
+
+### mainButtonsSize (default => 50)
+
+> type : *Int*
+```javascript
+	mainButtonsSize={ 30 }
+```
+
+Personnalize the mainButton size
+
+
+### actionsButtonsSize
+
+> type : *Int*  (default => 70)
+```javascript
+	actionsButtonsSize={ 30 }
+```
+
+Personnalize the mainButton size
+
 ### mainButton
 
 > type : *react component*
@@ -95,7 +115,9 @@ this props allow to personnalise the aspect of main button When it's disabled.
 
 ### isActive
 
-> type : bool (default => true)
+
+> type : *bool* (default => true)
+
 ```javascript
 	isActive={ false }
 ```

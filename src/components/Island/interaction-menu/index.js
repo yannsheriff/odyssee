@@ -13,7 +13,6 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-
 //  Import Helpers
 // --------------------------------------------------------------
 import images from '../../../assets/images'
@@ -26,6 +25,10 @@ import styles from './styles'
 import Swip from '../Swip'
 import MultiActionButton from '../../Multi-action-button'
 
+import { choices } from '../../../assets/images'
+
+
+
 export default class InteractionMenu extends Component {
 
   constructor(props) {
@@ -37,7 +40,9 @@ export default class InteractionMenu extends Component {
       actions: this.props.actions.snippets,
       actionsForButton: this._formatDataForActionButon(this.props.actions.snippets),
       haveAction: this.props.actions.haveAction,
-      _changeStep: this.props.changeStep
+      opacity: 0,
+      _changeStep: this.props.changeStep,
+      _prevStep: this.props.prevStep,
     }
 
   }
@@ -54,35 +59,48 @@ export default class InteractionMenu extends Component {
 
   _formatDataForActionButon(actions) {
     let payload = actions.map((action) => {
-      return { id: action.id, img: action.choiceImgId, label: action.title}
+      if (action.choiceImgId !== undefined) {
+        return { id: action.id, img: choices[action.choiceImgId].img, label: action.title}
+      }
     })
     return payload
   }
 
-  _handleSwip = () => {
+  _nextStep = () => {
+    if(!this.state.haveAction) {
       this.state._changeStep(this.state.actions[0].actions[0].id)
+    }
   }
+  _prevStep = () => {
+    this.state._prevStep()
+  }
+
+
 
 
 
 
   render() {
 
-    let swip = this.state.haveAction 
-    ? null
-    : <Swip
-        style={ styles.swipReconizer }
-        callback={ this._handleSwip }
-      />
-
     return (
       <View style={styles.container}>
         
+        <Swip
+          style={ styles.swipReconizer }
+          onSwipRight={ this._prevStep }
+          onSwipLeft={ this._nextStep }
+        />
+
         <MultiActionButton
           actions={this.state.actionsForButton}
+          // mainButtonsSize={10}
+          // actionsButtonsSize={50}
           // mainBtnStyle={}
           // initalPositon={}
-          //labelStyle={}
+          // labelStyle={}
+          
+          // onButtonPressed={}
+          // onButtonReleased={} 
 
           mainButton={
             <Image
@@ -99,6 +117,7 @@ export default class InteractionMenu extends Component {
               style={{height: 50, width: 50}}
             />
           }
+
           disabled={
             <Image
               source={images.openMenu}
@@ -114,7 +133,7 @@ export default class InteractionMenu extends Component {
           }}
         />
 
-        { swip }
+        
         
       </View>
     );

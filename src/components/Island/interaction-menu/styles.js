@@ -5,7 +5,14 @@ import screen from '../../../helpers/ScreenSize'
 const styles = StyleSheet.create({
     container: {
         position: "absolute",
-        bottom: 0,
+        top: 0,
+    },
+    absolute: {
+        width: screen.width,
+        height: 10,
+        position: "absolute",
+        top: 0, 
+        left: 0
     },
     menu: {
         width: screen.width,
@@ -25,12 +32,9 @@ const styles = StyleSheet.create({
     },
     swipReconizer: {
         width: screen.width,
-        height: 300,
+        height: screen.height,
         position: "absolute",
-        bottom: 0,
-        zIndex: 50,
-        backgroundColor: "red",
-        opacity: 0.3
+        top: 0,
     }
 });
 

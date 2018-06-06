@@ -4257,6 +4257,10 @@ react-native-gesture-recognizers@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-recognizers/-/react-native-gesture-recognizers-0.3.0.tgz#b6fdc70787e40801b267de41d9cccef0b963e46b"
 
+react-native-haptic@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-haptic/-/react-native-haptic-1.0.5.tgz#91fff9233a0eb0a4e420a00c2bf5cf29610946ed"
+
 react-native-rename@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-native-rename/-/react-native-rename-2.2.2.tgz#edbe16eea9d2d0e61b7b2c62ec4c2da585384f24"
@@ -4294,6 +4298,12 @@ react-native-svg@^6.3.1:
 react-native-swipe-recognizer@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/react-native-swipe-recognizer/-/react-native-swipe-recognizer-0.2.0.tgz#51151161c618e36d912213a26e9be7fb725f661d"
+
+react-native-swiper@^1.5.13:
+  version "1.5.13"
+  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.13.tgz#fa695cd4ab77b9a9df2d2bfee38ea7274dd07a2e"
+  dependencies:
+    prop-types "^15.5.10"
 
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"
@@ -4359,6 +4369,12 @@ react-native@0.52.0:
     xcode "^0.9.1"
     xmldoc "^0.4.0"
     yargs "^9.0.0"
+
+react-navigation-redux-helpers@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-navigation-redux-helpers/-/react-navigation-redux-helpers-1.1.2.tgz#13013230ac74aa125a5505eefc005db3801f9e07"
+  dependencies:
+    invariant "^2.2.2"
 
 react-navigation@^1.5.8:
   version "1.5.8"

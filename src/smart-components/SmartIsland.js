@@ -5,28 +5,37 @@ import {
   SafeAreaView,
   Text,
   View, 
+  TouchableOpacity,
+  StyleSheet, 
+  Image
 } from 'react-native'
 import { connect } from 'react-redux'
 import React, { Component } from 'react';
+import ReactNativeHaptic from 'react-native-haptic'
 
 //  Import Components
 // --------------------------------------------------------------
 import Narration from '../components/Island/narration'
 import InteractionMenu from '../components/Island/interaction-menu'
 import Illustrations from '../components/Island/Illustrations'
+import Collectables from '../components/Island/Collectables'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { goToStep, saveIslandData, requestIslandData } from '../redux/actions/island'
+import { goToStep, saveIslandData, requestIslandData, goToPreviousStep } from '../redux/actions/island'
+import { foundNewCollectable, saveCollectables } from '../redux/actions/collectables'
+import { toggleMenu } from '../redux/actions/menu'
 
 //  Import Data
 // --------------------------------------------------------------
 import islands from '../data'
+import { collectables } from '../data'
 
 //  Import Helpers
 // --------------------------------------------------------------
 import screen from '../helpers/ScreenSize'
 import { storeService } from '../helpers/saveData'
+import images from '../assets/images';
 
 
 
@@ -38,6 +47,7 @@ class SmartIsland extends Component {
     const { params } = this.props.navigation.state;
     this.actualSnippetId = this.props.island.actualSnippetId ? this.props.island.actualSnippetId : 1
     this.islandId = params.islandId
+    this.isTransitionFinished = true
     
     // var payload = this.getSnippetData(this.islandId , this.actualSnippetId)
     // console.log("Payload : ", payload)
@@ -49,8 +59,10 @@ class SmartIsland extends Component {
       currentIslandId: undefined,
       islandState: this.props.island,
       _changeStep: this.props.goToStep,
+      _goToPreviousStep: this.props.goToPreviousStep,
       _saveData: this.props.saveData,
       _requestIslandData: this.props.requestIslandData,
+      _toggleMenu: this.props.toggleMenu
     }
     
   }
@@ -65,9 +77,7 @@ componentWillMount(){
   *  Update the current snippet 
   */
 componentWillReceiveProps(nextProps) {
-  console.log("Data is arriving !")
   if (nextProps.island.actualSnippetId !== this.state.snippet) {
-    console.log("let's update")
     this.updateSnippet(nextProps.island)
   }
 }
@@ -79,6 +89,12 @@ componentWillReceiveProps(nextProps) {
   getSnippetData(currentIslandId, actualSnippetId) { 
 
     const snippet = islands[currentIslandId].writting.steps.find((index) => {
+      if (index.id === actualSnippetId) {
+        return index
+      }
+    });
+
+    const illustration = islands[currentIslandId].illustrations.steps.find((index) => {
       if (index.id === actualSnippetId) {
         return index
       }
@@ -96,6 +112,17 @@ componentWillReceiveProps(nextProps) {
         return index.animation
       }
     })
+
+
+    const collectableIds = illustration.collectables ? illustration.collectables : undefined
+    var collectableData = []
+    if ( collectableIds ) {
+      collectableIds.forEach(index => {
+        let collectable = collectables.fragments.find(element => index === element.id)
+        if(collectable) { collectableData.push(collectable) }
+      })
+    } 
+
 
     let snippetArray = []
     let haveAction = true
@@ -128,6 +155,7 @@ componentWillReceiveProps(nextProps) {
       actions: bundleAction, 
       offsets: offsets,
       animation: animation,
+      collectables: collectableData,
     }
 
     return payload
@@ -139,13 +167,27 @@ componentWillReceiveProps(nextProps) {
   */
   updateSnippet(state) {
     const payload = this.getSnippetData(state.currentIslandId, state.actualSnippetId)
+
+    if (this.state.islandState.actualSnippetId !== 1)  {
+      var isGoingForward = payload.snippet.id > this.state.islandState.actualSnippetId ? true : false
+    } else {
+      var isGoingForward = true
+    }
+
+    this.isTransitionFinished = false     
     this.setState({
       currentIslandId: state.currentIslandId,
       snippet: payload.snippet,
       actions: payload.actions,
       offsets: payload.offsets,
       animation: payload.animation,
-      islandState: state
+      collectables: payload.collectables,
+      islandState: state, 
+      isGoingForward: isGoingForward
+    }, () => {
+      setTimeout(()=>{
+        this.isTransitionFinished = true
+      }, 4000)
     })
   }
 
@@ -156,11 +198,27 @@ componentWillReceiveProps(nextProps) {
   goToNextStep = (id) => {
     if(id === 0) {
       this.props.navigation.navigate('Home')
-    } else {
+    } else if (this.isTransitionFinished) {
       this.state._saveData(this.state.islandState, id) 
       this.state._changeStep(id) 
     }
   }
+
+  goToPreviousStep = () => {
+    if(this.state.islandState.actualSnippetId > 1 && this.isTransitionFinished ) {
+      this.state._goToPreviousStep() 
+    }
+  }
+
+  collectableFound = (id) => {
+    //do something
+  }
+
+  toggleMenu = () => {
+    ReactNativeHaptic.generate('impact')
+    this.state._toggleMenu(1);
+  }
+
 
   render() {
 
@@ -177,12 +235,29 @@ componentWillReceiveProps(nextProps) {
         <Illustrations 
           offsets={ this.state.offsets.offsets }
           animation={ this.state.animation.animation }
+          swipBackward={ !this.state.isGoingForward }
         />
         <Narration snippet = { this.state.snippet } /> 
         <InteractionMenu 
           actions = { this.state.actions } 
           changeStep={ this.goToNextStep }  
+          prevStep={ this.goToPreviousStep }  
         /> 
+        <Collectables 
+          array={ this.state.collectables }
+          collectablePressed={ this.collectableFound }
+        />
+        <TouchableOpacity 
+          onPress={ this.toggleMenu }
+          style={ styles.menuContainer}
+        >
+          <Image 
+            source={images.burger}
+            resizeMethod="contain"
+            style={styles.menu}
+          />
+        </TouchableOpacity>
+        
       </View> )
     } else {
       var view = (<View><Text style={{color: 'white', textAlign: "center", marginTop: 300}}> Loading ... </Text></View>)
@@ -200,7 +275,7 @@ componentWillReceiveProps(nextProps) {
 const mapStateToProps = state => {
   return {
     island: state.island,
-    isOnIsland: state.isOnIsland
+    isOnIsland: state.isOnIsland,
   }
 }
 
@@ -215,7 +290,12 @@ const mapDispatchToProps = dispatch => {
     requestIslandData: (id) => {
       dispatch(requestIslandData(id))
     },
-    
+    goToPreviousStep: () => {
+      dispatch(goToPreviousStep())
+    },
+    toggleMenu: (page) => {
+      dispatch(toggleMenu(page));
+    }
   }
 }
 
@@ -226,3 +306,20 @@ const componentContainer = connect(
 )(SmartIsland)
 
 export default componentContainer
+
+
+
+const styles = StyleSheet.create({
+
+  menu: {
+    width: 30,
+    height: 30,
+  },
+  menuContainer: {
+    position: "absolute",
+    top: 35,
+    right: 20,
+    width: 30,
+    height: 30,
+  },
+});

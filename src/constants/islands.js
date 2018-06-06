@@ -1,6 +1,6 @@
 const islands = [
   {
-    id: 0,
+    id: 1,
     position: {
       x: 1000,
       y: 700
@@ -9,10 +9,12 @@ const islands = [
       x: 271,
       y: 534
     },
-    collisionDist: 150,
+    collisionDist: 200,
     image: 'cyclope',
     biomeLength: 4,
-    isIsland: true
+    isIsland: true,
+    isTarget: false,
+    opacity: 1
   }
 ]
 
