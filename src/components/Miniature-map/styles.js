@@ -1,17 +1,24 @@
 import { StyleSheet } from 'react-native'
+import screen from '../../helpers/ScreenSize'
 
 const styles = StyleSheet.create({
-    button: {
-        position: 'absolute',
-        height: 80,
-        width: 200,
-        bottom: 140,
-        left: 150
+    infoContainer: {
+      width: screen.width,
+      height: 100,
+      flexDirection: 'row',
+      justifyContent: "center",
+      alignItems: "center"
     },
-    svg: {
-        position: 'absolute',
-        top: 0
+    windDirText: {
+      color: '#ffffff',
+      textAlign: 'center',
+      width: screen.width / 3
+    },
+    windDirIcon: {
+      textAlign: 'center',
+      width: screen.width / 3
     }
+
 })
 
 export default styles

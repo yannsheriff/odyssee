@@ -9,6 +9,7 @@ import Achivements from "./Achievements-page";
 import { BlurView } from "react-native-blur";
 import renderIf from "../../helpers/renderIf";
 import ReactNativeHaptic from 'react-native-haptic'
+import MiniMap from '../../components/Miniature-map'
 
 import Swiper from "react-native-swiper";
 import images from "../../assets/images";
@@ -130,7 +131,7 @@ class MainMenu extends React.Component {
                 index={ this.state.page }
               >
                 <View style={styles.slide1}>
-                  <Text style={styles.text}>Hello Swiper</Text>
+                  <MiniMap />
                 </View>
                 <View style={{ backgroundColor: "transparent" }}>
                   <Achivements  />

@@ -29,6 +29,7 @@ import Islands from './islands'
 //  Import Actions
 // --------------------------------------------------------------
 import { launchMap, collision } from '../../redux/actions/sailing'
+import { toggleMenu } from '../../redux/actions/menu'
 
 
 
@@ -40,6 +41,7 @@ class VirtualMap extends Component {
     this.state = {
       _launchMap: this.props.launchMap,
       _collision: this.props.collision,
+      _toggleMenu: this.props.toggleMenu,
       // sailing
       orientation: this.props.sailing.orientation,
       center: {
@@ -72,9 +74,9 @@ class VirtualMap extends Component {
       isCompassLocked: true,
       compassSensitivity: 1,
       destination: {
-        id: this.props.sailing.destination.id,
-        x: this.props.sailing.destination.x - (mapSize.x / 2),
-        y: this.props.sailing.destination.y - (mapSize.y / 2)
+        id: '',
+        x: '',
+        y: ''
       },
       // boat animation
       animProgress: new Animated.Value(0),
@@ -106,6 +108,15 @@ class VirtualMap extends Component {
       this.setState({
           currentSpeed: 0
       }, this.state._launchMap(this.state.position))
+    }
+    if (nextProps.sailing.destination.id !== this.state.destination.id) {
+      this.setState({
+        destination: {
+          id: nextProps.sailing.destination.id,
+          x: nextProps.sailing.destination.x - (mapSize.x / 2),
+          y: nextProps.sailing.destination.y - (mapSize.y / 2)
+        }
+      })
     }
   }
 
@@ -199,6 +210,7 @@ class VirtualMap extends Component {
               })
               this.state._collision(island.id)
               this._toggleSailing()
+              this._toggleCompassLock()
             } else if (this.state.islandCollided !== null && island.opacity > 0 && this.state.goalSpeed > 0) {
               island.opacity = Math.floor(((island.opacity * 10) - 1)) / 10
             }
@@ -435,8 +447,8 @@ class VirtualMap extends Component {
     if (this.state.destination.id !== '') {
       const position = this.state.position
       const destination = this.state.destination
-      const adj = position.y - destination.y
-      const opp = position.x - destination.x
+      const adj = -position.y - destination.y
+      const opp = -position.x - destination.x
       let dir
       if (adj > 0) {
         dir = Math.atan(opp / adj) * 180 / Math.PI
@@ -499,6 +511,7 @@ class VirtualMap extends Component {
         >
           <Text>{ 'Goal: ' + Math.round(this._getSpeed(this.state.orientation) * 10) / 10 + '  Current: ' + Math.round(this.state.currentSpeed * 10) / 10 }</Text>
           <Text>{ 'Cap min: ' + this.state.speedCap.min + '  max: ' + this.state.speedCap.max }</Text>
+          <Text>{ 'windDir:' + speedModifiers.direction + '  boatDir: ' + this.state.orientation }</Text>
         </View>
         {renderIf(!this.state.hideUI,
           <View
@@ -555,7 +568,7 @@ class VirtualMap extends Component {
           </TouchableWithoutFeedback>
         )}
         <TouchableWithoutFeedback
-
+          onPress={() => this.state._toggleMenu(0)}
         >
           <View
             style={[styles.icon, styles.iconTop]}
@@ -590,6 +603,9 @@ const mapDispatchToProps = dispatch => {
     },
     collision: (islandCollided) => {
       dispatch(collision(islandCollided))
+    },
+    toggleMenu: (page) => {
+      dispatch(toggleMenu(page));
     }
   }
 }
