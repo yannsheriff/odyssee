@@ -34,7 +34,6 @@ export default class AnimationLayout extends React.Component {
 
 
   componentWillReceiveProps (nextProps) {
-    console.log(nextProps)
     if( this.state.isTransitionFinished ) { // If component receive a new animation 
       
       // Push new animation in state array
