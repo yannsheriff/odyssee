@@ -38,10 +38,6 @@ export const boatStates = {
         trans: 'toSailing',
         goal: 'sailing'
       },
-      down: {
-        trans: 'toRowing',
-        goal: 'stopped'
-      },
       stop: 'stopped',
       cap: {
         min: 0,
@@ -56,6 +52,14 @@ export const boatStates = {
         max: 0.66
       }
     },
+    toSailingReverse: {
+      frames:[122, 89],
+      stop: 'toStopped',
+      cap: {
+        min: 0.33,
+        max: 0.66
+      }
+    },
     sailing: {
       frames:[122, 153],
       up: {
@@ -63,7 +67,7 @@ export const boatStates = {
         goal: 'maxSpeed'
       },
       down: {
-        trans: 'toSailing',
+        trans: 'toSailingReverse',
         goal: 'rowing'
       },
       stop: 'toStopped',
@@ -80,10 +84,18 @@ export const boatStates = {
         max: 1
       }
     },
+    toMaxSpeedReverse: {
+      frames:[163, 153],
+      stop: 'toStopped',
+      cap: {
+        min: 0.66,
+        max: 1
+      }
+    },
     maxSpeed: {
       frames:[182, 199],
       down: {
-        trans: 'toMaxSpeed',
+        trans: 'toMaxSpeedReverse',
         goal: 'sailing'
       },
       stop: 'toStopped',

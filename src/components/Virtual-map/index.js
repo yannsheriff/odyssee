@@ -14,6 +14,7 @@ import LottieView from 'lottie-react-native'
 import images from '../../assets/images'
 import screen from '../../helpers/ScreenSize'
 import styles from './styles'
+import renderIf from '../../helpers/renderIf'
 
 //  Import Constants
 // --------------------------------------------------------------
@@ -65,6 +66,7 @@ class VirtualMap extends Component {
         y: 0
       },
       islandCollided: null,
+      hideUI: false,
       contentToRender: [],
       // compass
       isCompassLocked: true,
@@ -95,13 +97,21 @@ class VirtualMap extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    if (nextProps.sailing.islandCollided === null && this.state.hideUI) {
+      this.setState({
+        hideUI: false
+      })
+    }
     if (nextProps.sailing.callMap) {
-        this.setState({
-            currentSpeed: 0
-        }, this.state._launchMap(this.state.position))
+      this.setState({
+          currentSpeed: 0
+      }, this.state._launchMap(this.state.position))
     }
   }
 
+  /*
+   * Start lottie animations & loop/change them depending on queue
+   */
   _updateBoatAnimationState = () => {
     const boatState = this.state.animStates[this.state.animCurrent]
 
@@ -127,18 +137,26 @@ class VirtualMap extends Component {
     })
   }
 
+  /*
+   * Calculate and return speed depending on wind strength & orientation
+   */
   _getSpeed = (boatDir) => {
     const dif = Math.abs(speedModifiers.direction - boatDir)
     const modifier = Math.abs((dif - 180) / 180)
     return speedModifiers.wind - (speedModifiers.wind * modifier) + speedModifiers.min
   }
 
+  /*
+   * Start/Stop boat movement
+   */
   _toggleSailing = () => {
     if (this.state.sailing) {
       this.setState({
         sailing: !this.state.sailing,
         goalSpeed: 0,
-        deceleration: this.state.currentSpeed / 35 // 35 is the number of frames needed for complete deceleration
+        deceleration: this.state.currentSpeed / 35, // 35 is the number of frames needed for complete deceleration
+        animInLine: this.state.animStates[this.state.animCurrent].stop,
+        animGoal: 'stopped'
       })
     } else {
       this.setState({
@@ -150,7 +168,6 @@ class VirtualMap extends Component {
         requestAnimationFrame(() => {this._updateMap()})
       }
     }
-    console.log(this.state)
   }
 
   /*
@@ -172,7 +189,8 @@ class VirtualMap extends Component {
           if (dist <= island.collisionDist) {
             if (this.state.islandCollided === null) {
               this.setState({
-                islandCollided: island.id
+                islandCollided: island.id,
+                hideUI: true
               })
               this.state._collision(island.id)
               this._toggleSailing()
@@ -219,6 +237,9 @@ class VirtualMap extends Component {
     })
   }
 
+  /*
+   * Manage offset/frame depending on the difference between goal and current speed
+   */
   _manageSpeed = () => {
     const speed = this.state.currentSpeed
     const dif = this.state.goalSpeed - speed
@@ -257,6 +278,9 @@ class VirtualMap extends Component {
     }
   }
 
+  /*
+   * Initiate new set of animations
+   */
   _checkBoatStateChanges = (dir) => {
     const state = this.state
 
@@ -283,6 +307,9 @@ class VirtualMap extends Component {
     }
   }
 
+  /*
+   * Switch animations that are in Line
+   */
   _switchBoatAnimation = () => {
     let anims = ''
     let cap = this.state.speedCap
@@ -386,7 +413,8 @@ class VirtualMap extends Component {
         const newSpeed = this._getSpeed(newOrientation)
         this.setState({
           orientation: newOrientation,
-          speedRadius: newSpeed
+          speedRadius: newSpeed,
+          goalSpeed: newSpeed
         })
         this._sortContent()
         this.touchLastPos = evt.nativeEvent.pageX
@@ -458,61 +486,70 @@ class VirtualMap extends Component {
         <Animated.View style={styles.boat}>
           <LottieView
             source={ this.state.animData }
-            progress={this.state.animProgress}
+            progress={ this.state.animProgress }
             loop={ true }
           />
         </Animated.View>
         <View
           style={styles.navtools}
         >
-          <Text>{ Math.round(this._getSpeed(this.state.orientation) * 10) / 10 + ' ' + Math.round(this.state.currentSpeed * 10) / 10 }</Text>
+          <Text>{ 'Goal: ' + Math.round(this._getSpeed(this.state.orientation) * 10) / 10 + '  Current: ' + Math.round(this.state.currentSpeed * 10) / 10 }</Text>
+          <Text>{ 'Cap min: ' + this.state.speedCap.min + '  max: ' + this.state.speedCap.max }</Text>
         </View>
-        <View
-          style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
-        >
-          <Image
-            style={styles.pointer}
-            source={images.boussole}
-            resizeMethod="scale"
-          />
-        </View>
-        <View
-          onStartShouldSetResponder={(evt) => true}
-          onMoveShouldSetResponder={(evt) => true}
-          onResponderMove={this._handleCompassDrag}
-          onResponderRelease={(evt) => { this.touchLastPos = undefined }}
-          style={[styles.compassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' }] }]}
-        >
-          <Image
-            style={styles.compass}
-            source={images.aiguille}
-            resizeMethod="scale"
-          />
-        </View>
-        <TouchableWithoutFeedback
-          onPress={() => this._toggleSailing()}
-        >
+        {renderIf(!this.state.hideUI,
           <View
-            style={[styles.icon, styles.iconLeft]}
+            style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
           >
             <Image
-              style={styles.iconImage}
-              source={this.state.sailing ? images.iconPause : images.iconPlay}
+              style={styles.pointer}
+              source={images.boussole}
+              resizeMethod="scale"
             />
           </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback
-          onPress={this._toggleCompassLock}
-        >
+        )}
+        {renderIf(!this.state.hideUI,
           <View
-            style={[styles.icon, styles.iconRight]}
+            onStartShouldSetResponder={(evt) => true}
+            onMoveShouldSetResponder={(evt) => true}
+            onResponderMove={this._handleCompassDrag}
+            onResponderRelease={(evt) => { this.touchLastPos = undefined }}
+            style={[styles.compassContainer, { transform: [{ rotate: -this.state.orientation + 'deg' }] }]}
           >
             <Image
-              style={styles.iconImage}
-              source={this.state.isCompassLocked ? images.iconLock : images.iconUnlock}
+              style={styles.compass}
+              source={images.aiguille}
+              resizeMethod="scale"
             />
           </View>
-        </TouchableWithoutFeedback>
+        )}
+        {renderIf(!this.state.hideUI,
+          <TouchableWithoutFeedback
+            onPress={() => this._toggleSailing()}
+          >
+            <View
+              style={[styles.icon, styles.iconLeft]}
+            >
+              <Image
+                style={styles.iconImage}
+                source={this.state.sailing ? images.iconPause : images.iconPlay}
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        )}
+        {renderIf(!this.state.hideUI,
+          <TouchableWithoutFeedback
+            onPress={this._toggleCompassLock}
+          >
+            <View
+              style={[styles.icon, styles.iconRight]}
+            >
+              <Image
+                style={styles.iconImage}
+                source={this.state.isCompassLocked ? images.iconLock : images.iconUnlock}
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        )}
         <TouchableWithoutFeedback
 
         >
@@ -524,7 +561,8 @@ class VirtualMap extends Component {
               source={images.iconMap}
             />
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback
+>
       </View>
     )
   }

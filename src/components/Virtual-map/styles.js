@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
     },
     boat: {
       position: 'absolute',
-      width: 400,
-      height: 600,
-      left: (screen.width / 2) - 200,
-      top: (screen.height / 2) - 300
+      width: 175,
+      height: 380,
+      left: (screen.width / 2) - 87.5,
+      top: (screen.height / 2) - 190
     },
     container: {
       position: 'relative',
