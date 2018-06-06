@@ -71,7 +71,7 @@ export default class Narration extends Component {
             toValue: 0, 
           }),
           Animated.timing(this.state.texts[0].opacity, {
-            delay: 2000,
+            delay: 1000,
             duration: transitionDuration,
             toValue: 1,
           }),

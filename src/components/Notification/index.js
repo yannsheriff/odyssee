@@ -89,7 +89,7 @@ class VisualNotification extends React.Component {
         <View 
           style={styles.absolute } 
           onStartShouldSetResponder={ (evt) => true }
-          onResponderGrant={  (evt) => { 
+          onResponderGrant={(evt) => { 
             this.closeNotification()
           }}/> 
       </View>

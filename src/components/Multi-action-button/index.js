@@ -16,7 +16,7 @@ export default class MultiActionButton extends React.Component {
     this.firstTouch = undefined
     this.menuIsOpen = false
     this.isHovered=[0]
-    this.distFromInitialPosition = 120
+    this.buttonsOffset =  this.props.buttonsOffset ? this.props.buttonsOffset : 120 
     this.actionsButtonsSize = this.props.actionsButtonsSize ? this.props.actionsButtonsSize: 70
     this.mainButtonsSize = this.props.mainButtonsSize ? this.props.mainButtonsSize: 50
     this.onButtonPressed = this.props.onButtonPressed ? this.props.onButtonPressed : undefined
@@ -106,8 +106,8 @@ export default class MultiActionButton extends React.Component {
           {
             x: new Animated.Value(this.initialPosition.x + this.actionsButtonsSize/2 ),
             y: new Animated.Value(this.initialPosition.y - this.actionsButtonsSize/2 ),
-            x1: this.initialPosition.x + this.mainButtonsSize/2 - this.actionsButtonsSize/2  + this.distFromInitialPosition * Math.sin(this.positionReferenceMap[nbOfButtons][index] * (Math.PI / 180)),
-            y1: this.initialPosition.y + this.actionsButtonsSize/2 - this.actionsButtonsSize/2 - this.distFromInitialPosition * Math.cos(this.positionReferenceMap[nbOfButtons][index] * (Math.PI / 180)),
+            x1: this.initialPosition.x + this.mainButtonsSize/2 - this.actionsButtonsSize/2  + this.buttonsOffset * Math.sin(this.positionReferenceMap[nbOfButtons][index] * (Math.PI / 180)),
+            y1: this.initialPosition.y + this.actionsButtonsSize/2 - this.actionsButtonsSize/2 - this.buttonsOffset * Math.cos(this.positionReferenceMap[nbOfButtons][index] * (Math.PI / 180)),
             img: data.img,
             label: data.label,
             isHovered: false,
@@ -235,8 +235,8 @@ export default class MultiActionButton extends React.Component {
                 if(button.isHovered === false) {  // animate btn 
 
                   button.isHovered = true
-                  let newValueX = this.initialPosition.x + this.mainButtonsSize/2 - this.actionsButtonsSize/2 + (this.distFromInitialPosition + 30) * Math.sin(this.positionReferenceMap[this.state.buttonArray.length-1][index] * (Math.PI / 180))
-                  let newValueY = this.initialPosition.y + this.mainButtonsSize/2 - this.actionsButtonsSize/2  - (this.distFromInitialPosition + 30) * Math.cos(this.positionReferenceMap[this.state.buttonArray.length-1][index] * (Math.PI / 180))
+                  let newValueX = this.initialPosition.x + this.mainButtonsSize/2 - this.actionsButtonsSize/2 + (this.buttonsOffset + 30) * Math.sin(this.positionReferenceMap[this.state.buttonArray.length-1][index] * (Math.PI / 180))
+                  let newValueY = this.initialPosition.y + this.mainButtonsSize/2 - this.actionsButtonsSize/2  - (this.buttonsOffset + 30) * Math.cos(this.positionReferenceMap[this.state.buttonArray.length-1][index] * (Math.PI / 180))
                   Animated.parallel([
                     Animated.timing(button.y, {
                       toValue: newValueY, 
@@ -385,7 +385,6 @@ export default class MultiActionButton extends React.Component {
                   width: this.mainButtonsSize
                 }, this.state.btnStyle ]}
                 
-                onLongPress={this._onLongPressButton}
                 onStartShouldSetResponder={(evt) => true}
                 onMoveShouldSetResponder={(evt) => true}
                 onResponderMove={this._handleDrag}
