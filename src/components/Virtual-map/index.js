@@ -113,28 +113,34 @@ class VirtualMap extends Component {
    * Start lottie animations & loop/change them depending on queue
    */
   _updateBoatAnimationState = () => {
-    const boatState = this.state.animStates[this.state.animCurrent]
+    if (this.state.animCurrent) {
+      const boatState = this.state.animStates[this.state.animCurrent]
 
-    if (boatState.hasOwnProperty('cap') && this.state.speedCap !== boatState.cap) {
-      this.setState({
-        speedCap: {
-          min: boatState.cap.min * (speedModifiers.max + speedModifiers.min),
-          max: boatState.cap.max * (speedModifiers.max + speedModifiers.min)
-        }
-      })
-    }
-
-    this.state.animProgress.setValue(boatState.frames[0] / this.state.totalFrames)
-
-    Animated.timing(this.state.animProgress, {
-      toValue: boatState.frames[1] / this.state.totalFrames,
-      duration: Math.abs(boatState.frames[0] - boatState.frames[1]) / 30 * 1000
-    }).start(() => {
-      if (this.state.animGoal !== null) {
-        this._switchBoatAnimation()
+      if (boatState.hasOwnProperty('cap') && this.state.speedCap !== boatState.cap) {
+        this.setState({
+          speedCap: {
+            min: boatState.cap.min * (speedModifiers.max + speedModifiers.min),
+            max: boatState.cap.max * (speedModifiers.max + speedModifiers.min)
+          }
+        })
       }
-      this._updateBoatAnimationState()
-    })
+
+      this.state.animProgress.setValue(boatState.frames[0] / this.state.totalFrames)
+
+      Animated.timing(this.state.animProgress, {
+        toValue: boatState.frames[1] / this.state.totalFrames,
+        duration: Math.abs(boatState.frames[0] - boatState.frames[1]) / 30 * 1000
+      }).start(() => {
+        if (this.state.animGoal !== null) {
+          this._switchBoatAnimation()
+        } else if (this.state.animGoal === null && this.state.animCurrent === 'stopped' && this.state.currentSpeed > 0) {
+          this.state.currentSpeed = 0
+        }
+        this._updateBoatAnimationState()
+      })
+    } else {
+      console.log('animCurrent fucked up again, check this : ', this.state)
+    }
   }
 
   /*
@@ -154,18 +160,17 @@ class VirtualMap extends Component {
       this.setState({
         sailing: !this.state.sailing,
         goalSpeed: 0,
-        deceleration: this.state.currentSpeed / 35, // 35 is the number of frames needed for complete deceleration
+        deceleration: this.state.currentSpeed / 40, // 35 is the number of frames needed for complete deceleration
         animInLine: this.state.animStates[this.state.animCurrent].stop,
         animGoal: 'stopped'
       })
     } else {
+      if (this.state.currentSpeed === 0) {
       this.setState({
         sailing: !this.state.sailing,
         currentSpeed: speedModifiers.acceleration,
         goalSpeed: this.state.speedRadius
-      })
-      if (this.state.currentSpeed === 0) {
-        requestAnimationFrame(() => {this._updateMap()})
+      }, this._updateMap )
       }
     }
   }
@@ -272,7 +277,7 @@ class VirtualMap extends Component {
         }
       }
     }
-    else if (Math.abs(dif) < speedModifiers.acceleration) {
+    else if (Math.abs(dif) <= speedModifiers.acceleration) {
       // difference between goal and current speeds is inferior to the acceleration value : go directly to goal speed
       this.setState({ currentSpeed: this.state.goalSpeed })
     }
@@ -376,8 +381,7 @@ class VirtualMap extends Component {
       requestAnimationFrame(() => {this._updateMap()})
     } else if (this.state.stopping) {
       this.setState({
-        stopping: false,
-        currentSpeed: 0
+        stopping: false
       })
     }
   }
