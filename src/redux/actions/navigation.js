@@ -1,8 +1,8 @@
-const NAVIGATE = "Navigation/NAVIGATE"
+export const NAVIGATE = "Navigation/NAVIGATE"
 
-export function goToSailing() {
+export function navigateTo(routeName) {
     return {
         type: NAVIGATE,
-        routeName:"Sailing"
+        routeName: routeName
     }
 }

@@ -2,8 +2,8 @@ import React from "react";
 import { Animated, Easing, View, Text, StyleSheet, Button,TouchableOpacity, Image } from "react-native";
 import LottieView from "lottie-react-native";
 import { connect } from "react-redux";
-import { toggleMenu, saveMenu, navigateTo } from "../../redux/actions/menu";
-import { goToSailing } from "../../redux/actions/navigation";
+import { toggleMenu, saveMenu } from "../../redux/actions/menu";
+import { navigateTo } from "../../redux/actions/navigation";
 import screen from "../../helpers/ScreenSize";
 import Achivements from "./Achievements-page";
 import { BlurView } from "react-native-blur";
@@ -27,7 +27,7 @@ class MainMenu extends React.Component {
       popupDisplay: false,
       _toggleMenu: this.props.toggleMenu,
       _saveMenu: this.props.saveMenu,
-      _goToSailing: this.props.goToSailing,
+      _navigateTo: this.props.navigateTo,
     };
   }
 
@@ -78,9 +78,13 @@ class MainMenu extends React.Component {
     })
   }
 
-  navigateToSailing = () => {
+  quit = () => {
     this.closeMenu()
-    this.state._goToSailing()
+    if(this.state.reduxStore.isOnIsland) {
+      this.state._navigateTo("Sailing")
+    } else {
+      this.state._navigateTo("Home")
+    }
 
   };
 
@@ -91,6 +95,8 @@ class MainMenu extends React.Component {
   };
 
   render() {
+
+    var popUpText = this.state.reduxStore.isOnIsland ? "Etes-vous sur de vouloir quitter l'ile ?" : "Etes-vous sur de vouloirretourner au menu ?"
     return (
       <View style={{ position: "absolute", top: 0 }}>
         {renderIf(
@@ -161,10 +167,10 @@ class MainMenu extends React.Component {
 
             {renderIf( this.state.popupDisplay, 
               <View style={{width: screen.width, marginTop: screen.height / 100 * 40, flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                <Text style={{textAlign: "center", color: "white", fontSize: 22, fontFamily: "Infini-Regular",width: screen.width /100 * 90 }} > Etes-vous sur de vouloir quitter l'ile ? </Text>
+                <Text style={{textAlign: "center", color: "white", fontSize: 22, fontFamily: "Infini-Regular",width: screen.width /100 * 90 }} >  </Text>
                 <View style={{marginTop: 30, flexDirection: "row", justifyContent: "space-around", width: screen.width / 100 * 60 }}>
                   <TouchableOpacity
-                    onPress={this.navigateToSailing}
+                    onPress={this.quit}
                   >
                    <Text style={{textAlign: "center", color: "white", fontSize: 22, fontFamily: "Infini-Regular"}} > Oui </Text>
                    </TouchableOpacity>
@@ -206,8 +212,8 @@ const mapDispatchToProps = dispatch => {
     navigateTo: (screen) => {
       dispatch(navigateTo(screen))
     },
-    goToSailing: ()=> {
-      dispatch(goToSailing())
+    navigateTo: (routeName)=> {
+      dispatch(navigateTo(routeName))
     }
   };
 };

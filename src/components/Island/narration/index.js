@@ -82,7 +82,7 @@ export default class Narration extends Component {
               texts: [this.state.texts.shift()],
               isTransitionFinished: true
             })
-          }, 500)
+          }, 200)
         }); 
       })
     }

@@ -15,10 +15,11 @@ import ReactNativeHaptic from 'react-native-haptic'
 
 //  Import Components
 // --------------------------------------------------------------
+import Loader from '../components/Loader'
 import Narration from '../components/Island/narration'
-import InteractionMenu from '../components/Island/interaction-menu'
-import Illustrations from '../components/Island/Illustrations'
 import Collectables from '../components/Island/Collectables'
+import Illustrations from '../components/Island/Illustrations'
+import InteractionMenu from '../components/Island/interaction-menu'
 
 //  Import Actions
 // --------------------------------------------------------------
@@ -36,6 +37,7 @@ import { collectables } from '../data'
 import screen from '../helpers/ScreenSize'
 import { storeService } from '../helpers/saveData'
 import images from '../assets/images';
+import renderIf from '../helpers/renderIf'
 
 
 
@@ -58,6 +60,7 @@ class SmartIsland extends Component {
       animation: undefined,
       currentIslandId: undefined,
       islandState: this.props.island,
+      loader: true,
       _changeStep: this.props.goToStep,
       _goToPreviousStep: this.props.goToPreviousStep,
       _saveData: this.props.saveData,
@@ -70,6 +73,9 @@ class SmartIsland extends Component {
 
 componentWillMount(){
   this.state._requestIslandData(this.islandId)
+  setTimeout(() => {
+    this.setState({ loader: false})
+  }, 1000)
 }
 
   
@@ -81,7 +87,6 @@ componentWillReceiveProps(nextProps) {
     this.updateSnippet(nextProps.island)
   }
 }
-
 
  /*
   *  Load the data of the wanted Snippet
@@ -187,7 +192,7 @@ componentWillReceiveProps(nextProps) {
     }, () => {
       setTimeout(()=>{
         this.isTransitionFinished = true
-      }, 4000)
+      }, 2000)
     })
   }
 
@@ -257,7 +262,9 @@ componentWillReceiveProps(nextProps) {
             style={styles.menu}
           />
         </TouchableOpacity>
-        
+        {renderIf(this.state.loader,
+          <Loader />
+        )}
       </View> )
     } else {
       var view = (<View><Text style={{color: 'white', textAlign: "center", marginTop: 300}}> Loading ... </Text></View>)
