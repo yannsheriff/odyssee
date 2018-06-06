@@ -74,8 +74,8 @@ class SmartIsland extends Component {
 componentWillMount(){
   this.state._requestIslandData(this.islandId)
   setTimeout(() => {
-    this.setState({ loader: false})
-  }, 1000)
+    this.setState({ loader: false })
+  }, 3000)
 }
 
   

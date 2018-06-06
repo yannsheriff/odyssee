@@ -25,4 +25,6 @@ export const microInteraction = {
   findGlyphe:  require('./GlythComplete.json')
 }
 
+export const loaderAnim = require('./loaderAnim.json')
+
 export const animatedBoat = require('./boat.json')

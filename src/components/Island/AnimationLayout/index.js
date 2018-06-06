@@ -11,6 +11,7 @@ export default class AnimationLayout extends React.Component {
     super(props);
     this.animation = []
     this.state = {
+      lastProps: this.props.nextAnimation,
       isTransitionFinished: true,
       animations: [
         {
@@ -34,11 +35,12 @@ export default class AnimationLayout extends React.Component {
 
 
   componentWillReceiveProps (nextProps) {
-    if( this.state.isTransitionFinished ) { // If component receive a new animation 
+    if( this.state.isTransitionFinished && nextProps.nextAnimation !== this.state.lastProps ) { // If component receive a new animation 
       
       // Push new animation in state array
       this.setState({ 
         isTransitionFinished: false,
+        lastProps: nextProps.nextAnimation,
         animations:[ 
           {
             animation: nextProps.nextAnimation ? nextProps.nextAnimation.animation : null, 

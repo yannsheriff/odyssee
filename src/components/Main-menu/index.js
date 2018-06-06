@@ -147,6 +147,10 @@ class MainMenu extends React.Component {
                     title={'Quitter l\'ile'}
                     color={'white'}
                   />
+                  <Button
+                    title={'Aide'}
+                    color={'white'}
+                  />
                 </View>
               </Swiper>
               <View
@@ -167,7 +171,7 @@ class MainMenu extends React.Component {
 
             {renderIf( this.state.popupDisplay, 
               <View style={{width: screen.width, marginTop: screen.height / 100 * 40, flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                <Text style={{textAlign: "center", color: "white", fontSize: 22, fontFamily: "Infini-Regular",width: screen.width /100 * 90 }} >  </Text>
+                <Text style={{textAlign: "center", color: "white", fontSize: 22, fontFamily: "Infini-Regular",width: screen.width /100 * 90 }} >{popUpText}  </Text>
                 <View style={{marginTop: 30, flexDirection: "row", justifyContent: "space-around", width: screen.width / 100 * 60 }}>
                   <TouchableOpacity
                     onPress={this.quit}

@@ -13,19 +13,16 @@ export default class Loader extends React.Component {
     super(props);
 
     this.state = {
-      progress: new Animated.Value(0),
+      anim: new Animated.Value(0),
     }
     
   }
   componentDidMount() {
-    Animated.spring(this.state.progress, {
+    Animated.timing(this.state.anim, {
       toValue: 1, 
-      duration: 1000,
-    })
+      duration: 1500,
+    }).start()
   }
-
-
-
 
   render() {
       return (
@@ -33,8 +30,8 @@ export default class Loader extends React.Component {
           <View style={styles.anim}> 
             <LottieView 
               style={styles.anim}
-              source={ microInteraction.actionMenu } 
-              progress={this.state.progress}
+              source={ microInteraction.findGlyphe } 
+              progress={this.state.anim}
             />
           </View>
         </View>
