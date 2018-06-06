@@ -5,7 +5,7 @@
 ### actions
 
 > **Required** 
-> 
+>
 > type : *Array of objects*
 ```javascript
 	actions={[
@@ -60,6 +60,7 @@ style the label of each actions on hover.
 
   
 
+
 ### mainButtonsSize (default => 50)
 
 > type : *Int*
@@ -78,7 +79,6 @@ Personnalize the mainButton size
 ```
 
 Personnalize the mainButton size
-
 
 ### mainButton
 
@@ -115,7 +115,9 @@ this props allow to personnalise the aspect of main button When it's disabled.
 
 ### isActive
 
+
 > type : *bool* (default => true)
+
 ```javascript
 	isActive={ false }
 ```
