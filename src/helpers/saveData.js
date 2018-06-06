@@ -144,7 +144,7 @@ class StoreService {
             subtitle: undefined,
             animation: undefined,
           },
-          isOnIsland: false,
+          isOnIsland: dataSaved.isOnIsland,
           menu: {
             displayMenu: false,
             collectableEquipped: dataSaved.menu.collectableEquipped,
@@ -178,12 +178,12 @@ class StoreService {
               haveObject: false,
           }
         }
-        if (dataSaved.isOnIsland) {
-          let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
-          state.island.currentIslandId = dataSaved.isOnIsland
-          state.island.actualSnippetId = actualIsland.actualSnippetId
-          state.isOnIsland = dataSaved.isOnIsland
-        }
+        // if (dataSaved.isOnIsland) {
+        //   let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
+        //   state.island.currentIslandId = dataSaved.isOnIsland
+        //   state.island.actualSnippetId = actualIsland.actualSnippetId
+        //   state.isOnIsland = dataSaved.isOnIsland
+        // }
         return state
       }
   }

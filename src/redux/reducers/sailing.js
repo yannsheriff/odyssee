@@ -10,6 +10,11 @@ import {
   COLLISION
 } from '../actions/sailing'
 
+import { 
+  EQUIP_GLYPH,
+  UNEQUIP_GLYPH
+} from '../actions/menu'
+
 import { POPULATE_STORE } from '../actions/loading'
 
 const initialState = {
@@ -78,6 +83,19 @@ export function sailingReducer(state = initialState, action) {
       return state
     case POPULATE_STORE:
       return action.payload.sailing
+
+    case EQUIP_GLYPH:
+      return {
+          ...state,
+          collectableEquipped: [...state.collectableEquipped, action.id]
+      }
+
+    case UNEQUIP_GLYPH:
+      return {
+          ...state,
+          collectableEquipped: state.collectableEquipped.filter(el => el !== action.id)
+      }
+  
     default:
       return state
   }

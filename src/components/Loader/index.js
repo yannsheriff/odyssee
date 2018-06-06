@@ -24,28 +24,7 @@ class VisualNotification extends React.Component {
 
 
   componentWillReceiveProps (nextProps) {
-    if(nextProps.notification.title) {
-      ReactNativeHaptic.generate('notification')
-      this.setState({
-        haveNotification: true,
-        title: nextProps.notification.title,
-        subtitle: nextProps.notification.subtitle ? nextProps.notification.subtitle : '',
-        subtitle2: nextProps.notification.subtitle2 ? nextProps.notification.subtitle2 : '',
-        source: nextProps.notification.animation ? nextProps.notification.animation : null
-      }, () => {
-        if(nextProps.notification.animation) {
-          Animated.timing(this.state.progress, {
-            toValue: 1,
-            duration: 2300,
-            easing: Easing.linear,
-          }).start(()=> {
-            this.setState({
-              displayText: 1
-            })
-          });
-        }
-      })
-    }
+
   }
 
   componentDidMount() {
@@ -53,7 +32,7 @@ class VisualNotification extends React.Component {
   }
 
   closeNotification = () => {
-    this.setState({haveNotification: false, displayText: 0, progress: new Animated.Value(0) })
+
   }
   
 
@@ -67,11 +46,11 @@ class VisualNotification extends React.Component {
         >
 
         <BlurView
-              style={styles.absolute}
-              viewRef={this.state.viewRef}
-              blurType="light"
-              blurAmount={20}
-            />
+            style={styles.absolute}
+            viewRef={this.state.viewRef}
+            blurType="light"
+            blurAmount={20}
+          />
 
        
         <View style={styles.animation}>
