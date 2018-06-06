@@ -20,7 +20,9 @@ export const animations = [
 ]
 
 export const microInteraction = {
-    actionMenu: require('./RondAnimMenuAction.json'),
-    findFragment:  require('./GlyphAnim.json'),
-    findGlyphe:  require('./trophy.json')
+  actionMenu: require('./MenuAction.json'),
+  findFragment:  require('./success_animation.json'),
+  findGlyphe:  require('./trophy.json')
 }
+
+export const animatedBoat = require('./boat.json')

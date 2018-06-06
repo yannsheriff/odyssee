@@ -17,7 +17,12 @@ const images = {
       cyclope_4: require('./img/cyclope_4.png')
     },
     closeMenu: require('./img/Close.png'),
-    openMenu: require('./img/plus.png')
+    openMenu: require('./img/plus.png'),
+    iconPlay: require('./img/icon-play.png'),
+    iconPause: require('./img/icon-pause.png'),
+    iconLock: require('./img/icon-lock.png'),
+    iconUnlock: require('./img/icon-unlock.png'),
+    iconMap: require('./img/icon-map.png')
 };
 
 export const choices = [
