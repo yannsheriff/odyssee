@@ -43,6 +43,10 @@ export function* saveSailingData(action) {
       id: action.state.destination.id, 
       x: action.state.destination.x,
       y: action.state.destination.y,
+    },
+    modifiers: {
+      strength: action.state.modifiers.strength,
+      direction: action.state.modifiers.direction
     }
   }
 

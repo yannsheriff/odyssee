@@ -1,5 +1,6 @@
 import {
   UPDATE_ORIENTATION,
+  UPDATE_MODIFIERS,
   TOGGLE_SAILING,
   CALL_MAP,
   LAUNCH_MAP,
@@ -31,6 +32,10 @@ const initialState = {
     id: '',
     x: '',
     y: ''
+  },
+  modifiers: {
+    strength: 0,
+    direction: 0
   }
 }
 
@@ -40,6 +45,11 @@ export function sailingReducer(state = initialState, action) {
       return {
         ...state,
         orientation: action.orientation
+      }
+    case UPDATE_MODIFIERS:
+      return {
+        ...state,
+        modifiers: action.modifiers
       }
     case TOGGLE_SAILING:
       return {
