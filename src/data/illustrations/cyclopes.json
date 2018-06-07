@@ -1,105 +1,628 @@
 {
-    "steps": [
-        {
-            "id": 1,
-            "offsets": {
-                "first": 0,
-                "middle": 0,
-                "back": 0
-            },
-            "collectables": [1],
-            "animation": {
-                "loop": true,
-                "animationId": 2,
-                "animationDuration": 6000,
-                "transitionDuration": 2000
-            }
+  "steps": [
+      
+    {
+      "id": 1,
+      "offsets": {
+        "first": 0,
+        "middle": 0,
+        "back": 0
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "loop": true,
+        "animationId": 2,
+        "animationDuration": 1000,
+        "transitionDuration": 2000
+      }
+    },
+    {
+        "id": 2,
+        "offsets": {
+          "first": 375,
+          "middle": 250,
+          "back": 187.5
         },
-        {
-            "id": 2,
-            "offsets": {
-                "first": -300,
-                "middle": -200,
-                "back": -100
-            },
-            "collectables": [4],
-            "animation": {
-                "transitionDuration": 2000
-            }
-        },
-        {
-            "id": 3,
-            "offsets": {
-                "first": -600,
-                "middle": -300,
-                "back": -200
-            },
-            "collectables": [2],
-            "animation": {
-                "loop": true,
-                "animationId": 2,
-                "animationDuration": 1000,
-                "transitionDuration": 2000
-            }
-        },
-        {
-            "id": 4,
-            "offsets": {
-                "first": -600,
-                "middle": -300,
-                "back": -200
-            },
-            "collectables": [5],
-            "animation": {
-                "loop": true,
-                "animationId": 1,
-                "animationDuration": 1000,
-                "transitionDuration": 2000
-            }
-        },
-        {
-            "id": 5,
-            "offsets": {
-                "first": -900,
-                "middle": -600,
-                "back": -300
-            },
-            "collectables": [6],
-            "animation": {
-                "loop": true,
-                "animationId": 1,
-                "animationDuration": 1000,
-                "transitionDuration": 2000
-            }
-        },
-        {
-            "id": 6,
-            "offsets": {
-                "first": -900,
-                "middle": -600,
-                "back": -300
-            },
-            "animation": {
-                "loop": true,
-                "animationId": 1,
-                "animationDuration": 1000,
-                "transitionDuration": 2000
-            }
-        },
-        {
-            "id": 9999,
-            "offsets": {
-                "first": -900,
-                "middle": -600,
-                "back": -300
-            },
-            "animation": {
-                "loop": true,
-                "animationId": 1,
-                "animationDuration": 1000,
-                "transitionDuration": 2000
-            }
+        "collectables": [
+          1
+        ],
+        "animation": {
+          "loop": true,
+          "animationId": 2,
+          "animationDuration": 1000,
+          "transitionDuration": 2000
         }
-
-    ]
+      },
+    {
+      "id": 3,
+      "offsets": {
+        "first": 750,
+        "middle": 500,
+        "back": 375
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 4,
+      "offsets": {
+        "first": 1125,
+        "middle": 750,
+        "back": 562.5
+      },
+      "collectables": [1],
+      "animation": {
+        "loop": true,
+        "animationId": 2,
+        "animationDuration": 1000,
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 5,
+      "offsets": {
+        "first": 1500,
+        "middle": 1000,
+        "back": 750
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 6,
+      "offsets": {
+        "first": 1875,
+        "middle": 1250,
+        "back": 937.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 7,
+      "offsets": {
+        "first": 2250,
+        "middle": 1500,
+        "back": 1125
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 8,
+      "offsets": {
+        "first": 2625,
+        "middle": 1750,
+        "back": 1312.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 9,
+      "offsets": {
+        "first": 3000,
+        "middle": 2000,
+        "back": 1500
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 10,
+      "offsets": {
+        "first": 3375,
+        "middle": 2250,
+        "back": 1687.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 11,
+      "offsets": {
+        "first": 3750,
+        "middle": 2500,
+        "back": 1875
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 12,
+      "offsets": {
+        "first": 4125,
+        "middle": 2750,
+        "back": 2062.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 13,
+      "offsets": {
+        "first": 4500,
+        "middle": 3000,
+        "back": 2250
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 14,
+      "offsets": {
+        "first": 4875,
+        "middle": 3250,
+        "back": 2437.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 15,
+      "offsets": {
+        "first": 5250,
+        "middle": 3500,
+        "back": 2625
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 16,
+      "offsets": {
+        "first": 5625,
+        "middle": 3750,
+        "back": 2812.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 17,
+      "offsets": {
+        "first": 6000,
+        "middle": 4000,
+        "back": 3000
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 18,
+      "offsets": {
+        "first": 6375,
+        "middle": 4250,
+        "back": 3187.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 19,
+      "offsets": {
+        "first": 6750,
+        "middle": 4500,
+        "back": 3375
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 20,
+      "offsets": {
+        "first": 7125,
+        "middle": 4750,
+        "back": 3562.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 21,
+      "offsets": {
+        "first": 7500,
+        "middle": 5000,
+        "back": 3750
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 22,
+      "offsets": {
+        "first": 7875,
+        "middle": 5250,
+        "back": 3937.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 23,
+      "offsets": {
+        "first": 8250,
+        "middle": 5500,
+        "back": 4125
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 24,
+      "offsets": {
+        "first": 8625,
+        "middle": 5750,
+        "back": 4312.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 25,
+      "offsets": {
+        "first": 9000,
+        "middle": 6000,
+        "back": 4500
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 26,
+      "offsets": {
+        "first": 9375,
+        "middle": 6250,
+        "back": 4687.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 27,
+      "offsets": {
+        "first": 9750,
+        "middle": 6500,
+        "back": 4875
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 28,
+      "offsets": {
+        "first": 10125,
+        "middle": 6750,
+        "back": 5062.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 29,
+      "offsets": {
+        "first": 10500,
+        "middle": 7000,
+        "back": 5250
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 30,
+      "offsets": {
+        "first": 10875,
+        "middle": 7250,
+        "back": 5437.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 31,
+      "offsets": {
+        "first": 11250,
+        "middle": 7500,
+        "back": 5625
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 32,
+      "offsets": {
+        "first": 11625,
+        "middle": 7750,
+        "back": 5812.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 33,
+      "offsets": {
+        "first": 12000,
+        "middle": 8000,
+        "back": 6000
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 34,
+      "offsets": {
+        "first": 12375,
+        "middle": 8250,
+        "back": 6187.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 35,
+      "offsets": {
+        "first": 12750,
+        "middle": 8500,
+        "back": 6375
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 36,
+      "offsets": {
+        "first": 13125,
+        "middle": 8750,
+        "back": 6562.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 37,
+      "offsets": {
+        "first": 13500,
+        "middle": 9000,
+        "back": 6750
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 38,
+      "offsets": {
+        "first": 13875,
+        "middle": 9250,
+        "back": 6937.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 39,
+      "offsets": {
+        "first": 14250,
+        "middle": 9500,
+        "back": 7125
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 40,
+      "offsets": {
+        "first": 14625,
+        "middle": 9750,
+        "back": 7312.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 41,
+      "offsets": {
+        "first": 15000,
+        "middle": 10000,
+        "back": 7500
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 42,
+      "offsets": {
+        "first": 15375,
+        "middle": 10250,
+        "back": 7687.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 43,
+      "offsets": {
+        "first": 15750,
+        "middle": 10500,
+        "back": 7875
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    },
+    {
+      "id": 44,
+      "offsets": {
+        "first": 16125,
+        "middle": 10750,
+        "back": 8062.5
+      },
+      "collectables": [
+        1
+      ],
+      "animation": {
+        "transitionDuration": 2000
+      }
+    }
+  ]
 }

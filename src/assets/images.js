@@ -38,6 +38,46 @@ export const choices = [
         id: 2,
         img: require('./img/Arc.png')
     },
+    {
+        id: 3,
+        img: require('./img/appeler.png')
+    },
+    {
+        id: 4,
+        img: require('./img/Verite.png')
+    },
+    {
+        id: 5,
+        img: require('./img/SeTaire.png')
+    },
+    {
+        id: 6,
+        img: require('./img/SeCacher.png')
+    },
+    {
+        id: 7,
+        img: require('./img/Personne.png')
+    },
+    {
+        id: 8,
+        img: require('./img/NePasBouger.png')
+    },
+    {
+        id: 9,
+        img: require('./img/Motive.png')
+    },
+    {
+        id: 10,
+        img: require('./img/Mentir.png')
+    },
+    {
+        id: 11,
+        img: require('./img/Menace.png')
+    },
+    {
+        id: 12,
+        img: require('./img/Fils.png')
+    }
 ]
 
 export const backgrounds = {
@@ -60,19 +100,20 @@ export const backgrounds = {
     },
     foret: {
         p1: {
-            image: require('./img/Plan1.png'),
-            height: 2433,
-            width: 9989,
+            image: require('./img/premier_plan.png'),
+            height: 812,
+            width: 13876,
+
         },
         p2: {
-            image: require('./img/Plan2.png'),
-            height: 2541,
-            width: 5219,
+            image: require('./img/second_plan.png'),
+            height: 813,
+            width: 9469,
         },
         p3: {
-            image: require('./img/Plan3.jpg'),
-            height: 2437,
-            width: 3500,
+            image: require('./img/arriere-plan.jpg'),
+            height: 813,
+            width: 7235,
         } 
     }
 }

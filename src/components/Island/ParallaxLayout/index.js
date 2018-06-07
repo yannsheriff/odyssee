@@ -40,7 +40,7 @@ export default class ParallaxLayout extends Component {
     Animated.timing(
       this.state.fadeAnim,
     {
-        toValue: this.offsetX,
+        toValue: -this.offsetX,
         duration: 1500,              
       }
     ).start()
@@ -51,12 +51,13 @@ export default class ParallaxLayout extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     if (nextProps.offsetX !== undefined && nextProps.offsetX != this.offsetX) {
       this.offsetX = nextProps.offsetX
       Animated.timing(
         this.state.fadeAnim,
       {
-          toValue: nextProps.offsetX,
+          toValue: -nextProps.offsetX,
           duration: 1500,              
         }
       ).start()

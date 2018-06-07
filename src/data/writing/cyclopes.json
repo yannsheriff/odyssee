@@ -6,7 +6,6 @@
     "steps": [
         {
             "id": 1,
-            "title": "",
             "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché. L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage, sans jeter les ancres. On peut attendre ici, sans danger, les vents pour repartir.",
             "collectableObject": 0,
             "haveAction": false,
@@ -18,73 +17,202 @@
         },
         {
             "id": 2,
-            "title": "",
-            "text": " — Quelques hommes doivent rester sur le bateaux, les autres, débarqué avec des vivres. En attendant l’aube, nous nous installerons pour dormir sur le sable. Restez groupés, et ne vous éloignez pas du campement. N’allumez aucun feu qui pourrait nous faire repérer.",
+            "text": "",
             "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
-                    "id": 3
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "title": "",
-            "text": "l’îlot est habitable et prospère, il y a quelques chèvres que l’on peut apercevoir au loin.",
-            "collectableObject": 0,
-            "haveAction": true,
-            "actions": [
-                {
                     "id": 4
-                },
-                {
-                    "id": 5
-                },
-                {
-                    "id": 6
                 }
             ]
         },
         {
             "id": 4,
-            "title": "Attraper un arc",
-            "choiceImgId": 2,
-            "text": "Ce gibier tombe à point, les hommes s’emparent aussitôt de leur arc, et d’épieux à longues douilles, pour chasser. Les dieux sont avec nous, la chasse est bonne. Et ainsi, du lever au coucher du soleil, nous festoyons  de viandes grillées et de vin doux tiré des amphores.",
+            "title": "",
+            "text": "L’îlot est habitable et prospère, il y a quelques daim que l’on peut apercevoir.",
             "collectableObject": 0,
-            "haveAction": false,
+            "haveAction": true,
             "actions": [
                 {
+                    "choiceImgId": 2,
+                    "title": "Attraper un arc",
                     "id": 6
-                }
-            ]
-        },
-        {
-            "id": 5,
-            "title": "Attraper un épieux",
-            "choiceImgId": 0,
-            "text": "Ce gibier tombe à point, les hommes s’emparent aussitôt de leur arc, et d’épieux à longues douilles, pour chasser. Les dieux sont avec nous, la chasse est bonne. Et ainsi, du lever au coucher du soleil, nous festoyons  de viandes grillées et de vin doux tiré des amphores.",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
+                },
                 {
+                    "title": "Attraper un épieux",
+                    "choiceImgId": 0,
                     "id": 6
+                },
+                {
+                    "title": "Continuer sa route",
+                    "choiceImgId": 1,
+                    "id": 9
                 }
             ]
         },
         {
             "id": 6,
-            "title": "Continuer sa route",
-            "choiceImgId": 1,
+            "text": "Ce gibier tombe à point, les hommes s’emparent aussitôt de leur arc, et d’épieux à longues douilles, pour chasser. Les dieux sont avec nous, la chasse est bonne.",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 7
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "text": "",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "text": "Et ainsi, du lever au coucher du soleil, nous festoyons  de viandes grillées et de vin doux tiré des amphores.",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 9
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "text": " — Quelques hommes doivent rester sur le bateaux, les autres, débarqué avec des vivres. En attendant l’aube, nous nous installerons pour dormir sur le sable. Restez groupés, et ne vous éloignez pas du campement. N’allumez aucun feu qui pourrait nous faire repérer.",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 10
+                }
+            ]
+        },
+        {
+            "id": 10,
             "text": "Tout près de notre îlot se dresse une autre île, plus montagneuse. Elle est si proche de nous que l’on en devine les fumées des foyers, et l’on entend les brebis et les chèvres bêler. Elle m’intrigue. Qui habite cette terre ? ",
             "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
-                    "id": 9999
+                    "id": 11
                 }
             ]
         },
+        {
+            "id": 11,
+            "text": "Bientôt, nous atteignons à la rame l’autre rivage, et je repère au bout d’un cap une grotte, juste au-dessus de la mer. Elle est cachée derrière les lauriers sauvages. Des brebis et des chèvres sont parquées dans un enclos à côté. Un haut rempart de blocs de pierres et d’arbres, des chênes et des pins, encerclent les lieux. Quel être étrange habite ici pour vivre seul, à l’écart de ses semblables ?",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 12
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "text": "",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 13
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "text": "",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 14
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "text": "",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 15
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "text": "— Il me faut douze braves qui exploreront la grotte de plus près, soyez prêts à fuir au plus vite, si nous sommes en danger ! Courage, inconscience ou défi, je veux rencontrer le propriétaire de cet antre ! J’emporte l’outre de vin, offerte chez les Cicones, à Ismaros, et une besace pleine de vivres. Quelques cadeaux à échanger en signe de civilité ! Partons explorer les lieux !",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 16
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "text": [
+                "Quelle puanteur insupportable, un mélange de fumier et de lait caillé ! Qui peut vivre ici ? ",
+                "Des fromages sont alignés les uns à côté des autres sur des claies, et puis, un peu plus loin, on trouve des étables pleines de chevreaux et d’agneaux, avec des jattes et des terrines pour le lait."
+            ],
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 17
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "text": "",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 18
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "text": "",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 19
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "text": "Un Cyclope ! Nous sommes dans l’antre d’un Cyclope ",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 15
+                }
+            ]
+        },
+        
+
+
+
+
+
         {
             "id": 9999, 
             "title": "End",

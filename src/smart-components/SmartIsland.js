@@ -59,6 +59,9 @@ class SmartIsland extends Component {
       offsets: undefined,
       animation: undefined,
       currentIslandId: undefined,
+      narration: undefined,
+      haveMultipleText: undefined,
+      currentText: undefined,
       islandState: this.props.island,
       loader: true,
       _changeStep: this.props.goToStep,
@@ -99,6 +102,14 @@ componentWillReceiveProps(nextProps) {
       }
     });
 
+    if (Array.isArray(snippet.text)) {
+      var haveMultipleText = true
+    } else {
+      var haveMultipleText = false
+    }
+    const narration = snippet.text
+
+
     const illustration = islands[currentIslandId].illustrations.steps.find((index) => {
       if (index.id === actualSnippetId) {
         return index
@@ -129,31 +140,30 @@ componentWillReceiveProps(nextProps) {
     } 
 
 
-    let snippetArray = []
-    let haveAction = true
 
+    let haveAction = true
     if (snippet.haveAction) {
-      snippet.actions.forEach(element => {
-        islands[currentIslandId].writting.steps.find((index) => {
-          if (index.id === element.id) {
-            snippetArray.push(index) 
-          }
-        });
-      });
+      var snippetArray = snippet.actions.map(element => {
+        return {
+          title: element.title,
+          id: element.id,
+          choiceImgId: element.choiceImgId
+        }
+      })
     } else {
       haveAction = false 
-      snippetArray = islands[currentIslandId].writting.steps.find((index) => {
-        if (index.id === actualSnippetId) {
-          return index
+      var snippetArray = snippet.actions.map(element => {
+        return {
+          id: element.id,
         }
-      });
-      snippetArray = [snippetArray]
+      })
     }
+
+
     let bundleAction = {
       haveAction: haveAction,
       snippets: snippetArray
     }
-
 
     const payload = {
       snippet: snippet,
@@ -161,6 +171,8 @@ componentWillReceiveProps(nextProps) {
       offsets: offsets,
       animation: animation,
       collectables: collectableData,
+      narration: narration,
+      haveMultipleText: haveMultipleText
     }
 
     return payload
@@ -179,6 +191,8 @@ componentWillReceiveProps(nextProps) {
       var isGoingForward = true
     }
 
+
+
     this.isTransitionFinished = false     
     this.setState({
       currentIslandId: state.currentIslandId,
@@ -187,8 +201,11 @@ componentWillReceiveProps(nextProps) {
       offsets: payload.offsets,
       animation: payload.animation,
       collectables: payload.collectables,
+      narration: payload.narration,
+      haveMultipleText: payload.haveMultipleText,
+      currentText: isGoingForward ? 0 : payload.narration.length - 1,
       islandState: state, 
-      isGoingForward: isGoingForward
+      isGoingForward: isGoingForward,
     }, () => {
       setTimeout(()=>{
         this.isTransitionFinished = true
@@ -204,14 +221,22 @@ componentWillReceiveProps(nextProps) {
     if(id === 0) {
       this.props.navigation.navigate('Home')
     } else if (this.isTransitionFinished) {
-      this.state._saveData(this.state.islandState, id) 
-      this.state._changeStep(id) 
+        if(this.state.haveMultipleText && this.state.currentText < this.state.narration.length - 1  ) {
+          this.setState({ currentText: this.state.currentText + 1})
+        } else {
+          this.state._saveData(this.state.islandState, id) 
+          this.state._changeStep(id) 
+        }
     }
   }
 
   goToPreviousStep = () => {
-    if(this.state.islandState.actualSnippetId > 1 && this.isTransitionFinished ) {
-      this.state._goToPreviousStep() 
+    if(this.state.haveMultipleText && this.state.currentText > 0  ) {
+      this.setState({ currentText: this.state.currentText - 1})
+    } else {
+      if(this.state.islandState.actualSnippetId > 1 && this.isTransitionFinished ) {
+        this.state._goToPreviousStep() 
+      }
     }
   }
 
@@ -242,7 +267,8 @@ componentWillReceiveProps(nextProps) {
           animation={ this.state.animation.animation }
           swipBackward={ !this.state.isGoingForward }
         />
-        <Narration snippet = { this.state.snippet } /> 
+        
+        <Narration text = { this.state.haveMultipleText ? this.state.narration[this.state.currentText] : this.state.narration } /> 
         <InteractionMenu 
           actions = { this.state.actions } 
           changeStep={ this.goToNextStep }  
