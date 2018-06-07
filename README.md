@@ -78,6 +78,13 @@ Personnalize the mainButton size
 	actionsButtonsSize={ 30 }
 ```
 
+### buttonsOffset
+
+> type : *Int*  (default => 120)
+```javascript
+	buttonsOffset={ 150 }
+```
+
 Personnalize the mainButton size
 
 ### mainButton

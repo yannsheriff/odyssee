@@ -95,13 +95,13 @@ class Accueil extends Component {
                         color="#fff"
                     />
                     </View>
-                    <View style={styles.buttonBorder}>
+                    {/* <View style={styles.buttonBorder}>
                     <Button
                         onPress={() => this.props.navigation.navigate('Test')}
                         title={'Test'}
                         color="#fff"
                     />
-                    </View>
+                    </View> */}
                 </View>
             </View>
         );

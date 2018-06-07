@@ -13,31 +13,37 @@ export default class Loader extends React.Component {
     super(props);
 
     this.state = {
-      progress: new Animated.Value(0),
+      anim: new Animated.Value(0),
+      opacity: new Animated.Value(1),
     }
     
   }
   componentDidMount() {
-    Animated.spring(this.state.progress, {
-      toValue: 1, 
-      duration: 1000,
-    })
+
+    Animated.sequence([
+      Animated.timing(this.state.anim, {
+        toValue: 1, 
+        duration: 1500,
+      }),
+      Animated.timing(this.state.opacity, {
+        toValue: 0, 
+        duration: 1000,
+      })
+    ]).start()
+
   }
-
-
-
 
   render() {
       return (
-        <View style={styles.container}>
+        <Animated.View  style={[ styles.container, { opacity: this.state.opacity }]}>
           <View style={styles.anim}> 
             <LottieView 
               style={styles.anim}
-              source={ microInteraction.actionMenu } 
-              progress={this.state.progress}
+              source={ microInteraction.findGlyphe } 
+              progress={this.state.anim}
             />
           </View>
-        </View>
+        </Animated.View>
     );
   }
 }

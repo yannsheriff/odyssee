@@ -46,7 +46,7 @@ export default class Narration extends Component {
 
 
   componentWillReceiveProps (nextProps) {
-    if(nextProps.snippet.text && this.state.isTransitionFinished ) { // If component receive a new animation 
+    if(nextProps.snippet.text && this.state.isTransitionFinished && nextProps.snippet.text !== this.state.texts[0].text) { // If component receive a new animation 
       
       // Get transition duration
       let transitionDuration = nextProps.transitionDuration ? nextProps.transitionDuration : this.state.transitionDuration
@@ -71,7 +71,7 @@ export default class Narration extends Component {
             toValue: 0, 
           }),
           Animated.timing(this.state.texts[0].opacity, {
-            delay: 2000,
+            delay: 1000,
             duration: transitionDuration,
             toValue: 1,
           }),

@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     animation: {
-        marginTop: 20,
         position: "absolute",
         top: 0,
         width: screen.width,
