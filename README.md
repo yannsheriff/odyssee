@@ -30,12 +30,26 @@ The array of action, needs all the three parameters
 
 It's a callBack function triggered on choice selected, with the choice id in parameters
 
+
+
+
+### onPress
+
+> type : *function*
+```javascript
+	onPress={() => {
+		// do something 
+	}}
+```
+
+It's a callBack function triggered when the main button is pressed 
+
   
 
 ### mainBtnStyle
 > type : *css*
 ```javascript
-	mainBtnStyle= {{ background: "green" }}
+	mainBtnStyle= {{ backgroundColor: "green" }}
 ```
 style the main button (the one that trigger the multi-action).
 
@@ -58,7 +72,15 @@ Change the position of the main button.
 ```
 style the label of each actions on hover.
 
-  
+
+### blurView (default => false)
+
+> type : *Bool*
+```javascript
+	blurView={ true } 
+```
+add a blur on open
+
 
 
 ### mainButtonsSize (default => 50)

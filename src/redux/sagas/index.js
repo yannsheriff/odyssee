@@ -1,4 +1,3 @@
-import { delay } from 'redux-saga'
 import { put, takeEvery, all, select } from 'redux-saga/effects'
 import { SAVE_ISLAND_DATA, REQUEST_ISLAND_DATA, dispatchIslandData } from '../actions/island'
 import { SAVE_SAILING } from '../actions/sailing'
@@ -72,6 +71,7 @@ export function* saveIslandData(action) {
         screenReaded: actualIslandSavedData.screenReaded.concat(action.state.actualSnippetId),
         actualSnippetId: action.nextSnippetId,
       }
+      
       // Create a new occurence of the saved state
       var newState = {
         ...data,
@@ -83,6 +83,9 @@ export function* saveIslandData(action) {
           }
         })
       }
+
+      console.log("newState", newState)
+
     } 
   // Save data to Async storage
   yield storeService.save(newState)

@@ -21,6 +21,9 @@ export default class MultiActionButton extends React.Component {
     this.mainButtonsSize = this.props.mainButtonsSize ? this.props.mainButtonsSize: 50
     this.onButtonPressed = this.props.onButtonPressed ? this.props.onButtonPressed : undefined
     this.onButtonReleased = this.props.onButtonReleased ? this.props.onButtonReleased : undefined
+    this.onPress = this.props.onOpen ? this.props.onPress : function() {}
+    this.haveCallToAction = this.props.haveCallToAction ? true : false
+    this.blurView = this.props.blurView ? true : false
     this.initialPosition = this.props.initalPositon 
     ? this.props.initalPositon
     : {
@@ -45,6 +48,7 @@ export default class MultiActionButton extends React.Component {
       text: '',
       isOpen: false,
       isActive: this.props.isActive !== undefined ? this.props.isActive : true, 
+      blurView: this.blurView,
       chosenId: undefined,
       buttonArray: buttonArray ,
       btnStyle: this.props.mainBtnStyle, 
@@ -56,13 +60,13 @@ export default class MultiActionButton extends React.Component {
   }
 
   componentDidMount() {
-    if(this.state.isActive) {
+    if(this.state.isActive && this.state.haveCallToAction) {
       this.animationAction.play()
     } 
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if(this.state.isActive) {
+  componentDidUpdate(prevState) {
+    if(this.state.isActive && this.state.haveCallToAction) {
       this.animationAction.play()
     } 
     if(prevState.isOpen !== this.state.isOpen) {
@@ -77,11 +81,9 @@ export default class MultiActionButton extends React.Component {
         buttonArray: this._prepareButtons(nextProps.actions)
       })
     } else {
-      setTimeout(()=> {
-        this.setState({
-          buttonArray: []
-        })
-      }, 1000 )
+      this.setState({
+        buttonArray: []
+      })
     }
 
     if (nextProps.isActive !== undefined) {
@@ -104,6 +106,7 @@ export default class MultiActionButton extends React.Component {
       array.forEach((data, index) => {
         payload.push(
           {
+            id: index,
             x: new Animated.Value(this.initialPosition.x + this.actionsButtonsSize/2 ),
             y: new Animated.Value(this.initialPosition.y - this.actionsButtonsSize/2 ),
             x1: this.initialPosition.x + this.mainButtonsSize/2 - this.actionsButtonsSize/2  + this.buttonsOffset * Math.sin(this.positionReferenceMap[nbOfButtons][index] * (Math.PI / 180)),
@@ -111,7 +114,7 @@ export default class MultiActionButton extends React.Component {
             img: data.img,
             label: data.label,
             isHovered: false,
-            id: data.id
+            idToGo: data.id
           }, 
         )
       })
@@ -131,6 +134,7 @@ export default class MultiActionButton extends React.Component {
     })
 
     ReactNativeHaptic.generate('impact')
+    // this.onPress()
 
     if (this.state.buttonArray.length > 0) {
       let animationsToPlay = this.state.buttonArray.reduce(function(payload, button) {
@@ -166,42 +170,42 @@ export default class MultiActionButton extends React.Component {
     this.setState({
       opacity: 0,
       text: "",
-      isOpen: false
+      isOpen: false,
+      transitionFinished: false
     })
     if (this.state.buttonArray.length > 0) { 
       let animationsToPlay = this.state.buttonArray.reduce((payload, button) => {
         payload.push(
-          Animated.spring(button.x, {
+          Animated.timing(button.x, {
             toValue: this.initialPosition.x + this.actionsButtonsSize/2, 
-            duration: 1000,
+            duration: 200,
+            // easing: Easing.out
           }),
-          Animated.spring(button.y, {
+          Animated.timing(button.y, {
             toValue: this.initialPosition.y + this.actionsButtonsSize/2, 
-            duration: 1000,
+            duration: 200,
+            // easing: Easing.out
           })
         )
         return payload;
       }, []);
       animationsToPlay.push(
-        Animated.spring(this.state.optionsSize, {
-          duration: 1000,
-          toValue: 0, 
+        Animated.timing(this.state.optionsSize, {
+          duration: 200,
+          toValue: 0,
         })
       )
       Animated.parallel(animationsToPlay).start(()=> {
-        if (this.state.chosenId) {
+        if (this.state.chosenId !== undefined) {
+          if (this.callback) {
+            this.callback(this.state.chosenId)
+          }
           this.setState({
             chosenId: undefined,
-            buttonArray: []
+            transitionFinished: true
           })
         }
       });
-    }
-
-    if (this.state.chosenId !== undefined) {
-      if (this.callback) {
-        this.callback(this.state.chosenId)
-      }
     }
   }
 
@@ -212,7 +216,7 @@ export default class MultiActionButton extends React.Component {
   */ 
   _handleDrag = (evt) => { 
       if (this.firstTouch) {
-        if ( evt.nativeEvent.timestamp > this.firstTouch + 100) {
+        if ( evt.nativeEvent.timestamp > this.firstTouch + 10 + this.state.transitionFinished) {
           if (!this.menuIsOpen) {
             this._openMenu()
             this.menuIsOpen = true
@@ -255,7 +259,7 @@ export default class MultiActionButton extends React.Component {
 
                 this.setState({  // Set text on screen and id in the state
                   text: button.label,
-                  chosenId: button.id
+                  chosenId: button.idToGo
                 })
 
 
@@ -292,10 +296,6 @@ export default class MultiActionButton extends React.Component {
       } else {
         this.firstTouch = evt.nativeEvent.timestamp
       }
-  }
-
-  async _unHoverBtn(index) {
-   
   }
 
 
@@ -359,10 +359,10 @@ export default class MultiActionButton extends React.Component {
               style={[ styles.text, this.state.textStyle ]}
             >  {this.state.text} </Text>
             <View>
-              {renderIf(this.state.isActive,
+              {renderIf(this.state.isActive && this.haveCallToAction,
                 <View  style={[styles.animationContainer, { top: 
-                  this.initialPosition.y - 50, 
-                  left:this.initialPosition.x -50
+                  this.initialPosition.y - 75 + this.mainButtonsSize / 2, 
+                  left:this.initialPosition.x - 75 + this.mainButtonsSize / 2
                 }]}>
                   <LottieView 
                     style={ styles.animation }
