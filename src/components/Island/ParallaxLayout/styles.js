@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
         height: screen.height,
         position: 'absolute',
         top: 0,
+        
     },
     img: {
         height: screen.height,

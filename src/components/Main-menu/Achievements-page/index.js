@@ -118,7 +118,7 @@ class Menu_achivement extends React.Component {
     });
 
 
-     // ===== Render collectables ===== // 
+     // ===== Render achievement ===== // 
 
      var achievementToDisplay = this.state.achievement.map(element => {
       return (

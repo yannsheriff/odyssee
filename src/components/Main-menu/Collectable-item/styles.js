@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   },
   glyphesName: {
     textAlign: "center",
+    fontFamily: "Infini-Regular",
     color: "white",
     width: 70,
     marginTop: 5

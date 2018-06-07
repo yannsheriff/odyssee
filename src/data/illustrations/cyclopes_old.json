@@ -12,6 +12,9 @@
         1
       ],
       "animation": {
+        "loop": true,
+        "animationId": 2,
+        "animationDuration": 1000,
         "transitionDuration": 2000
       }
     },
@@ -26,6 +29,9 @@
           1
         ],
         "animation": {
+          "loop": true,
+          "animationId": 2,
+          "animationDuration": 1000,
           "transitionDuration": 2000
         }
       },
@@ -47,8 +53,8 @@
       "id": 4,
       "offsets": {
         "first": 1125,
-        "middle": 780,
-        "back": 610
+        "middle": 750,
+        "back": 562.5
       },
       "collectables": [1],
       "animation": {
@@ -76,8 +82,8 @@
       "id": 6,
       "offsets": {
         "first": 1875,
-        "middle": 1150,
-        "back": 837.5
+        "middle": 1250,
+        "back": 937.5
       },
       "collectables": [
         1
@@ -92,7 +98,7 @@
         "first": 2250,
         "middle": 1500,
         "back": 1125
-      }, 
+      },
       "collectables": [
         1
       ],
@@ -118,8 +124,8 @@
       "id": 9,
       "offsets": {
         "first": 3000,
-        "middle": 1980,
-        "back": 1400
+        "middle": 2000,
+        "back": 1500
       },
       "collectables": [
         1
@@ -145,9 +151,9 @@
     {
       "id": 11,
       "offsets": {
-        "first": 3770,
-        "middle": 2470,
-        "back": 1785
+        "first": 3750,
+        "middle": 2500,
+        "back": 1875
       },
       "collectables": [
         1
@@ -174,8 +180,8 @@
       "id": 13,
       "offsets": {
         "first": 4500,
-        "middle": 2870,
-        "back": 2190
+        "middle": 3000,
+        "back": 2250
       },
       "collectables": [
         1
@@ -189,7 +195,7 @@
       "offsets": {
         "first": 4875,
         "middle": 3250,
-        "back": 2327.5
+        "back": 2437.5
       },
       "collectables": [
         1
@@ -202,7 +208,7 @@
       "id": 15,
       "offsets": {
         "first": 5250,
-        "middle": 3540,
+        "middle": 3500,
         "back": 2625
       },
       "collectables": [
@@ -216,8 +222,8 @@
       "id": 16,
       "offsets": {
         "first": 5625,
-        "middle": 3950,
-        "back": 2832.5
+        "middle": 3750,
+        "back": 2812.5
       },
       "collectables": [
         1
@@ -230,7 +236,7 @@
       "id": 17,
       "offsets": {
         "first": 6000,
-        "middle": 4200,
+        "middle": 4000,
         "back": 3000
       },
       "collectables": [
@@ -244,8 +250,8 @@
       "id": 18,
       "offsets": {
         "first": 6375,
-        "middle": 4525,
-        "back": 3227.5
+        "middle": 4250,
+        "back": 3187.5
       },
       "collectables": [
         1
@@ -257,9 +263,9 @@
     {
       "id": 19,
       "offsets": {
-        "first": 6790,
-        "middle": 4900,
-        "back": 3410
+        "first": 6750,
+        "middle": 4500,
+        "back": 3375
       },
       "collectables": [
         1
@@ -271,8 +277,8 @@
     {
       "id": 20,
       "offsets": {
-        "first": 7085,
-        "middle": 4920,
+        "first": 7125,
+        "middle": 4750,
         "back": 3562.5
       },
       "collectables": [
@@ -285,9 +291,9 @@
     {
       "id": 21,
       "offsets": {
-        "first": 7550,
-        "middle": 5300,
-        "back": 3800
+        "first": 7500,
+        "middle": 5000,
+        "back": 3750
       },
       "collectables": [
         1
@@ -299,9 +305,9 @@
     {
       "id": 22,
       "offsets": {
-        "first": 7850,
-        "middle": 5500,
-        "back": 3850
+        "first": 7875,
+        "middle": 5250,
+        "back": 3937.5
       },
       "collectables": [
         1
@@ -314,7 +320,7 @@
       "id": 23,
       "offsets": {
         "first": 8250,
-        "middle": 5800,
+        "middle": 5500,
         "back": 4125
       },
       "collectables": [
@@ -328,8 +334,8 @@
       "id": 24,
       "offsets": {
         "first": 8625,
-        "middle": 6000,
-        "back": 4382.5 
+        "middle": 5750,
+        "back": 4312.5
       },
       "collectables": [
         1
@@ -342,8 +348,8 @@
       "id": 25,
       "offsets": {
         "first": 9000,
-        "middle": 6400,
-        "back": 4700
+        "middle": 6000,
+        "back": 4500
       },
       "collectables": [
         1
@@ -356,8 +362,8 @@
       "id": 26,
       "offsets": {
         "first": 9375,
-        "middle": 6600,
-        "back": 4800
+        "middle": 6250,
+        "back": 4687.5
       },
       "collectables": [
         1
@@ -369,9 +375,9 @@
     {
       "id": 27,
       "offsets": {
-        "first": 9710,
-        "middle": 6900,
-        "back": 5300
+        "first": 9750,
+        "middle": 6500,
+        "back": 4875
       },
       "collectables": [
         1
@@ -384,8 +390,8 @@
       "id": 28,
       "offsets": {
         "first": 10125,
-        "middle": 7300,
-        "back": 5422.5
+        "middle": 6750,
+        "back": 5062.5
       },
       "collectables": [
         1
@@ -397,9 +403,9 @@
     {
       "id": 29,
       "offsets": {
-        "first": 10525,
-        "middle": 7650,
-        "back": 5612.5 
+        "first": 10500,
+        "middle": 7000,
+        "back": 5250
       },
       "collectables": [
         1
@@ -411,9 +417,9 @@
     {
       "id": 30,
       "offsets": {
-        "first": 10800,
-        "middle": 7790,
-        "back": 5820.5 
+        "first": 10875,
+        "middle": 7250,
+        "back": 5437.5
       },
       "collectables": [
         1
@@ -426,8 +432,8 @@
       "id": 31,
       "offsets": {
         "first": 11250,
-        "middle": 8200,
-        "back": 6100.5 
+        "middle": 7500,
+        "back": 5625
       },
       "collectables": [
         1
@@ -439,9 +445,9 @@
     {
       "id": 32,
       "offsets": {
-        "first": 11700,
-        "middle": 8600,
-        "back": 6100.5
+        "first": 11625,
+        "middle": 7750,
+        "back": 5812.5
       },
       "collectables": [
         1
@@ -454,8 +460,8 @@
       "id": 33,
       "offsets": {
         "first": 12000,
-        "middle": 8815,
-        "back": 6250.5
+        "middle": 8000,
+        "back": 6000
       },
       "collectables": [
         1
@@ -467,9 +473,9 @@
     {
       "id": 34,
       "offsets": {
-        "first": 12370, 
-        "middle": 8890,
-        "back": 6500.5
+        "first": 12375,
+        "middle": 8250,
+        "back": 6187.5
       },
       "collectables": [
         1
@@ -481,9 +487,9 @@
     {
       "id": 35,
       "offsets": {
-        "first": 12730, 
-        "middle": 9200,
-        "back": 6750.5
+        "first": 12750,
+        "middle": 8500,
+        "back": 6375
       },
       "collectables": [
         1
@@ -495,9 +501,9 @@
     {
       "id": 36,
       "offsets": {
-        "first": 13200, 
-        "middle": 9400,
-        "back": 6900.5
+        "first": 13125,
+        "middle": 8750,
+        "back": 6562.5
       },
       "collectables": [
         1
@@ -510,8 +516,8 @@
       "id": 37,
       "offsets": {
         "first": 13500,
-        "middle": 9600,
-        "back": 7200
+        "middle": 9000,
+        "back": 6750
       },
       "collectables": [
         1

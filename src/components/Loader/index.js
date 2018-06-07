@@ -4,7 +4,7 @@ import LottieView from 'lottie-react-native';
 import { connect } from 'react-redux'
 import ReactNativeHaptic from 'react-native-haptic';
 import { BlurView } from 'react-native-blur'
-import { microInteraction } from '../../assets/anim'
+import { loaderAnim } from '../../assets/anim'
 
 import styles from './styles';
 
@@ -39,7 +39,7 @@ export default class Loader extends React.Component {
           <View style={styles.anim}> 
             <LottieView 
               style={styles.anim}
-              source={ microInteraction.findGlyphe } 
+              source={ loaderAnim } 
               progress={this.state.anim}
             />
           </View>

@@ -113,7 +113,7 @@ class MainMenu extends React.Component {
               style={styles.absolute}
               viewRef={this.state.viewRef}
               blurType="light"
-              blurAmount={20}
+              blurAmount={13}
             />
             {renderIf( !this.state.popupDisplay, 
             <View>

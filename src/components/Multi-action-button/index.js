@@ -33,7 +33,7 @@ export default class MultiActionButton extends React.Component {
       [-45, 0, 45]
     ]
 
-    if (props.actions.length > 0  && props.isActive || props.actions.length > 0  && props.isActive == undefined) {
+    if (props.actions && props.actions.length > 0  && props.isActive || props.actions.length > 0  && props.isActive == undefined) {
       var buttonArray = this._prepareButtons(this.props.actions)
     } else {
       var buttonArray = []
@@ -72,7 +72,7 @@ export default class MultiActionButton extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.actions.length > 0  && nextProps.isActive || nextProps.actions.length > 0  && nextProps.isActive == undefined) {
+    if (nextProps.actions && nextProps.actions.length > 0  && nextProps.isActive || nextProps.actions.length > 0  && nextProps.isActive == undefined) {
       this.setState({
         buttonArray: this._prepareButtons(nextProps.actions)
       })
@@ -81,7 +81,7 @@ export default class MultiActionButton extends React.Component {
         this.setState({
           buttonArray: []
         })
-      }, 2000 )
+      }, 1000 )
     }
 
     if (nextProps.isActive !== undefined) {
