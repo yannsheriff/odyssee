@@ -104,6 +104,9 @@ componentWillReceiveProps(nextProps) {
 
     if (Array.isArray(snippet.text)) {
       var haveMultipleText = true
+      if(snippet.actionPosition) {
+        var actionPosition = snippet.actionPosition
+      }
     } else {
       var haveMultipleText = false
     }
@@ -172,7 +175,8 @@ componentWillReceiveProps(nextProps) {
       animation: animation,
       collectables: collectableData,
       narration: narration,
-      haveMultipleText: haveMultipleText
+      haveMultipleText: haveMultipleText,
+      actionPosition: actionPosition ? actionPosition : false
     }
 
     return payload
@@ -203,6 +207,7 @@ componentWillReceiveProps(nextProps) {
       collectables: payload.collectables,
       narration: payload.narration,
       haveMultipleText: payload.haveMultipleText,
+      actionPosition: payload.actionPosition,
       currentText: isGoingForward ? 0 : payload.narration.length - 1,
       islandState: state, 
       isGoingForward: isGoingForward,
@@ -252,6 +257,17 @@ componentWillReceiveProps(nextProps) {
 
   render() {
 
+    if (this.state.actionPosition) {
+      if ( this.state.actionPosition === this.state.currentText + 1) {
+        var actions = this.state.actions
+      } else {
+        var actions = false
+      }
+    } else {
+      var actions =  this.state.actions
+    }
+    
+
     if (  this.state.actions 
           && this.state.offsets 
           && this.state.animation 
@@ -270,7 +286,7 @@ componentWillReceiveProps(nextProps) {
         
         <Narration text = { this.state.haveMultipleText ? this.state.narration[this.state.currentText] : this.state.narration } /> 
         <InteractionMenu 
-          actions = { this.state.actions } 
+          actions = { actions } 
           changeStep={ this.goToNextStep }  
           prevStep={ this.goToPreviousStep }  
         /> 

@@ -92,7 +92,7 @@ export default class Narration extends Component {
     var text = this.state.texts.map((text, index) => {
       if (text) {   // If animation exist then render it
         return (
-          <Animated.View style={{ position: "absolute", opacity: text.opacity, top: 560, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
+          <Animated.View style={{ position: "absolute", opacity: text.opacity, top: screen.height / 100 * 72, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
             <Text style={ styles.text }> { text.text } </Text>
           </Animated.View>
         )

@@ -53,12 +53,13 @@ export default class ParallaxLayout extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(nextProps)
     if (nextProps.offsetX !== undefined && nextProps.offsetX != this.offsetX) {
+
       this.offsetX = nextProps.offsetX
       Animated.timing(
         this.state.fadeAnim,
       {
           toValue: -nextProps.offsetX,
-          duration: 1500,              
+          duration: nextProps.transitionDuration ? nextProps.transitionDuration : 1500,              
         }
       ).start()
     }

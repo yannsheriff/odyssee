@@ -37,9 +37,9 @@ export default class InteractionMenu extends Component {
     this.state = {
 
       style: props.style,
-      actions: this.props.actions.snippets,
-      actionsForButton: this._formatDataForActionButon(this.props.actions.snippets),
-      haveAction: this.props.actions.haveAction,
+      actions: this.props.actions ? this.props.actions.snippets : undefined,
+      actionsForButton: this.props.actions ? this._formatDataForActionButon(this.props.actions.snippets) : undefined ,
+      haveAction: this.props.actions ? this.props.actions.haveAction : false,
       opacity: 0,
       _changeStep: this.props.changeStep,
       _prevStep: this.props.prevStep,
@@ -49,7 +49,7 @@ export default class InteractionMenu extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      if (nextProps.actions.snippets.length > 1) {
+      if (nextProps.actions.snippets.length > 0 && nextProps.actions.snippets[0].title ) {
         this.setState({ 
           actions: nextProps.actions.snippets,
           actionsForButton: this._formatDataForActionButon(nextProps.actions.snippets),

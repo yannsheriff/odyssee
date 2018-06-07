@@ -101,19 +101,19 @@ export const backgrounds = {
     foret: {
         p1: {
             image: require('./img/premier_plan.png'),
-            height: 812,
-            width: 13876,
+            height: 1624,
+            width: 27751,
 
         },
         p2: {
             image: require('./img/second_plan.png'),
-            height: 813,
-            width: 9469,
+            height: 1625,
+            width: 19580,
         },
         p3: {
             image: require('./img/arriere-plan.jpg'),
-            height: 813,
-            width: 7235,
+            height: 1625,
+            width: 15160,
         } 
     }
 }
