@@ -22,7 +22,10 @@ const images = {
     iconPause: require('./img/icon-pause.png'),
     iconLock: require('./img/icon-lock.png'),
     iconUnlock: require('./img/icon-unlock.png'),
-    iconMap: require('./img/icon-map.png')
+    iconMap: require('./img/icon-map.png'),
+    iconBoat: require('./img/icon-boat.png'),
+    iconWind: require('./img/icon-wind.png'),
+    iconWindForce: require('./img/icon-windforce.png')
 };
 
 export const choices = [
