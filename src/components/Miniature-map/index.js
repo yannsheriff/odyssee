@@ -35,8 +35,15 @@ class MiniatureMap extends Component {
       destination: this.props.sailing.destination,
       menuHeight: 84,
       windUIHeight: 100,
-      nbLines: 7
+      nbLines: 7,
+      windForce: 0
     }
+  }
+
+  componentDidMount () {
+    this.setState({
+      windForce: speedModifiers.wind
+    })
   }
 
   _switchDestination (target) {
@@ -68,9 +75,10 @@ class MiniatureMap extends Component {
           opacity = 1
         }
         return (
-          <G>
+          <G
+            key={ 'c' + c.id }
+          >
             <Circle
-              key={c.id}
               fill={ color }
               scale={1}
               cx={(mapSize.x - c.position.x) / mapSize.x * screen.width}
@@ -79,7 +87,6 @@ class MiniatureMap extends Component {
               onPress={() => { this._switchDestination(c) }}
             />
             <Circle
-              key={ c.id }
               fill={ 'transparent' }
               strokeWidth={ 1 }
               stroke={ '#fbb70c' }
@@ -103,6 +110,7 @@ class MiniatureMap extends Component {
     for (let i = 1; i <= this.state.nbLines; i++) {
       lines.push(
         <Line
+          key={'lv' + i}
           x1={ i * lineSpace }
           y1={ 0 }
           x2={ i * lineSpace }
@@ -115,6 +123,7 @@ class MiniatureMap extends Component {
     for (let i = 0; i <= nbHorizontalLines; i++) {
       lines.push(
         <Line
+          key={'lh' + i}
           x1={ 0 }
           y1={ (lineSpace * i) + 1 }
           x2={ screen.width }
@@ -183,8 +192,44 @@ class MiniatureMap extends Component {
               r="5"
             />
           </Svg>
+          <View
+            style={ styles.windForceContainer }
+          >
+            <Svg
+                style={ styles.windForce }
+                width={ 88 }
+                height={ 28 }
+              >
+                <Image
+                  x={ 14 }
+                  y={ -6 }
+                  width={ 16 }
+                  height={ 16 }
+                  href={ images.iconWindForce }
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={ 1 }
+                />
+                <Image
+                  x={ 36 }
+                  y={ -6 }
+                  width={ 16 }
+                  height={ 16 }
+                  href={ images.iconWindForce }
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={ this.state.windForce > (speedModifiers.max * 0.33) ? 1 : 0.4 }
+                />
+                <Image
+                  x={ 58 }
+                  y={ -6 }
+                  width={ 16 }
+                  height={ 16 }
+                  href={ images.iconWindForce }
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={ this.state.windForce > (speedModifiers.max * 0.66) ? 1 : 0.4 }
+                />
+            </Svg>
+          </View>
         </View>
-
       </View>
     )
   }

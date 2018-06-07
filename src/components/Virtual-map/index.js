@@ -28,7 +28,7 @@ import Islands from './islands'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { launchMap, collision } from '../../redux/actions/sailing'
+import { collision, updatePosition } from '../../redux/actions/sailing'
 import { toggleMenu } from '../../redux/actions/menu'
 
 
@@ -39,7 +39,7 @@ class VirtualMap extends Component {
     super(props)
 
     this.state = {
-      _launchMap: this.props.launchMap,
+      _updatePosition: this.props.updatePosition,
       _collision: this.props.collision,
       _toggleMenu: this.props.toggleMenu,
       // sailing
@@ -85,6 +85,7 @@ class VirtualMap extends Component {
       animCurrent: 'stopped',
       animInLine: null,
       animGoal: null,
+      animatingBoat: false,
       totalFrames: 270
     }
   }
@@ -94,20 +95,11 @@ class VirtualMap extends Component {
     this._toggleCompassLock()
   }
 
-  componentDidMount () {
-    this._updateBoatAnimationState()
-  }
-
   componentWillReceiveProps (nextProps) {
     if (nextProps.sailing.islandCollided === null && this.state.hideUI) {
       this.setState({
         hideUI: false
       })
-    }
-    if (nextProps.sailing.callMap) {
-      this.setState({
-          currentSpeed: 0
-      }, this.state._launchMap(this.state.position))
     }
     if (nextProps.sailing.destination.id !== this.state.destination.id) {
       this.setState({
@@ -142,15 +134,29 @@ class VirtualMap extends Component {
         toValue: boatState.frames[1] / this.state.totalFrames,
         duration: Math.abs(boatState.frames[0] - boatState.frames[1]) / 30 * 1000
       }).start(() => {
-        if (this.state.animGoal !== null) {
-          this._switchBoatAnimation()
-        } else if (this.state.animGoal === null && this.state.animCurrent === 'stopped' && this.state.currentSpeed > 0) {
-          this.state.currentSpeed = 0
+        if (this.state.animCurrent === 'stopped' && this.state.currentSpeed === 0 && this.state.animGoal === null) {
+          this.setState({
+            animatingBoat: false
+          })
         }
-        this._updateBoatAnimationState()
+        else {
+          if (this.state.animGoal !== null) {
+            this._switchBoatAnimation()
+          } else if (this.state.animGoal === null && this.state.animCurrent === 'stopped' && this.state.currentSpeed > 0) {
+            this.state.currentSpeed = 0
+          }
+          this._updateBoatAnimationState()
+        }
       })
     } else {
-      console.log('animCurrent fucked up again, check this : ', this.state)
+      this.setState({
+        animCurrent: 'stopped',
+        animGoal: null,
+        animInLine: null,
+        goalSpeed: 0,
+        currentSpeed: 0,
+        sailing: false
+      }, console.log('animCurrent fucked up again, resetting animations : ', this.state))
     }
   }
 
@@ -177,11 +183,11 @@ class VirtualMap extends Component {
       })
     } else {
       if (this.state.currentSpeed === 0) {
-      this.setState({
-        sailing: !this.state.sailing,
-        currentSpeed: speedModifiers.acceleration,
-        goalSpeed: this.state.speedRadius
-      }, this._updateMap )
+        this.setState({
+          sailing: !this.state.sailing,
+          currentSpeed: speedModifiers.acceleration,
+          goalSpeed: this.state.speedRadius
+        }, this._updateMap )
       }
     }
   }
@@ -210,7 +216,9 @@ class VirtualMap extends Component {
               })
               this.state._collision(island.id)
               this._toggleSailing()
-              this._toggleCompassLock()
+              if (!this.state.isCompassLocked) {
+                this._toggleCompassLock()
+              }
             } else if (this.state.islandCollided !== null && island.opacity > 0 && this.state.goalSpeed > 0) {
               island.opacity = Math.floor(((island.opacity * 10) - 1)) / 10
             }
@@ -368,6 +376,12 @@ class VirtualMap extends Component {
   _updateMap = () => {
     if (this.state.currentSpeed > 0) {
       const s = this.state
+      let animBoat = this.state.animatingBoat
+
+      if (!this.state.animatingBoat) {
+        this._updateBoatAnimationState()
+        animBoat = true
+      }
 
       this._checkIfInViewport()
       this._sortContent()
@@ -387,7 +401,8 @@ class VirtualMap extends Component {
         position: {
           x: newX,
           y: newY
-        }
+        },
+        animatingBoat: animBoat
       })
 
       requestAnimationFrame(() => {this._updateMap()})
@@ -405,7 +420,11 @@ class VirtualMap extends Component {
     if (this.state.isCompassLocked) {
       this.setState({isCompassLocked: false})
       RNSimpleCompass.start(this.state.compassSensitivity, (degree) => {
-        this.setState({orientation: degree})
+        this.setState({
+          orientation: degree,
+          speedRadius: this._getSpeed(degree),
+          goalSpeed: this._getSpeed(degree)
+        })
       });
     } else {
       this.setState({isCompassLocked: true})
@@ -506,13 +525,6 @@ class VirtualMap extends Component {
             loop={ true }
           />
         </Animated.View>
-        <View
-          style={styles.navtools}
-        >
-          <Text>{ 'Goal: ' + Math.round(this._getSpeed(this.state.orientation) * 10) / 10 + '  Current: ' + Math.round(this.state.currentSpeed * 10) / 10 }</Text>
-          <Text>{ 'Cap min: ' + this.state.speedCap.min + '  max: ' + this.state.speedCap.max }</Text>
-          <Text>{ 'windDir:' + speedModifiers.direction + '  boatDir: ' + this.state.orientation }</Text>
-        </View>
         {renderIf(!this.state.hideUI,
           <View
             style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
@@ -568,7 +580,7 @@ class VirtualMap extends Component {
           </TouchableWithoutFeedback>
         )}
         <TouchableWithoutFeedback
-          onPress={() => this.state._toggleMenu(0)}
+          onPress={() => {this.state._updatePosition(this.state.position); this.state._toggleMenu(0)}}
         >
           <View
             style={[styles.icon, styles.iconTop]}
@@ -598,11 +610,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    launchMap: (position) => {
-      dispatch(launchMap(position))
-    },
     collision: (islandCollided) => {
       dispatch(collision(islandCollided))
+    },
+    updatePosition: (position) => {
+      dispatch(updatePosition(position))
     },
     toggleMenu: (page) => {
       dispatch(toggleMenu(page));
