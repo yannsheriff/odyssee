@@ -81,7 +81,7 @@ export default class MultiActionButton extends React.Component {
         this.setState({
           buttonArray: []
         })
-      }, 2000 )
+      }, 1000 )
     }
 
     if (nextProps.isActive !== undefined) {

@@ -114,20 +114,20 @@ componentWillReceiveProps(nextProps) {
 
 
     const illustration = islands[currentIslandId].illustrations.steps.find((index) => {
-      if (index.id === actualSnippetId) {
+      if (index.id === snippet.illustration) {
         return index
       }
     });
 
     const offsets = islands[currentIslandId].illustrations.steps.find((index) => {
-      if (index.id === actualSnippetId) {
+      if (index.id === snippet.illustration) {
         return index.offsets
       }
     });
 
 
     const animation = islands[currentIslandId].illustrations.steps.find((index) => {
-      if (index.id === actualSnippetId) {
+      if (index.id === snippet.illustration) {
         return index.animation
       }
     })

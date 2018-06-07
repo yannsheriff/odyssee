@@ -6,6 +6,7 @@
     "steps": [
         {
             "id": 1,
+            "illustration": 1,
             "text": "",
             "collectableObject": 0,
             "haveAction": false,
@@ -17,6 +18,7 @@
         },
         {
             "id": 2,
+            "illustration": 2,
             "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché. L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage. On peut attendre ici, sans danger, les vents pour repartir.",
             "collectableObject": 0,
             "haveAction": false,
@@ -24,10 +26,11 @@
                 {
                     "id": 4
                 }
-            ]
+            ] 
         },
         {
             "id": 4,
+            "illustration": 4,
             "title": "",
             "text": "L’îlot est habitable et prospère, il y a quelques daim que l’on peut apercevoir.",
             "collectableObject": 0,
@@ -52,6 +55,7 @@
         },
         {
             "id": 6,
+            "illustration": 6,
             "text": "Ce gibier tombe à point, les hommes s’emparent aussitôt de leur arc, et d’épieux à longues douilles, pour chasser. Les dieux sont avec nous, la chasse est bonne.",
             "collectableObject": 0,
             "haveAction": false,
@@ -63,6 +67,7 @@
         },
         {
             "id": 8,
+            "illustration": 8,
             "text": "Et ainsi, du lever au coucher du soleil, nous festoyons  de viandes grillées et de vin doux tiré des amphores.",
             "collectableObject": 0,
             "haveAction": false,
@@ -74,6 +79,7 @@
         },
         {
             "id": 9,
+            "illustration": 9,
             "text": [" — Quelques hommes doivent rester sur le bateaux, les autres, débarqué avec des vivres. En attendant l’aube, nous nous installerons pour dormir sur le sable. ",
                 "Restez groupés, et ne vous éloignez pas du campement. N’allumez aucun feu qui pourrait nous faire repérer."],
             "collectableObject": 0,
@@ -86,6 +92,7 @@
         },
         {
             "id": 10,
+            "illustration": 10,
             "text": "Tout près de notre îlot se dresse une autre île, plus montagneuse. Elle est si proche de nous que l’on en devine les fumées des foyers. ",
             "collectableObject": 0,
             "haveAction": false,
@@ -97,6 +104,7 @@
         },
         {
             "id": 11,
+            "illustration": 11,
             "text": "",
             "collectableObject": 0,
             "haveAction": false,
@@ -108,6 +116,7 @@
         },
         {
             "id": 12,
+            "illustration": 12,
             "text": "Elle m’intrigue. Qui habite cette terre ? ",
             "collectableObject": 0,
             "haveAction": false,
@@ -119,6 +128,7 @@
         },
         {
             "id": 13,
+            "illustration": 13,
             "text": ["Bientôt, nous atteignons à la rame l’autre rivage, et je repère au bout d’un cap une grotte, juste au-dessus de la mer. Elle est cachée derrière les lauriers sauvages. Des brebis et des chèvres sont parquées dans un enclos à côté.",
                     "Un haut rempart de blocs de pierres et d’arbres, des chênes et des pins, encerclent les lieux. Quel être étrange habite ici pour vivre seul, à l’écart de ses semblables ?"
             ],
@@ -133,6 +143,7 @@
         {
             "id": 15,
             "text": "",
+            "illustration": 15,
             "collectableObject": 0,
             "haveAction": false,
             "actions": [
@@ -147,6 +158,7 @@
                 "En entrant dans la grotte, on peut sentir une odeur insupportable, un mélange de fumier et de lait caillé. Qui peut vivre ici ?",
                 "Des fromages sont alignés les uns à côté des autres sur des claies, et puis, un peu plus loin, on trouve des étables pleines de chevreaux et d’agneaux, avec des jattes et des terrines pour le lait."
             ],
+            "illustration": 16,
             "collectableObject": 0,
             "haveAction": false,
             "actions": [
@@ -157,8 +169,21 @@
         },
         {
             "id": 17,
-            "text": [ "Mes compagnons apeurer veulent fuir mais je ne les écoute pas. Ils ont beau insister, je veux rencontrer celui qui se terre dans cette grotte avec bêtes et fromages, voir son visage et, s’il le faut, me mesurer à lui.",
-            "- Ulysse, volons les fromages, ramenons quelques agneaux et chevreaux aux bateaux, et rentrons au plus vite, car les dieux seuls savent ce qui se passera si l’homme qui vit ici revient et nous trouve chez lui."],
+            "illustration": 17,
+            "text": "Mes compagnons apeurer veulent fuir mais je ne les écoute pas. Ils ont beau insister, je veux rencontrer celui qui se terre dans cette grotte avec bêtes et fromages, voir son visage et, s’il le faut, me mesurer à lui.",
+            "collectableObject": 0,
+            "actionPosition": 2,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 18
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "illustration": 17,
+            "text": "- Ulysse, volons les fromages, ramenons quelques agneaux et chevreaux aux bateaux, et rentrons au plus vite, car les dieux seuls savent ce qui se passera si l’homme qui vit ici revient et nous trouve chez lui.",
             "collectableObject": 0,
             "actionPosition": 2,
             "haveAction": true,
@@ -166,17 +191,42 @@
                 {
                     "choiceImgId": 9,
                     "title": "Les motivés",
-                    "id": 17
+                    "id": 19
                 },
                 {
                     "title": "Les menacés", 
                     "choiceImgId": 11,
-                    "id": 17
+                    "id": 20
                 }
             ]
         },
         {
-            "id": 18,
+            "id": 19,
+            "illustration": 17,
+            "text": "I'm a good guy !",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 21
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "illustration": 17,
+            "text": "I'm a bitch",
+            "collectableObject": 0,
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 21
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "illustration": 18,
             "text": [
                 "Quelle puanteur insupportable, un mélange de fumier et de lait caillé ! Qui peut vivre ici ? ",
                 "Des fromages sont alignés les uns à côté des autres sur des claies, et puis, un peu plus loin, on trouve des étables pleines de chevreaux et d’agneaux, avec des jattes et des terrines pour le lait."
@@ -191,6 +241,7 @@
         },
         {
             "id": 19,
+            "illustration": 19,
             "text": "Un Cyclope ! Nous sommes dans l’antre d’un Cyclope ",
             "collectableObject": 0,
             "haveAction": false,
@@ -202,6 +253,7 @@
         },
         {
             "id": 20,
+            "illustration": 20,
             "text": "zizi ",
             "collectableObject": 0,
             "haveAction": false,
@@ -213,6 +265,7 @@
         },
         {
             "id": 21,
+            "illustration": 21,
             "text": "Un Cyclope ! Nous sommes dans l’antre d’un Cyclope ",
             "collectableObject": 0,
             "haveAction": false,
@@ -224,6 +277,7 @@
         },
         {
             "id": 22,
+            "illustration": 22,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -235,6 +289,7 @@
         },
         {
             "id": 23,
+            "illustration": 23,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -246,6 +301,7 @@
         },
         {
             "id": 24,
+            "illustration": 24,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -257,6 +313,7 @@
         },
         {
             "id": 25,
+            "illustration": 25,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -268,6 +325,7 @@
         },
         {
             "id": 26,
+            "illustration": 26,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -279,6 +337,7 @@
         },
         {
             "id": 27,
+            "illustration": 27,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -290,6 +349,7 @@
         },
         {
             "id": 28,
+            "illustration": 28,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -301,6 +361,7 @@
         },
         {
             "id": 29,
+            "illustration": 29,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -312,6 +373,7 @@
         },
         {
             "id": 30,
+            "illustration": 30,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -323,6 +385,7 @@
         },
         {
             "id": 31,
+            "illustration": 31,
             "text": "done",
             "collectableObject": 0,
             "haveAction": false,
@@ -334,6 +397,7 @@
         },
         {
             "id": 32,
+            "illustration": 32,
             "text": "32",
             "collectableObject": 0,
             "haveAction": false,
@@ -345,6 +409,7 @@
         },
         {
             "id": 33,
+            "illustration": 33,
             "text": "33",
             "collectableObject": 0,
             "haveAction": false,
@@ -356,6 +421,7 @@
         },
         {
             "id": 34,
+            "illustration": 34,
             "text": "34",
             "collectableObject": 0,
             "haveAction": false,
@@ -367,6 +433,7 @@
         },
         {
             "id": 35,
+            "illustration": 35,
             "text": "35",
             "collectableObject": 0,
             "haveAction": false,
@@ -378,6 +445,7 @@
         },
         {
             "id": 36,
+            "illustration": 36,
             "text": "36",
             "collectableObject": 0,
             "haveAction": false,
@@ -389,6 +457,7 @@
         },
         {
             "id": 37,
+            "illustration": 37,
             "text": "37",
             "collectableObject": 0,
             "haveAction": false,
@@ -400,6 +469,7 @@
         },
         {
             "id": 38,
+            "illustration": 38,
             "text": "38",
             "collectableObject": 0,
             "haveAction": false,
