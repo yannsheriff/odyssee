@@ -20,7 +20,6 @@ import MultiActionButton from '../components/Multi-action-button'
 
 class SmartSailing extends Component {
 
-
   constructor(props) {
     super(props)
 

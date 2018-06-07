@@ -26,9 +26,9 @@ class SmartLoading extends Component {
     } 
   }
 
-  // componentWillMount() {
-  //   AsyncStorage.removeItem('saved');
-  // }
+  componentWillMount() {
+    AsyncStorage.removeItem('saved');
+  }
 
   componentDidMount() {
     console.log(this.state.ReduxState)

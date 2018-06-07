@@ -21,14 +21,16 @@ import renderIf from '../../helpers/renderIf'
 import { mapSize, speedModifiers, boatStates } from '../../constants'
 import { IslandsData } from '../../constants/islands'
 import { animatedBoat } from '../../assets/anim/index'
+import collectables from '../../data/collectables.json'
 
 //  Import Components
 // --------------------------------------------------------------
 import Islands from './islands'
+import MultiActionButton from '../../components/Multi-action-button'
 
 //  Import Actions
 // --------------------------------------------------------------
-import { collision, updatePosition } from '../../redux/actions/sailing'
+import { collision, updatePosition, updateModifiers } from '../../redux/actions/sailing'
 import { toggleMenu } from '../../redux/actions/menu'
 
 
@@ -39,6 +41,7 @@ class VirtualMap extends Component {
     super(props)
 
     this.state = {
+      _updateModifiers: this.props.updateModifiers,
       _updatePosition: this.props.updatePosition,
       _collision: this.props.collision,
       _toggleMenu: this.props.toggleMenu,
@@ -54,7 +57,6 @@ class VirtualMap extends Component {
       },
       sailing: false,
       vpRadius:  Math.hypot(screen.width, screen.height) / 2,
-      speedRadius: this._getSpeed(0),
       currentSpeed: 0,
       stopping: false,
       speedCap: {
@@ -68,9 +70,12 @@ class VirtualMap extends Component {
         y: 0
       },
       islandCollided: null,
-      hideUI: false,
       contentToRender: [],
+      // speed modifiers
+      windDirection: speedModifiers.direction,
+      windStrength: speedModifiers.wind,
       // compass
+      hideUI: false,
       isCompassLocked: true,
       compassSensitivity: 1,
       destination: {
@@ -86,13 +91,30 @@ class VirtualMap extends Component {
       animInLine: null,
       animGoal: null,
       animatingBoat: false,
-      totalFrames: 270
+      totalFrames: 270,
+      // boat button
+      glyphList: collectables.glyphs,
+      equippedGlyphs: this.props.sailing.collectableEquipped,
+      actionsForButton: [],
+      haveAction: false,
+      testGlyphs: [1,2,4]
     }
   }
 
   componentWillMount () {
     this._checkIfInViewport()
     this._toggleCompassLock()
+    if(this.state.testGlyphs.length > 0) { // TODO : switch tested state prop from "testGlyphs" to "equippedGlyphs"
+      this.setState({
+        haveAction: true
+      }, this._getEquippedGlyphs())
+    }
+  }
+
+  componentDidMount () {
+    this.setState({
+      speedRadius: this._getSpeed(0)
+    })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -108,6 +130,55 @@ class VirtualMap extends Component {
           x: nextProps.sailing.destination.x - (mapSize.x / 2),
           y: nextProps.sailing.destination.y - (mapSize.y / 2)
         }
+      })
+    }
+    if (this.state.equippedGlyphs !== nextProps.sailing.collectableEquipped) {
+      let haveAction = false
+      if (nextProps.sailing.collectableEquipped.length > 0) { haveAction = true }
+      this.setState({
+        equippedGlyphs: nextProps.sailing.collectableEquipped,
+        haveAction: haveAction
+      }, this._getEquippedGlyphs)
+    }
+  }
+
+  /*
+   * Check which glyphs are equipped
+   */
+  _getEquippedGlyphs = () => {
+    let buttons = []
+    console.log(this.state.glyphList)
+    this.state.testGlyphs.forEach(glyph => { // TODO : switch array from "testGlyphs" to "equippedGlyphs"
+      const equipped = this.state.glyphList.find(g => {
+        return g.id === glyph
+      })
+      buttons.push(
+        {
+          id: equipped.id,
+          img: images.iconPlay,
+          label: ''
+        }
+      )
+    })
+    this.setState({
+      actionsForButton: buttons
+    }, console.log(this.state.actionsForButton))
+  }
+
+  /*
+   * actions when glyph is used
+   */
+  _useGlyph = (glyphId) => {
+    if (glyphId === 2) { // perfect wind direction glyph
+      let wd = this.state.orientation + 180
+      if (wd > 359) {wd = wd - 360}
+      else if (wd < 0) {wd = wd + 360}
+      this.setState({
+        windDirection: wd
+      })
+      this.state._updateModifiers({
+        strength: this.state.windStrength,
+        direction: Math.round(wd)
       })
     }
   }
@@ -164,9 +235,9 @@ class VirtualMap extends Component {
    * Calculate and return speed depending on wind strength & orientation
    */
   _getSpeed = (boatDir) => {
-    const dif = Math.abs(speedModifiers.direction - boatDir)
+    const dif = Math.abs(this.state.windDirection - boatDir)
     const modifier = Math.abs((dif - 180) / 180)
-    return speedModifiers.wind - (speedModifiers.wind * modifier) + speedModifiers.min
+    return this.state.windStrength - (this.state.windStrength * modifier) + speedModifiers.min
   }
 
   /*
@@ -525,6 +596,19 @@ class VirtualMap extends Component {
             loop={ true }
           />
         </Animated.View>
+        <MultiActionButton
+          actions={this.state.actionsForButton}
+
+          mainButtonsSize={ 120 }
+
+          initalPositon={{ x: (screen.width / 2) - 60, y: (screen.height / 2) - 60 }}
+
+          isActive={this.state.haveAction}
+
+          onChoiceSelected={(action) => {
+            this._useGlyph(action)
+          }}
+        />
         {renderIf(!this.state.hideUI,
           <View
             style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
@@ -580,7 +664,7 @@ class VirtualMap extends Component {
           </TouchableWithoutFeedback>
         )}
         <TouchableWithoutFeedback
-          onPress={() => {this.state._updatePosition(this.state.position); this.state._toggleMenu(0)}}
+          onPress={() => {this.state._updatePosition(this.state.position); this.state._updateModifiers({strength: this.state.windStrength, direction: this.state.windDirection}); this.state._toggleMenu(0)}}
         >
           <View
             style={[styles.icon, styles.iconTop]}
@@ -615,6 +699,9 @@ const mapDispatchToProps = dispatch => {
     },
     updatePosition: (position) => {
       dispatch(updatePosition(position))
+    },
+    updateModifiers: (modifiers) => {
+      dispatch(updateModifiers(modifiers))
     },
     toggleMenu: (page) => {
       dispatch(toggleMenu(page));

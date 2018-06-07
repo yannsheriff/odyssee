@@ -53,6 +53,10 @@ class StoreService {
             id: '', 
             x: '',
             y: '',
+          },
+          modifiers: {
+            strength: 0,
+            direction: 0
           }
         }
       }
@@ -124,6 +128,10 @@ class StoreService {
               id: '', 
               x: '',
               y: '',
+            },
+            modifiers: {
+              strength: 0,
+              direction: 0
             }
           },
           island: {

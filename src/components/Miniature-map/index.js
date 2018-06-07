@@ -36,14 +36,17 @@ class MiniatureMap extends Component {
       menuHeight: 84,
       windUIHeight: 100,
       nbLines: 7,
-      windForce: 0
+      windForce: 0, //this.props.sailing.modifiers.strength
+      windDirection: this.props.sailing.modifiers.direction
     }
   }
 
-  componentDidMount () {
-    this.setState({
-      windForce: speedModifiers.wind
-    })
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.sailing.modifiers.direction !== this.state.windDirection) {
+      this.setState({
+        windDirection: nextProps.sailing.modifiers.direction
+      })
+    }
   }
 
   _switchDestination (target) {
@@ -82,7 +85,7 @@ class MiniatureMap extends Component {
               fill={ color }
               scale={1}
               cx={(mapSize.x - c.position.x) / mapSize.x * screen.width}
-              cy={(mapSize.y - c.position.y) / mapSize.y * screen.height}
+              cy={(mapSize.y - c.position.y) / mapSize.y * (screen.height - this.state.menuHeight - this.state.windUIHeight)}
               r="8"
               onPress={() => { this._switchDestination(c) }}
             />
@@ -152,7 +155,7 @@ class MiniatureMap extends Component {
             { this._renderIslands() }
             <Image
               x={ ((this.state.position.x + (mapSize.x / 2)) / mapSize.x * screen.width) - (126 / 4)}
-              y={ -((this.state.position.y + (mapSize.y / 2)) / mapSize.y * screen.height) + (81 / 4)}
+              y={ -((this.state.position.y + (mapSize.y / 2)) / mapSize.y * (screen.height + this.state.menuHeight + this.state.windUIHeight)) + (81 / 4)}
               width={ 126 / 2 }
               height={ 81 / 2 }
               opacity={ 1 }
@@ -170,7 +173,7 @@ class MiniatureMap extends Component {
           <Text
             style={ styles.windDirText }
           >
-            { speedModifiers.direction + '°' }
+            { this.state.windDirection + '°' }
           </Text>
           <Svg
             style={ styles.windDirIcon }
@@ -187,8 +190,8 @@ class MiniatureMap extends Component {
             />
             <Circle
               fill={ '#ffffff' }
-              cx={ 40 + (35 * Math.cos(90 - speedModifiers.direction * 0.0174533)) }
-              cy={ 40 + (35 * Math.sin(90 - speedModifiers.direction * 0.0174533)) }
+              cx={ 40 + (35 * Math.cos((90 - this.state.windDirection) * 0.0174533)) }
+              cy={ 40 + (35 * Math.sin((90 - this.state.windDirection) * 0.0174533)) }
               r="5"
             />
           </Svg>

@@ -1,6 +1,8 @@
+import screen from '../helpers/ScreenSize'
+
 export const mapSize = {
-    x: 2000,
-    y: 2000
+    x: screen.width * 20,
+    y: screen.width * 20
 }
 
 // Actual max speed is max speed + min speed

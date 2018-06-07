@@ -1,4 +1,5 @@
 export const UPDATE_ORIENTATION = 'UPDATE_ORIENTATION'
+export const UPDATE_MODIFIERS = 'UPDATE_MODIFIERS'
 export const TOGGLE_SAILING = 'TOGGLE_SAILING'
 export const CALL_MAP = 'CALL_MAP'
 export const LAUNCH_MAP = 'LAUNCH_MAP'
@@ -14,6 +15,13 @@ export function updateOrientation (orientation) {
         type: UPDATE_ORIENTATION,
         orientation: orientation
     }
+}
+
+export function updateModifiers (modifiers) {
+  return {
+    type: UPDATE_MODIFIERS,
+    modifiers: modifiers
+  }
 }
 
 export function toggleSailing () {
