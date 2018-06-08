@@ -5,9 +5,10 @@ const images = {
     aiguille: require('./img/Aiguille.png'),
     bateau: require('./img/Bateau.png'),
     home: require('./img/home.png'),
+    homeScreen: require('./img/home.jpg'),
+    closeMainMenu: require('./img/icon-close.png'),
+    burger: require('./img/icon-burger.png'),
     homeScreen: require('./img/Intro.jpg'),
-    closeMainMenu: require('./img/croix.png'),
-    burger: require('./img/menu.png'),
     glyphes: require('./img/CercleGlyph.png'),
     iles: {
       cyclope: require('./img/ile_cyclope.png'),

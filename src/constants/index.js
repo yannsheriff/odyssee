@@ -2,7 +2,7 @@ import screen from '../helpers/ScreenSize'
 
 export const mapSize = {
     x: screen.width * 20,
-    y: screen.width * 20
+    y: screen.height * 20
 }
 
 // Actual max speed is max speed + min speed
@@ -110,3 +110,15 @@ export const boatStates = {
       frames:[240, 255]
     }
 }
+
+export const windStates = [
+  [0, 50],
+  [51, 100],
+  [101, 151],
+]
+
+export const seagullsStates = [
+  [0, 50],
+  [51, 100],
+  [101, 151],
+]
