@@ -102,7 +102,7 @@ export default class InteractionMenu extends Component {
           actions={this.state.actionsForButton}
           blurView={true} 
           mainButtonsSize={50}
-          haveCallToAction={true}
+          haveCallToAction={ true }
           // actionsButtonsSize={50}
           // mainBtnStyle={{height: 50, width: 50}}
           // initalPositon={}

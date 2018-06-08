@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import images from "../../../assets/images"
 import { collectables } from "../../../data";
 import { achievement } from "../../../data";
-
+import { benediction } from "../../../assets/images";
 //  Import redux
 // --------------------------------------------------------------
 import { equipGlyph, unequipGlyph } from "../../../redux/actions/menu";
@@ -58,18 +58,25 @@ class Menu_achivement extends React.Component {
         var founded = foundedGlyphs.some(
           elementFounded => elementFounded === element.id
         );
+
         if (selectedGlyphs) {
           var selected = selectedGlyphs.some(
             elementSelected => elementSelected === element.id
           );
         }
+
+        var icon = benediction.find(bene => {
+          if (bene.id === element.id) {
+            return bene.img
+          }
+        })
       }
       return {
         name: element.name,
-        icon: element.icon,
+        icon: icon,
         id: element.id,
         found: founded ? founded : false,
-        selected: selected ? selected : false
+        selected: selected ? selected : false 
       };
     });
     return collectablesArray;

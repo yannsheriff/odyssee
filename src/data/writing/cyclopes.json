@@ -8,7 +8,6 @@
             "id": 1,
             "illustration": 1,
             "text": "",
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -20,7 +19,6 @@
             "id": 2,
             "illustration": 2,
             "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché. L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage. On peut attendre ici, sans danger, les vents pour repartir.",
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -33,7 +31,6 @@
             "illustration": 4,
             "title": "",
             "text": "L’îlot est habitable et prospère, il y a quelques daim que l’on peut apercevoir.",
-            "collectableObject": 0,
             "haveAction": true,
             "actions": [
                 {
@@ -57,7 +54,6 @@
             "id": 6,
             "illustration": 6,
             "text": "Ce gibier tombe à point, les hommes s’emparent aussitôt de leur arc, et d’épieux à longues douilles, pour chasser. Les dieux sont avec nous, la chasse est bonne.",
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -69,7 +65,6 @@
             "id": 8,
             "illustration": 8,
             "text": "Et ainsi, du lever au coucher du soleil, nous festoyons  de viandes grillées et de vin doux tiré des amphores.",
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -82,7 +77,6 @@
             "illustration": 9,
             "text": [" — Quelques hommes doivent rester sur le bateaux, les autres, débarqué avec des vivres. En attendant l’aube, nous nous installerons pour dormir sur le sable. ",
                 "Restez groupés, et ne vous éloignez pas du campement. N’allumez aucun feu qui pourrait nous faire repérer."],
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -94,7 +88,6 @@
             "id": 10,
             "illustration": 10,
             "text": "Tout près de notre îlot se dresse une autre île, plus montagneuse. Elle est si proche de nous que l’on en devine les fumées des foyers. ",
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -106,7 +99,6 @@
             "id": 11,
             "illustration": 11,
             "text": "",
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -118,7 +110,6 @@
             "id": 12,
             "illustration": 12,
             "text": "Elle m’intrigue. Qui habite cette terre ? ",
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -132,7 +123,6 @@
             "text": ["Bientôt, nous atteignons à la rame l’autre rivage, et je repère au bout d’un cap une grotte, juste au-dessus de la mer. Elle est cachée derrière les lauriers sauvages. Des brebis et des chèvres sont parquées dans un enclos à côté.",
                     "Un haut rempart de blocs de pierres et d’arbres, des chênes et des pins, encerclent les lieux. Quel être étrange habite ici pour vivre seul, à l’écart de ses semblables ?"
             ],
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -144,7 +134,6 @@
             "id": 15,
             "text": "",
             "illustration": 15,
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -156,10 +145,9 @@
             "id": 16,
             "text": [
                 "En entrant dans la grotte, on peut sentir une odeur insupportable, un mélange de fumier et de lait caillé. Qui peut vivre ici ?",
-                "Des fromages sont alignés les uns à côté des autres sur des claies, et puis, un peu plus loin, on trouve des étables pleines de chevreaux et d’agneaux, avec des jattes et des terrines pour le lait."
-            ],
+                "Des fromages sont alignés les uns à côté des autres sur des claies, un peu plus loin, on trouve des étables pleines de chevreaux et d’agneaux, avec des jattes et des terrines pour le lait."
+            ], 
             "illustration": 16,
-            "collectableObject": 0,
             "haveAction": false,
             "actions": [
                 {
@@ -171,7 +159,6 @@
             "id": 17,
             "illustration": 17,
             "text": "Mes compagnons apeurer veulent fuir mais je ne les écoute pas. Ils ont beau insister, je veux rencontrer celui qui se terre dans cette grotte avec bêtes et fromages, voir son visage et, s’il le faut, me mesurer à lui.",
-            "collectableObject": 0,
             "actionPosition": 2,
             "haveAction": false,
             "actions": [
@@ -184,17 +171,16 @@
             "id": 18,
             "illustration": 17,
             "text": "- Ulysse, volons les fromages, ramenons quelques agneaux et chevreaux aux bateaux, et rentrons au plus vite, car les dieux seuls savent ce qui se passera si l’homme qui vit ici revient et nous trouve chez lui.",
-            "collectableObject": 0,
             "actionPosition": 2,
             "haveAction": true,
             "actions": [
                 {
                     "choiceImgId": 9,
-                    "title": "Les motivés",
+                    "title": "Les motiver",
                     "id": 19
                 },
                 {
-                    "title": "Les menacés", 
+                    "title": "Les menacer", 
                     "choiceImgId": 11,
                     "id": 20
                 }
@@ -203,8 +189,7 @@
         {
             "id": 19,
             "illustration": 17,
-            "text": "I'm a good guy !",
-            "collectableObject": 0,
+            "text": " - Après avoir fait une razzia de ces fromage et de petit bétail, voilà tout ce que vous me proposez ? La fuite ? Quel triomphe sans gloire ! Nous l’attendrons là.",
             "haveAction": false,
             "actions": [
                 {
@@ -215,8 +200,7 @@
         {
             "id": 20,
             "illustration": 17,
-            "text": "I'm a bitch",
-            "collectableObject": 0,
+            "text": "- Je ne vous laisserai pas fuir, vous devrez me passez sur le corps. Nous attendrons ici. Sacrifiez plutôt aux dieux avant de manger les fromages, et allumez un feu que l’on y voit plus clair.",
             "haveAction": false,
             "actions": [
                 {
@@ -227,47 +211,7 @@
         {
             "id": 21,
             "illustration": 18,
-            "text": [
-                "Quelle puanteur insupportable, un mélange de fumier et de lait caillé ! Qui peut vivre ici ? ",
-                "Des fromages sont alignés les uns à côté des autres sur des claies, et puis, un peu plus loin, on trouve des étables pleines de chevreaux et d’agneaux, avec des jattes et des terrines pour le lait."
-            ],
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 19
-                }
-            ]
-        },
-        {
-            "id": 19,
-            "illustration": 19,
-            "text": "Un Cyclope ! Nous sommes dans l’antre d’un Cyclope ",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 20
-                }
-            ]
-        },
-        {
-            "id": 20,
-            "illustration": 20,
-            "text": "zizi ",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 21
-                }
-            ]
-        },
-        {
-            "id": 21,
-            "illustration": 21,
-            "text": "Un Cyclope ! Nous sommes dans l’antre d’un Cyclope ",
-            "collectableObject": 0,
+            "text": "Un Cyclope ! Nous sommes dans l’antre d’un Cyclope !",
             "haveAction": false,
             "actions": [
                 {
@@ -277,45 +221,54 @@
         },
         {
             "id": 22,
-            "illustration": 22,
-            "text": "done",
-            "collectableObject": 0,
-            "haveAction": false,
+            "illustration": 19,
+            "text": "Nous sommes prisonniers, aucun homme ne pourrait le soulever. Dans l’obscurité,  le Cyclope ne nous a pas repérés, il commence la traite des chèvres.  Un peu plus tard, il allume un feu avec un immense fagot, et la grotte s’éclaire aussitôt. ",
+            "haveAction": true,
             "actions": [
                 {
+                    "choiceImgId": 8,
+                    "title": "Ne pas bouger",
                     "id": 23
-                }
-            ]
-        },
-        {
-            "id": 23,
-            "illustration": 23,
-            "text": "done",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
+                },
                 {
+                    "title": "L’appeler", 
+                    "choiceImgId": 3,
                     "id": 24
-                }
-            ]
-        },
-        {
-            "id": 24,
-            "illustration": 24,
-            "text": "done",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
+                },
                 {
+                    "title": "Se cacher", 
+                    "choiceImgId": 6,
                     "id": 25
                 }
             ]
         },
         {
+            "id": 23,
+            "illustration": 19,
+            "text": "Qui êtes-vous ? rugit-il d’une voix si souterraine que nos cœurs éclatent de peur.",
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 26
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "illustration": 19,
+            "text": "HEY !! Qui êtes-vous ? Rugit-il d’une voix si souterraine que nos cœurs éclatent de peur.",
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 26
+                }
+            ]
+        },
+        {
             "id": 25,
-            "illustration": 25,
-            "text": "done",
-            "collectableObject": 0,
+            "illustration": 19,
+            "text": ["Mes compagnons, effrayés, se réfugient tout au fond de la grotte, tandis que le géant s’affaire et rentre son troupeau de bêtes bien grasses, pour les traire..",
+                "Qui êtes-vous ? rugit-il d’une voix si souterraine que nos cœurs éclatent de peur."],
             "haveAction": false,
             "actions": [
                 {
@@ -325,9 +278,47 @@
         },
         {
             "id": 26,
-            "illustration": 26,
-            "text": "done",
-            "collectableObject": 0,
+            "illustration": 20,
+            "text": "D’où venez-vous comme cela par la mer ?              Êtes-vous des marchands ou des pirates, prêts à attaquer tous ceux qui n’ont pas la même langue qu’eux ?",
+            "haveAction": true,
+            "actions": [
+                {
+                    "choiceImgId": 4,
+                    "title": "Dire la vérité",
+                    "id": 27
+                },
+                {
+                    "title": "Mentir", 
+                    "choiceImgId": 10,
+                    "id": 28
+                },
+                {
+                    "title": "Ne rien dire", 
+                    "choiceImgId": 5,
+                    "id": 28
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "illustration": 20,
+            "text": ["Nous sommes des Achéens et nous venons de Troie ; Nous sommes des guerriers, dont la gloire est connue aujourd’hui d’un bout à l’autre de la terre, à cause de sa victoire sur Troie.", 
+            "Comme le veulent les lois de l’hospitalité, nous implorons ta protection à genoux. Et, pour que s’établissent des liens entre nous, offre-nous, selon la coutume, des cadeaux.",
+            "Crains les dieux et respecte notre demande : car tu le sais, Zeus, le dieu des dieux, défend les étrangers.", 
+            "— Qui es-tu, misérable, pour me dire de respecter les dieux ? Les Cyclopes ne craignent ni les dieux ni les hommes. Nous n’avons qu’une loi, celle du plus fort, et ce n’est pas la peur de la vengeance de Zeus qui m’empêchera de vous tuer si j’en ai envie. ", 
+            "Mais dis moi plutôt, où tu as laissé ton navire pour venir jusqu’ici ? À l’extrémité du cap, ou plus près ?"],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 30
+                }
+            ]
+        },
+        {
+            "id": 28,
+            "illustration": 20,
+            "text": ["Je prend mon courage et lui répond la première chose qui me viens a l’esprit :                                                — Nous sommes des troubadours. — Qui es-tu, misérable, pour te moquer de moi ainsi ?", 
+            "Les Cyclopes n’ont qu’une loi, celle du plus fort, et rien ne m’empêchera de vous tuer si j’en ai envie. Mais dis moi plutôt, où tu as laissé ton navire pour venir jusqu’ici ? À l’extrémité du cap, ou plus près ?"],
             "haveAction": false,
             "actions": [
                 {
@@ -336,34 +327,9 @@
             ]
         },
         {
-            "id": 27,
-            "illustration": 27,
-            "text": "done",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 28
-                }
-            ]
-        },
-        {
-            "id": 28,
-            "illustration": 28,
-            "text": "done",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 29
-                }
-            ]
-        },
-        {
             "id": 29,
-            "illustration": 29,
-            "text": "done",
-            "collectableObject": 0,
+            "illustration": 20,
+            "text": "- Parle misérable ou tu sera le premier à être mon repas ! Dis moi, où tu as laissé ton navire.",
             "haveAction": false,
             "actions": [
                 {
@@ -373,9 +339,14 @@
         },
         {
             "id": 30,
-            "illustration": 30,
-            "text": "done",
-            "collectableObject": 0,
+            "illustration": 21,
+            "text": [
+                "Je me méfie de lui, et je lui mens.",
+                "Poséidon, le dieu de la mer, a brisé mon bateau sur les rochers aux confins de ton île, et le vent du large l’a entraîné au loin. Moi et mes compagnons, nous avons échappé de justesse à la mort.",
+                "Le Cyclope m’écoute à peine. Brusquement, il attrape deux hommes d’un coup et les assomme sur le sol. Leurs cervelles giclent, ensanglantant la terre. ", 
+                "Il les dévore comme un lion affamé, sans rien laisser, ni les entrailles, ni la chair, ni la moelle.  ",
+                "Puis le Cyclope rassasié par sa barbarie, s’étend dans la grotte au milieu de ses bêtes, et s’endort."
+            ],
             "haveAction": false,
             "actions": [
                 {
@@ -385,9 +356,11 @@
         },
         {
             "id": 31,
-            "illustration": 31,
-            "text": "done",
-            "collectableObject": 0,
+            "illustration": 22,
+            "text": [
+                "Comment s’enfuir de cet antre puant, échapper à cette sauvagerie monstrueuse et rejoindre les bateaux ?", 
+                "Inutile d’espérer le tuer en le frappant d’un coup d’épée au foie... Et même si, avec l’aide de Zeus, je réussis à le toucher, comment déplacer le bloc de pierre à l’entrée ?"
+            ],
             "haveAction": false,
             "actions": [
                 {
@@ -397,57 +370,68 @@
         },
         {
             "id": 32,
-            "illustration": 32,
-            "text": "32",
-            "collectableObject": 0,
-            "haveAction": false,
+            "illustration": 23,
+            "text": ["Mes compagnons, abattus, gémissent dans l’obscurité.  — Nous sommes piégés, les hommes restés au bateau ne savent pas où nous sommes. Qui de nous, demain, sera dévoré ? Zeus, je t’implore !",
+            "Au petit matin d’un geste, il attrape encore deux de mes hommes entre ses pouces, pour les manger. "],
+            "haveAction": true,
             "actions": [
                 {
+                    "choiceImgId": 2,
+                    "title": "L’attaquer à l’arc",
                     "id": 33
-                }
-            ]
-        },
-        {
-            "id": 33,
-            "illustration": 33,
-            "text": "33",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
+                },
                 {
+                    "title": "L’attaquer à l’épieux", 
+                    "choiceImgId": 0,
                     "id": 34
-                }
-            ]
-        },
-        {
-            "id": 34,
-            "illustration": 34,
-            "text": "34",
-            "collectableObject": 0,
-            "haveAction": false,
-            "actions": [
+                },
                 {
+                    "title": "Ne rien faire ", 
+                    "choiceImgId": 8,
                     "id": 35
                 }
             ]
         },
         {
-            "id": 35,
-            "illustration": 35,
-            "text": "35",
-            "collectableObject": 0,
+            "id": 33,
+            "illustration": 23,
+            "text": ["Ulysse et ses compagnons lancent leur flèches vers le cyclope. Sa peau épaisse fit ricocher les projectiles, durant cette manoeuvre ulysse remarqua que leur ennemi protéger son oeil  par réflèxe révélant son seul point faible.",
+            "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme       aussitôt. Nous allons tous y passer ! hurlent mes compagnons. Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?"],
             "haveAction": false,
             "actions": [
                 {
-                    "id": 36
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "id": 34,
+            "illustration": 23,
+            "text": ["Ulysse et ses compagnons lancent leur épieux vers le cyclope. Sa peau épaisse fit ricocher les projectiles, durant cette manoeuvre ulysse remarqua que leur ennemi protéger son oeil  par réflèxe révélant son seul point faible. ",
+            "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme aussitôt. Nous allons tous y passer ! hurlent mes compagnons. Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?"],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "id": 35,
+            "illustration": 23,
+            "text": "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme aussitôt. Nous allons tous y passer ! hurlent mes compagnons. Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?",
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 2
                 }
             ]
         },
         {
             "id": 36,
-            "illustration": 36,
-            "text": "36",
-            "collectableObject": 0,
+            "illustration": 24,
+            "text": ["Ce ne sont que cris et larmes. Je dois agir au plus vite. Par la force ? Impossible, je ne suis pas de taille ! Par la ruse, alors ? Qu’Athéna m’aide une fois encore, et je tiens ma vengeance.",
+            "Hier, près d’un enclos, nous avons repéré le gourdin du cyclope. Il est long, d’un bon diamètre, et nous avions alors pensé qu’il ferait un solide mât de navire à vingt rameurs."],
             "haveAction": false,
             "actions": [
                 {
@@ -457,21 +441,194 @@
         },
         {
             "id": 37,
-            "illustration": 37,
-            "text": "37",
-            "collectableObject": 0,
+            "illustration": 25,
+            "text": ["— Apportez-moi le gourdin du cyclope, je vais m’en servir comme épieu, après l’avoir coupé à la bonne taille. J’aiguiserai la pointe. Nous cacherons l’épieu sous le fumier qui s’entasse dans la grotte.",
+            "Maintenant, tirez au sort ceux qui devront crever l’œil du Cyclope, pendant qu’il dormira. Nous ne devons pas rater notre cible, c’est notre seule chance de rester en vie."],
             "haveAction": false,
             "actions": [
                 {
-                    "id": 9999
+                    "id": 38
                 }
             ]
         },
         {
             "id": 38,
-            "illustration": 38,
-            "text": "38",
-            "collectableObject": 0,
+            "illustration": 26,
+            "text": ["Quelques heures plus tard, nous entendons les pas effrayants du Cyclope et les bêlements de ses bêtes. Il se fait tard, et il rentre ses troupeaux à l’abri pour la nuit, refermant vite la grotte.", 
+            "Sans un mot, le Cyclope commence la traite des brebis et des chèvres, met de côté le lait pour les fromages, et brusquement se jette sur nous, attrape encore deux hommes dans ses mains grasses et dégoulinantes. Il les déchiquette et avale les morceaux de bras et de jambes, tout rond.", 
+            "Je dois agir vite, sinon nous allons tous mourir."],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 39
+                }
+            ]
+        },
+        {
+            "id": 39,
+            "illustration": 27,
+            "text": ["Je lui tends une jatte de vin : — Cyclope, bois donc cela pour arroser les chairs humaines. Je t’aurais offert une outre pleine de ce vin délicieux, si tu nous avais accueillis selon les lois de l’hospitalité.", 
+                "Mais ta violence dépasse les bornes ! Qui, parmi nous autres mortels, pourrait te demander asile après ce que tu as fait ?",
+                "— Ton vin à toi est un nectar, de l’ambroisie, une boisson divine ! Sois généreux, ressers-moi, et dis-moi qui tu es, pour que je te fasse un cadeau qui te plaise.",
+                "Je le sers une deuxième fois, il en redemande, et boit encore... Bientôt, l’alcool fait son effet, et son esprit s’embrouille. "],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 40
+                }
+            ]
+        },
+        {
+            "id": 40,
+            "illustration": 28,
+            "text": "— Cyclope, puisque selon les règles de l’hospitalité, tu me demandes mon nom, je vais te le dire. ",
+            "haveAction": true,
+            "actions": [
+                {
+                    "choiceImgId": 7,
+                    "title": "Je suis Personne.",
+                    "id": 41
+                },
+                {
+                    "title": "Je suis cycnos le fils de Poséidon", 
+                    "choiceImgId": 12,
+                    "id": 42
+                }
+            ]
+        },
+        {
+            "id": 41,
+            "illustration": 28,
+            "text": ["Mais toi, tu n’oublieras pas ce que tu m’as promis. Je m’appelle Personne. Personne, c’est le nom que mes parents et mes compagnons me donnent.", 
+            "À ces mots, tête renversée, il est secoué d’un rire d’ivrogne : Eh bien, mon cadeau à moi, c’est que je te mangerai le dernier !"],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 43
+                }
+            ]
+        },
+        {
+            "id": 42,
+            "illustration": 28,
+            "text": "Menteur ! Cycnos est tombé durant la guerre de Troyes, sous la flèche d’Achilles. Quel est ton vrai nom ? ",
+            "haveAction": true,
+            "actions": [
+                {
+                    "choiceImgId": 7,
+                    "title": "Je suis Personne.",
+                    "id": 41
+                },
+                {
+                    "title": "Je suis cycnos le fils de Poséidon", 
+                    "choiceImgId": 12,
+                    "id": 42
+                }
+            ]
+        },
+        {
+            "id": 43,
+            "illustration": 29,
+            "text": ["— Sortez l’épieu ! Vite ! Et chauffez-le sur le feu ! Courage, nous allons nous en sortir ! Athéna nous aidera ! Nous ne devons pas faiblir.",
+            "Les quatre compagnons désignés s’emparent de l’épieu, durci à la ﬂamme, et s'enfoncent dans l’œil du Cyclope.",
+            "Moi, placé juste en dessous d’eux, je les aide à le tourner. Nous tournons de toutes nos forces, et le sang gicle autour de l’épieu brûlant.",
+            "Le Cyclope, soudain, rugit de douleur, et la roche tremble sous son cri. Nous nous enfuyons de tout côté. Il arrache l’épieu, le sang coule partout."],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 44
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "illustration": 30,
+            "text": ["— À l’aide ! À l’aide ! Et les Cyclopes, aux alentours, l’entendent et accourent.",
+            "— Qu’as-tu, Polyphème, à crier ainsi dans la nuit ? Tu nous empêches de dormir. Mais lui hurle de plus belle !",
+            "— Est-ce que quelqu’un te vole tes bêtes, ou bien est-ce qu’un homme essaie de te tuer, par la ruse ou par la force ?",
+            "— Mes amis ! Personne vient essayer de me tuer.",
+            "— Puisque tu es tout seul, et que personne ne t’agresse, nous ne pouvons rien pour toi. Tu deviens fou, c’est une maladie envoyée par Zeus, implore plutôt ton père, le dieu Poséidon, de te guérir.",
+            "Et, sur ces conseils, ils repartent au plus vite dormir."],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 45
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "illustration": 31,
+            "text": "Le Cyclope n’en peut plus il ouvre la grotte et s'assit à l’entrée, barrant ainsi le passage. Comment allons-nous faire, quelle ruse imaginer, nos vies sont en jeu... Les béliers ! Certains sont grands et gras, avec une toison de laine bien fournie !",
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 46
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "illustration": 32,
+            "text": "Si je les attache trois par trois, je peux dissimuler un homme sous le ventre de celui du milieu, en le liant avec des tiges d’osier. Chaque homme sera ainsi porté par trois béliers. Moi, je pourrais m’accrocher par les mains à la laine du plus gros, sous son ventre. Il n’y a pas d’autres solutions.",
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 47
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "illustration": 33,
+            "text": ["Nous attendons l’aube avec inquiétude. Dès qu’ils le peuvent, les béliers bondissent pour sortir dans les pâturages. Polyphème souffre de sa blessure ouverte, et son visage effrayant est maculé de sang.",
+            "Il palpe le dos de chaque bête qui passe devant lui. J’avais raison, il est trop fruste pour deviner qu’un homme est attaché sous le poitrail. "],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 48
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "illustration": 34,
+            "text": "Mon bélier, enfin, se dirige lentement vers la porte de la grotte, tant il est alourdi par sa laine, mais aussi par le bon poids d’un homme rusé.",
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 49
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "illustration": 35,
+            "text": ["— Pourquoi es-tu le dernier à sortir aujourd’hui, alors qu’habituellement, tu es toujours le premier au pâturage, ]le premier à boire dans le ﬂeuve ou à revenir dans l’enclos chaque soir ? Aurais-tu pitié de moi ?",
+            " Si tu [pouvais parler, tu me dirais, toi, où il se cache, et je lui fendrais le crâne, pour lui faire sauter la cervelle."],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 50
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "illustration": 36,
+            "text": ["Pendant qu’il parle ainsi au bélier, la jointure de mes doigts accrochés à la laine de son ventre est si douloureuse que j’ai peur de lâcher prise. Mais le Cyclope pousse enfin le bélier dehors !",
+            "— Poussons le troupeau devant nous jusqu’au bateau. Embarquez le troupeau et levez l’ancre pour reprendre la mer !  "],
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 51
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "illustration": 37,
+            "text": "37",
             "haveAction": false,
             "actions": [
                 {
@@ -479,19 +636,18 @@
                 }
             ]
         },
-        
 
+        
 
         {
             "id": 9999, 
-            "title": "End",
-            "text": "This is end of the story",
-            "collectableObject": 0,
+            "illustration": 37,
+            "text": "Bisous",
             "haveAction": true,
             "actions": [
                 {
                     "choiceImgId": 1,
-                    "title": "Attraper un arc",
+                    "title": "retourner au bateau",
                     "id": 0
                 }
             ]

@@ -93,7 +93,7 @@ export default class Narration extends Component {
       if (text) {   // If animation exist then render it
         return (
           <Animated.View style={{ position: "absolute", opacity: text.opacity, top: screen.height / 100 * 72, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
-            <Text style={ styles.text }> { text.text } </Text>
+            <Text style={ styles.text }>{ text.text } </Text>
           </Animated.View>
         )
       } else {      // Else render a blank layer

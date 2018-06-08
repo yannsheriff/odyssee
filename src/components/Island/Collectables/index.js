@@ -228,11 +228,11 @@ class Collectables extends Component {
               
               style={{
                 position: "absolute",
-                width: 20,                
-                height: 20,
-                top: collectable.y,
-                left: collectable.x,
-                backgroundColor: 'white',
+                width: 40,                
+                height: 40,
+                top: screen.height / 100 * collectable.y,
+                left: screen.width / 100 * collectable.x,
+                // backgroundColor: 'red',
               }}
             />  
            )
