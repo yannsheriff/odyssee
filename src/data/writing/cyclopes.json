@@ -317,7 +317,7 @@
         {
             "id": 28,
             "illustration": 20,
-            "text": ["Je prend mon courage et lui répond la première chose qui me viens a l’esprit :                                                — Nous sommes des troubadours. — Qui es-tu, misérable, pour te moquer de moi ainsi ?", 
+            "text": ["Je prend mon courage et lui répond la première chose qui me viens a l’esprit :                                                — Nous sommes des troubadours.                                          — Qui es-tu, misérable, pour te moquer de moi ainsi ?", 
             "Les Cyclopes n’ont qu’une loi, celle du plus fort, et rien ne m’empêchera de vous tuer si j’en ai envie. Mais dis moi plutôt, où tu as laissé ton navire pour venir jusqu’ici ? À l’extrémité du cap, ou plus près ?"],
             "haveAction": false,
             "actions": [
@@ -371,7 +371,7 @@
         {
             "id": 32,
             "illustration": 23,
-            "text": ["Mes compagnons, abattus, gémissent dans l’obscurité.  — Nous sommes piégés, les hommes restés au bateau ne savent pas où nous sommes. Qui de nous, demain, sera dévoré ? Zeus, je t’implore !",
+            "text": ["Mes compagnons, abattus, gémissent dans l’obscurité.  — Nous sommes piégés, les hommes restés au bateau ne savent pas où nous sommes. Qui de nous, demain, sera dévoré ?                                       Zeus, je t’implore !",
             "Au petit matin d’un geste, il attrape encore deux de mes hommes entre ses pouces, pour les manger. "],
             "haveAction": true,
             "actions": [
