@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         position:"absolute",
         top: 300,
         width: screen.width,
+        paddingHorizontal: 10,
         textAlign: "center",
         fontFamily: "Infini-Regular",
         lineHeight: 90,

@@ -143,15 +143,15 @@ class MainMenu extends React.Component {
                   <Achivements  />
                 </View>
                 <View style={styles.slide3}>
-                  <Button
+                <TouchableOpacity>
+                  <Text style={styles.menuTextButton}> Aide </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
                     onPress={this.displayQuitPopup}
-                    title={'Quitter l\'ile'}
-                    color={'white'}
-                  />
-                  <Button
-                    title={'Aide'}
-                    color={'white'}
-                  />
+                  >
+                    <Text style={styles.menuTextButton}> Quitter </Text>
+                  </TouchableOpacity>
+                
                 </View>
               </Swiper>
               <View

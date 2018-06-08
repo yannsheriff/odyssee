@@ -175,6 +175,10 @@ class StoreService {
               id: dataSaved.sailing.destination.id, 
               x: dataSaved.sailing.destination.id,
               y: dataSaved.sailing.destination.id,
+            },
+            modifiers: {
+              strength:  dataSaved.sailing.modifiers.strength ? dataSaved.sailing.modifiers.strength : 0,
+              direction: dataSaved.sailing.modifiers.direction ? dataSaved.sailing.modifiers.direction : 0
             }
           },
           island: {

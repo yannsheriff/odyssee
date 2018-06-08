@@ -46,6 +46,7 @@
 		A52785D12087491300336B4A /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A52785C62087487F00336B4A /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		EC307BB8CCFD40738F83D408 /* Ravenia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 360C66D6DF5D465FA8277DC4 /* Ravenia.ttf */; };
+		805AE9F7CBC1407FB28122AE /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F94C23B3575417E83F8B699 /* OpenSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -464,6 +465,7 @@
 		F4197094CA554800A6E241DE /* RNSimpleCompass.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSimpleCompass.xcodeproj; path = "../node_modules/react-native-simple-compass/ios/RNSimpleCompass.xcodeproj"; sourceTree = "<group>"; };
 		F469C069E126458A9EE6EDE7 /* libRNSimpleCompass.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSimpleCompass.a; sourceTree = "<group>"; };
 		360C66D6DF5D465FA8277DC4 /* Ravenia.ttf */ = {isa = PBXFileReference; name = "Ravenia.ttf"; path = "../src/assets/fonts/Ravenia.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9F94C23B3575417E83F8B699 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBold.ttf"; path = "../src/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -811,6 +813,7 @@
 				88C3830E34F949F6AA07B20A /* Infini-regular.otf */,
 				4B78B7BCD4D642B89E23D0EF /* Infini.otf */,
 				360C66D6DF5D465FA8277DC4 /* Ravenia.ttf */,
+				9F94C23B3575417E83F8B699 /* OpenSans-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1370,6 +1373,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				4F9C8691508347F58F0FA5F0 /* Infini.otf in Resources */,
 				EC307BB8CCFD40738F83D408 /* Ravenia.ttf in Resources */,
+				805AE9F7CBC1407FB28122AE /* OpenSans-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
