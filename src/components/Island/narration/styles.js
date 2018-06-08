@@ -4,7 +4,7 @@ import screen from '../../../helpers/ScreenSize'
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 630,
+        marginTop: screen.height / 100 * 75,
         width: screen.width,
         flexDirection: 'row',
         justifyContent: 'center',

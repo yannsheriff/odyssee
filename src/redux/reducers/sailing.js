@@ -1,5 +1,6 @@
 import {
   UPDATE_ORIENTATION,
+  UPDATE_MODIFIERS,
   TOGGLE_SAILING,
   CALL_MAP,
   LAUNCH_MAP,
@@ -9,6 +10,11 @@ import {
   SAVE_SAILING,
   COLLISION
 } from '../actions/sailing'
+
+import { 
+  EQUIP_GLYPH,
+  UNEQUIP_GLYPH
+} from '../actions/menu'
 
 import { POPULATE_STORE } from '../actions/loading'
 
@@ -26,6 +32,10 @@ const initialState = {
     id: '',
     x: '',
     y: ''
+  },
+  modifiers: {
+    strength: 0,
+    direction: 0
   }
 }
 
@@ -35,6 +45,11 @@ export function sailingReducer(state = initialState, action) {
       return {
         ...state,
         orientation: action.orientation
+      }
+    case UPDATE_MODIFIERS:
+      return {
+        ...state,
+        modifiers: action.modifiers
       }
     case TOGGLE_SAILING:
       return {
@@ -78,6 +93,19 @@ export function sailingReducer(state = initialState, action) {
       return state
     case POPULATE_STORE:
       return action.payload.sailing
+
+    case EQUIP_GLYPH:
+      return {
+          ...state,
+          collectableEquipped: [...state.collectableEquipped, action.id]
+      }
+
+    case UNEQUIP_GLYPH:
+      return {
+          ...state,
+          collectableEquipped: state.collectableEquipped.filter(el => el !== action.id)
+      }
+  
     default:
       return state
   }

@@ -1,8 +1,8 @@
-import { delay } from 'redux-saga'
-import { put, takeEvery, all } from 'redux-saga/effects'
+import { put, takeEvery, all, select } from 'redux-saga/effects'
 import { SAVE_ISLAND_DATA, REQUEST_ISLAND_DATA, dispatchIslandData } from '../actions/island'
 import { SAVE_SAILING } from '../actions/sailing'
 import { SAVE_MENU } from '../actions/menu'
+import { NAVIGATE } from '../actions/navigation'
 import { SAVE_COLLECTABLES } from '../actions/collectables'
 import { REQUEST_STORE, populateStore } from '../actions/loading'
 import { storeService } from '../../helpers/saveData'
@@ -11,6 +11,18 @@ export function* helloSaga() {
     console.log('Hello Sagas!')
 }
 
+export function* saveIsOnIsland() {
+  const data = yield storeService.getSaving()
+  const state = yield select();
+  console.log('Saving data ⏳')
+
+  var newState = {
+    ...data,
+    isOnIsland: state.isOnIsland
+  }
+  yield storeService.save(newState)
+  console.log('Saved ✅')
+}
 
 export function* saveSailingData(action) {
   console.log('Saving data ⏳')
@@ -30,6 +42,10 @@ export function* saveSailingData(action) {
       id: action.state.destination.id, 
       x: action.state.destination.x,
       y: action.state.destination.y,
+    },
+    modifiers: {
+      strength: action.state.modifiers.strength,
+      direction: action.state.modifiers.direction
     }
   }
 
@@ -55,6 +71,7 @@ export function* saveIslandData(action) {
         screenReaded: actualIslandSavedData.screenReaded.concat(action.state.actualSnippetId),
         actualSnippetId: action.nextSnippetId,
       }
+      
       // Create a new occurence of the saved state
       var newState = {
         ...data,
@@ -66,6 +83,9 @@ export function* saveIslandData(action) {
           }
         })
       }
+
+      console.log("newState", newState)
+
     } 
   // Save data to Async storage
   yield storeService.save(newState)
@@ -108,8 +128,6 @@ export function* dispatchPopulateStore() {
   yield put (populateStore(data))
   console.log('Populated ✅')
 }
-
-
 
 export function* requestIslandData(action) {
   console.log('asking data ⏳')
@@ -166,6 +184,10 @@ export function*  watchSavingSailing() {
   yield takeEvery(SAVE_SAILING, saveSailingData)
 }
 
+export function*  watchSavingIsOnIsland() {
+  yield takeEvery(NAVIGATE, saveIsOnIsland)
+}
+
 export function*  watchSavingMenu() {
   yield takeEvery(SAVE_MENU, saveMenuData)
 }
@@ -193,6 +215,7 @@ export default function* rootSaga() {
     watchRequestIslandData(),
     watchSavingSailing(),
     watchSavingCollectables(),
-    watchSavingMenu()
+    watchSavingMenu(),
+    watchSavingIsOnIsland()
   ])
 }

@@ -5,9 +5,6 @@ import screen from '../../helpers/ScreenSize'
 const styles = StyleSheet.create({
     wrapper: {},
     slide1: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
       backgroundColor: "transparent"
     },
     slide2: {

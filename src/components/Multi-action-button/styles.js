@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
         top: 300,
         width: screen.width,
         textAlign: "center",
+        fontFamily: "Infini-Regular",
+        lineHeight: 90,
         fontSize: 70,
         color: "white",
         fontWeight: "bold",

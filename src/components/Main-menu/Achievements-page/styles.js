@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   },
   achievementText: {
     color: "white",
+    fontFamily: "Infini-Regular",
     fontSize: 18,
     width: screen.width / 100 * 80
   },

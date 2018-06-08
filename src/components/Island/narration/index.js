@@ -37,7 +37,7 @@ export default class Narration extends Component {
       texts: [
         {
           // If animation is not null put it in the state
-          text: props.snippet.text ? props.snippet.text : null,
+          text: props.text ? props.text : null,
           opacity: new Animated.Value(1),
         }
       ],
@@ -46,7 +46,7 @@ export default class Narration extends Component {
 
 
   componentWillReceiveProps (nextProps) {
-    if(nextProps.snippet.text && this.state.isTransitionFinished ) { // If component receive a new animation 
+    if(nextProps.text !== this.state.texts[0].text) { // If component receive a new animation 
       
       // Get transition duration
       let transitionDuration = nextProps.transitionDuration ? nextProps.transitionDuration : this.state.transitionDuration
@@ -56,7 +56,7 @@ export default class Narration extends Component {
         isTransitionFinished: false,
         texts:[ 
           {
-            text: nextProps.snippet.text, 
+            text: nextProps.text ? nextProps.text : "" , 
             opacity: new Animated.Value(0)
           }, 
           ...this.state.texts
@@ -67,22 +67,20 @@ export default class Narration extends Component {
         // Animate the old & the animation to the left
         Animated.parallel([
           Animated.timing(this.state.texts[1].opacity, {
-            duration: transitionDuration,
+            duration: 500,
             toValue: 0, 
           }),
           Animated.timing(this.state.texts[0].opacity, {
-            delay: 2000,
-            duration: transitionDuration,
+            delay: 500,
+            duration: 500,
             toValue: 1,
           }),
         ]).start(()=> {
           // When the animation is finished wiat 1s and delete old animation from the state Array
-          setTimeout(()=> {
             this.setState({ 
               texts: [this.state.texts.shift()],
               isTransitionFinished: true
             })
-          }, 500)
         }); 
       })
     }
@@ -94,7 +92,7 @@ export default class Narration extends Component {
     var text = this.state.texts.map((text, index) => {
       if (text) {   // If animation exist then render it
         return (
-          <Animated.View style={{ position: "absolute", opacity: text.opacity, top: 560, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
+          <Animated.View style={{ position: "absolute", opacity: text.opacity, top: screen.height / 100 * 72, width: screen.width, flexDirection: "row", justifyContent: "center" }}>
             <Text style={ styles.text }> { text.text } </Text>
           </Animated.View>
         )

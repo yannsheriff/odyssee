@@ -74,7 +74,7 @@ class VisualNotification extends React.Component {
             />
 
        
-        <View style={styles.animation}>
+        <View style={[styles.animation, { marginTop: this.state.subtitle === '' ? 0 : 30 }]}>
           <LottieView
             resizeMode="contain"
             progress={this.state.progress}
@@ -89,7 +89,7 @@ class VisualNotification extends React.Component {
         <View 
           style={styles.absolute } 
           onStartShouldSetResponder={ (evt) => true }
-          onResponderGrant={  (evt) => { 
+          onResponderGrant={(evt) => { 
             this.closeNotification()
           }}/> 
       </View>

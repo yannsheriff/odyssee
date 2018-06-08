@@ -47,8 +47,8 @@ export default class CollectableItem extends React.Component {
               backgroundColor: this.state.found
                 ? "rgba(255, 255, 255, 0.3)"
                 : null,
-              borderColor: this.state.selected ? "red" : null,
-              borderWidth: this.state.selected ? 1 : 0
+              borderColor: this.state.selected ? "white" : null,
+              borderWidth: this.state.selected ? 2 : 0
             }
           ]}
           onPress={() => {
@@ -58,12 +58,16 @@ export default class CollectableItem extends React.Component {
           <View style={{ position: "absolute" }}>
             <Image
               style={{
-                height: this.state.selected ? 58 : 60,
-                width: this.state.selected ? 58 : 60
+                height: this.state.selected ? 56 : 60,
+                width: this.state.selected ? 56 : 60
               }}
               source={images.glyphes}
             />
-            <Text style={[styles.glyphsFont, { opacity: this.state.found ? 1 : 0 }]}>
+            <Text style={[styles.glyphsFont, {
+              top: this.state.selected ? 20 : 22,
+              width: this.state.selected ? 56 : 60,
+              opacity: this.state.found ? 1 : 0 }]
+            }>
               {this.state.icon}
             </Text>
           </View>

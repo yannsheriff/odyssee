@@ -21,7 +21,6 @@ class StoreService {
   async getSaving() {
 
     let dataSaved = await AsyncStorage.getItem("saved");
-
     if (dataSaved !== null && dataSaved) {
       return JSON.parse(dataSaved)
     } else {
@@ -53,6 +52,10 @@ class StoreService {
             id: '', 
             x: '',
             y: '',
+          },
+          modifiers: {
+            strength: 0,
+            direction: 0
           }
         }
       }
@@ -124,12 +127,16 @@ class StoreService {
               id: '', 
               x: '',
               y: '',
+            },
+            modifiers: {
+              strength: 0,
+              direction: 0
             }
           },
           island: {
               currentIslandId: null,
               screenReaded: [],
-              actualSnippetId: 1,
+              actualSnippetId: 17,
               haveAction: false,
               haveObject: false,
           }
@@ -144,7 +151,7 @@ class StoreService {
             subtitle: undefined,
             animation: undefined,
           },
-          isOnIsland: false,
+          isOnIsland: dataSaved.isOnIsland,
           menu: {
             displayMenu: false,
             collectableEquipped: dataSaved.menu.collectableEquipped,
@@ -178,12 +185,12 @@ class StoreService {
               haveObject: false,
           }
         }
-        if (dataSaved.isOnIsland) {
-          let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
-          state.island.currentIslandId = dataSaved.isOnIsland
-          state.island.actualSnippetId = actualIsland.actualSnippetId
-          state.isOnIsland = dataSaved.isOnIsland
-        }
+        // if (dataSaved.isOnIsland) {
+        //   let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
+        //   state.island.currentIslandId = dataSaved.isOnIsland
+        //   state.island.actualSnippetId = actualIsland.actualSnippetId
+        //   state.isOnIsland = dataSaved.isOnIsland
+        // }
         return state
       }
   }

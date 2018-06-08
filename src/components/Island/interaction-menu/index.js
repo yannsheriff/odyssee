@@ -37,27 +37,34 @@ export default class InteractionMenu extends Component {
     this.state = {
 
       style: props.style,
-      actions: this.props.actions.snippets,
-      actionsForButton: this._formatDataForActionButon(this.props.actions.snippets),
-      haveAction: this.props.actions.haveAction,
+      actions: this.props.actions ? this.props.actions.snippets : undefined,
+      actionsForButton: this.props.actions ? this._formatDataForActionButon(this.props.actions.snippets) : undefined ,
+      haveAction: this.props.actions ? this.props.actions.haveAction : false,
       opacity: 0,
       _changeStep: this.props.changeStep,
       _prevStep: this.props.prevStep,
+      nextAction: null
     }
 
   }
 
   componentWillReceiveProps(nextProps) {
-      if (nextProps.actions.snippets.length > 0) {
+      if (nextProps.actions.snippets.length > 0 && nextProps.actions.snippets[0].title ) {
         this.setState({ 
           actions: nextProps.actions.snippets,
           actionsForButton: this._formatDataForActionButon(nextProps.actions.snippets),
+          haveAction: nextProps.actions.haveAction
+        })
+      } else {
+        this.setState({ 
+          nextAction: nextProps.actions.snippets[0].id,
           haveAction: nextProps.actions.haveAction
         })
       }
   }
 
   _formatDataForActionButon(actions) {
+    
     let payload = actions.map((action) => {
       if (action.choiceImgId !== undefined) {
         return { id: action.id, img: choices[action.choiceImgId].img, label: action.title}
@@ -68,7 +75,7 @@ export default class InteractionMenu extends Component {
 
   _nextStep = () => {
     if(!this.state.haveAction) {
-      this.state._changeStep(this.state.actions[0].actions[0].id)
+      this.state._changeStep(this.state.nextAction)
     }
   }
   _prevStep = () => {
@@ -93,9 +100,11 @@ export default class InteractionMenu extends Component {
 
         <MultiActionButton
           actions={this.state.actionsForButton}
-          // mainButtonsSize={10}
+          blurView={true} 
+          mainButtonsSize={50}
+          haveCallToAction={true}
           // actionsButtonsSize={50}
-          // mainBtnStyle={}
+          // mainBtnStyle={{height: 50, width: 50}}
           // initalPositon={}
           // labelStyle={}
           
