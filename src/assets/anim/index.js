@@ -28,3 +28,7 @@ export const microInteraction = {
 export const loaderAnim = require('./LoaderAnimation.json')
 
 export const animatedBoat = require('./boat.json')
+
+export const animatedWind = require('./wind.json')
+
+//export const animatedSeagulls = require('./seagulls.json')

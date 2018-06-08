@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginTop: 15
     }, 
-    close: { position: "absolute", top: 70, right: 20, zIndex: 50 },
+    close: { position: "absolute", top: 50, right: 40, zIndex: 50 },
     dash: { width: 1, height: 20, backgroundColor: 'rgba(255, 255, 255, 0.5)',  },
     navigationLine: {
       position: "absolute",

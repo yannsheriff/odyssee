@@ -3,8 +3,8 @@
 // --------------------------------------------------------------
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Image, TouchableWithoutFeedback, Animated, Text } from 'react-native'
-import Svg,{ G, Rect } from 'react-native-svg'
+import { View, Image, TouchableWithoutFeedback, Animated } from 'react-native'
+import Svg,{ G, Rect, Defs, RadialGradient, Stop, Circle } from 'react-native-svg'
 import RNSimpleCompass from 'react-native-simple-compass'
 import LottieView from 'lottie-react-native'
 
@@ -18,9 +18,9 @@ import renderIf from '../../helpers/renderIf'
 
 //  Import Constants
 // --------------------------------------------------------------
-import { mapSize, speedModifiers, boatStates } from '../../constants'
+import { mapSize, speedModifiers, boatStates, windStates, seagullsStates } from '../../constants'
 import { IslandsData } from '../../constants/islands'
-import { animatedBoat } from '../../assets/anim/index'
+import { animatedBoat, animatedWind, animatedSeagulls } from '../../assets/anim/index'
 import collectables from '../../data/collectables.json'
 
 //  Import Components
@@ -71,6 +71,11 @@ class VirtualMap extends Component {
       },
       islandCollided: null,
       contentToRender: [],
+      // gradients
+      biomeGradients: null,
+      gradParams: {
+        radius: 4000,
+      },
       // speed modifiers
       windDirection: speedModifiers.direction,
       windStrength: speedModifiers.wind,
@@ -97,14 +102,26 @@ class VirtualMap extends Component {
       equippedGlyphs: this.props.sailing.collectableEquipped,
       actionsForButton: [],
       haveAction: false,
-      testGlyphs: [1,2,4]
+      // wind animation
+      windProgress: new Animated.Value(0),
+      windData: animatedWind,
+      windStates: windStates,
+      totalWindFrames: 151,
+      // seagulls animation
+      seagullsProgress: new Animated.Value(0),
+      seagullsData: animatedSeagulls,
+      seagullsStates: seagullsStates,
+      totalSeagullsFrames : 150
     }
   }
 
   componentWillMount () {
     this._checkIfInViewport()
     this._toggleCompassLock()
-    if(this.state.testGlyphs.length > 0) { // TODO : switch tested state prop from "testGlyphs" to "equippedGlyphs"
+    if (this.state.biomeGradients === null) {
+      this._getBiomeGradients()
+    }
+    if(this.state.equippedGlyphs.length > 0) {
       this.setState({
         haveAction: true
       }, this._getEquippedGlyphs())
@@ -115,6 +132,7 @@ class VirtualMap extends Component {
     this.setState({
       speedRadius: this._getSpeed(0)
     })
+    this._animateWind()
   }
 
   componentWillReceiveProps (nextProps) {
@@ -147,8 +165,7 @@ class VirtualMap extends Component {
    */
   _getEquippedGlyphs = () => {
     let buttons = []
-    console.log(this.state.glyphList)
-    this.state.testGlyphs.forEach(glyph => { // TODO : switch array from "testGlyphs" to "equippedGlyphs"
+    this.state.equippedGlyphs.forEach(glyph => {
       const equipped = this.state.glyphList.find(g => {
         return g.id === glyph
       })
@@ -162,7 +179,7 @@ class VirtualMap extends Component {
     })
     this.setState({
       actionsForButton: buttons
-    }, console.log(this.state.actionsForButton))
+    })
   }
 
   /*
@@ -549,6 +566,93 @@ class VirtualMap extends Component {
     }
   }
 
+  /*
+   * Get gradients for all islands and populate a static array
+   */
+  _getBiomeGradients = () => {
+    let grads = []
+    IslandsData.forEach(island => {
+      if (island.isIsland) {
+        grads.push({
+          id: 'grad_' + island.id,
+          position: island.position,
+          grad: island.grad
+        })
+      }
+    })
+    this.setState({
+      biomeGradients: grads
+    })
+  }
+
+  /*
+   * Make biome gradients (they should always be displayed so are rendered separatly from islands and other assets)
+   */
+  _createBiomeGradients = () => {
+    return this.state.biomeGradients.map(grad => {
+      return (
+        <RadialGradient
+          key={ grad.id }
+          id={ grad.id }
+          cx={ grad.position.x }
+          cy={ grad.position.y }
+          rx={ this.state.gradParams.radius }
+          ry={ this.state.gradParams.radius }
+          fx={ grad.position.x }
+          fy={ grad.position.y }
+          gradientUnits="userSpaceOnUse"
+        >
+          <Stop
+            offset="0"
+            stopColor={ grad.grad }
+            stopOpacity="1"
+          />
+          <Stop
+            offset="1"
+            stopColor={ grad.grad }
+            stopOpacity="0"
+          />
+        </RadialGradient>
+      )
+    })
+  }
+
+  /*
+   * Insert gradients in circles
+   */
+  _renderBiomeGradients = () => {
+    return this.state.biomeGradients.map(grad => {
+      return (
+        <Circle
+          key={ grad.id }
+          fill={ 'url(#' + grad.id + ')' }
+          cx={ grad.position.x }
+          cy={ grad.position.y }
+          r={ this.state.gradParams.radius }
+        />
+      )
+    })
+  }
+
+  /*
+   * wind animation
+   */
+  _animateWind = () => {
+    let w = Math.ceil(Math.random() * 3) - 1
+    if (w < 0) { w = 0}
+
+    this.state.windProgress.setValue(this.state.windStates[w][0] / this.state.totalWindFrames)
+
+    Animated.timing(this.state.windProgress, {
+      toValue: this.state.windStates[w][1] / this.state.totalWindFrames,
+      duration: Math.abs(this.state.windStates[w][0] - this.state.windStates[w][1]) / 30 * 1000
+    }).start(() => {
+      setTimeout(() => {
+        this._animateWind()
+      }, (Math.random() * 3000) + 4000)
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -556,6 +660,9 @@ class VirtualMap extends Component {
           height={screen.height}
           width={screen.width}
         >
+          <Defs>
+            {this._createBiomeGradients()}
+          </Defs>
           <G
             width={mapSize.x}
             height={mapSize.y}
@@ -572,7 +679,7 @@ class VirtualMap extends Component {
               x={0}
               y={0}
               scale={1}
-              fill="#59beb2"
+              fill="#4580F6"
             />
             <G
               width={mapSize.x}
@@ -581,6 +688,7 @@ class VirtualMap extends Component {
               y={this.state.position.y}
               scale={1}
             >
+              {this._renderBiomeGradients()}
               <Islands
                 islands={this.state.contentToRender}
                 deg={this.state.orientation}
@@ -593,22 +701,31 @@ class VirtualMap extends Component {
           <LottieView
             source={ this.state.animData }
             progress={ this.state.animProgress }
-            loop={ true }
           />
         </Animated.View>
+        <Animated.View style={styles.seagulls}>
+          <LottieView
+            // source={ this.state.seagullsData }
+            // progress={ this.state.seagullsProgress }
+          />
+        </Animated.View>
+        <Animated.View style={[styles.windAnim, {transform: [{ rotate: 180 - this.state.windDirection + this.state.orientation + 'deg' }]} ]}>
+          <LottieView
+            source={ this.state.windData }
+            progress={ this.state.windProgress }
+          />
+        </Animated.View>
+        {renderIf(this.state.haveAction,
         <MultiActionButton
           actions={this.state.actionsForButton}
-
           mainButtonsSize={ 120 }
-
           initalPositon={{ x: (screen.width / 2) - 60, y: (screen.height / 2) - 60 }}
-
           isActive={this.state.haveAction}
-
           onChoiceSelected={(action) => {
             this._useGlyph(action)
           }}
         />
+        )}
         {renderIf(!this.state.hideUI,
           <View
             style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
@@ -670,12 +787,11 @@ class VirtualMap extends Component {
             style={[styles.icon, styles.iconTop]}
           >
             <Image
-              style={styles.iconImage}
-              source={images.iconMap}
+              style={styles.iconBurger}
+              source={images.burger}
             />
           </View>
-        </TouchableWithoutFeedback
->
+        </TouchableWithoutFeedback>
       </View>
     )
   }

@@ -95,7 +95,7 @@ class MiniatureMap extends Component {
               stroke={ '#fbb70c' }
               scale={ 1 }
               cx={ (mapSize.x - c.position.x) / mapSize.x * screen.width }
-              cy={ (mapSize.y - c.position.y) / mapSize.y * screen.height }
+              cy={ (mapSize.y - c.position.y) / mapSize.y * (screen.height - this.state.menuHeight - this.state.windUIHeight)}
               r="12"
               opacity={ opacity }
             />
@@ -162,7 +162,7 @@ class MiniatureMap extends Component {
               href={ images.iconBoat }
               preserveAspectRatio="xMidYMid slice"
               originX={((this.state.position.x + (mapSize.x / 2)) / mapSize.x * screen.width)}
-              originY={((this.state.position.y + (mapSize.y / 2)) / mapSize.y * screen.height)}
+              originY={((this.state.position.y + (mapSize.y / 2)) / mapSize.y * (screen.height))}
               rotation={180}
             />
           </G>

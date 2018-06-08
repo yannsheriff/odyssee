@@ -77,12 +77,32 @@ const styles = StyleSheet.create({
       top: screen.height - ((screen.width - 100) / 2) - 17
     },
     iconTop: {
-      right: 10,
-      top: 40
+      top: 50,
+      right: 40,
+      width: 35,
+      height: 35
+    },
+    iconBurger: {
+      width: 35,
+      height: 35
     },
     iconImage: {
       width: 40,
       height: 40
+    },
+    windAnim: {
+      position: 'absolute',
+      left: (screen.width / 2) - (Math.sqrt(Math.pow(screen.width, 2) + Math.pow(screen.height, 2)) / 2) - 50,
+      top: (screen.height / 2) - (Math.sqrt(Math.pow(screen.width, 2) + Math.pow(screen.height, 2)) / 2) - 50,
+      width: Math.sqrt(Math.pow(screen.width, 2) + Math.pow(screen.height, 2)) + 100,
+      height: Math.sqrt(Math.pow(screen.width, 2) + Math.pow(screen.height, 2)) + 100
+    },
+    seagulls: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width: screen.width,
+      height: screen.height
     }
   });
 

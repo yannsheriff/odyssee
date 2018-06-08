@@ -2,27 +2,28 @@ const islands = [
   {
     id: 1,
     position: {
-      x: 1000,
-      y: 700
+      x: 3750,
+      y: 7500
     },
     size: {
-      x: 271,
-      y: 534
+      x: 275,
+      y: 543
     },
     collisionDist: 200,
     image: 'cyclope',
     biomeLength: 4,
     isIsland: true,
     isTarget: false,
-    opacity: 1
+    opacity: 1,
+    grad: '#01c1b2'
   }
 ]
 
 const biomesElements = []
 islands.forEach(island => {
-  const nb = Math.floor(Math.random() * 10) + 10
+  const nb = 100
   for (let i = 0; i < nb; i++) {
-    const dist = Math.random() * 500 + 200
+    const dist = Math.random() * 3000 + 200
     const deg = Math.random() * 360
     const element = {
       id: island.id + '_' + i,

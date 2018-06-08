@@ -122,10 +122,10 @@ class MainMenu extends React.Component {
               >
                 <TouchableOpacity 
                   onPress={this.closeMenu} 
-                  style={{width: 30, height: 30}}
+                  style={{width: 35, height: 35}}
                 >
                   <Image 
-                    style={{width: 30, height: 30}}
+                    style={{width: 35, height: 35}}
                     source={images.closeMainMenu} 
                     />
                 </TouchableOpacity>
