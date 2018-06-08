@@ -100,9 +100,11 @@ export default class InteractionMenu extends Component {
 
         <MultiActionButton
           actions={this.state.actionsForButton}
-          // mainButtonsSize={10}
+          blurView={true} 
+          mainButtonsSize={50}
+          haveCallToAction={true}
           // actionsButtonsSize={50}
-          // mainBtnStyle={}
+          // mainBtnStyle={{height: 50, width: 50}}
           // initalPositon={}
           // labelStyle={}
           

@@ -21,7 +21,6 @@ class StoreService {
   async getSaving() {
 
     let dataSaved = await AsyncStorage.getItem("saved");
-
     if (dataSaved !== null && dataSaved) {
       return JSON.parse(dataSaved)
     } else {

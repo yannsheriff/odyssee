@@ -1,8 +1,6 @@
 //  Import modules
 // --------------------------------------------------------------
 import {
-  Button,
-  SafeAreaView,
   Text,
   View, 
   TouchableOpacity,
@@ -24,7 +22,6 @@ import InteractionMenu from '../components/Island/interaction-menu'
 //  Import Actions
 // --------------------------------------------------------------
 import { goToStep, saveIslandData, requestIslandData, goToPreviousStep } from '../redux/actions/island'
-import { foundNewCollectable, saveCollectables } from '../redux/actions/collectables'
 import { toggleMenu } from '../redux/actions/menu'
 
 //  Import Data
@@ -35,7 +32,6 @@ import { collectables } from '../data'
 //  Import Helpers
 // --------------------------------------------------------------
 import screen from '../helpers/ScreenSize'
-import { storeService } from '../helpers/saveData'
 import images from '../assets/images';
 import renderIf from '../helpers/renderIf'
 
@@ -76,6 +72,7 @@ class SmartIsland extends Component {
 
 componentWillMount(){
   this.state._requestIslandData(this.islandId)
+  
   setTimeout(() => {
     this.setState({ loader: false })
   }, 3000)
@@ -279,6 +276,7 @@ componentWillReceiveProps(nextProps) {
         height: screen.height
       }}>
         <Illustrations 
+          images = {this.loadedImage}
           offsets={ this.state.offsets.offsets }
           animation={ this.state.animation.animation }
           swipBackward={ !this.state.isGoingForward }
