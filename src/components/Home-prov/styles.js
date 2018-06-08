@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     }, 
     buttonBorder: {
-        paddingVertical: 14,
+        paddingVertical: 22,
         width: 260,
         marginBottom: 30,
         borderWidth: 1,
@@ -33,15 +33,17 @@ const styles = StyleSheet.create({
         borderStyle: "solid"
     },
     buttonPlain: {
-        paddingVertical: 14,
+        paddingVertical: 22,
         width: 260,
-        marginBottom: 10,
+        marginBottom: 30,
+
         borderRadius: 50,
         backgroundColor: "#9c75d7",
         borderStyle: "solid"
     },
     buttonText: {
         width: 260,
+        fontFamily: "OpenSans-SemiBold",
         textAlign: "center",
         fontSize: 14
     }

@@ -32,7 +32,7 @@ export default class MultiActionButton extends React.Component {
     }
     this.positionReferenceMap = [
       [0],
-      [45, -45],
+      [40, -40],
       [-45, 0, 45]
     ]
 

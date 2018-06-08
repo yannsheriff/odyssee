@@ -101,11 +101,11 @@ export default class InteractionMenu extends Component {
         <MultiActionButton
           actions={this.state.actionsForButton}
           blurView={true} 
-          mainButtonsSize={50}
+          mainButtonsSize={70}
           haveCallToAction={ true }
           // actionsButtonsSize={50}
           // mainBtnStyle={{height: 50, width: 50}}
-          // initalPositon={}
+          initalPositon={{ x: screen.width / 100 * 50 - 35 , y: screen.height - 70 - 22 }}
           // labelStyle={}
           
           // onButtonPressed={}
@@ -115,7 +115,7 @@ export default class InteractionMenu extends Component {
             <Image
               source={images.openMenu}
               resizeMethod={"contain"}
-              style={{height: 50, width: 50}}
+              style={{height: 70, width: 70}}
             />
           }
           
@@ -123,7 +123,7 @@ export default class InteractionMenu extends Component {
             <Image
               source={images.closeMenu}
               resizeMethod={"contain"}
-              style={{height: 50, width: 50}}
+              style={{height: 70, width: 70}}
             />
           }
 
@@ -131,7 +131,7 @@ export default class InteractionMenu extends Component {
             <Image
               source={images.openMenu}
               resizeMethod={"contain"}
-              style={{height: 50, width: 50, opacity: 0.1}}
+              style={{height: 70, width: 70, opacity: 0.1}}
             />
           }
 

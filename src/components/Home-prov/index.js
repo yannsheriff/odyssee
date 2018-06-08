@@ -81,15 +81,15 @@ class Accueil extends Component {
                             color="#fff"
                         />
                     </View> */}
-                    <TouchableOpacity style={styles.buttonBorder}
-                     onPress={ this.newGame.bind(this) }>
-                            <Text style={[styles.buttonText, {color:"#9c75d7"}]} >Continuer</Text>
+                    <TouchableOpacity style={styles.buttonPlain}
+                     onPress={ this.navigateToIsland }>
+                            <Text style={[styles.buttonText, {color:"#e3e7eb"}]} >Continuer</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonPlain}
+                    <TouchableOpacity style={styles.buttonBorder}
                     onPress={ this.newGame.bind(this) }>
 
-                            <Text style={[styles.buttonText, {color:"#e3e7eb"}]} >Nouvelle partie</Text>
+                            <Text style={[styles.buttonText, {color:"#9c75d7"} ]} >Nouvelle partie</Text>
                         </TouchableOpacity>
 
                     {/* <View style={styles.buttonBorder}>

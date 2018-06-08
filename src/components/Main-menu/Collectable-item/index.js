@@ -42,8 +42,8 @@ export default class CollectableItem extends React.Component {
     ? 
     <Image
       style={{
-        height: this.state.selected ? 56 : 60,
-        width: this.state.selected ? 56 : 60, 
+        height: this.state.selected ? 56 : 58,
+        width: this.state.selected ? 56 : 58, 
         opacity: this.state.selected ? 1 : 0.4,
         resizeMode: "contain",
         borderColor: this.state.selected ? "white" : "#ffffff30",
@@ -54,8 +54,8 @@ export default class CollectableItem extends React.Component {
     :     
     <Image
       style={{
-        height: this.state.selected ? 56 : 60,
-        width: this.state.selected ? 56 : 60
+        height: this.state.selected ? 56 : 58,
+        width: this.state.selected ? 56 : 58
       }}
       source={images.glyphes}
     />

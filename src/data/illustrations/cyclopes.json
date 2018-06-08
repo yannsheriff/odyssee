@@ -4,9 +4,9 @@
     {
       "id": 1,
       "offsets": {
-        "first": 0,
-        "middle": 0,
-        "back": 0
+        "first": 1,
+        "middle": 1,
+        "back": 1
       },
       "collectables": [],
       "animation": {
@@ -241,9 +241,9 @@
       },
       "collectables": [],
       "animation": {
-        "loop": true,
+        "loop": false,
         "animationId": 10,
-        "animationDuration": 2100, 
+        "animationDuration": 5000, 
         "transitionDuration": 3000
       }
     },

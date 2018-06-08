@@ -75,7 +75,7 @@
         {
             "id": 9,
             "illustration": 9,
-            "text": [" — Quelques hommes doivent rester sur le bateaux, les autres, débarqué avec des vivres. En attendant l’aube, nous nous installerons pour dormir sur le sable. ",
+            "text": [" — Quelques hommes doivent rester sur le bateaux, les autres, débarqué avec des vivres.           En attendant l’aube, nous nous installerons pour dormir sur le sable. ",
                 "Restez groupés, et ne vous éloignez pas du campement. N’allumez aucun feu qui pourrait nous faire repérer."],
             "haveAction": false,
             "actions": [
@@ -396,11 +396,12 @@
             "id": 33,
             "illustration": 23,
             "text": ["Ulysse et ses compagnons lancent leur flèches vers le cyclope. Sa peau épaisse fit ricocher les projectiles, durant cette manoeuvre ulysse remarqua que leur ennemi protéger son oeil  par réflèxe révélant son seul point faible.",
-            "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme       aussitôt. Nous allons tous y passer ! hurlent mes compagnons. Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?"],
+            "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme       aussitôt. Nous allons tous y passer ! hurlent mes compagnons.",
+            "Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?"],
             "haveAction": false,
             "actions": [
                 {
-                    "id": 2
+                    "id": 34
                 }
             ]
         },
@@ -408,22 +409,24 @@
             "id": 34,
             "illustration": 23,
             "text": ["Ulysse et ses compagnons lancent leur épieux vers le cyclope. Sa peau épaisse fit ricocher les projectiles, durant cette manoeuvre ulysse remarqua que leur ennemi protéger son oeil  par réflèxe révélant son seul point faible. ",
-            "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme aussitôt. Nous allons tous y passer ! hurlent mes compagnons. Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?"],
+            "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme aussitôt. Nous allons tous y passer ! Hurlent mes compagnons.",
+            "Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?"],
             "haveAction": false,
             "actions": [
                 {
-                    "id": 2
+                    "id": 35
                 }
             ]
         },
         {
             "id": 35,
             "illustration": 23,
-            "text": "Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme aussitôt. Nous allons tous y passer ! hurlent mes compagnons. Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?",
+            "text": ["Bientôt repu et satisfait, il ouvre la porte de la grotte, fait sortir son troupeau et la referme aussitôt.",
+            "Nous allons tous y passer ! hurlent mes compagnons. Pourquoi nous as-tu entraînés dans une mort horrible ? N’avions-nous pas suffisamment combattu à tes côtés ?"],
             "haveAction": false,
             "actions": [
                 {
-                    "id": 2
+                    "id": 36
                 }
             ]
         },
@@ -453,10 +456,10 @@
         },
         {
             "id": 38,
-            "illustration": 26,
+            "illustration": 26, 
             "text": ["Quelques heures plus tard, nous entendons les pas effrayants du Cyclope et les bêlements de ses bêtes. Il se fait tard, et il rentre ses troupeaux à l’abri pour la nuit, refermant vite la grotte.", 
-            "Sans un mot, le Cyclope commence la traite des brebis et des chèvres, met de côté le lait pour les fromages, et brusquement se jette sur nous, attrape encore deux hommes dans ses mains grasses et dégoulinantes. Il les déchiquette et avale les morceaux de bras et de jambes, tout rond.", 
-            "Je dois agir vite, sinon nous allons tous mourir."],
+            "Sans un mot, le Cyclope commence la traite des brebis et des chèvres, met de côté le lait pour les fromages, et brusquement se jette sur nous, attrape encore deux hommes dans ses mains grasses et dégoulinantes.", 
+            "Il les déchiquette et avale les morceaux de bras et de jambes, tout rond. Je dois agir vite, sinon nous allons tous mourir."],
             "haveAction": false,
             "actions": [
                 {
