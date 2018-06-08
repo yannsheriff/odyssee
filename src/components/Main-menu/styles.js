@@ -1,6 +1,5 @@
-import { StyleSheet } from 'react-native'
-import screen from '../../helpers/ScreenSize'
-
+import { StyleSheet } from "react-native";
+import screen from "../../helpers/ScreenSize";
 
 const styles = StyleSheet.create({
     wrapper: {},
@@ -59,7 +58,15 @@ const styles = StyleSheet.create({
       bottom: 0,
       width: screen.width / 3,
       height: 4
-    }
+    },
+    menuTextButton: {
+59.	  textAlign: "center",
+60.	    color: "white",
+61.	    height: 55,
+62.	    fontSize: 22,
+63.	    fontFamily: "Infini-Regular"
+64.	 }
   });
 
-export default styles
+
+export default styles;

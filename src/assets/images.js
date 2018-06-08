@@ -8,7 +8,7 @@ const images = {
     homeScreen: require('./img/home.jpg'),
     closeMainMenu: require('./img/icon-close.png'),
     burger: require('./img/icon-burger.png'),
-    burger: require('./img/icon-burger.png'),
+    homeScreen: require('./img/Intro.jpg'),
     glyphes: require('./img/CercleGlyph.png'),
     iles: {
       cyclope: require('./img/ile_cyclope.png'),
@@ -29,6 +29,32 @@ const images = {
     iconWindForce: require('./img/icon-windforce.png')
 };
 
+export const benediction = [
+    {
+        id: 0,
+        img: require('./img/Eol.png')
+    },
+    {
+        id: 1,
+        img: require('./img/Athena.png')
+    },
+    {
+        id: 2,
+        img: require('./img/Elios.png')
+    },
+    {
+        id: 3,
+        img: require('./img/Hades.png')
+    },
+    {
+        id: 4,
+        img: require('./img/Chronos.png')
+    },
+    {
+        id: 5,
+        img: require('./img/Poseidon.png')
+    }
+]
 export const choices = [
     {
         id: 0,

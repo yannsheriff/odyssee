@@ -32,7 +32,7 @@ export default class MultiActionButton extends React.Component {
     }
     this.positionReferenceMap = [
       [0],
-      [45, -45],
+      [40, -40],
       [-45, 0, 45]
     ]
 
@@ -60,13 +60,13 @@ export default class MultiActionButton extends React.Component {
   }
 
   componentDidMount() {
-    if(this.state.isActive && this.state.haveCallToAction) {
+    if(this.state.isActive && this.haveCallToAction) {
       this.animationAction.play()
     } 
   }
 
   componentDidUpdate(prevState) {
-    if(this.state.isActive && this.state.haveCallToAction) {
+    if(this.state.isActive && this.haveCallToAction) {
       this.animationAction.play()
     } 
     if(prevState.isOpen !== this.state.isOpen) {
@@ -357,7 +357,7 @@ export default class MultiActionButton extends React.Component {
               />)}
             <Text
               style={[ styles.text, this.state.textStyle ]}
-            >  {this.state.text} </Text>
+            >{this.state.text}</Text>
             <View>
               {renderIf(this.state.isActive && this.haveCallToAction,
                 <View  style={[styles.animationContainer, { top: 

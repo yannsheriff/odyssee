@@ -37,7 +37,7 @@ class MiniatureMap extends Component {
       windUIHeight: 100,
       nbLines: 7,
       windForce: 0, //this.props.sailing.modifiers.strength
-      windDirection: this.props.sailing.modifiers.direction
+      windDirection: this.props.sailing.modifiers.direction ?  this.props.sailing.modifiers.direction : 0
     }
   }
 
