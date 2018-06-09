@@ -7,10 +7,7 @@ import { StackNavigator, addNavigationHelpers, } from 'react-navigation';
 // ----------------------------
 import NavigationStack from "./Navigation";
 
-import {
-  createReduxBoundAddListener,
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
+import { createReduxBoundAddListener } from 'react-navigation-redux-helpers';
 
 import { connect } from 'react-redux'
 

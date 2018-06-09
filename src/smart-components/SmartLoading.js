@@ -1,7 +1,7 @@
 //  Import Modules
 // --------------------------------------------------------------
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { requestStore } from '../redux/actions/loading'
 import { AsyncStorage } from 'react-native';
@@ -44,7 +44,13 @@ class SmartLoading extends Component {
 
     render() {
       let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.isMapActive !== undefined
-      ? ( <View><Router /><MainMenu /><Notification /></View> ) 
+      ? ( 
+        <View>
+           <StatusBar hidden={true} />
+          <Router />
+          <MainMenu />
+          <Notification />
+        </View> ) 
       : ( <View><Text>loading..</Text></View> /* <Loader /> */ )
         return render
     }

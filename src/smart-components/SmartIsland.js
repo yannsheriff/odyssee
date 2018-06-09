@@ -83,8 +83,16 @@ componentWillMount(){
   *  Update the current snippet 
   */
 componentWillReceiveProps(nextProps) {
-  if (nextProps.island.actualSnippetId !== this.state.snippet) {
-    this.updateSnippet(nextProps.island)
+  if(nextProps.island.currentIslandId) {
+    if (nextProps.island.actualSnippetId !== this.state.snippet) {
+      this.updateSnippet(nextProps.island)
+    } 
+  } else {
+    this.state._requestIslandData(this.islandId)
+  
+    setTimeout(() => {
+      this.setState({ loader: false })
+    }, 3000)
   }
 }
 

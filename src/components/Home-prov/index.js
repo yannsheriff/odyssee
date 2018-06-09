@@ -44,7 +44,7 @@ class Accueil extends Component {
     componentWillReceiveProps(nextProps) {
         if(this.requestFlushData) {
             this.requestFlushData = false
-            this.navigateToIsland()
+            this.navigateVideo()
         }
     }
 
@@ -54,15 +54,22 @@ class Accueil extends Component {
           params: {}
         });
         this.props.navigation.dispatch(navigate);
-      };
+    };
 
-      navigateToIsland = () => {
+    navigateVideo = () => {
         const navigate = NavigationActions.navigate({
-          routeName: 'Island',
+            routeName: 'Introduction',
+        });
+        this.props.navigation.dispatch(navigate);
+    };
+
+    navigateToIsland = () => {
+        const navigate = NavigationActions.navigate({
+            routeName: 'Island',
           params: { islandId: 1 }
         });
         this.props.navigation.dispatch(navigate);
-      };
+    };
     
 
     render() {

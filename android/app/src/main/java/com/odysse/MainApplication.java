@@ -3,6 +3,7 @@ package com.odysse;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.reactlibrary.RNReactNativeHapticFeedbackPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactVideoPackage(),
             new RNReactNativeHapticFeedbackPackage(),
             new BlurViewPackage(),
             new LottiePackage(),

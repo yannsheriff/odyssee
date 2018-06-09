@@ -60,12 +60,12 @@ const styles = StyleSheet.create({
       height: 4
     },
     menuTextButton: {
-59.	  textAlign: "center",
-60.	    color: "white",
-61.	    height: 55,
-62.	    fontSize: 22,
-63.	    fontFamily: "Infini-Regular"
-64.	 }
+      textAlign: "center",
+      color: "white", 
+      height: 55,
+      fontSize: 22,
+      fontFamily: "Infini-Regular"
+    }
   });
 
 
