@@ -84,6 +84,13 @@ class Accueil extends Component {
         });
         this.props.navigation.dispatch(navigate);
     };
+
+    navigateToTest = (id) => {
+        const navigate = NavigationActions.navigate({
+            routeName: 'Test',
+        });
+        this.props.navigation.dispatch(navigate);
+    };
     
 
     render() {
@@ -113,12 +120,13 @@ class Accueil extends Component {
                             <Text style={[styles.buttonText, {color:"#9c75d7"} ]} >Nouvelle partie</Text>
                         </TouchableOpacity>
 
-                    {/* <View style={styles.buttonBorder}>
                     <Button
-                        onPress={() => this.props.navigation.navigate('Test')}
+                        onPress={this.navigateToTest}
                         title={'Test'}
                         color="#fff"
                     />
+                    {/* <View style={styles.buttonBorder}>
+                    
                     </View> */}
                 </View>
             </View>

@@ -20,8 +20,8 @@ import { NavigationActions } from "react-navigation";
 class MainMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.page = 0 
     this.state = {
+      page: 0,
       reduxStore: this.props.store,
       paginationPosition: new Animated.Value(0),
       display: false,
@@ -34,14 +34,18 @@ class MainMenu extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.store.menu.displayMenu !== this.state.display) {
-        this.page = 1
         this.setState({
-          page: 1,
+          page: nextProps.store.menu.page,
           reduxStore: nextProps.store,
           display: nextProps.store.menu.displayMenu,
-          paginationPosition: new Animated.Value(1 * (screen.width / 3)),
+          paginationPosition: new Animated.Value(this.state.page  * (screen.width / 3)),
           popupDisplay: false
         });
+        if (nextProps.store.menu.displayMenu) {
+          setTimeout(()=>{
+            this.scroller.scrollBy(this.state.page, false)
+          }, 200)
+        }
     } else {
       this.setState({
         reduxStore: nextProps.store,
@@ -50,24 +54,25 @@ class MainMenu extends React.Component {
   }
 
   indexDidChange = id => {
-    console.log(id)
-    this.page = id
+    this.setState({page: id})
     Animated.timing(
       this.state.paginationPosition, 
       {
         toValue: id * (screen.width / 3),
         duration: 200 
       }
-    ).start(()=>{
-      this.forceUpdate();
-    });
-    
+    ).start();
   };
 
   displayQuitPopup = () => {
     this.setState({
       popupDisplay: true
     })
+  }
+
+  scrollTo = id => {
+    var relativeIndex = id - this.state.page
+    this.scroller.scrollBy(relativeIndex, true)
   }
 
   quit = () => {
@@ -125,7 +130,7 @@ class MainMenu extends React.Component {
                 style={styles.wrapper}
                 showsPagination={false}
                 onIndexChanged={this.indexDidChange}
-                index={ this.state.page }
+                ref={scroller => this.scroller = scroller}
               >
                 <View style={styles.slide1}>
                   <MiniMap />
@@ -149,14 +154,26 @@ class MainMenu extends React.Component {
                 style={styles.navigationLine}
               >
                 <Animated.View
-                  style={[styles.navigationIndicator, {left: this.state.paginationPosition,}]}
+                  style={[styles.navigationIndicator, {left: this.state.paginationPosition}]}
                 />
                 <View style={styles.categories}> 
-                  <Text style={[styles.categorieMenu, { opacity: this.page === 0 ? 1 : 0.5 }]}>Carte</Text>
+                  <TouchableOpacity 
+                    onPress={()=> this.scrollTo(0)}
+                    style={styles.categorieMenu}>
+                    <Text style={[styles.categorieMenuText, { opacity: this.state.page === 0 ? 1 : 0.5 }]}>Carte</Text>
+                  </TouchableOpacity> 
                   <View style={[styles.dash, {marginLeft: -10}]} />
-                  <Text style={[styles.categorieMenu, { opacity: this.page === 1 ? 1 : 0.5 }]}>Inventaire</Text>
+                  <TouchableOpacity 
+                    onPress={()=> this.scrollTo(1)}
+                    style={styles.categorieMenu}>
+                    <Text style={[styles.categorieMenuText, { opacity: this.state.page === 1 ? 1 : 0.5 }]}>Inventaire</Text>
+                  </TouchableOpacity>
                   <View style={[styles.dash, {marginRight: -9}]}/>
-                  <Text style={[styles.categorieMenu, { opacity: this.page === 2 ? 1 : 0.5 }]}>Reglages</Text>
+                  <TouchableOpacity 
+                    onPress={()=> this.scrollTo(2)}
+                    style={styles.categorieMenu}>
+                    <Text style={[styles.categorieMenuText, { opacity: this.state.page === 2 ? 1 : 0.5 }]}>Reglages</Text>
+                  </TouchableOpacity>
                 </View>
               </View> 
             </View>)}

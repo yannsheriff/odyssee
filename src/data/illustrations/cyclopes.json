@@ -10,7 +10,7 @@
       },
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -25,7 +25,7 @@
           "loop": true,
           "animationId": 1,
           "animationDuration": 2000,
-          "transitionDuration": 2000
+          "transitionDuration": 1500
         }
       },
     {
@@ -37,7 +37,7 @@
       },
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -52,7 +52,7 @@
         "loop": true,
         "animationId": 2,
         "animationDuration": 2100,
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -64,7 +64,7 @@
       },
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -79,7 +79,7 @@
         "loop": true,
         "animationId": 3,
         "animationDuration": 2100,
-        "transitionDuration": 2000
+        "transitionDuration": 1100
       }
     },
     {
@@ -91,7 +91,7 @@
       }, 
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -106,7 +106,7 @@
         "loop": true,
         "animationId": 4,
         "animationDuration": 2100,
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -118,7 +118,7 @@
       },
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -130,7 +130,7 @@
       },
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -145,7 +145,7 @@
         "loop": true,
         "animationId": 5,
         "animationDuration": 2100,
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -157,7 +157,7 @@
       },
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -172,7 +172,7 @@
         "loop": true,
         "animationId": 6,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -184,7 +184,7 @@
       },
       "collectables": [],
       "animation": {
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -199,7 +199,7 @@
         "loop": true,
         "animationId": 7,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -214,7 +214,7 @@
         "loop": true,
         "animationId": 8,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -229,7 +229,7 @@
         "loop": true,
         "animationId": 9,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -244,7 +244,7 @@
         "loop": false,
         "animationId": 10,
         "animationDuration": 5000, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -259,7 +259,7 @@
         "loop": true,
         "animationId": 11,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -274,7 +274,7 @@
         "loop": true,
         "animationId": 12,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -289,7 +289,7 @@
         "loop": true,
         "animationId": 13,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -304,7 +304,7 @@
         "loop": true,
         "animationId": 14,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -319,7 +319,7 @@
         "loop": true,
         "animationId": 15,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -334,7 +334,7 @@
         "loop": true,
         "animationId": 16,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -349,7 +349,7 @@
         "loop": true,
         "animationId": 17,
         "animationDuration": 2100, 
-        "transitionDuration": 3000
+        "transitionDuration": 1500
       }
     },
     {
@@ -364,7 +364,7 @@
         "loop": true,
         "animationId": 9,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -379,7 +379,7 @@
         "loop": true,
         "animationId": 19,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -394,7 +394,7 @@
         "loop": true,
         "animationId": 20,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -409,7 +409,7 @@
         "loop": true,
         "animationId": 21,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -424,7 +424,7 @@
         "loop": true,
         "animationId": 22,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -439,7 +439,7 @@
         "loop": true,
         "animationId": 23,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -454,7 +454,7 @@
         "loop": true,
         "animationId": 24,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -469,7 +469,7 @@
         "loop": true,
         "animationId": 25,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -484,7 +484,7 @@
         "loop": true,
         "animationId": 26,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -499,7 +499,7 @@
         "loop": true,
         "animationId": 27,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -514,7 +514,7 @@
         "loop": true,
         "animationId": 28,
         "animationDuration": 2100, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -529,7 +529,7 @@
         "loop": false,
         "animationId": 29,
         "animationDuration": 5000, 
-        "transitionDuration": 2000
+        "transitionDuration": 1500
       }
     },
     {
@@ -541,7 +541,7 @@
       },
       "collectables": [],
       "animation": {
-          "transitionDuration": 2000
+          "transitionDuration": 1500
       }
   }
   ]

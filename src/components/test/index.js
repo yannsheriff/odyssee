@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import screen from "../../helpers/ScreenSize";
 import images, { backgrounds } from "../../assets/images";
-import { AsyncStorage, View, Button, StyleSheet, Image } from "react-native";
+import { AsyncStorage, View, Text, Button, StyleSheet, Image } from "react-native";
 import { storeService } from "../../helpers/saveData";
 import LottieView from "lottie-react-native";
 import MainMenu from "../Main-menu";
@@ -11,93 +11,63 @@ import { toggleMenu } from "../../redux/actions/menu";
 
 import { microInteraction } from "../../assets/anim";
 
+import Swiper from 'react-native-swiper';
+
 const styles = StyleSheet.create({
-  container: {
-    width: screen.width,
-    height: screen.height
+  wrapper: {
   },
-  background: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: screen.width,
-    height: screen.height
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
   },
-  center: {
-    position: "absolute",
-    top: 550,
-    left: 0,
-    width: screen.width,
-    flexDirection: "column",
-    alignItems: "center"
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
   },
-  buttonBorder: {
-    paddingVertical: 5,
-    width: 220,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 50,
-    borderColor: "white",
-    borderStyle: "solid"
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
   }
-});
+})
 
-class BasicExample extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      _toggleMenu: this.props.toggleMenu
-    };
+export default class Test extends Component {
+
+
+  componentDidMount(){
+    setTimeout(()=>{
+      this.scroller.scrollBy(1, true)
+    }, 1000)
   }
-
-  componentDidMount() {
-    // this.restoreData()
-    // this.consoleDataSaved()
-    // this.getPreviousSnipet()
-    // this.handleIslandData()
-  }
-
-  render() {
+  render(){
     return (
-      <View style={styles.container}>
-        <Image
-          style={styles.background}
-          source={images.homeScreen}
-          resizeMethod="scale"
-        />
-        <View style={{ position: "absolute", top: 70, left: 20, zIndex: 50 }}>
-          <Button
-            title={"menu"}
-            onPress={() => {
-              this.state._toggleMenu();
-            }}
-          />
+      <View style={{height: screen.height, width: screen.width}}>
+      <Swiper style={styles.wrapper} showsButtons={true}
+        ref={scroller => this.scroller = scroller}
+      >
+        <View style={styles.slide1}>
+          <Text style={styles.text}>Hello Swiper</Text>
         </View>
+        <View style={styles.slide2}>
+          <Text style={styles.text}>Beautiful</Text>
+        </View>
+        <View style={styles.slide3}>
+          <Text style={styles.text}>And simple</Text>
+        </View>
+      </Swiper>
       </View>
     );
   }
 }
 
-/* ===============================================================
-  ======================= REDUX CONNECTION =======================
-  ================================================================ */
-
-const mapStateToProps = state => {
-  return {};
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleMenu: () => {
-      dispatch(toggleMenu());
-    }
-  };
-};
-
-const componentContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BasicExample);
-
-export default componentContainer;

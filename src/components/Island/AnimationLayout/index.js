@@ -59,11 +59,11 @@ export default class AnimationLayout extends React.Component {
         // Animate the old & the animation to the left
         Animated.parallel([
           Animated.timing(this.state.animations[1].position, {
-            duration: 1500,
+            duration: nextProps.transitionDuration,
             toValue:  nextProps.swipBack ? screen.width + 2 : -screen.width + 2 , 
           }),
           Animated.timing(this.state.animations[0].position, {
-            duration: 1500,
+            duration: nextProps.transitionDuration,
             toValue:  0,
           }),
         ]).start(()=> {
