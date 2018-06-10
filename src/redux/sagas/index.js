@@ -3,25 +3,39 @@ import { SAVE_ISLAND_DATA, REQUEST_ISLAND_DATA, dispatchIslandData } from '../ac
 import { SAVE_SAILING } from '../actions/sailing'
 import { SAVE_MENU } from '../actions/menu'
 import { NAVIGATE } from '../actions/navigation'
+import { changeLocation } from "../actions/isOnIsland";
 import { SAVE_COLLECTABLES } from '../actions/collectables'
 import { REQUEST_STORE, populateStore } from '../actions/loading'
 import { storeService } from '../../helpers/saveData'
+const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
 export function* helloSaga() {
     console.log('Hello Sagas!')
 }
 
-export function* saveIsOnIsland() {
+export function* saveIsOnIsland(action) {
+  
+  yield delay(1000)
+  const state = yield select()
   const data = yield storeService.getSaving()
-  const state = yield select();
-  console.log('Saving data ⏳')
-
-  var newState = {
-    ...data,
-    isOnIsland: state.isOnIsland
+  
+  if(action.routeName === "Sailing" || action.routeName === "Island") {
+    console.log('Saving position data ⏳')
+    if (action.routeName === "Sailing") {
+      var newState = {
+        ...data,
+        isOnIsland: false,
+      }
+    } else if (action.routeName === "Island"){
+      var newState = {
+        ...data,
+        isOnIsland: state.island.currentIslandId,
+      }
+    }
+    yield put(changeLocation(newState.isOnIsland))
+    yield storeService.save(newState)
+    console.log('Saved ✅')
   }
-  yield storeService.save(newState)
-  console.log('Saved ✅')
 }
 
 export function* saveSailingData(action) {
@@ -60,8 +74,8 @@ export function* saveSailingData(action) {
 
 export function* saveIslandData(action) {
   const data = yield storeService.getSaving()
-  console.log('Saving data ⏳')
-    let actualIslandSavedData = data.visitedIsland.find((island, index) => { if( island.id === action.state.currentIslandId) { return island }})
+  console.log('Saving Island data ⏳')
+  let actualIslandSavedData = data.visitedIsland.find((island, index) => { if( island.id === action.state.currentIslandId) { return island }})
     
     // If existe
     if (actualIslandSavedData) {
@@ -109,7 +123,7 @@ export function* saveCollectablesData(action) {
 
 export function* saveMenuData(action) {
   const data = yield storeService.getSaving()
-  console.log('Saving data ⏳')
+  console.log('Saving Menu data ⏳')
   console.log(action)
   var newState = {
     ...data,
@@ -163,9 +177,9 @@ export function* requestIslandData(action) {
       visitedIsland: data.visitedIsland.concat(actualIsland),
     }
 
-    let payload = {
+    var payload = {
+      actualSnippetId: 1,
       islandId: actualIsland.id,
-      actualSnippetId: 1
     }
 
     yield put (dispatchIslandData(payload))

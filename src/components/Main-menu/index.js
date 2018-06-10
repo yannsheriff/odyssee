@@ -34,23 +34,14 @@ class MainMenu extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.store.menu.displayMenu !== this.state.display) {
-      if(nextProps.store.menu.page) {
-        this.page = nextProps.store.menu.page,
+        this.page = 1
         this.setState({
-          page: nextProps.store.menu.page,
+          page: 1,
           reduxStore: nextProps.store,
           display: nextProps.store.menu.displayMenu,
-          paginationPosition: new Animated.Value(nextProps.store.menu.page * (screen.width / 3)),
-        });
-      } else {
-        this.setState({
-          reduxStore: nextProps.store,
-          display: nextProps.store.menu.displayMenu,
-          paginationPosition: new Animated.Value(0),
+          paginationPosition: new Animated.Value(1 * (screen.width / 3)),
           popupDisplay: false
         });
-      }
-      
     } else {
       this.setState({
         reduxStore: nextProps.store,

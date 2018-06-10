@@ -22,8 +22,9 @@ export default class Loader extends React.Component {
 
     Animated.sequence([
       Animated.timing(this.state.anim, {
-        toValue: 1, 
-        duration: 1500,
+        easing: Easing.linear,
+        toValue: 0.4, 
+        duration: 3000,
       }),
       Animated.timing(this.state.opacity, {
         toValue: 0, 
