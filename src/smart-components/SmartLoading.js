@@ -11,8 +11,9 @@ import { AsyncStorage } from 'react-native';
 //  Import Components
 // --------------------------------------------------------------
 import Router from '../Router'
-import Notification from '../components/Notification'
 import MainMenu from '../components/Main-menu'
+import AudioHandler from '../components/Audio-handler'
+import Notification from '../components/Notification'
 
 
 class SmartLoading extends Component {
@@ -46,7 +47,8 @@ class SmartLoading extends Component {
       let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.isMapActive !== undefined
       ? ( 
         <View>
-           <StatusBar hidden={true} />
+          <StatusBar hidden={true} />
+          <AudioHandler />
           <Router />
           <MainMenu />
           <Notification />

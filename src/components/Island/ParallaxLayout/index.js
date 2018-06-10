@@ -51,7 +51,6 @@ export default class ParallaxLayout extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     if (nextProps.offsetX !== undefined && nextProps.offsetX != this.offsetX) {
 
       this.offsetX = nextProps.offsetX

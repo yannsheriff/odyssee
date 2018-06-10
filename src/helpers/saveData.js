@@ -136,7 +136,7 @@ class StoreService {
           island: {
               currentIslandId: null,
               screenReaded: [],
-              actualSnippetId: 17,
+              actualSnippetId: 1,
               haveAction: false,
               haveObject: false,
           }

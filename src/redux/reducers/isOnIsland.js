@@ -3,7 +3,7 @@ import {
     POPULATE_STORE ,
 } from '../actions/loading'
 
-import { NAVIGATE } from '../actions/navigation'
+import { CHANGE_LOCATION } from "../actions/isOnIsland";
     
     
 export function isOnIsland(state = false, action) {
@@ -15,8 +15,9 @@ export function isOnIsland(state = false, action) {
         case POPULATE_STORE:
             return action.payload.isOnIsland
         
-        case NAVIGATE:
-            return action.routeName === "Island" ? true : false
+        case CHANGE_LOCATION:
+            console.log('alriiiiiiiiight')
+            return action.state
 
         default:
             return state

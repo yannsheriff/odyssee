@@ -32,11 +32,13 @@ const styles = StyleSheet.create({
     }, 
     categorieMenu: {
       flex: 1,
+    }, 
+    categorieMenuText: {
       fontFamily: "Infini-Regular",
       color: "white",
       fontSize: 18,
       textAlign: "center",
-    }, 
+    },
     categories: {
       flexDirection: 'row',
       alignItems: 'center',
