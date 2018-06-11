@@ -6,6 +6,7 @@ import { NAVIGATE } from '../actions/navigation'
 import { changeLocation } from "../actions/isOnIsland";
 import { SAVE_COLLECTABLES } from '../actions/collectables'
 import { REQUEST_STORE, populateStore } from '../actions/loading'
+import { FIRST_TIME } from '../actions/isFirstOpening'
 import { storeService } from '../../helpers/saveData'
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
@@ -36,6 +37,18 @@ export function* saveIsOnIsland(action) {
     yield storeService.save(newState)
     console.log('Saved ✅')
   }
+}
+
+export function* saveFirstOpening() {
+  
+  yield delay(2000)
+  const state = yield select()
+  const data = yield storeService.getSaving()
+  var newState = {
+    ...data,
+    isFirstOpening: false
+  }
+  yield storeService.save(newState)
 }
 
 export function* saveSailingData(action) {
@@ -218,6 +231,10 @@ export function* watchPopulateStore() {
   yield takeEvery(REQUEST_STORE, dispatchPopulateStore)
 }
 
+export function* wachIsFirstOpening() {
+  yield takeEvery(FIRST_TIME, saveFirstOpening)
+}
+
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
@@ -230,6 +247,7 @@ export default function* rootSaga() {
     watchSavingSailing(),
     watchSavingCollectables(),
     watchSavingMenu(),
-    watchSavingIsOnIsland()
+    watchSavingIsOnIsland(),
+    wachIsFirstOpening()
   ])
 }

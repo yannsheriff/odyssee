@@ -25,6 +25,7 @@ class StoreService {
       return JSON.parse(dataSaved)
     } else {
       let createSaving = {
+        isFirstOpening: true,
         isOnIsland: false,
         isTutoFinished: false,
         collectables: {
@@ -98,6 +99,7 @@ class StoreService {
       const dataSaved = await this.getSaving()
       if (dataSaved.isNewInstance ) {
         var state = {
+          isFirstOpening: true,
           notification: {
             title: undefined,
             subtitle: undefined,
@@ -146,6 +148,7 @@ class StoreService {
         console.log(' ================ Async Storage ================ ')
         console.log("last Save :", dataSaved )
         var state = {
+          isFirstOpening: dataSaved.isFirstOpening,
           notification: {
             title: undefined,
             subtitle: undefined,

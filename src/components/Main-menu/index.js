@@ -1,6 +1,6 @@
 import React from "react";
-import { Animated, Easing, View, Text, StyleSheet, Button,TouchableOpacity, Image } from "react-native";
-import LottieView from "lottie-react-native";
+import { Animated, View, Text,TouchableOpacity, Image } from "react-native";
+
 import { connect } from "react-redux";
 import { toggleMenu, saveMenu } from "../../redux/actions/menu";
 import { navigateTo } from "../../redux/actions/navigation";
@@ -10,11 +10,9 @@ import { BlurView } from "react-native-blur";
 import renderIf from "../../helpers/renderIf";
 import ReactNativeHaptic from 'react-native-haptic'
 import MiniMap from '../../components/Miniature-map'
-
 import Swiper from "react-native-swiper";
 import images from "../../assets/images";
 import styles from './styles';
-import { NavigationActions } from "react-navigation";
 
 
 class MainMenu extends React.Component {

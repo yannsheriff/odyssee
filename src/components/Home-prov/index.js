@@ -4,17 +4,15 @@
 import React, { Component } from 'react';
 import {
     Image,
-    Platform,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
     Button,
 } from 'react-native'
-import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import { AsyncStorage } from 'react-native';
 import { requestStore } from '../../redux/actions/loading'
+import { firstOpening } from "../../redux/actions/isFirstOpening";
 import { NavigationActions } from "react-navigation";
 
 
@@ -22,6 +20,7 @@ import { NavigationActions } from "react-navigation";
 // --------------------------------------------------------------
 import images from '../../assets/images'
 import styles from './styles'
+import renderIf from '../../helpers/renderIf'
 
 
 
@@ -32,7 +31,8 @@ class Accueil extends Component {
         this.requestFlushData = false 
         this.state = {
             reduxState: this.props.state,
-            _populateStore: this.props.populateStore
+            _populateStore: this.props.populateStore,
+            _isFirstOpening: this.props.firstOpening
         }
     }
 
@@ -40,6 +40,7 @@ class Accueil extends Component {
         await AsyncStorage.removeItem('saved')
         this.requestFlushData = true
         this.state._populateStore()
+        this.state._isFirstOpening()
 
     }
 
@@ -109,15 +110,16 @@ class Accueil extends Component {
                             color="#fff"
                         />
                     </View> */}
+                    {renderIf( !this.state.reduxState.isFirstOpening,
                     <TouchableOpacity style={styles.buttonPlain}
                      onPress={ this.continueGame }>
                             <Text style={[styles.buttonText, {color:"#e3e7eb"}]} >Continuer</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>)}
 
-                    <TouchableOpacity style={styles.buttonBorder}
+                    <TouchableOpacity style={ !this.state.reduxState.isFirstOpening ? styles.buttonBorder : styles.buttonPlain }
                     onPress={ this.newGame.bind(this) }>
 
-                            <Text style={[styles.buttonText, {color:"#9c75d7"} ]} >Nouvelle partie</Text>
+                            <Text style={[styles.buttonText, !this.state.reduxState.isFirstOpening ? {color:"#9c75d7"} : {color:"#e3e7eb"}]} >Nouvelle partie</Text>
                         </TouchableOpacity>
 
                     <Button
@@ -148,7 +150,10 @@ class Accueil extends Component {
   const mapDispatchToProps = dispatch => {
       return {
         populateStore: () => {
-          dispatch(requestStore())
+            dispatch(requestStore())
+        },
+        firstOpening: ()=> {
+            dispatch(firstOpening())
         },
       }
     }
