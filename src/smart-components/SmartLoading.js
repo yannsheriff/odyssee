@@ -44,7 +44,7 @@ class SmartLoading extends Component {
   }
 
     render() {
-      let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.isMapActive !== undefined
+      let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.position !== undefined
       ? ( 
         <View>
           <StatusBar hidden={true} />

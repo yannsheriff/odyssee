@@ -7,7 +7,7 @@ import { View, Image, TouchableWithoutFeedback, Animated } from 'react-native'
 import Svg,{ G, Rect, Defs, RadialGradient, Stop, Circle } from 'react-native-svg'
 import RNSimpleCompass from 'react-native-simple-compass'
 import LottieView from 'lottie-react-native'
-
+import ReactNativeHaptic from 'react-native-haptic'
 
 //  Import Helpers
 // --------------------------------------------------------------
@@ -40,13 +40,15 @@ class VirtualMap extends Component {
   constructor(props) {
     super(props)
 
+    this.isGoingToIsland = false
+
     this.state = {
       _updateModifiers: this.props.updateModifiers,
       _updatePosition: this.props.updatePosition,
       _collision: this.props.collision,
       _toggleMenu: this.props.toggleMenu,
       // sailing
-      orientation: this.props.sailing.orientation,
+      orientation: 0,
       center: {
         x: ((mapSize.x / 2) - (screen.width / 2)) * -1,
         y: ((mapSize.y / 2) - (screen.height / 2)) * -1
@@ -111,7 +113,7 @@ class VirtualMap extends Component {
       seagullsProgress: new Animated.Value(0),
       seagullsData: animatedSeagulls,
       seagullsStates: seagullsStates,
-      totalSeagullsFrames : 150
+      totalSeagullsFrames : 208
     }
   }
 
@@ -126,6 +128,15 @@ class VirtualMap extends Component {
         haveAction: true
       }, this._getEquippedGlyphs())
     }
+    if (this.props.sailing.destination.id !== this.state.destination.id && this.state.destination.id === '') {
+      this.setState({
+        destination: {
+          id: this.props.sailing.destination.id,
+          x: this.props.sailing.destination.x - (mapSize.x / 2),
+          y: this.props.sailing.destination.y - (mapSize.y / 2)
+        }
+      })
+    }
   }
 
   componentDidMount () {
@@ -133,6 +144,9 @@ class VirtualMap extends Component {
       speedRadius: this._getSpeed(0)
     })
     this._animateWind()
+    setTimeout(() => {
+      this._animateSeagulls()
+    }, (Math.random() * 5000) + 3000)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -567,6 +581,21 @@ class VirtualMap extends Component {
   }
 
   /*
+   * Update pointer opacity depending on direction
+   */
+  _getPointerOpacity = () => {
+    const o = Math.abs(-this._getPointerDirection() + this.state.orientation - 180)
+    if (!this.isGoingToIsland && o >= 170) {
+      this.isGoingToIsland = true
+      ReactNativeHaptic.generate('impact')
+    }
+    else if (this.isGoingToIsland && o < 170) {
+      this.isGoingToIsland = false
+    }
+    return o / 180 * 0.6
+  }
+
+  /*
    * Get gradients for all islands and populate a static array
    */
   _getBiomeGradients = () => {
@@ -653,6 +682,25 @@ class VirtualMap extends Component {
     })
   }
 
+  /*
+   * wind animation
+   */
+  _animateSeagulls = () => {
+    let w = Math.ceil(Math.random() * 4) - 1
+    if (w < 0) { w = 0}
+
+    this.state.seagullsProgress.setValue(this.state.seagullsStates[w][0] / this.state.totalSeagullsFrames)
+
+    Animated.timing(this.state.seagullsProgress, {
+      toValue: this.state.seagullsStates[w][1] / this.state.totalSeagullsFrames,
+      duration: Math.abs(this.state.seagullsStates[w][0] - this.state.seagullsStates[w][1]) / 30 * 1000
+    }).start(() => {
+      setTimeout(() => {
+        this._animateSeagulls()
+      }, (Math.random() * 10000) + 10000)
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -705,8 +753,8 @@ class VirtualMap extends Component {
         </Animated.View>
         <Animated.View style={styles.seagulls}>
           <LottieView
-            // source={ this.state.seagullsData }
-            // progress={ this.state.seagullsProgress }
+            source={ this.state.seagullsData }
+            progress={ this.state.seagullsProgress }
           />
         </Animated.View>
         <Animated.View style={[styles.windAnim, {transform: [{ rotate: 180 - this.state.windDirection + this.state.orientation + 'deg' }]} ]}>
@@ -731,7 +779,7 @@ class VirtualMap extends Component {
             style={[styles.outerCompassContainer, { transform: [{ rotate: this.state.destination.id !== '' ? (-this._getPointerDirection() + this.state.orientation + 'deg') : 180 + 'deg' }] }]}
           >
             <Image
-              style={styles.pointer}
+              style={[styles.pointer, { opacity: this._getPointerOpacity() + 0.4}]}
               source={images.boussole}
               resizeMethod="scale"
             />
@@ -781,7 +829,14 @@ class VirtualMap extends Component {
           </TouchableWithoutFeedback>
         )}
         <TouchableWithoutFeedback
-          onPress={() => {this.state._updatePosition(this.state.position); this.state._updateModifiers({strength: this.state.windStrength, direction: this.state.windDirection}); this.state._toggleMenu(0)}}
+          onPress={() => {
+            this.state._updatePosition(this.state.position)
+            this.state._updateModifiers({strength: this.state.windStrength, direction: this.state.windDirection})
+            this.state._toggleMenu(0)
+            if (!this.state.isCompassLocked) {
+              this._toggleCompassLock()
+            }
+          }}
         >
           <View
             style={[styles.icon, styles.iconTop]}

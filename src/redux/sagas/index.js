@@ -54,33 +54,13 @@ export function* saveFirstOpening() {
 export function* saveSailingData(action) {
   console.log('Saving data ⏳')
   const data = yield storeService.getSaving()
-  console.log(action)
-  let newSailing = {
-    orientation: action.state.orientation,
-    position: {
-        x: action.state.position.x,
-        y: action.state.position.y
-    },
-    isSailing: false,
-    callMap: false,
-    isMapActive: false,
-    collectableEquipped: action.state.collectableEquipped,
-    destination: { 
-      id: action.state.destination.id, 
-      x: action.state.destination.x,
-      y: action.state.destination.y,
-    },
-    modifiers: {
-      strength: action.state.modifiers.strength,
-      direction: action.state.modifiers.direction
-    }
-  }
+  const state = yield select()
 
   var newState = {
     ...data,
-    sailing: newSailing
+    sailing: state.sailing
   }
-  console.log(newState)
+  console.log('state', state)
   yield storeService.save(newState)
   console.log('Saved ✅')
 }

@@ -20,7 +20,7 @@ import { IslandsData } from '../../constants/islands'
 //  Import Actions
 // --------------------------------------------------------------
 
-import { hideMap, updateDestination } from  '../../redux/actions/sailing'
+import { updateDestination } from  '../../redux/actions/sailing'
 
 
 class MiniatureMap extends Component {
@@ -29,7 +29,6 @@ class MiniatureMap extends Component {
     super(props)
 
     this.state = {
-      _hideMap: this.props.hideMap,
       _updateDestination: this.props.updateDestination,
       position: this.props.sailing.position,
       destination: this.props.sailing.destination,
@@ -251,9 +250,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    hideMap: () => {
-      dispatch(hideMap())
-    },
     updateDestination: (destination) => {
       dispatch(updateDestination(destination))
     }

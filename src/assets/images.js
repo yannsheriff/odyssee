@@ -1,5 +1,3 @@
-
-
 const images = {
     boussole: require('./img/bb.png'),
     aiguille: require('./img/Aiguille.png'),
@@ -26,7 +24,9 @@ const images = {
     iconMap: require('./img/icon-map.png'),
     iconBoat: require('./img/icon-boat.png'),
     iconWind: require('./img/icon-wind.png'),
-    iconWindForce: require('./img/icon-windforce.png')
+    iconWindForce: require('./img/icon-windforce.png'),
+    iconEnterIsland: require('./img/icon-enter_island.png'),
+    iconLeaveIsland: require('./img/icon-leave_island.png')
 };
 
 export const benediction = [
