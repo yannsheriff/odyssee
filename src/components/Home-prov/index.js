@@ -48,8 +48,10 @@ class Accueil extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
         if(this.requestFlushData) {
             this.requestFlushData = false
+            this.state._isFirstOpening()
             this.navigateVideo()
         }
         if(nextProps.state !== this.state.reduxState) {
@@ -60,7 +62,6 @@ class Accueil extends Component {
         await AsyncStorage.removeItem('saved')
         this.requestFlushData = true
         this.state._populateStore()
-        this.state._isFirstOpening()
 
     }
 

@@ -8,6 +8,7 @@ import {
   Image
 } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from "react-navigation"
 import React, { Component } from 'react';
 import ReactNativeHaptic from 'react-native-haptic'
 
@@ -229,7 +230,11 @@ componentWillReceiveProps(nextProps) {
 
   goToNextStep = (id) => {
     if(id === 0) {
-      this.props.navigation.navigate('Home')
+      const navigate = NavigationActions.navigate({
+        routeName: 'Sailing',
+        params: {}
+      });
+      this.props.navigation.dispatch(navigate);
     } else if (this.isTransitionFinished) {
         if(this.state.haveMultipleText && this.state.currentText < this.state.narration.length - 1  ) {
           this.setState({ currentText: this.state.currentText + 1})

@@ -79,7 +79,7 @@
         "loop": true,
         "animationId": 3,
         "animationDuration": 2100,
-        "transitionDuration": 1100
+        "transitionDuration": 1500
       }
     },
     {
@@ -91,7 +91,7 @@
       }, 
       "collectables": [],
       "animation": {
-        "transitionDuration": 1500
+        "transitionDuration": 1200
       }
     },
     {

@@ -107,7 +107,12 @@ export const choices = [
     {
         id: 12,
         img: require('./img/Fils.png')
-    }
+    },
+    {
+        id: 13,
+        img: require('./img/Nerienfaire.png')
+    },
+
 ]
 
 export const backgrounds = {

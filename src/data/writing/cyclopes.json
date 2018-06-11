@@ -7,7 +7,7 @@
         {
             "id": 1,
             "illustration": 1,
-            "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché.",
+            "text": "L’aube, fille du matin, arrive et, en un instant, revele une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage.",
             "haveAction": false,
             "actions": [
                 {
@@ -18,7 +18,7 @@
         {
             "id": 2,
             "illustration": 2,
-            "text": "L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage. On peut attendre ici, sans danger, les vents pour repartir.",
+            "text": "On peut attendre ici, sans danger, les vents pour repartir.",
             "haveAction": false,
             "actions": [
                 {
@@ -295,7 +295,7 @@
                 {
                     "title": "Ne rien dire", 
                     "choiceImgId": 5,
-                    "id": 28
+                    "id": 29
                 }
             ]
         },
@@ -329,7 +329,7 @@
         {
             "id": 29,
             "illustration": 20,
-            "text": "- Parle misérable ou tu sera le premier à être mon repas ! Dis moi, où tu as laissé ton navire.",
+            "text": "— Parle misérable ou tu sera le premier à être mon repas ! Dis moi, où tu as laissé ton navire.",
             "haveAction": false,
             "actions": [
                 {
@@ -371,8 +371,7 @@
         {
             "id": 32,
             "illustration": 23,
-            "text": ["Mes compagnons, abattus, gémissent dans l’obscurité.  — Nous sommes piégés, les hommes restés au bateau ne savent pas où nous sommes. Qui de nous, demain, sera dévoré ? Zeus, je t’implore !",
-            "Au petit matin d’un geste, il attrape encore deux de mes hommes entre ses pouces, pour les manger. "],
+            "text":  "Mes compagnons, abattus, gémissent dans l’obscurité. Nous sommes piégés, les autres ne savent pas où nous sommes. Au petit matin d’un geste, il attrape encore deux de mes hommes entre ses pouces, pour les manger. ",
             "haveAction": true,
             "actions": [
                 {
@@ -387,7 +386,7 @@
                 },
                 {
                     "title": "Ne rien faire ", 
-                    "choiceImgId": 8,
+                    "choiceImgId": 13,
                     "id": 35
                 }
             ]
@@ -584,7 +583,8 @@
         {
             "id": 46,
             "illustration": 33,
-            "text": "Si je les attache trois par trois, je peux dissimuler un homme sous le ventre de celui du milieu, en le liant avec des tiges d’osier. Chaque homme sera ainsi porté par trois béliers.                                          Moi, je pourrais m’accrocher par les mains à la laine du plus gros, sous son ventre. Il n’y a pas d’autres solutions.",
+            "text": ["Si je les attache trois par trois, je peux dissimuler un homme sous le ventre de celui du milieu, en le liant avec des tiges d’osier. Chaque homme sera ainsi porté par trois béliers.",
+            "Moi, je pourrais m’accrocher par les mains à la laine du plus gros, sous son ventre. Il n’y a pas d’autres solutions."],
             "haveAction": false,
             "actions": [
                 {
@@ -645,7 +645,7 @@
         {
             "id": 9999, 
             "illustration": 37,
-            "text": "Bisous",
+            "text": "Athena : Bravo Ulysse tu as retrouve ton premier souvenir ! Continu comme ça car le suivant est tout proche..",
             "haveAction": true,
             "actions": [
                 {

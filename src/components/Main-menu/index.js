@@ -94,7 +94,7 @@ class MainMenu extends React.Component {
 
   render() {
 
-    var popUpText = this.state.reduxStore.isOnIsland ? "Etes-vous sur de vouloir quitter l'ile ?" : "Etes-vous sur de vouloirretourner au menu ?"
+    var popUpText = this.state.reduxStore.isOnIsland ? "Etes-vous sur de vouloir quitter l'ile ?" : "Etes-vous sur de vouloir retourner au menu ?"
     return (
       <View style={{ position: "absolute", top: 0 }}>
         {renderIf(
