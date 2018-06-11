@@ -2,13 +2,7 @@
 //  Import modules
 // --------------------------------------------------------------
 import React, { Component } from 'react'
-import {
-  Text,
-  View,
-  Button,
-  TouchableHighlight,
-  Alert
-} from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 
 
@@ -16,12 +10,9 @@ import { connect } from 'react-redux'
 // --------------------------------------------------------------
 import screen from '../../../helpers/ScreenSize'
 import styles from './styles'
-import renderIf from '../../../helpers/renderIf'
 
 //  Import assets
 // --------------------------------------------------------------
-import { backgrounds } from '../../../assets/images'
-import {animations} from '../../../assets/anim'
 import { microInteraction } from '../../../assets/anim'
 
 //  Import Actions
@@ -33,10 +24,6 @@ import { printNotification } from '../../../redux/actions/notification'
 // --------------------------------------------------------------
 import { collectables } from '../../../data'
 
-//  Import components
-// --------------------------------------------------------------
-import ParallaxLayout from '../ParallaxLayout'
-import AnimationLayout from '../AnimationLayout'
 
 
 
@@ -188,7 +175,7 @@ class Collectables extends Component {
       let glypheCompletion = this.getGlypheCompletion(fragmentId)
       console.log(glypheCompletion)
       this.state._dispatchNotification(
-        "Nouveaux fragement !",
+        "Nouveaux fragment !",
         glypheCompletion.completed+"/"+glypheCompletion.all,
         collectableData.name,
         microInteraction.findFragment

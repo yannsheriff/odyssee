@@ -3,6 +3,7 @@ import { Animated, View, Text,TouchableOpacity, Image } from "react-native";
 
 import { connect } from "react-redux";
 import { toggleMenu, saveMenu } from "../../redux/actions/menu";
+import { collision } from '../../redux/actions/sailing'
 import { navigateTo } from "../../redux/actions/navigation";
 import screen from "../../helpers/ScreenSize";
 import Achivements from "./Achievements-page";
@@ -27,6 +28,7 @@ class MainMenu extends React.Component {
       _toggleMenu: this.props.toggleMenu,
       _saveMenu: this.props.saveMenu,
       _navigateTo: this.props.navigateTo,
+      _reverseCollisionOnNavigation: this.props.reverseCollisionOnNavigation,
     };
   }
 
@@ -76,6 +78,7 @@ class MainMenu extends React.Component {
   quit = () => {
     this.closeMenu()
     if(this.state.reduxStore.isOnIsland) {
+      this.state._reverseCollisionOnNavigation()
       this.state._navigateTo("Sailing")
     } else {
       this.state._navigateTo("Home")
@@ -225,6 +228,9 @@ const mapDispatchToProps = dispatch => {
     },
     navigateTo: (routeName)=> {
       dispatch(navigateTo(routeName))
+    }, 
+    reverseCollisionOnNavigation: () => {
+      dispatch(collision(null))
     }
   };
 };

@@ -48,7 +48,7 @@ class AudioHandler extends React.Component {
     });
 
     Promise.all([homeMusique, sailingMusique, IslandMusique, awaitME ]).then(()=>{
-      this.playActualMusique()
+      // this.playActualMusique() 
     })
   }
 
@@ -68,7 +68,8 @@ class AudioHandler extends React.Component {
   playActualMusique() {
     switch (this.state.actualMusique) {
       case "Home":
-        this.play(0)
+        // this.play(0)
+        this.fadeOut(this.state.isPlaying)
         break;
     
       case "Sailing":
@@ -97,6 +98,7 @@ class AudioHandler extends React.Component {
           this.musiques.forEach(element => {
             if(element.id === index) {
               element.musique.setVolume(0)
+              element.musique.setNumberOfLoops(-1);
               element.musique.play()
               this.fadeIn(element.id, timing, delay)
             }
@@ -109,9 +111,10 @@ class AudioHandler extends React.Component {
         this.musiques.forEach(element => {
           if(element.id === index) {
             element.musique.setVolume(0)
+            element.musique.setNumberOfLoops(-1);
             element.musique.play()
-            this.fadeIn(element.id, 3000)
-          }
+            this.fadeIn(element.id, timing, delay)
+          } 
         })
       })
     }

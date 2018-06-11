@@ -139,4 +139,6 @@ export const animatedBoat = require('./boat.json')
 
 export const animatedWind = require('./wind.json')
 
+export const menuAnimation = require('./IntroAnim.json')
+
 //export const animatedSeagulls = require('./seagulls.json')

@@ -46,7 +46,15 @@ const styles = StyleSheet.create({
         fontFamily: "OpenSans-SemiBold",
         textAlign: "center",
         fontSize: 14
+    },
+    animation: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: screen.width,
+        height: screen.height
     }
+
     
 
 });

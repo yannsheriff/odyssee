@@ -7,7 +7,7 @@
         {
             "id": 1,
             "illustration": 1,
-            "text": "",
+            "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché.",
             "haveAction": false,
             "actions": [
                 {
@@ -18,7 +18,7 @@
         {
             "id": 2,
             "illustration": 2,
-            "text": "L’aube, fille du matin, arrive et, en un instant, révèle ce qui hier était caché. L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage. On peut attendre ici, sans danger, les vents pour repartir.",
+            "text": "L’île offre une anse qui forme un port naturel, parfaite pour laisser les navires au mouillage. On peut attendre ici, sans danger, les vents pour repartir.",
             "haveAction": false,
             "actions": [
                 {
@@ -317,7 +317,7 @@
         {
             "id": 28,
             "illustration": 20,
-            "text": ["Je prend mon courage et lui répond la première chose qui me viens a l’esprit :                                                — Nous sommes des troubadours. — Qui es-tu, misérable, pour te moquer de moi ainsi ?", 
+            "text": ["Je prend mon courage et lui répond la première chose qui me viens a l’esprit :                                                — Nous sommes des troubadours.                                         — Qui es-tu, misérable, pour te moquer de moi ainsi ?", 
             "Les Cyclopes n’ont qu’une loi, celle du plus fort, et rien ne m’empêchera de vous tuer si j’en ai envie. Mais dis moi plutôt, où tu as laissé ton navire pour venir jusqu’ici ? À l’extrémité du cap, ou plus près ?"],
             "haveAction": false,
             "actions": [
@@ -484,6 +484,17 @@
         {
             "id": 40,
             "illustration": 28,
+            "text": "",
+            "haveAction": false,
+            "actions": [
+                {
+                    "id": 41
+                }
+            ]
+        },
+        {
+            "id": 40,
+            "illustration": 29,
             "text": "— Cyclope, puisque selon les règles de l’hospitalité, tu me demandes mon nom, je vais te le dire. ",
             "haveAction": true,
             "actions": [
@@ -501,7 +512,7 @@
         },
         {
             "id": 41,
-            "illustration": 28,
+            "illustration": 29,
             "text": ["Mais toi, tu n’oublieras pas ce que tu m’as promis. Je m’appelle Personne. Personne, c’est le nom que mes parents et mes compagnons me donnent.", 
             "À ces mots, tête renversée, il est secoué d’un rire d’ivrogne : Eh bien, mon cadeau à moi, c’est que je te mangerai le dernier !"],
             "haveAction": false,
@@ -513,7 +524,7 @@
         },
         {
             "id": 42,
-            "illustration": 28,
+            "illustration": 29,
             "text": "Menteur ! Cycnos est tombé durant la guerre de Troyes, sous la flèche d’Achilles. Quel est ton vrai nom ? ",
             "haveAction": true,
             "actions": [
@@ -531,7 +542,7 @@
         },
         {
             "id": 43,
-            "illustration": 29,
+            "illustration": 30,
             "text": ["— Sortez l’épieu ! Vite ! Et chauffez-le sur le feu ! Courage, nous allons nous en sortir ! Athéna nous aidera ! Nous ne devons pas faiblir.",
             "Les quatre compagnons désignés s’emparent de l’épieu, durci à la ﬂamme, et s'enfoncent dans l’œil du Cyclope.",
             "Moi, placé juste en dessous d’eux, je les aide à le tourner. Nous tournons de toutes nos forces, et le sang gicle autour de l’épieu brûlant.",
@@ -545,7 +556,7 @@
         },
         {
             "id": 44,
-            "illustration": 30,
+            "illustration": 31,
             "text": ["— À l’aide ! À l’aide ! Et les Cyclopes, aux alentours, l’entendent et accourent.",
             "— Qu’as-tu, Polyphème, à crier ainsi dans la nuit ? Tu nous empêches de dormir. Mais lui hurle de plus belle !",
             "— Est-ce que quelqu’un te vole tes bêtes, ou bien est-ce qu’un homme essaie de te tuer, par la ruse ou par la force ?",
@@ -561,7 +572,7 @@
         },
         {
             "id": 45,
-            "illustration": 31,
+            "illustration": 32,
             "text": "Le Cyclope n’en peut plus il ouvre la grotte et s'assit à l’entrée, barrant ainsi le passage. Comment allons-nous faire, quelle ruse imaginer, nos vies sont en jeu... Les béliers ! Certains sont grands et gras, avec une toison de laine bien fournie !",
             "haveAction": false,
             "actions": [
@@ -572,8 +583,8 @@
         },
         {
             "id": 46,
-            "illustration": 32,
-            "text": "Si je les attache trois par trois, je peux dissimuler un homme sous le ventre de celui du milieu, en le liant avec des tiges d’osier. Chaque homme sera ainsi porté par trois béliers. Moi, je pourrais m’accrocher par les mains à la laine du plus gros, sous son ventre. Il n’y a pas d’autres solutions.",
+            "illustration": 33,
+            "text": "Si je les attache trois par trois, je peux dissimuler un homme sous le ventre de celui du milieu, en le liant avec des tiges d’osier. Chaque homme sera ainsi porté par trois béliers.                                          Moi, je pourrais m’accrocher par les mains à la laine du plus gros, sous son ventre. Il n’y a pas d’autres solutions.",
             "haveAction": false,
             "actions": [
                 {
@@ -583,7 +594,7 @@
         },
         {
             "id": 47,
-            "illustration": 33,
+            "illustration": 34,
             "text": ["Nous attendons l’aube avec inquiétude. Dès qu’ils le peuvent, les béliers bondissent pour sortir dans les pâturages. Polyphème souffre de sa blessure ouverte, et son visage effrayant est maculé de sang.",
             "Il palpe le dos de chaque bête qui passe devant lui. J’avais raison, il est trop fruste pour deviner qu’un homme est attaché sous le poitrail. "],
             "haveAction": false,
@@ -595,7 +606,7 @@
         },
         {
             "id": 48,
-            "illustration": 34,
+            "illustration": 35,
             "text": "Mon bélier, enfin, se dirige lentement vers la porte de la grotte, tant il est alourdi par sa laine, mais aussi par le bon poids d’un homme rusé.",
             "haveAction": false,
             "actions": [
@@ -606,9 +617,9 @@
         },
         {
             "id": 49,
-            "illustration": 35,
-            "text": ["— Pourquoi es-tu le dernier à sortir aujourd’hui, alors qu’habituellement, tu es toujours le premier au pâturage, ]le premier à boire dans le ﬂeuve ou à revenir dans l’enclos chaque soir ? Aurais-tu pitié de moi ?",
-            " Si tu [pouvais parler, tu me dirais, toi, où il se cache, et je lui fendrais le crâne, pour lui faire sauter la cervelle."],
+            "illustration": 36,
+            "text": ["— Pourquoi es-tu le dernier à sortir aujourd’hui, alors qu’habituellement, tu es toujours le premier au pâturage, le premier à boire dans le ﬂeuve ou à revenir dans l’enclos chaque soir ? Aurais-tu pitié de moi ?",
+            " Si tu pouvais parler, tu me dirais, toi, où il se cache, et je lui fendrais le crâne, pour lui faire sauter la cervelle."],
             "haveAction": false,
             "actions": [
                 {
@@ -618,20 +629,9 @@
         },
         {
             "id": 50,
-            "illustration": 36,
+            "illustration": 37,
             "text": ["Pendant qu’il parle ainsi au bélier, la jointure de mes doigts accrochés à la laine de son ventre est si douloureuse que j’ai peur de lâcher prise. Mais le Cyclope pousse enfin le bélier dehors !",
             "— Poussons le troupeau devant nous jusqu’au bateau. Embarquez le troupeau et levez l’ancre pour reprendre la mer !  "],
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 51
-                }
-            ]
-        },
-        {
-            "id": 51,
-            "illustration": 37,
-            "text": "37",
             "haveAction": false,
             "actions": [
                 {
@@ -639,7 +639,7 @@
                 }
             ]
         },
-
+    
         
 
         {

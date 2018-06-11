@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontFamily: "Infini-Regular",
         width: screen.width / 100 * 60,
-        marginTop: screen.height / 100 * 40,
+        marginTop: screen.height / 100 * 38,
         fontSize: 30,
         color: 'white',
         textAlign: 'center',

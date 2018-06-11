@@ -14,12 +14,17 @@ import { AsyncStorage } from 'react-native';
 import { requestStore } from '../../redux/actions/loading'
 import { firstOpening } from "../../redux/actions/isFirstOpening";
 import { NavigationActions } from "react-navigation";
+import LottieView from "lottie-react-native";
+
+//  Import assets
+// --------------------------------------------------------------
+import images from '../../assets/images'
+import { menuAnimation } from "../../assets/anim";
+import styles from './styles'
 
 
 //  Import Helpers
 // --------------------------------------------------------------
-import images from '../../assets/images'
-import styles from './styles'
 import renderIf from '../../helpers/renderIf'
 
 
@@ -36,6 +41,21 @@ class Accueil extends Component {
         }
     }
 
+
+
+    componentDidMount() {
+        this.animation.play()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.requestFlushData) {
+            this.requestFlushData = false
+            this.navigateVideo()
+        }
+        if(nextProps.state !== this.state.reduxState) {
+            this.setState({reduxState: nextProps.state})
+        }
+    }
     async newGame() {
         await AsyncStorage.removeItem('saved')
         this.requestFlushData = true
@@ -53,15 +73,6 @@ class Accueil extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.requestFlushData) {
-            this.requestFlushData = false
-            this.navigateVideo()
-        }
-        if(nextProps.state !== this.state.reduxState) {
-            this.setState({reduxState: nextProps.state})
-        }
-    }
 
     navigateToSailing = () => {
         const navigate = NavigationActions.navigate({
@@ -102,6 +113,15 @@ class Accueil extends Component {
                     source={images.homeScreen}
                     resizeMethod="scale"
                 />
+                <View style={styles.animation}> 
+                    <LottieView 
+                    style={styles.animation}
+                    source={ menuAnimation } 
+                    speed={0.5}
+                    loop={true}
+                    ref={animation => this.animation = animation }
+                    />
+                </View>
                 <View style={styles.center}>
                     {/* <View style={styles.buttonBorder}>
                         <Button
