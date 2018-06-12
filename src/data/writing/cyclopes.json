@@ -76,18 +76,8 @@
             "id": 9,
             "illustration": 9,
             "text": [" — Quelques hommes doivent rester sur le bateaux, les autres, débarqué avec des vivres.           En attendant l’aube, nous nous installerons pour dormir sur le sable. ",
-                "Restez groupés, et ne vous éloignez pas du campement. N’allumez aucun feu qui pourrait nous faire repérer."],
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 10
-                }
-            ]
-        },
-        {
-            "id": 10,
-            "illustration": 10,
-            "text": "Tout près de notre îlot se dresse une autre île, plus montagneuse. Elle est si proche de nous que l’on en devine les fumées des foyers. ",
+                "Restez groupés, et ne vous éloignez pas du campement. N’allumez aucun feu qui pourrait nous faire repérer.",
+                "Tout près de notre îlot se dresse une autre île, plus montagneuse. Elle est si proche de nous que l’on en devine les fumées des foyers. "],
             "haveAction": false,
             "actions": [
                 {
@@ -107,21 +97,12 @@
             ]
         },
         {
-            "id": 12,
-            "illustration": 12,
-            "text": "Elle m’intrigue. Qui habite cette terre ? ",
-            "haveAction": false,
-            "actions": [
-                {
-                    "id": 13
-                }
-            ]
-        },
-        {
             "id": 13,
             "illustration": 13,
-            "text": ["Bientôt, nous atteignons à la rame l’autre rivage, et je repère au bout d’un cap une grotte, juste au-dessus de la mer. Elle est cachée derrière les lauriers sauvages. Des brebis et des chèvres sont parquées dans un enclos à côté.",
-                    "Un haut rempart de blocs de pierres et d’arbres, des chênes et des pins, encerclent les lieux. Quel être étrange habite ici pour vivre seul, à l’écart de ses semblables ?"
+            "text": [
+                "Elle m’intrigue. Qui habite cette terre ? ",
+                "Bientôt, nous atteignons à la rame l’autre rivage, et je repère au bout d’un cap une grotte, juste au-dessus de la mer. Elle est cachée derrière les lauriers sauvages. Des brebis et des chèvres sont parquées dans un enclos à côté.",
+                "Un haut rempart de blocs de pierres et d’arbres, des chênes et des pins, encerclent les lieux. Quel être étrange habite ici pour vivre seul, à l’écart de ses semblables ?"
             ],
             "haveAction": false,
             "actions": [
