@@ -3,7 +3,7 @@ const islands = [
     id: 1,
     position: {
       x: 3750,
-      y: 7500
+      y: 7000
     },
     size: {
       x: 275,
@@ -21,7 +21,7 @@ const islands = [
     id: 2,
     position: {
       x: 5000,
-      y: 5000
+      y: 3000
     },
     size: {
       x: 275,
@@ -39,7 +39,7 @@ const islands = [
     id: 3,
     position: {
       x: 2000,
-      y: 9000
+      y: 12000
     },
     size: {
       x: 275,
@@ -51,7 +51,7 @@ const islands = [
     isIsland: true,
     isTarget: false,
     opacity: 1,
-    grad: '#FF86A0'
+    grad: '#8bcfef'
   }
 ]
 
