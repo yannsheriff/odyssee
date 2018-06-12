@@ -3,7 +3,7 @@ const islands = [
     id: 1,
     position: {
       x: 3750,
-      y: 7500
+      y: 7000
     },
     size: {
       x: 275,
@@ -11,11 +11,47 @@ const islands = [
     },
     collisionDist: 200,
     image: 'cyclope',
-    biomeLength: 4,
+    biomeLength: 5,
     isIsland: true,
     isTarget: false,
     opacity: 1,
     grad: '#01c1b2'
+  },
+  {
+    id: 2,
+    position: {
+      x: 5000,
+      y: 3000
+    },
+    size: {
+      x: 275,
+      y: 608
+    },
+    collisionDist: 230,
+    image: 'eol',
+    biomeLength: 4,
+    isIsland: true,
+    isTarget: false,
+    opacity: 1,
+    grad: '#B760FF'
+  },
+  {
+    id: 3,
+    position: {
+      x: 2000,
+      y: 12000
+    },
+    size: {
+      x: 275,
+      y: 573
+    },
+    collisionDist: 215,
+    image: 'lotophage',
+    biomeLength: 2,
+    isIsland: true,
+    isTarget: false,
+    opacity: 1,
+    grad: '#8bcfef'
   }
 ]
 

@@ -103,6 +103,17 @@ const styles = StyleSheet.create({
       top: 0,
       width: screen.width,
       height: screen.height
+    },
+    activeGlyph: {
+      position: 'absolute',
+      left: (screen.width / 2) - 20,
+      top: screen.height - (screen.width / 2) - 20,
+      width: 50,
+      height: 50
+    },
+    glyph: {
+      width: 50,
+      height: 50
     }
   });
 

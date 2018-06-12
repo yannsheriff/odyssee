@@ -114,11 +114,12 @@ export const boatStates = {
 export const windStates = [
   [0, 50],
   [51, 100],
-  [101, 151],
+  [101, 151]
 ]
 
 export const seagullsStates = [
-  [0, 50],
-  [51, 100],
-  [101, 151],
+  [0, 52],
+  [52, 104],
+  [104, 156],
+  [156, 208]
 ]

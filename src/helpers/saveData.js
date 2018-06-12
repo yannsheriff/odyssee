@@ -38,14 +38,10 @@ class StoreService {
         },
         visitedIsland:[{}],
         sailing: {
-          orientation: 0,
           position: {
               x: 0,
               y: 0
           },
-          isSailing: false,
-          callMap: false,
-          isMapActive: false,
           islandCollided: null,
           collectableFound: [],
           collectableEquipped: [],
@@ -115,14 +111,10 @@ class StoreService {
             glyphs: []
           },
           sailing: {
-            orientation: 0,
             position: {
                 x: 0,
                 y: 0
             },
-            isSailing: false,
-            callMap: false,
-            isMapActive: false,
             islandCollided: null,
             collectableEquipped: [],
             destination: { 
@@ -164,20 +156,16 @@ class StoreService {
             glyphs: dataSaved.collectables.glyphs
           },
           sailing: {
-            orientation: dataSaved.sailing.orientation ? dataSaved.sailing.orientation : 0,
             position: {
                 x: dataSaved.sailing.position.x,
                 y: dataSaved.sailing.position.y
             },
-            isSailing: false,
-            callMap: false,
-            isMapActive: false,
             islandCollided: null,
             collectableEquipped: dataSaved.sailing.collectableEquipped,
             destination: { 
               id: dataSaved.sailing.destination.id, 
-              x: dataSaved.sailing.destination.id,
-              y: dataSaved.sailing.destination.id,
+              x: dataSaved.sailing.destination.x,
+              y: dataSaved.sailing.destination.y,
             },
             modifiers: {
               strength:  dataSaved.sailing.modifiers.strength ? dataSaved.sailing.modifiers.strength : 0,

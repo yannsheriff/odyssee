@@ -141,4 +141,5 @@ export const animatedWind = require('./wind.json')
 
 export const menuAnimation = require('./IntroAnim.json')
 
-//export const animatedSeagulls = require('./seagulls.json')
+export const animatedSeagulls = require('./seagulls.json')
+

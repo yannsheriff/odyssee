@@ -1,5 +1,3 @@
-
-
 const images = {
     boussole: require('./img/bb.png'),
     aiguille: require('./img/Aiguille.png'),
@@ -15,7 +13,15 @@ const images = {
       cyclope_1: require('./img/cyclope_1.png'),
       cyclope_2: require('./img/cyclope_2.png'),
       cyclope_3: require('./img/cyclope_3.png'),
-      cyclope_4: require('./img/cyclope_4.png')
+      cyclope_4: require('./img/cyclope_4.png'),
+      eol: require('./img/ile_eol.png'),
+      eol_1: require('./img/eol_1.png'),
+      eol_2: require('./img/eol_2.png'),
+      eol_3: require('./img/eol_3.png'),
+      eol_4: require('./img/eol_4.png'),
+      lotophage: require('./img/ile_lotophage.png'),
+      lotophage_1: require('./img/lotophage_1.png'),
+      lotophage_2: require('./img/lotophage_2.png')
     },
     closeMenu: require('./img/Close.png'),
     openMenu: require('./img/plus.png'),
@@ -26,7 +32,9 @@ const images = {
     iconMap: require('./img/icon-map.png'),
     iconBoat: require('./img/icon-boat.png'),
     iconWind: require('./img/icon-wind.png'),
-    iconWindForce: require('./img/icon-windforce.png')
+    iconWindForce: require('./img/icon-windforce.png'),
+    iconEnterIsland: require('./img/icon-enter_island.png'),
+    iconLeaveIsland: require('./img/icon-leave_island.png')
 };
 
 export const benediction = [
