@@ -37,6 +37,12 @@ const images = {
     iconLeaveIsland: require('./img/icon-leave_island.png')
 };
 
+export const tuto = [
+    require('./img/Splash1.png'),
+    require('./img/Splash2.png'),
+    require('./img/Splash3.png'),
+    require('./img/Splash4.png'),
+]
 export const benediction = [
     {
         id: 0,
@@ -122,7 +128,6 @@ export const choices = [
     },
 
 ]
-
 export const backgrounds = {
     test: {
         p1: {

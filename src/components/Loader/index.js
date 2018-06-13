@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Easing, View, Text } from 'react-native';
+import { Animated, View, Text, Easing } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { connect } from 'react-redux'
 import ReactNativeHaptic from 'react-native-haptic';

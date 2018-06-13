@@ -4,6 +4,7 @@ import { Animated, View, Text,TouchableOpacity, Image } from "react-native";
 import { connect } from "react-redux";
 import { toggleMenu, saveMenu } from "../../redux/actions/menu";
 import { collision } from '../../redux/actions/sailing'
+import { NavigationActions } from "react-navigation";
 import { navigateTo } from "../../redux/actions/navigation";
 import screen from "../../helpers/ScreenSize";
 import Achivements from "./Achievements-page";
@@ -19,9 +20,12 @@ import styles from './styles';
 class MainMenu extends React.Component {
   constructor(props) {
     super(props);
+
+    this.once = 0
     this.state = {
       page: 0,
       reduxStore: this.props.store,
+      nav: this.props.navigation,
       paginationPosition: new Animated.Value(0),
       display: false,
       popupDisplay: false,
@@ -41,10 +45,16 @@ class MainMenu extends React.Component {
           paginationPosition: new Animated.Value(this.state.page  * (screen.width / 3)),
           popupDisplay: false
         });
-        if (nextProps.store.menu.displayMenu) {
-          setTimeout(()=>{
-            this.scroller.scrollBy(this.state.page, false)
-          }, 200)
+        if (nextProps.store.menu.displayMenu && this.state.page !== nextProps.store.menu.displayMenu ) {
+          this.once += 1
+          if (this.once < 2) {
+            setTimeout(()=>{
+              this.scroller.scrollBy(this.state.page, true)
+            }, 500)
+            setTimeout(()=>{
+              this.once = 0
+            }, 3500)
+          } 
         }
     } else {
       this.setState({
@@ -69,6 +79,11 @@ class MainMenu extends React.Component {
       popupDisplay: true
     })
   }
+
+  navigateToTest = (id) => {
+    this.state._toggleMenu();
+    this.state._navigateTo('Test')
+  };
 
   scrollTo = id => {
     var relativeIndex = id - this.state.page
@@ -140,7 +155,7 @@ class MainMenu extends React.Component {
                   <Achivements  />
                 </View>
                 <View style={styles.slide3}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.navigateToTest}>
                   <Text style={styles.menuTextButton}> Aide </Text>
                   </TouchableOpacity>
                   <TouchableOpacity

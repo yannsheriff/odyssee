@@ -175,7 +175,7 @@ class Collectables extends Component {
       let glypheCompletion = this.getGlypheCompletion(fragmentId)
       console.log(glypheCompletion)
       this.state._dispatchNotification(
-        "Nouveaux fragment !",
+        "Nouveau fragment !",
         glypheCompletion.completed+"/"+glypheCompletion.all,
         collectableData.name,
         microInteraction.findFragment

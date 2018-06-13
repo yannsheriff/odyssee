@@ -98,7 +98,7 @@ class Accueil extends Component {
         this.props.navigation.dispatch(navigate);
     };
 
-    navigateToTest = (id) => {
+    navigateToTest = () => {
         const navigate = NavigationActions.navigate({
             routeName: 'Test',
         });

@@ -23,6 +23,8 @@ import InteractionMenu from '../components/Island/interaction-menu'
 //  Import Actions
 // --------------------------------------------------------------
 import { goToStep, saveIslandData, requestIslandData, goToPreviousStep } from '../redux/actions/island'
+import { navigateTo } from '../redux/actions/navigation'
+import { collision } from '../redux/actions/sailing'
 import { toggleMenu } from '../redux/actions/menu'
 
 //  Import Data
@@ -230,11 +232,8 @@ componentWillReceiveProps(nextProps) {
 
   goToNextStep = (id) => {
     if(id === 0) {
-      const navigate = NavigationActions.navigate({
-        routeName: 'Sailing',
-        params: {}
-      });
-      this.props.navigation.dispatch(navigate);
+      this.state._reverseCollisionOnNavigation()
+      this.state._navigateTo("Sailing")
     } else if (this.isTransitionFinished) {
         if(this.state.haveMultipleText && this.state.currentText < this.state.narration.length - 1  ) {
           this.setState({ currentText: this.state.currentText + 1})
@@ -355,6 +354,12 @@ const mapDispatchToProps = dispatch => {
     },
     toggleMenu: (page) => {
       dispatch(toggleMenu(page));
+    },
+    navigateTo: (routeName)=> {
+      dispatch(navigateTo(routeName))
+    }, 
+    reverseCollisionOnNavigation: () => {
+      dispatch(collision(null))
     }
   }
 }
