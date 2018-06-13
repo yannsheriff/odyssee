@@ -79,6 +79,7 @@ class MiniatureMap extends Component {
         return (
           <G
             key={ 'c' + c.id }
+            onPress={() => { this._switchDestination(c) }}
           >
             <Circle
               fill={ color }
@@ -86,7 +87,6 @@ class MiniatureMap extends Component {
               cx={(mapSize.x - c.position.x) / mapSize.x * screen.width}
               cy={(mapSize.y - c.position.y) / mapSize.y * (screen.height - this.state.menuHeight - this.state.windUIHeight)}
               r="8"
-              onPress={() => { this._switchDestination(c) }}
             />
             <Circle
               fill={ 'transparent' }
@@ -97,6 +97,14 @@ class MiniatureMap extends Component {
               cy={ (mapSize.y - c.position.y) / mapSize.y * (screen.height - this.state.menuHeight - this.state.windUIHeight)}
               r="12"
               opacity={ opacity }
+            />
+            <Circle
+              fill={ 'transparent' }
+              scale={1}
+              cx={(mapSize.x - c.position.x) / mapSize.x * screen.width}
+              cy={(mapSize.y - c.position.y) / mapSize.y * (screen.height - this.state.menuHeight - this.state.windUIHeight)}
+              r="25"
+              onPress={() => { this._switchDestination(c) }}
             />
           </G>
         )
