@@ -11,6 +11,7 @@ export default class AnimationLayout extends React.Component {
     super(props);
     this.animation = []
     this.state = {
+      lastProps: this.props.nextAnimation,
       isTransitionFinished: true,
       animations: [
         {
@@ -34,12 +35,12 @@ export default class AnimationLayout extends React.Component {
 
 
   componentWillReceiveProps (nextProps) {
-    console.log(nextProps)
-    if( this.state.isTransitionFinished ) { // If component receive a new animation 
+    if( this.state.isTransitionFinished && nextProps.nextAnimation !== this.state.lastProps ) { // If component receive a new animation 
       
       // Push new animation in state array
       this.setState({ 
         isTransitionFinished: false,
+        lastProps: nextProps.nextAnimation,
         animations:[ 
           {
             animation: nextProps.nextAnimation ? nextProps.nextAnimation.animation : null, 
@@ -66,13 +67,12 @@ export default class AnimationLayout extends React.Component {
             toValue:  0,
           }),
         ]).start(()=> {
+          
           // When the animation is finished wiat 1s and delete old animation from the state Array
-          setTimeout(()=> {
-            this.setState({ 
-              animations: [this.state.animations.shift()],
-              isTransitionFinished: true
-            })
-          }, 1000)
+          this.setState({ 
+            animations: [this.state.animations.shift()],
+            isTransitionFinished: true
+          })
         }); 
       })
     }

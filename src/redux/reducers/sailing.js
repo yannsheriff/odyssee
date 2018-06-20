@@ -1,63 +1,41 @@
 import {
-  UPDATE_ORIENTATION,
-  TOGGLE_SAILING,
-  CALL_MAP,
-  LAUNCH_MAP,
-  HIDE_MAP,
+  UPDATE_MODIFIERS,
   UPDATE_DESTINATION,
   UPDATE_POSITION,
   SAVE_SAILING,
   COLLISION
 } from '../actions/sailing'
 
+import { 
+  EQUIP_GLYPH,
+  UNEQUIP_GLYPH
+} from '../actions/menu'
+
 import { POPULATE_STORE } from '../actions/loading'
 
 const initialState = {
-  orientation: 0,
   position: {
     x: 0,
     y: 0
   },
-  isSailing: false,
-  callMap: false,
-  isMapActive: false,
   islandCollided: null,
   destination: {
     id: '',
     x: '',
     y: ''
+  },
+  modifiers: {
+    strength: 0,
+    direction: 0
   }
 }
 
 export function sailingReducer(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_ORIENTATION:
+    case UPDATE_MODIFIERS:
       return {
         ...state,
-        orientation: action.orientation
-      }
-    case TOGGLE_SAILING:
-      return {
-        ...state,
-        isSailing: !state.isSailing
-      }
-    case CALL_MAP:
-      return {
-        ...state,
-        isSailing: false,
-        callMap: true
-      }
-    case LAUNCH_MAP:
-      return {
-        ...state,
-        isMapActive: true,
-        callMap: false,
-        position: action.position
-      }
-    case HIDE_MAP:
-      return {
-        ...state,
-        isMapActive: false
+        modifiers: action.modifiers
       }
     case UPDATE_DESTINATION:
       return {
@@ -78,6 +56,19 @@ export function sailingReducer(state = initialState, action) {
       return state
     case POPULATE_STORE:
       return action.payload.sailing
+
+    case EQUIP_GLYPH:
+      return {
+          ...state,
+          collectableEquipped: [...state.collectableEquipped, action.id]
+      }
+
+    case UNEQUIP_GLYPH:
+      return {
+          ...state,
+          collectableEquipped: state.collectableEquipped.filter(el => el !== action.id)
+      }
+  
     default:
       return state
   }

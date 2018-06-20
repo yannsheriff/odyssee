@@ -1,12 +1,14 @@
+import screen from '../helpers/ScreenSize'
+
 export const mapSize = {
-    x: 2000,
-    y: 2000
+    x: screen.width * 20,
+    y: screen.height * 20
 }
 
 // Actual max speed is max speed + min speed
 export const speedModifiers = {
     min: 0.75,
-    max: 2.5,
+    max: 2.25,
     wind: Math.random() * 2.25,
     direction: Math.floor(Math.random() * 360),
     acceleration: 0.02
@@ -108,3 +110,16 @@ export const boatStates = {
       frames:[240, 255]
     }
 }
+
+export const windStates = [
+  [0, 50],
+  [51, 100],
+  [101, 151]
+]
+
+export const seagullsStates = [
+  [0, 52],
+  [52, 104],
+  [104, 156],
+  [156, 208]
+]

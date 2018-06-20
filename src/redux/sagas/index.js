@@ -1,51 +1,74 @@
-import { delay } from 'redux-saga'
-import { put, takeEvery, all } from 'redux-saga/effects'
+import { put, takeEvery, all, select } from 'redux-saga/effects'
 import { SAVE_ISLAND_DATA, REQUEST_ISLAND_DATA, dispatchIslandData } from '../actions/island'
 import { SAVE_SAILING } from '../actions/sailing'
 import { SAVE_MENU } from '../actions/menu'
+import { NAVIGATE } from '../actions/navigation'
+import { changeLocation } from "../actions/isOnIsland";
 import { SAVE_COLLECTABLES } from '../actions/collectables'
 import { REQUEST_STORE, populateStore } from '../actions/loading'
+import { FIRST_TIME } from '../actions/isFirstOpening'
 import { storeService } from '../../helpers/saveData'
+const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
 export function* helloSaga() {
     console.log('Hello Sagas!')
 }
 
+export function* saveIsOnIsland(action) {
+  
+  yield delay(1000)
+  const state = yield select()
+  const data = yield storeService.getSaving()
+  
+  if(action.routeName === "Sailing" || action.routeName === "Island") {
+    console.log('Saving position data ⏳')
+    if (action.routeName === "Sailing") {
+      var newState = {
+        ...data,
+        isOnIsland: false,
+      }
+    } else if (action.routeName === "Island"){
+      var newState = {
+        ...data,
+        isOnIsland: state.island.currentIslandId,
+      }
+    }
+    yield put(changeLocation(newState.isOnIsland))
+    yield storeService.save(newState)
+    console.log('Saved ✅')
+  }
+}
+
+export function* saveFirstOpening() {
+  
+  yield delay(2000)
+  const state = yield select()
+  const data = yield storeService.getSaving()
+  var newState = {
+    ...data,
+    isFirstOpening: false
+  }
+  yield storeService.save(newState)
+}
 
 export function* saveSailingData(action) {
   console.log('Saving data ⏳')
   const data = yield storeService.getSaving()
-  console.log(action)
-  let newSailing = {
-    orientation: action.state.orientation,
-    position: {
-        x: action.state.position.x,
-        y: action.state.position.y
-    },
-    isSailing: false,
-    callMap: false,
-    isMapActive: false,
-    collectableEquipped: action.state.collectableEquipped,
-    destination: { 
-      id: action.state.destination.id, 
-      x: action.state.destination.x,
-      y: action.state.destination.y,
-    }
-  }
+  const state = yield select()
 
   var newState = {
     ...data,
-    sailing: newSailing
+    sailing: state.sailing
   }
-  console.log(newState)
+  console.log('state', state)
   yield storeService.save(newState)
   console.log('Saved ✅')
 }
 
 export function* saveIslandData(action) {
   const data = yield storeService.getSaving()
-  console.log('Saving data ⏳')
-    let actualIslandSavedData = data.visitedIsland.find((island, index) => { if( island.id === action.state.currentIslandId) { return island }})
+  console.log('Saving Island data ⏳')
+  let actualIslandSavedData = data.visitedIsland.find((island, index) => { if( island.id === action.state.currentIslandId) { return island }})
     
     // If existe
     if (actualIslandSavedData) {
@@ -55,6 +78,7 @@ export function* saveIslandData(action) {
         screenReaded: actualIslandSavedData.screenReaded.concat(action.state.actualSnippetId),
         actualSnippetId: action.nextSnippetId,
       }
+      
       // Create a new occurence of the saved state
       var newState = {
         ...data,
@@ -66,6 +90,9 @@ export function* saveIslandData(action) {
           }
         })
       }
+
+      console.log("newState", newState)
+
     } 
   // Save data to Async storage
   yield storeService.save(newState)
@@ -89,7 +116,7 @@ export function* saveCollectablesData(action) {
 
 export function* saveMenuData(action) {
   const data = yield storeService.getSaving()
-  console.log('Saving data ⏳')
+  console.log('Saving Menu data ⏳')
   console.log(action)
   var newState = {
     ...data,
@@ -108,8 +135,6 @@ export function* dispatchPopulateStore() {
   yield put (populateStore(data))
   console.log('Populated ✅')
 }
-
-
 
 export function* requestIslandData(action) {
   console.log('asking data ⏳')
@@ -145,9 +170,9 @@ export function* requestIslandData(action) {
       visitedIsland: data.visitedIsland.concat(actualIsland),
     }
 
-    let payload = {
+    var payload = {
+      actualSnippetId: 1,
       islandId: actualIsland.id,
-      actualSnippetId: 1
     }
 
     yield put (dispatchIslandData(payload))
@@ -166,6 +191,10 @@ export function*  watchSavingSailing() {
   yield takeEvery(SAVE_SAILING, saveSailingData)
 }
 
+export function*  watchSavingIsOnIsland() {
+  yield takeEvery(NAVIGATE, saveIsOnIsland)
+}
+
 export function*  watchSavingMenu() {
   yield takeEvery(SAVE_MENU, saveMenuData)
 }
@@ -182,6 +211,10 @@ export function* watchPopulateStore() {
   yield takeEvery(REQUEST_STORE, dispatchPopulateStore)
 }
 
+export function* wachIsFirstOpening() {
+  yield takeEvery(FIRST_TIME, saveFirstOpening)
+}
+
 
 // notice how we now only export the rootSaga
 // single entry point to start all Sagas at once
@@ -193,6 +226,8 @@ export default function* rootSaga() {
     watchRequestIslandData(),
     watchSavingSailing(),
     watchSavingCollectables(),
-    watchSavingMenu()
+    watchSavingMenu(),
+    watchSavingIsOnIsland(),
+    wachIsFirstOpening()
   ])
 }

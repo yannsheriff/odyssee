@@ -1,7 +1,7 @@
 //  Import Modules
 // --------------------------------------------------------------
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { requestStore } from '../redux/actions/loading'
 import { AsyncStorage } from 'react-native';
@@ -11,8 +11,9 @@ import { AsyncStorage } from 'react-native';
 //  Import Components
 // --------------------------------------------------------------
 import Router from '../Router'
-import Notification from '../components/Notification'
 import MainMenu from '../components/Main-menu'
+import AudioHandler from '../components/Audio-handler'
+import Notification from '../components/Notification'
 
 
 class SmartLoading extends Component {
@@ -43,8 +44,15 @@ class SmartLoading extends Component {
   }
 
     render() {
-      let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.isMapActive !== undefined
-      ? ( <View><Router /><MainMenu /><Notification /></View> ) 
+      let render = this.state.ReduxState.island !== undefined && this.state.ReduxState.sailing.position !== undefined
+      ? ( 
+        <View>
+          <StatusBar hidden={true} />
+          <AudioHandler />
+          <Router />
+          <MainMenu />
+          <Notification />
+        </View> ) 
       : ( <View><Text>loading..</Text></View> /* <Loader /> */ )
         return render
     }

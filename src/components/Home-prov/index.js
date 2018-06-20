@@ -4,24 +4,28 @@
 import React, { Component } from 'react';
 import {
     Image,
-    Platform,
-    StyleSheet,
     Text,
+    TouchableOpacity,
     View,
     Button,
 } from 'react-native'
-import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import { AsyncStorage } from 'react-native';
 import { requestStore } from '../../redux/actions/loading'
+import { firstOpening } from "../../redux/actions/isFirstOpening";
 import { NavigationActions } from "react-navigation";
+import LottieView from "lottie-react-native";
+
+//  Import assets
+// --------------------------------------------------------------
+import images from '../../assets/images'
+import { menuAnimation } from "../../assets/anim";
+import styles from './styles'
 
 
 //  Import Helpers
 // --------------------------------------------------------------
-import images from '../../assets/images'
-import screen from '../../helpers/ScreenSize'
-import styles from './styles'
+import renderIf from '../../helpers/renderIf'
 
 
 
@@ -31,22 +35,45 @@ class Accueil extends Component {
         super(props)
         this.requestFlushData = false 
         this.state = {
-            _populateStore: this.props.populateStore
+            reduxState: this.props.state,
+            _populateStore: this.props.populateStore,
+            _isFirstOpening: this.props.firstOpening
         }
     }
 
+
+
+    componentDidMount() {
+        this.animation.play()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        if(this.requestFlushData) {
+            this.requestFlushData = false
+            this.state._isFirstOpening()
+            this.navigateVideo()
+        }
+        if(nextProps.state !== this.state.reduxState) {
+            this.setState({reduxState: nextProps.state})
+        }
+    }
     async newGame() {
         await AsyncStorage.removeItem('saved')
         this.requestFlushData = true
         this.state._populateStore()
+
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.requestFlushData) {
-            this.requestFlushData = false
-            this.navigateToIsland()
+    continueGame = () => {
+        console.log(this.state.reduxState)
+        if (this.state.reduxState.isOnIsland !== false) {
+            this.navigateToIsland(this.state.reduxState.isOnIsland)
+        } else {
+            this.navigateToSailing()
         }
     }
+
 
     navigateToSailing = () => {
         const navigate = NavigationActions.navigate({
@@ -54,15 +81,29 @@ class Accueil extends Component {
           params: {}
         });
         this.props.navigation.dispatch(navigate);
-      };
+    };
 
-      navigateToIsland = () => {
+    navigateVideo = () => {
         const navigate = NavigationActions.navigate({
-          routeName: 'Island',
-          params: { islandId: 1 }
+            routeName: 'Introduction',
         });
         this.props.navigation.dispatch(navigate);
-      };
+    };
+
+    navigateToIsland = (id) => {
+        const navigate = NavigationActions.navigate({
+            routeName: 'Island',
+          params: { islandId: id }
+        });
+        this.props.navigation.dispatch(navigate);
+    };
+
+    navigateToTest = () => {
+        const navigate = NavigationActions.navigate({
+            routeName: 'Test',
+        });
+        this.props.navigation.dispatch(navigate);
+    };
     
 
     render() {
@@ -73,35 +114,43 @@ class Accueil extends Component {
                     source={images.homeScreen}
                     resizeMethod="scale"
                 />
+                <View style={styles.animation}> 
+                    <LottieView 
+                    style={styles.animation}
+                    source={ menuAnimation } 
+                    speed={0.5}
+                    loop={true}
+                    ref={animation => this.animation = animation }
+                    />
+                </View>
                 <View style={styles.center}>
-                    <View style={styles.buttonBorder}>
+                    {/* <View style={styles.buttonBorder}>
                         <Button
                             onPress={this.navigateToSailing}
                             title={'Aller a la navigation'}
                             color="#fff"
                         />
-                    </View>
-                    <View style={styles.buttonBorder}>
+                    </View> */}
+                    {renderIf( !this.state.reduxState.isFirstOpening,
+                    <TouchableOpacity style={styles.buttonPlain}
+                     onPress={ this.continueGame }>
+                            <Text style={[styles.buttonText, {color:"#e3e7eb"}]} >Continuer</Text>
+                    </TouchableOpacity>)}
+
+                    <TouchableOpacity style={ !this.state.reduxState.isFirstOpening ? styles.buttonBorder : styles.buttonPlain }
+                    onPress={ this.newGame.bind(this) }>
+
+                            <Text style={[styles.buttonText, !this.state.reduxState.isFirstOpening ? {color:"#9c75d7"} : {color:"#e3e7eb"}]} >Nouvelle partie</Text>
+                        </TouchableOpacity>
+
                     <Button
-                        onPress={this.navigateToIsland} // props news on this island
-                        title={'Aller a l\'ile'}
-                        color="#fff"
-                    />
-                    </View>
-                    <View style={styles.buttonBorder}>
-                    <Button
-                        onPress={ this.newGame.bind(this) }
-                        title={'Nouvelle partie'}
-                        color="#fff"
-                    />
-                    </View>
-                    <View style={styles.buttonBorder}>
-                    <Button
-                        onPress={() => this.props.navigation.navigate('Test')}
+                        onPress={this.navigateToTest}
                         title={'Test'}
                         color="#fff"
                     />
-                    </View>
+                    {/* <View style={styles.buttonBorder}>
+                    
+                    </View> */}
                 </View>
             </View>
         );
@@ -122,7 +171,10 @@ class Accueil extends Component {
   const mapDispatchToProps = dispatch => {
       return {
         populateStore: () => {
-          dispatch(requestStore())
+            dispatch(requestStore())
+        },
+        firstOpening: ()=> {
+            dispatch(firstOpening())
         },
       }
     }

@@ -9,7 +9,7 @@ import { saveSailing, collision } from '../redux/actions/sailing'
 // --------------------------------------------------------------
 import renderIf from '../helpers/renderIf'
 import screen from '../helpers/ScreenSize'
-import images, { choices } from '../assets/images'
+import images from '../assets/images'
 
 //  Import Components
 // --------------------------------------------------------------
@@ -20,14 +20,12 @@ import MultiActionButton from '../components/Multi-action-button'
 
 class SmartSailing extends Component {
 
-
   constructor(props) {
     super(props)
 
     this.state = {
       _saveSailing: this.props.saveSailing,
       _collision: this.props.collision,
-      isMapActive: this.props.sailing.isMapActive,
       islandCollided: this.props.sailing.islandCollided,
       reduxState: this.props.sailing,
       appState: AppState.currentState,
@@ -48,6 +46,7 @@ class SmartSailing extends Component {
 
   _handleAppStateChange = (nextAppState) => {
     if (this.state.appState === 'active' && nextAppState === 'background') {
+      console.log('savemaboy')
       this.state._saveSailing(this.state.reduxState)
     }
   }
@@ -64,14 +63,14 @@ class SmartSailing extends Component {
         islandCollided: nextProps.sailing.islandCollided,
         actionsForButton: [
           {
-            id: nextProps.sailing.islandCollided,
-            img: choices[1].img,
-            label: 'Accoster sur l\'île'
+            id: 'leave',
+            img: images.iconLeaveIsland,
+            label: 'Rester en mer'
           },
           {
-            id: 'leave',
-            img: choices[2].img,
-            label: 'Rester en mer'
+            id: nextProps.sailing.islandCollided,
+            img: images.iconEnterIsland,
+            label: 'Accoster sur l\'île'
           }
         ],
         haveAction: true
@@ -91,13 +90,8 @@ class SmartSailing extends Component {
               left: 0
             }}
           >
-            {renderIf(!this.state.isMapActive,
-              <VirtualMap />
-            )}
-            {renderIf(this.state.isMapActive,
-              <MiniMap />
-            )}
-            {renderIf(!this.state.isMapActive && this.state.islandCollided !== null,
+            <VirtualMap />
+            {renderIf(this.state.islandCollided !== null,
 
               <MultiActionButton
                 actions={this.state.actionsForButton}

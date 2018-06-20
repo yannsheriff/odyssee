@@ -21,11 +21,11 @@ class StoreService {
   async getSaving() {
 
     let dataSaved = await AsyncStorage.getItem("saved");
-
     if (dataSaved !== null && dataSaved) {
       return JSON.parse(dataSaved)
     } else {
       let createSaving = {
+        isFirstOpening: true,
         isOnIsland: false,
         isTutoFinished: false,
         collectables: {
@@ -38,14 +38,10 @@ class StoreService {
         },
         visitedIsland:[{}],
         sailing: {
-          orientation: 0,
           position: {
               x: 0,
               y: 0
           },
-          isSailing: false,
-          callMap: false,
-          isMapActive: false,
           islandCollided: null,
           collectableFound: [],
           collectableEquipped: [],
@@ -53,6 +49,10 @@ class StoreService {
             id: '', 
             x: '',
             y: '',
+          },
+          modifiers: {
+            strength: 0,
+            direction: 0
           }
         }
       }
@@ -95,6 +95,7 @@ class StoreService {
       const dataSaved = await this.getSaving()
       if (dataSaved.isNewInstance ) {
         var state = {
+          isFirstOpening: true,
           notification: {
             title: undefined,
             subtitle: undefined,
@@ -110,20 +111,20 @@ class StoreService {
             glyphs: []
           },
           sailing: {
-            orientation: 0,
             position: {
                 x: 0,
                 y: 0
             },
-            isSailing: false,
-            callMap: false,
-            isMapActive: false,
             islandCollided: null,
             collectableEquipped: [],
             destination: { 
               id: '', 
               x: '',
               y: '',
+            },
+            modifiers: {
+              strength: 0,
+              direction: 0
             }
           },
           island: {
@@ -139,12 +140,13 @@ class StoreService {
         console.log(' ================ Async Storage ================ ')
         console.log("last Save :", dataSaved )
         var state = {
+          isFirstOpening: dataSaved.isFirstOpening,
           notification: {
             title: undefined,
             subtitle: undefined,
             animation: undefined,
           },
-          isOnIsland: false,
+          isOnIsland: dataSaved.isOnIsland,
           menu: {
             displayMenu: false,
             collectableEquipped: dataSaved.menu.collectableEquipped,
@@ -154,20 +156,20 @@ class StoreService {
             glyphs: dataSaved.collectables.glyphs
           },
           sailing: {
-            orientation: dataSaved.sailing.orientation ? dataSaved.sailing.orientation : 0,
             position: {
                 x: dataSaved.sailing.position.x,
                 y: dataSaved.sailing.position.y
             },
-            isSailing: false,
-            callMap: false,
-            isMapActive: false,
             islandCollided: null,
             collectableEquipped: dataSaved.sailing.collectableEquipped,
             destination: { 
               id: dataSaved.sailing.destination.id, 
-              x: dataSaved.sailing.destination.id,
-              y: dataSaved.sailing.destination.id,
+              x: dataSaved.sailing.destination.x,
+              y: dataSaved.sailing.destination.y,
+            },
+            modifiers: {
+              strength:  dataSaved.sailing.modifiers.strength ? dataSaved.sailing.modifiers.strength : 0,
+              direction: dataSaved.sailing.modifiers.direction ? dataSaved.sailing.modifiers.direction : 0
             }
           },
           island: {
@@ -178,12 +180,12 @@ class StoreService {
               haveObject: false,
           }
         }
-        if (dataSaved.isOnIsland) {
-          let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
-          state.island.currentIslandId = dataSaved.isOnIsland
-          state.island.actualSnippetId = actualIsland.actualSnippetId
-          state.isOnIsland = dataSaved.isOnIsland
-        }
+        // if (dataSaved.isOnIsland) {
+        //   let actualIsland = dataSaved.visitedIsland.find((island) => { if( island.id === dataSaved.isOnIsland) { return island }})
+        //   state.island.currentIslandId = dataSaved.isOnIsland
+        //   state.island.actualSnippetId = actualIsland.actualSnippetId
+        //   state.isOnIsland = dataSaved.isOnIsland
+        // }
         return state
       }
   }

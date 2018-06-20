@@ -38,6 +38,28 @@ export default class CollectableItem extends React.Component {
 
 
   render() {
+    var image =  this.state.found 
+    ? 
+    <Image
+      style={{
+        height: this.state.selected ? 56 : 58,
+        width: this.state.selected ? 56 : 58, 
+        opacity: this.state.selected ? 1 : 0.4,
+        resizeMode: "contain",
+        borderColor: this.state.selected ? "white" : "#ffffff30",
+
+      }}
+      source={this.state.icon.img}
+    />
+    :     
+    <Image
+      style={{
+        height: this.state.selected ? 56 : 58,
+        width: this.state.selected ? 56 : 58
+      }}
+      source={images.glyphes}
+    />
+
     return (
       <View style={styles.collectablesContainer}>
         <TouchableOpacity
@@ -45,10 +67,10 @@ export default class CollectableItem extends React.Component {
             styles.touchable,
             {
               backgroundColor: this.state.found
-                ? "rgba(255, 255, 255, 0.3)"
+                ? "rgba(255, 255, 255, 0.1)"
                 : null,
-              borderColor: this.state.selected ? "red" : null,
-              borderWidth: this.state.selected ? 1 : 0
+              borderColor: this.state.selected ? "white" : "#ffffff30",
+              borderWidth: this.state.selected ? 2 : 1
             }
           ]}
           onPress={() => {
@@ -56,16 +78,14 @@ export default class CollectableItem extends React.Component {
           }}
         >
           <View style={{ position: "absolute" }}>
-            <Image
-              style={{
-                height: this.state.selected ? 58 : 60,
-                width: this.state.selected ? 58 : 60
-              }}
-              source={images.glyphes}
-            />
-            <Text style={[styles.glyphsFont, { opacity: this.state.found ? 1 : 0 }]}>
-              {this.state.icon}
-            </Text>
+            { image }
+            {/* <Text style={[styles.glyphsFont, {
+              top: this.state.selected ? 20 : 22,
+              width: this.state.selected ? 56 : 60,
+              opacity: this.state.found ? 1 : 0 }]
+            }> */}
+              
+            {/* </Text> */}
           </View>
         </TouchableOpacity>
         <Text style={styles.glyphesName}>{this.state.name}</Text>

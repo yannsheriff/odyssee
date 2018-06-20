@@ -2,27 +2,64 @@ const islands = [
   {
     id: 1,
     position: {
-      x: 1000,
-      y: 700
+      x: 3750,
+      y: 7000
     },
     size: {
-      x: 271,
-      y: 534
+      x: 275,
+      y: 543
     },
     collisionDist: 200,
     image: 'cyclope',
+    biomeLength: 5,
+    isIsland: true,
+    isTarget: false,
+    opacity: 1,
+    grad: '#01c1b2'
+  },
+  {
+    id: 2,
+    position: {
+      x: 5000,
+      y: 3000
+    },
+    size: {
+      x: 275,
+      y: 608
+    },
+    collisionDist: 230,
+    image: 'eol',
     biomeLength: 4,
     isIsland: true,
     isTarget: false,
-    opacity: 1
+    opacity: 1,
+    grad: '#B760FF'
+  },
+  {
+    id: 3,
+    position: {
+      x: 2000,
+      y: 12000
+    },
+    size: {
+      x: 275,
+      y: 573
+    },
+    collisionDist: 215,
+    image: 'lotophage',
+    biomeLength: 2,
+    isIsland: true,
+    isTarget: false,
+    opacity: 1,
+    grad: '#8bcfef'
   }
 ]
 
 const biomesElements = []
 islands.forEach(island => {
-  const nb = Math.floor(Math.random() * 10) + 10
+  const nb = 100
   for (let i = 0; i < nb; i++) {
-    const dist = Math.random() * 500 + 200
+    const dist = Math.random() * 3000 + 200
     const deg = Math.random() * 360
     const element = {
       id: island.id + '_' + i,

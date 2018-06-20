@@ -1,13 +1,9 @@
-import { StyleSheet } from 'react-native'
-import screen from '../../helpers/ScreenSize'
-
+import { StyleSheet } from "react-native";
+import screen from "../../helpers/ScreenSize";
 
 const styles = StyleSheet.create({
     wrapper: {},
     slide1: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
       backgroundColor: "transparent"
     },
     slide2: {
@@ -36,17 +32,19 @@ const styles = StyleSheet.create({
     }, 
     categorieMenu: {
       flex: 1,
+    }, 
+    categorieMenuText: {
       fontFamily: "Infini-Regular",
       color: "white",
       fontSize: 18,
       textAlign: "center",
-    }, 
+    },
     categories: {
       flexDirection: 'row',
       alignItems: 'center',
       marginTop: 15
     }, 
-    close: { position: "absolute", top: 70, right: 20, zIndex: 50 },
+    close: { position: "absolute", top: 50, right: 40, zIndex: 50 },
     dash: { width: 1, height: 20, backgroundColor: 'rgba(255, 255, 255, 0.5)',  },
     navigationLine: {
       position: "absolute",
@@ -62,7 +60,15 @@ const styles = StyleSheet.create({
       bottom: 0,
       width: screen.width / 3,
       height: 4
+    },
+    menuTextButton: {
+      textAlign: "center",
+      color: "white", 
+      height: 55,
+      fontSize: 22,
+      fontFamily: "Infini-Regular"
     }
   });
 
-export default styles
+
+export default styles;

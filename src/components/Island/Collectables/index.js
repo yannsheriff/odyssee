@@ -2,13 +2,7 @@
 //  Import modules
 // --------------------------------------------------------------
 import React, { Component } from 'react'
-import {
-  Text,
-  View,
-  Button,
-  TouchableHighlight,
-  Alert
-} from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 
 
@@ -16,12 +10,9 @@ import { connect } from 'react-redux'
 // --------------------------------------------------------------
 import screen from '../../../helpers/ScreenSize'
 import styles from './styles'
-import renderIf from '../../../helpers/renderIf'
 
 //  Import assets
 // --------------------------------------------------------------
-import { backgrounds } from '../../../assets/images'
-import {animations} from '../../../assets/anim'
 import { microInteraction } from '../../../assets/anim'
 
 //  Import Actions
@@ -33,10 +24,6 @@ import { printNotification } from '../../../redux/actions/notification'
 // --------------------------------------------------------------
 import { collectables } from '../../../data'
 
-//  Import components
-// --------------------------------------------------------------
-import ParallaxLayout from '../ParallaxLayout'
-import AnimationLayout from '../AnimationLayout'
 
 
 
@@ -179,8 +166,8 @@ class Collectables extends Component {
     if ( Array.isArray(glypheArray) ) {
       let newGlyphe = glypheArray[0]
       this.state._dispatchNotification(
-        "Nouvelle glyphe !", null,
-        "Bravo vous avez touvé la " + collectables.glyphs[newGlyphe].name, 
+        "Nouvelle bénédiction !", null,
+        "Bravo vous avez obtenu la bénédiction d'" + collectables.glyphs[newGlyphe].name, 
         microInteraction.findGlyphe
       )
       this.state._glypheFound(newGlyphe, fragmentId)
@@ -188,7 +175,7 @@ class Collectables extends Component {
       let glypheCompletion = this.getGlypheCompletion(fragmentId)
       console.log(glypheCompletion)
       this.state._dispatchNotification(
-        "Nouveaux fragement !",
+        "Nouveau fragment !",
         glypheCompletion.completed+"/"+glypheCompletion.all,
         collectableData.name,
         microInteraction.findFragment
@@ -228,11 +215,11 @@ class Collectables extends Component {
               
               style={{
                 position: "absolute",
-                width: 20,                
-                height: 20,
-                top: collectable.y,
-                left: collectable.x,
-                backgroundColor: 'red',
+                width: 40,                
+                height: 40,
+                top: screen.height / 100 * collectable.y,
+                left: screen.width / 100 * collectable.x,
+                // backgroundColor: 'red',
               }}
             />  
            )
